@@ -1,0 +1,16 @@
+
+n" value="Button 1" id="btn1"  />
+<input type="button" value="Button 2" id="btn2"  />
+<input type="button" value="Button 3" id="btn3"  onclick="buttonClicked();"/>
+ 
+<script type="text/javascript">
+function buttonClicked(){
+    var text = (this === window) ? 'window' : this.id;
+    alert( text );
+}
+var button1 = document.getElementById('btn1');
+var button2 = document.getElementById('btn2');
+ 
+button1.onclick = buttonClicked;
+button2.onclick = function(){   buttonClicked();   };
+</script>

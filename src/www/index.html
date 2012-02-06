@@ -1,0 +1,386 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta name="viewport" content="width=480; user-scalable=no" />
+        <meta name="HandheldFriendly" content="true" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title>DevTrac</title>
+        <link rel="stylesheet" href="css/devtrac.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <script type="text/javascript" src="javascript/lib/ext/phonegap.js">
+        </script>
+        <script type="text/javascript" src="javascript/lib/ext/json2.js">
+        </script>
+        <script type="text/javascript" src="javascript/lib/ext/crypto_sha256.js">
+        </script>
+        <script type="text/javascript" src="javascript/lib/ext/hmac.js">
+        </script>
+        <script type="text/javascript" src="javascript/lib/ext/jquery.1.4.4.min.js">
+        </script>
+        <script type="text/javascript" src="javascript/lib/initializer.js">
+        </script>
+        <script type="text/javascript" src="javascript/lib/constants.js">
+        </script>
+        <script type="text/javascript" src="javascript/common/common.js">
+        </script>
+        <script type="text/javascript" src="javascript/common/datapull.js">
+        </script>
+        <script type="text/javascript" src="javascript/common/datapush.js">
+        </script>
+        <script type="text/javascript" src="javascript/common/datastore.js">
+        </script>
+        <script type="text/javascript" src="javascript/common/screens.js">
+        </script>
+        <script type="text/javascript" src="javascript/interactions/user.login.js">
+        </script>
+        <script type="text/javascript" src="javascript/interactions/remote.view.js">
+        </script>
+        <script type="text/javascript" src="javascript/interactions/photo.upload.js">
+        </script>
+        <script type="text/javascript" src="javascript/models/user.js">
+        </script>
+        <script type="text/javascript" src="javascript/models/dataModel.js">
+        </script>
+        <script type="text/javascript" src="javascript/controllers/loginController.js">
+        </script>
+        <script type="text/javascript" src="javascript/controllers/fieldTripController.js">
+        </script>
+        <script type="text/javascript" src="javascript/controllers/questionsController.js">
+        </script>
+        <script type="text/javascript" src="javascript/controllers/siteController.js">
+        </script>
+        <script type="text/javascript" src="javascript/controllers/siteDetailController.js">
+        </script>
+        <script type="text/javascript" src="javascript/controllers/contactInfoController.js">
+        </script>
+        <script type="text/javascript" src="javascript/controllers/actionItemController.js">
+        </script>
+        <script type="text/javascript" src="javascript/controllers/settingsController.js">
+        </script>
+        <script type="text/javascript" src="javascript/controllers/photoController.js">
+        </script>
+        <script type="text/javascript" src="javascript/helpers/site_list_helper.js">
+        </script>
+        <script type="text/javascript" src="javascript/main.js">
+        </script>
+    </head>
+    <body id="stage" class="theme" onload="onLoad();">
+        <div id="spinner" class="black_overlay">
+            <p class="white_content">
+                Loading...
+            </p>
+        </div>
+        <div id="pull_status" style="display: none">
+            <p>
+                <strong>Network Operation Status</strong>
+            </p>
+            <span id="status"></span>
+        </div>
+        <!--Login Screen -->
+        <div id="login_screen" style="display: none">
+            <div class="toolbar">
+                <h1>Login</h1>
+            </div>
+            <div class="content">
+                <p>
+                    <label>
+                        Username
+                    </label>
+                    <input type="text" name="username" id="username" class="input" value="" size="20" tabindex="10"/>
+                </p>
+                <p>
+                    <label>
+                        Password
+                    </label>
+                    <input type="password" name="password" id="password" class="input" value="" size="20" tabindex="20"/>
+                </p>
+                <p class="submit">
+                    <input type="button" name="login" id="login" class="button" value="Log In"/>
+                </p>
+            </div>
+        </div><!-- Trip Details Screen -->
+        <div id="sites_to_visit" style="display: none">
+            <div class="toolbar">
+                <h1><span id="trip_title"></span></h1>
+            </div>
+            <div class="content">
+                <div class="right">
+                    <span id="add_new_site_button" class="link">Add New Site</span>
+                </div>
+                <div class="tip largebox" id="no_sites_in_trip">
+                    You don't have any sites to visit yet. Why not add one?
+                </div>
+                <div class="sites_list">
+                    <div id="list_trip">
+                        <h2>Sites to Visit</h2>
+                        <div class="grid grid_heading">
+                            <div class="col1">
+                                Name
+                            </div>
+                            <div class="col2">
+                                Type
+                            </div>
+                            <div class="col3">
+                                Visited
+                            </div>
+                        </div>
+                        <div id="site_list" class="grid">
+                        </div>
+                    </div>
+                    <div class="tip">
+                        Sites visited are marked <img src="css/images/icon_tick.gif"/>
+                    </div>
+                </div>
+                <div class="right">
+                    <span id="logout" name="logout" class="link">Change User</span>
+                    | <span id="upload_data" class="link">Upload Field Trip</span>
+                    | <span id="settings_button" class="link">Settings</span>
+                </div>
+            </div>
+        </div>
+        <!-- Add Site Screen -->
+        <div id="add_new_site" style="display: none">
+            <div class="toolbar">
+                <h1>New Site</h1>
+                <span class="back back_to_site_list">Back</span>
+            </div>
+            <div class="content">
+                <div class="right">
+                    <span id="sites_to_visit_button" class="link">Sites To Visit</span>
+                </div>
+                <div id="add_trip">
+                    <h2>Add New Site</h2>
+                    <p>
+                        <label>
+                            Site Name
+                        </label>
+                        <input type="text" name="site_title" id="site_title" class="input" value="" size="20" tabindex="10"/><span class="tip">(example: Toro health center, Acwera water point)</span>
+                    </p>
+                    <p>
+                        <label>
+                            Site Type
+                        </label>
+                        <select id="sitetypes" class="select" name="sitetypes">
+                        </select>
+                    </p>
+                    <p class="submit">
+                        <input type="submit" name="type-submit" id="add_site_button" class="button" value="Add" tabindex="100"/>
+                    </p>
+                </div>
+            </div>
+        </div><!-- Settings Screen -->
+        <div id="settings" style="display: none">
+            <div class="toolbar">
+                <h1>Settings</h1>
+                <span class="back back_to_site_list">Back</span>
+            </div>
+            <div class="content">
+                <div>
+                    <div align="center">
+                        <p>
+                            <input type="button" id="update_question_places" class="button" value="Download Database"/>
+                        </p>
+                        <p>
+                            <input type="button" id="wipe_out_data" class="button" value="DELETE Data"/>
+                        </p>
+                        <p>
+                            <input type="button" id="show_log" class="button" value="Show Log"/>
+                        </p>
+                        <p>
+                            <input type="checkbox" value="on" id="log_debug_mode" /><span>Debug Mode</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Delete Confirm Screen -->
+        <div id="delete_confirm" style="display: none">
+            <div class="toolbar">
+                <h1>Delete Confirm</h1>
+            </div>
+            <div class="content">
+                <p>
+                    Do you really want to delete all the application data? 
+                    This will erase any unsynced changes. This operation is not reversible.
+                </p>
+                <p class="submit">
+                    <input type="button" id="delete_proceed" class="button" value="Proceed"/>&nbsp;<input type="button" id="delete_cancel" class="button" value="Cancel"/>
+                </p>
+            </div>
+        </div><!-- Data Upload progress -->
+        <div id="upload_progress" style="display: none">
+            <div class="toolbar">
+                <h1>Data upload progress</h1>
+            </div>
+            <div class="upload_progress_log">
+            </div>
+        </div>
+        <!-- Questionnaire form Screen -->
+        <div id="questions_form" style="display: none">
+            <div class="toolbar">
+                <h1 id="Report_item">Questionnaire</h1>
+                <span class="back site_details_sub_screen">Back</span>
+            </div>
+            <div class="content">
+                <form>
+                    <div class="question-content">
+                    </div>
+                </form>
+            </div>
+            <div id="questionnaire_actions">
+                <p class="submit">
+                    <input type="button" name="questions-submit" id="questions-submit" class="button" value="Save" tabindex="100"/>
+                </p>
+            </div>
+        </div><!-- Site Details screen -->
+        <div id="site_details_screen" style="display: none">
+            <div class="toolbar">
+                <h1><span id="site_details_title"></span></h1>
+                <span class="back" id="site_details_back_button">Back</span>
+            </div>
+            <div class="content">
+                <ul>
+                    <li>
+                        <span id="site_detail_narrative" class="link">Narrative</span>
+                    </li>
+                    <li>
+                        <span id="site_detail_contact_info" class="link">Contact Info</span>
+                    </li>
+                    <li>
+                        <span id="site_detail_questions" class="link">Answer Questions</span>
+                    </li>
+                    <li>
+                        <span id="site_detail_photo" class="link">Photo</span>
+                    </li>
+                    <li>
+                        <span id="site_detail_action_item" class="link">Action Item</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Site Narrative Screen -->
+        <div id="site_narrative_screen" style="display: none">
+            <div class="toolbar">
+                <h1>Narrative</h1>
+                <span class="back site_details_sub_screen">Back</span>
+            </div>
+            <div class="content">
+                <p>
+                    <label id="narrative_notes">
+                        Notes about your visit
+                    </label>
+                    <textarea id="narrative_notes" class="site_narrative_notes" value="Existing narrative" rows="6" cols="30">
+                    </textarea>
+                </p>
+                <p class="submit">
+                    <input type="button" name="narrative-save" id="narrative-save" class="button" value="Save"/>
+                </p>
+            </div>
+        </div><!-- Contact Info Screen -->
+        <div id="contact_info_edit_screen" style="display: none">
+            <div class="toolbar">
+                <h1>Contact Information</h1>
+                <span class="back site_details_sub_screen">Back</span>
+            </div>
+            <div class="content">
+                <p>
+                    <label id="contact_name">
+                        Name
+                    </label>
+                    <input type="text" id="contact_name_input" class="input" value=""/>
+                </p>
+                <p>
+                    <label id="contact_number">
+                        Phone Number
+                    </label>
+                    <input type="text" id="contact_phone_number_input" class="input" value=""/>
+                </p>
+                <p>
+                    <label id="contact_email">
+                        Email
+                    </label>
+                    <input type="text" id="contact_email_input" class="input" value=""/>
+                </p>
+                <p class="submit">
+                    <input type="submit" id="contact_save" class="button" value="Save"/>
+                </p>
+            </div>
+        </div><!-- Photo Screen -->
+        <div id="photo_screen" style="display: none">
+            <div class="toolbar">
+                <h1>Photo</h1>
+                <span class="back site_details_sub_screen">Back</span>
+            </div>
+            <div class="content">
+                <p>
+                    <label id="photo">
+                        Browse photo
+                    </label>
+                    <input id="photo_path" type="file"/>
+                </p>
+                <p class="submit">
+                    <input type="button" id="attach_photo" class="button" value="Attach"/>
+                </p>
+                <ul id="photo_list">
+                </ul>
+            </div>
+        </div>
+        <!-- List Action item Screen -->
+        <div id="list_action_item_screen" style="display: none">
+            <div class="toolbar">
+                <h1>Action Item</h1>
+                <span class="back site_details_sub_screen">Back</span>
+            </div>
+            <div class="content">
+                <div class="right">
+                    <span id="add_action_item_button" class="link">Add New Action Item</span>
+                </div>
+                <div id="no_action_items" style="display: none">
+                    No action items 
+                </div>
+                <div class="grid action_item_grid" style="display: none">
+                    <div class="grid_heading">
+                        <div class="col1">
+                            Action Item
+                        </div>
+                        <div class="col2">
+                            Assigned To
+                        </div>
+                    </div>
+                    <div id="action_items_list">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Action item Screen -->
+        <div id="add_action_item_screen" style="display: none">
+            <div class="toolbar">
+                <h1>Add New Action Item</h1>
+                <span class="back back_to_action_item_list">Back</span>
+            </div>
+            <div class="content">
+                <p>
+                    <label id="action_title">
+                        Title
+                    </label>
+                    <input type="text" id="action_item_title" class="input" value=""/>
+                </p>
+                <p>
+                    <label id="action_task">
+                        Task
+                    </label>
+                    <input type="text" id="action_item_task" class="input" value=""/>
+                </p>
+                <p>
+                    <label id="action_assign">
+                        Assign To
+                    </label>
+                    <select id="action_item_assigned_to" class="select" name="users">
+                    </select>
+                </p>
+                <p class="submit">
+                    <input type="submit" id="save_action_item" class="button" value="Add"/>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
