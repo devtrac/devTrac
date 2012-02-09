@@ -1,0 +1,11 @@
+MIDlet-Name: devTrac-Blackberry-46
+MIDlet-Version: 2.2.3
+MIDlet-Vendor: Unicef
+MIDlet-Description: DevTrac Blackberry Client
+MIDlet-Jar-URL: devTrac-Blackberry-46.jar
+MIDlet-Jar-Size: 0
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: DevTrac,res/img/icon.png,
+RIM-MIDlet-Flags-1: 0
+
