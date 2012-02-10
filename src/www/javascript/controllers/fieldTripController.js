@@ -50,7 +50,7 @@ fieldTripController.paintSites = function(){
         var site = devtrac.fieldTrip.sites[id];
         var siteId = site.id ? site.id : site.name;
 		var siteType = site.type ? site.type : "";
-		var html = "<div class='grid_row'><div id='" + siteId + "' class='link site_item col1'>" + site.name + "</div>";
+		var html = "<div class='grid_row'><input id='" + siteId + "_upload' type='checkbox' class='col0' ><div id='" + siteId + "' class='link site_item col1'>" + site.name + "</div>";
 		html += "<div class='col2'>" + siteType + "</div><div class='col3'>";
 		if (site.complete) {
             html += "<span class='done'><img src='css/images/icon_tick.gif'/></span>";

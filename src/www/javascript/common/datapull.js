@@ -143,6 +143,8 @@ DataPull.prototype.tripDetails = function(callback){
     $("#status").html("");
 	navigator.log.debug("Requesting trip details.");
     var tripSuccess = function(tripResponse){
+    	alert(tripResponse["#data"].length);
+    	alert(tripResponse["#data"][0]);
         if (devtrac.common.hasError(tripResponse)) {
             devtrac.common.logAndShowGenericError(devtrac.common.getErrorMessage(tripResponse));
             callback();
