@@ -23,6 +23,7 @@ function Site(){
     this.submission = [];
     this.photos = {};
     this.actionItems = [];
+    this.upload = false;
 }
 
 function PlaceTaxonomy(){
