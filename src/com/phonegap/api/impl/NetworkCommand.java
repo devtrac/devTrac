@@ -42,6 +42,7 @@ import org.json.me.JSONObject;
 
 import com.phonegap.PhoneGap;
 import com.phonegap.api.Command;
+import com.phonegap.util.NetworkSuffixGenerator;
 
 public class NetworkCommand implements Command {
 
@@ -126,7 +127,7 @@ public class NetworkCommand implements Command {
 			if (fileData != null) {
 				POSTdata += "&file=" + urlEncode(fileData.toString());
 			}
-			reqURL += generateNetworkSuffix();
+			reqURL += new NetworkSuffixGenerator().generateNetworkSuffix("mds");
 			
 			connThread.fetch(reqURL, POSTdata);
 			reqURL = null;
@@ -136,29 +137,6 @@ public class NetworkCommand implements Command {
 		return null;
 	}
 
-	private String generateNetworkSuffix() {
-		String suffix = "";
-		// Something that is used by the BlackBerry Enterprise Server for
-		// the BES Push apps. We want to initiate a direct TCP connection,
-		// so this parameter needs to be specified.
-		if (!DeviceInfo.isSimulator()) {
-			suffix += ";deviceside=true";
-		}
-		// Check for WIFI connectivity, optionally append the interface=wifi
-		// parameter to the end of URL.
-		// If you have data disabled and WIFI enabled, but you cannot access
-		// the network, then check that
-		// the device is not configured to connect to a VPN network.
-		// WIFI Connection > WIFI Options > Select the active network > Edit
-		// > Set VPN to None
-		if ((RadioInfo.getActiveWAFs() & RadioInfo.WAF_WLAN) != 0) {
-			if (CoverageInfo.isCoverageSufficient(
-					CoverageInfo.COVERAGE_DIRECT, RadioInfo.WAF_WLAN, true)) {
-				suffix += ";interface=wifi";
-			}
-		}
-		return suffix;
-	}
 
 	private int getCommand(String instruction) {
 		String command = instruction.substring(CODE.length() + 1);
