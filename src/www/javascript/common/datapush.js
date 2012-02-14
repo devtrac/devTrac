@@ -78,7 +78,8 @@ DataPush.prototype.clearAndResync = function(){
     devtrac.dataStore.removeFieldTrip(function(){
         devtrac.fieldTrip = new FieldTrip();
         devtrac.currentSite = "";
-        devtrac.dataPull.tripDetails(fieldTripController.showTripReports);
+        devtrac.dataPull.tripDetails(devtrac.siteUpload.writeBackUncheckedSites(devtrac.fieldTrip.sites));
+        fieldTripController.showTripReports();
     });
 }
 
