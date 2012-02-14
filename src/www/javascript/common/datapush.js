@@ -7,9 +7,14 @@ DataPush.prototype.uploadData = function(progressCallback, callback, errorCallba
     devtrac.dataPush.uploadImages(progressCallback, function(msg){
         progressCallback('Image upload completed. Starting to upload site data.');
         var siteData = [];
+        devtrac.siteUpload.prepare(devtrac.fieldTrip.sites);
         try {
             $.each(devtrac.fieldTrip.sites, function(index, site){
-    			siteData.push(devtrac.dataPush.createUpdatePlaceNode(site));
+                if(!site.upload) {
+	                navigator.log.debug('Skipping the unchecked site: ' + ((site && site.name) ? site.name : ''));
+	                continue;
+                }
+                siteData.push(devtrac.dataPush.createUpdatePlaceNode(site));
                 
                 if (site.offline) {
 	                navigator.log.debug('Collecting data for Creating new site ' + ((site && site.name) ? site.name : ''));
