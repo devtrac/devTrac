@@ -3,7 +3,7 @@
 set -e
 
 # Test
-./build/spec
+sh ./build/spec
 
 # Clear
 rm -rf bin
