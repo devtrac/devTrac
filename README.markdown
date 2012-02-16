@@ -1,4 +1,10 @@
-Add new read me.
-Test update.
-Add another read me.
-Append read me.
+# Still in documenting...
+
+# DevTrac
+
+## Setup CI
+
+### Dependency
+
+- Jenkins
+- node.js
