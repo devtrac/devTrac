@@ -33,7 +33,6 @@ import javax.microedition.io.StreamConnection;
 import javax.microedition.io.file.FileConnection;
 
 import net.rim.device.api.io.Base64OutputStream;
-import net.rim.device.api.system.CoverageInfo;
 import net.rim.device.api.system.DeviceInfo;
 import net.rim.device.api.system.RadioInfo;
 import net.rim.device.api.ui.UiApplication;
@@ -127,7 +126,8 @@ public class NetworkCommand implements Command {
 			if (fileData != null) {
 				POSTdata += "&file=" + urlEncode(fileData.toString());
 			}
-			reqURL += new NetworkSuffixGenerator().generateNetworkSuffix("mds");
+			
+			reqURL += new NetworkSuffixGenerator().generateNetworkSuffix();
 			
 			connThread.fetch(reqURL, POSTdata);
 			reqURL = null;
