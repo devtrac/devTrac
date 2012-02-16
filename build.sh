@@ -1,5 +1,10 @@
 #! /bin/sh
 
+set -e
+
+# Test
+./build/spec
+
 # Clear
 rm -rf bin
 rm -rf deliverables
