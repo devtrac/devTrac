@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Jasmine Runer</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <link rel="stylesheet" type="text/css" href="../../../../lib/jasmine/jasmine.css">
+        <script type="text/javascript" src="../../../../lib/jasmine/jasmine.js">
+        </script>
+        <script type="text/javascript" src="../../../../lib/jasmine/jasmine-html.js">
+        </script>
+        <script type="text/javascript" src="../../../../lib/jasmine/jasmine-jquery.js">
+        </script>
+        <script type="text/javascript" src="../../../../src/www/javascript/lib/ext/jquery.1.4.4.min.js">
+        </script>
+		<script type="text/javascript">
+        (function(){
+            	var jasmineEnv = jasmine.getEnv();
+            	jasmineEnv.updateInterval = 1000;
+
+            	var trivialReporter = new jasmine.TrivialReporter();
+            	jasmineEnv.addReporter(trivialReporter);
+
+            	jasmineEnv.specFilter = function(spec){
+            		return trivialReporter.specFilter(spec);
+            	}
+
+            	var currentWindowOnload = window.onload;
+
+            	window.onload = function(){
+            		if(currentWindowOnload){
+            			currentWindowOnload();
+            		}
+            		execJasmine();
+            	};
+
+            	function execJasmine(){
+            		jasmineEnv.execute();
+            	}
+
+            })();
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
