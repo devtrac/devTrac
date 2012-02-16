@@ -8,3 +8,4 @@
 
 - Jenkins
 - node.js
+- jasmine-node
