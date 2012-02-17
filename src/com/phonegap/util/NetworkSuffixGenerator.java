@@ -11,26 +11,17 @@ public class NetworkSuffixGenerator {
 
 	public String generateNetworkSuffix() {
 		String suffix = "";
-		if (hasTCPCoverage().booleanValue()) {
-			suffix += ";deviceside=true";
-			suffix += createWifiSuffix();
-		} else
-			suffix = createSuffixForNonTCP();
 		
-		return suffix;
-	}
-
-	private String createSuffixForNonTCP() {
-		String suffix = "";
 		if (hasBESCoverage().booleanValue()) {
 			suffix += ";deviceside=false";
-		} else {
+		}else {
 			suffix += ";deviceside=true";
-		}
+			suffix += createWifiSuffix();
+		} 
 		return suffix;
 	}
 
-	protected String createWifiSuffix() {
+	public String createWifiSuffix() {
 		String suffix = "";
 		if ((RadioInfo.getActiveWAFs() & RadioInfo.WAF_WLAN) != 0) {
 			if (hasTCPCoverage().booleanValue()) {
@@ -40,12 +31,12 @@ public class NetworkSuffixGenerator {
 		return suffix;
 	}
 
-	protected Boolean hasBESCoverage() {
+	public Boolean hasBESCoverage() {
 		return new Boolean(
 				CoverageInfo.isCoverageSufficient(CoverageInfo.COVERAGE_MDS));
 	}
 
-	protected Boolean hasTCPCoverage() {
+	public Boolean hasTCPCoverage() {
 		return new Boolean(CoverageInfo.isCoverageSufficient(
 		CoverageInfo.COVERAGE_DIRECT, RadioInfo.WAF_WLAN, true));
 	}

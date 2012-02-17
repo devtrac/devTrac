@@ -1,7 +1,8 @@
 package com.phonegap.util;
-
 import junit.framework.TestCase;
 import org.mockito.Mockito;
+
+import com.phonegap.util.NetworkSuffixGenerator;
 
 public class NetworkSuffixGeneratorTest extends TestCase {
 	private NetworkSuffixGenerator generator = new NetworkSuffixGenerator();
@@ -14,13 +15,13 @@ public class NetworkSuffixGeneratorTest extends TestCase {
 		assertEquals(";deviceside=false", suffix);
 	}
 	
-	public void test_should_generate_network_suffix_for_TCP_when_both_available(){
+	public void test_should_generate_network_suffix_for_BES_when_both_available(){
 		NetworkSuffixGenerator spy = spyOnGenerator(Boolean.TRUE, Boolean.TRUE);
 		((NetworkSuffixGenerator) Mockito.doReturn(";interface=wifi").when(spy)).createWifiSuffix();
 		
 		String suffix = spy.generateNetworkSuffix();
 		
-		assertEquals(";deviceside=true;interface=wifi", suffix);
+		assertEquals(";deviceside=false", suffix);
 	}
 	
 	public void test_should_generate_network_suffix_for_TCP(){
