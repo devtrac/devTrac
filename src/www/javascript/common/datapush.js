@@ -8,36 +8,21 @@ DataPush.prototype.uploadData = function(progressCallback, callback, errorCallba
         progressCallback('Image upload completed. Starting to upload site data.');
         var siteData = [];
         try {
-            $.each(devtrac.fieldTrip.sites, function(index, site){
-    			siteData.push(devtrac.dataPush.createUpdatePlaceNode(site));
-                
-                if (site.offline) {
-	                navigator.log.debug('Collecting data for Creating new site ' + ((site && site.name) ? site.name : ''));
-                    site.id = "%REPORTITEMID%";
-                    site.placeId = "%PLACEID%";
-                    siteData.push(devtrac.dataPush.createFieldTripItemNode(devtrac.fieldTrip.id, site));
-	            }
-                else {
-                    navigator.log.debug('Collecting data for Updating site ' + ((site && site.name) ? site.name : ''));
-                    siteData.push(devtrac.dataPush.updateFieldTripItemNode(site));
-	            }
-                $.each(site.actionItems, function(ind, actionItem){
-                    navigator.log.debug('Collecting data for creating ActionItem ' + ((actionItem && actionItem.title) ? actionItem.title : '') + ' node');
-                    siteData.push(devtrac.dataPush.createActionItemNode(site.id, site.placeId, actionItem));
-                });
-                
-                navigator.log.debug('Collecting data for Updating answers data');
-	            if (site.submission && site.submission.length && site.submission.length > 0) {
-	                var questionsNode = devtrac.dataPush.questionsSaveNode(site);
-	                if (questionsNode) {
-	                    siteData.push(questionsNode);
-                    }
+        	devtrac.siteUpload.uploadMultiple(devtrac.fieldTrip.sites, progressCallback, function(response){
+                navigator.log.debug('Received response from service: ' + JSON.stringify(response));
+                if (response['#error']) {
+                    alert("Error occured in uploading trip information. Please try again.");
+    				fieldTripController.showTripReports();
                 }
+                else {
+                    callback('Data uploaded successfully. Trip will be re-downloaded.');
+                    devtrac.dataPush.clearAndResync();
+                }
+            }, function(srvErr){
+                navigator.log.log('Error in sync service call.');
+                navigator.log.log(srvErr);
+                errorCallback(srvErr);
             });
-            navigator.log.debug('Creating service sync node');
-            var serviceSyncNode = devtrac.dataPush.serviceSyncSaveNode(siteData);
-	        navigator.log.debug('Calling upload service with ' + devtrac.common.convertHash(serviceSyncNode).length + ' byte data.');
-            progressCallback('Calling upload service with ' + devtrac.common.convertHash(serviceSyncNode).length + ' byte data.');
         } 
         catch (ex) {
             navigator.log.log('Error while creating upload node');
@@ -46,21 +31,6 @@ DataPush.prototype.uploadData = function(progressCallback, callback, errorCallba
             return;
         }
         
-        devtrac.dataPush._callService(serviceSyncNode, function(response){
-            navigator.log.debug('Received response from service: ' + JSON.stringify(response));
-            if (response['#error']) {
-                alert("Error occured in uploading trip information. Please try again.");
-				fieldTripController.showTripReports();
-            }
-            else {
-                callback('Data uploaded successfully. Trip will be re-downloaded.');
-                devtrac.dataPush.clearAndResync();
-            }
-        }, function(srvErr){
-            navigator.log.log('Error in sync service call.');
-            navigator.log.log(srvErr);
-            errorCallback(srvErr);
-        });
         navigator.log.debug('Called upload service with ' + devtrac.common.convertHash(serviceSyncNode).length + ' byte data.');
     }, function(err){
         navigator.log.log('Error in image upload');

@@ -9,16 +9,22 @@ describe("SiteUpload", function(){
 
 		beforeEach(function(){
 			var sites = [1, 2, 3];
+
+			spyOn(devtrac.siteUpload, '_packageSite').andCallFake(function(site){
+				return [{'name':site}];
+			})
+			spyOn(devtrac.dataPush, 'serviceSyncSaveNode').andCallThrough();
 			spyOn(navigator.network, 'XHR').andCallFake(function(URL, POSTdata, successCallback, errorCallback){
 				successCallback({'#data':'data_string'});
 			})
+		
 			uploader.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
 		})
 
 		it("should call progress callback for right times", function(){
 			expect(progressCallback.callCount).toEqual(3);
 		});
-		
+
 		it("should call success callback", function(){
 			expect(successCallback).toHaveBeenCalled();
 		});
@@ -26,10 +32,14 @@ describe("SiteUpload", function(){
 		it("should NOT call error callback", function(){
 			expect(errorCallback).not.toHaveBeenCalled();
 		});
-		
+
 		// TODO verify the arguments especially for the data to be sent
 		it("should call navigator.network.XHR for right times", function(){
 			expect(navigator.network.XHR.callCount).toEqual(3);
 		});
+
+		it("should call createBBSync with correct node data", function(){	
+			expect(devtrac.dataPush.serviceSyncSaveNode.mostRecentCall.args).toEqual([[{'name':1}]]);
+		})
 	});
 });
