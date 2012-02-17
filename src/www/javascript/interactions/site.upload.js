@@ -2,7 +2,7 @@ function SiteUpload(){
 }
 
 SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successCallback, errorCallback){
-	devtrac.siteUpload._uploadInternal(sites, {}, successCallback, progressCallback, errorCallback);
+	devtrac.siteUpload._uploadInternal(sites, {}, progressCallback, successCallback, errorCallback);
 }
 
 SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
