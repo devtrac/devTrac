@@ -87,6 +87,8 @@ QuestionsController.prototype.save = function(){
     devtrac.questionsController.collectTextAnswers();
     devtrac.currentSite.submission = devtrac.questionsController.answers;
     devtrac.questionsController.markProgress();
+
+    devtrac.currentSite.uploaded = false;
     devtrac.dataStore.saveCurrentSite(function(){
         alert("Your response is saved.");
         devtrac.siteDetailController.show();

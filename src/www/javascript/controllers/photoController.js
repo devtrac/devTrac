@@ -19,6 +19,8 @@ PhotoController.prototype.attach = function(){
     if (photo.val()) {
         navigator.image.resize(photo.val(), 640, 480, function(path){
             devtrac.currentSite.photos[path] = "";
+
+            devtrac.currentSite.uploaded = false;
             devtrac.dataStore.saveCurrentSite(function(){
                 alert("Image attached successfully.")
                 devtrac.photoController.show();

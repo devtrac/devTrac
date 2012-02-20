@@ -127,6 +127,8 @@ ActionItemController.prototype.save = function(){
     actionItem.task = task;
     actionItem.assignedTo = assignedTo;
     devtrac.currentSite.actionItems.push(actionItem);
+
+    devtrac.currentSite.uploaded = false;
     devtrac.dataStore.saveCurrentSite(function(){
         alert("Added action item.");
         navigator.log.debug("Saved action item. Will display list.");

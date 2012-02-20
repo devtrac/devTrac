@@ -23,8 +23,10 @@ function Site(){
     this.submission = [];
     this.photos = {};
     this.actionItems = [];
-	this.historyAssignedToMeActionItems = [];
+    this.historyAssignedToMeActionItems = [];
     this.historyNotAssignedToMeActionItems = [];
+
+    this.uploaded = true;
 }
 
 function PlaceTaxonomy(){

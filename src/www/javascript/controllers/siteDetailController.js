@@ -18,6 +18,8 @@ SiteDetailController.prototype.updateNarrative = function(){
 	var narrative = $(".site_narrative_notes").val();
 	if (narrative) {
 		devtrac.currentSite.narrative = narrative;
+
+		devtrac.currentSite.uploaded = false;
 		devtrac.dataStore.saveCurrentSite(function(){
 			alert("Updated narrative text.");
 			devtrac.siteDetailController.show();

@@ -6,6 +6,10 @@ SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successC
 }
 
 SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
+	if(site.uploaded === true) {
+		successCallback(site.name + ": No need to upload");
+		return;
+	}
 	var siteData = devtrac.siteUpload._packageSite(site);
 	var bbSyncNode = devtrac.siteUpload._createBBSyncNode(siteData);
 
@@ -16,8 +20,8 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 			fieldTripController.showTripReports();
         }
         else {
+            site.uploaded = true;
             successCallback('Data uploaded successfully.');
-//            devtrac.dataPush.clearAndResync();``
         }
     }, function(srvErr){
         navigator.log.log('Error in sync service call.');
@@ -31,8 +35,7 @@ SiteUpload.prototype._uploadInternal = function(sites, uploadedSites, progressCa
 	if(siteToUpload){
 		devtrac.siteUpload.upload(siteToUpload, function(nid){
 			uploadedSites[siteToUpload] = nid;
-			if(progressCallback)
-				progressCallback(uploadedSites, siteToUpload, nid);
+			progressCallback(siteToUpload.name);
 			devtrac.siteUpload._uploadInternal(sites, uploadedSites, progressCallback, successCallback, errorCallback);
 		}, errorCallback);
 	} else {
@@ -77,6 +80,5 @@ SiteUpload.prototype._createBBSyncNode = function(siteData){
     var serviceSyncNode = devtrac.dataPush.serviceSyncSaveNode(siteData);
     var length = devtrac.common.convertHash(serviceSyncNode).length;
     navigator.log.debug('Calling upload service with ' + length + ' byte data.');
-//    progressCallback('Calling upload service with ' + length + ' byte data.');
     return serviceSyncNode;
 }
