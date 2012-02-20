@@ -4,3 +4,5 @@
 bin
 deliverables
 *.tmp_*
+LogFile.txt
+build.sh~
