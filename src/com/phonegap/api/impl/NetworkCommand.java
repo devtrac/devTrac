@@ -121,13 +121,13 @@ public class NetworkCommand implements Command {
 				reqURL = reqURL.substring(0, pipeIndex);
 			}
 			
-			LogCommand.DEBUG("Calling service " + reqURL);
+			reqURL += new NetworkSuffixGenerator().generateNetworkSuffix();
 			
+			LogCommand.DEBUG("Calling service " + reqURL);
+
 			if (fileData != null) {
 				POSTdata += "&file=" + urlEncode(fileData.toString());
 			}
-			
-			reqURL += new NetworkSuffixGenerator().generateNetworkSuffix();
 			
 			connThread.fetch(reqURL, POSTdata);
 			reqURL = null;
