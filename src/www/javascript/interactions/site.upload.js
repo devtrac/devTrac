@@ -7,7 +7,7 @@ SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successC
 
 SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 	if(site.uploaded === true) {
-		successCallback(site.name + ": No need to upload");
+		successCallback("Do not need to upload " + site.name + ".");
 		return;
 	}
 	var siteData = devtrac.siteUpload._packageSite(site);
@@ -35,7 +35,7 @@ SiteUpload.prototype._uploadInternal = function(sites, uploadedSites, progressCa
 	if(siteToUpload){
 		devtrac.siteUpload.upload(siteToUpload, function(nid){
 			uploadedSites[siteToUpload] = nid;
-			progressCallback(siteToUpload.name);
+			progressCallback("Uploading " + siteToUpload.name);
 			devtrac.siteUpload._uploadInternal(sites, uploadedSites, progressCallback, successCallback, errorCallback);
 		}, errorCallback);
 	} else {
