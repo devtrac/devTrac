@@ -123,7 +123,7 @@ public class NetworkCommand implements Command {
 			
 			reqURL += new NetworkSuffixGenerator().generateNetworkSuffix();
 			
-			LogCommand.DEBUG("Calling service " + reqURL);
+			LogCommand.LOG("Calling service " + reqURL);
 
 			if (fileData != null) {
 				POSTdata += "&file=" + urlEncode(fileData.toString());
