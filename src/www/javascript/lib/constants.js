@@ -1,4 +1,4 @@
-
+/*
 DT = {
 	DOMAIN: 'devtrac.ug',
 	SERVICE_ENDPOINT: 'http://www.devtrac.ug/services/json',
@@ -18,8 +18,7 @@ DT = {
 	QUESTIONS_SAVE: 'questionnaire.submit',		
 	FILE_UPLOAD_PATH: 'sites/default/files/blackberry/<UID>/'
 }
-
-/*
+*/
 DT = {
     DOMAIN: 'devtrac.org',
     SERVICE_ENDPOINT: 'http://test.devtrac.org/services/json',
@@ -39,4 +38,3 @@ DT = {
 	QUESTIONS_SAVE: 'questionnaire.submit',		
 	FILE_UPLOAD_PATH: 'sites/default/files/blackberry/<UID>/'
 };
-*/
