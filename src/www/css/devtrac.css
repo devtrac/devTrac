@@ -35,6 +35,12 @@ h2 {
 	margin-bottom: 10px;
 }
 
+.action_item_grid h4 {
+	color: #AAAAAA;
+	text-align: center;
+	margin-top: 9px;
+}
+
 .input, .select {
     background: none repeat scroll 0 0 #FBFBFB;
     border: 1px solid #9D9D9D;
@@ -197,6 +203,7 @@ p.submit {
     font-size: 16px;
     padding: 5px;
 	overflow: hidden;
+	height: 25px;
 }
 .grid .col1{
 	float: left;

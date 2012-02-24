@@ -6,15 +6,27 @@ ActionItemController.prototype.show = function(){
     navigator.log.debug("Showing action items");
 	screens.show("loading");
     var actionItemGrid = $(".action_item_grid");
-	if (devtrac.currentSite.actionItems.length == 0) {
+	
+	var fakeItems = [];
+	var fakeActionItem = new ActionItem();
+		fakeActionItem.id = 1;
+		fakeActionItem.title = "fake 1";
+		fakeActionItem.task = "test fake";
+		fakeActionItem.assignedTo = "Me";
+	fakeItems.push(fakeActionItem);
+	if (devtrac.currentSite.actionItems.length == 0 && fakeItems.length == 0) {
         $("#no_action_items").show();
         actionItemGrid.hide();
         screens.show("list_action_items");
         return;
     }
+
     var container = $("#action_items_list");
+	var previousContainer = $("#previous_action_items_list");
     $("#no_action_items").hide();
     container.html("");
+    previousContainer.html("");
+
 	$.each(devtrac.currentSite.actionItems, function(index, item){
 		var profiles = $.grep(devtrac.profiles, function(profile){
 			return item.assignedTo == profile.username;
@@ -23,7 +35,10 @@ ActionItemController.prototype.show = function(){
         var html = "<div class='grid_row'><div class='col1'>" + item.title + "</div><div class='col2'>" + name + "</div></div>";
         container.append(html);
     });
-    actionItemGrid.show();
+	var preHtml = "<div class='grid_row'><div class='col1'>" + fakeActionItem.title + "</div><div class='col2'>" + fakeActionItem.assignedTo + "</div></div>";
+	previousContainer.append(preHtml);
+	actionItemGrid.show();
+
 	navigator.log.debug("Displayed action items");
     screens.show("list_action_items");
 }
@@ -46,12 +61,12 @@ ActionItemController.prototype.save = function(){
     var title = $("#action_item_title").val();
     var task = $("#action_item_task").val();
     var assignedTo = $("#action_item_assigned_to").val();
-    
+
     if (!title || !task || !assignedTo) {
         alert("Please enter title, task and assigned to values.");
         return;
     }
-    
+
     var actionItem = new ActionItem();
 	actionItem.id = 0;
     actionItem.title = title;
