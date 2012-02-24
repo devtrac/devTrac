@@ -24,23 +24,25 @@ ActionItemController.prototype.show = function(){
     var container = $("#action_items_list");
 	var previousContainer = $("#previous_action_items_list");
     $("#no_action_items").hide();
-    container.html("");
-    previousContainer.html("");
 
-	$.each(devtrac.currentSite.actionItems, function(index, item){
-		var profiles = $.grep(devtrac.profiles, function(profile){
+	devtrac.actionItemController.displayActionItem(devtrac.currentSite.actionItems, devtrac.profiles, container);
+	devtrac.actionItemController.displayActionItem(fakeItems, devtrac.profiles, previousContainer);
+	actionItemGrid.show();
+
+	navigator.log.debug("Displayed action items");
+    screens.show("list_action_items");
+}
+
+ActionItemController.prototype.displayActionItem = function(actionItems, userProfiles, container){
+	container.html("");
+	$.each(actionItems, function(index, item){
+		var profiles = $.grep(userProfiles, function(profile){
 			return item.assignedTo == profile.username;
         });
 		var name = profiles.length > 0 ? profiles[0].name : "N/A";
         var html = "<div class='grid_row'><div class='col1'>" + item.title + "</div><div class='col2'>" + name + "</div></div>";
         container.append(html);
     });
-	var preHtml = "<div class='grid_row'><div class='col1'>" + fakeActionItem.title + "</div><div class='col2'>" + fakeActionItem.assignedTo + "</div></div>";
-	previousContainer.append(preHtml);
-	actionItemGrid.show();
-
-	navigator.log.debug("Displayed action items");
-    screens.show("list_action_items");
 }
 
 ActionItemController.prototype.add = function(){
