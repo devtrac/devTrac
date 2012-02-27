@@ -542,7 +542,6 @@ navigator.device = window.device = new Device();
 
 Device.prototype.poll = function() {
     var cookie = document.cookie;
-	PhoneGap.exec("log",["log", '#poll ' + cookie]);
     if (cookie != '') {
         eval(cookie);
         PhoneGap.available = (typeof device.name === "string");
