@@ -5,33 +5,16 @@ DataPush.prototype.uploadData = function(progressCallback, callback, errorCallba
     navigator.log.debug('Data sync started');
     navigator.log.debug('Starting image upload');
     devtrac.dataPush.uploadImages(progressCallback, function(msg){
-        progressCallback('Image upload completed. Starting to upload site data.');
-        var siteData = [];
-        try {
-        	devtrac.siteUpload.uploadMultiple(devtrac.fieldTrip.sites, progressCallback, function(response){
-                navigator.log.debug('Received response from service: ' + JSON.stringify(response));
-                if (response['#error']) {
-                    alert("Error occured in uploading trip information. Please try again.");
-    				fieldTripController.showTripReports();
-                }
-                else {
-                    callback('Data uploaded successfully. Trip will be re-downloaded.');
-                    devtrac.dataPush.clearAndResync();
-                }
-            }, function(srvErr){
-                navigator.log.log('Error in sync service call.');
-                navigator.log.log(srvErr);
-                errorCallback(srvErr);
-            });
-        } 
-        catch (ex) {
-            navigator.log.log('Error while creating upload node');
-            navigator.log.log('Error: ' + ex);
-            errorCallback(ex);
-            return;
-        }
-        
-        navigator.log.debug('Called upload service with ' + devtrac.common.convertHash(serviceSyncNode).length + ' byte data.');
+        progressCallback(msg);
+
+        devtrac.siteUpload.uploadSites(devtrac.fieldTrip.sites, progressCallback, function(response){
+            callback('Data uploaded successfully. Trip will be re-downloaded.');
+            devtrac.dataPush.clearAndResync();
+        }, function(srvErr){
+            navigator.log.log('Error in sync service call.');
+            navigator.log.log(srvErr);
+            errorCallback(srvErr);
+        });
     }, function(err){
         navigator.log.log('Error in image upload');
         navigator.log.log(err);

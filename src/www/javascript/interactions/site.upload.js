@@ -1,6 +1,38 @@
 function SiteUpload(){
 }
 
+SiteUpload.prototype.uploadSites = function(sites, progressCallback, successCallback, errorCallback) {
+	var site = sites.pop();
+
+	if (site) {
+		if(site.uploaded === true) {
+			alert("Do not need to upload " + site.name + ".");
+			devtrac.siteUpload.uploadSites(sites, progressCallback, successCallback, errorCallback);
+		}
+
+		var siteData = devtrac.siteUpload._packageSite(site);
+		var bbSyncNode = devtrac.siteUpload._createBBSyncNode(siteData);
+
+		devtrac.dataPush._callService(bbSyncNode, function(response){
+	        navigator.log.debug('Received response from service: ' + JSON.stringify(response));
+	        if (response['#error']) {
+	            alert("Error occured in uploading trip information. Please try again.");
+				fieldTripController.showTripReports();
+	        }
+	        else {
+	            site.uploaded = true;
+				devtrac.siteUpload.uploadSites(sites, progressCallback, successCallback, errorCallback);
+	        }
+	    }, function(srvErr){
+	        navigator.log.log('Error in sync service call.');
+	        navigator.log.log(srvErr);
+	        errorCallback(srvErr);
+	    });
+	} else {
+		successCallback('All sites shown successfully.');
+	}
+}
+
 SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successCallback, errorCallback){
 	devtrac.siteUpload._uploadInternal(sites, {}, progressCallback, successCallback, errorCallback);
 }
