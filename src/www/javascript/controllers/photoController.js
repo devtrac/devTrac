@@ -28,7 +28,7 @@ PhotoController.prototype.attach = function(){
         }, function(err){
             devtrac.common.logAndShowGenericError('Failed to attach image.');
         })
-		navigator.log.debug("Attached photo: " + photo);
+		navigator.log.debug("Attached photo: " + photo.val());
         photo.val("");
     }
 }
