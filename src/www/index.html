@@ -360,7 +360,7 @@
 
             </div>
         </div>
-        <!-- Action item Screen -->
+        <!-- Action item adding Screen -->
         <div id="add_action_item_screen" style="display: none">
             <div class="toolbar">
                 <h1>Add New Action Item</h1>
@@ -388,6 +388,37 @@
                 </p>
                 <p class="submit">
                     <input type="submit" id="save_action_item" class="button" value="Add"/>
+                </p>
+            </div>
+        </div>
+       <!-- Action item editing Screen -->
+	   <div id="action_item_edit_screen" style="display: none">
+            <div class="toolbar">
+                <h1>Action Item</h1>
+                <span class="back back_to_action_item_list">Back</span>
+            </div>
+            <div class="content">
+               <p>
+                    <label id="action_title">
+                        Title
+                    </label>
+                    <input type="text" id="action_item_title_edit" class="input" value=""/>
+                </p>
+               <p>
+                    <label id="action_task">
+                        Task
+                    </label>
+                    <input type="text" id="action_item_task_edit" class="input" value=""/>
+                </p>
+                <p>
+                    <label id="action_assign">
+                        Assign To
+                    </label>
+                    <select id="action_item_assigned_to_edit" class="select" name="users">
+                    </select>
+                </p>
+                <p class="submit">
+                    <input type="submit" id="action_item_edit" class="button" value="Save"/>
                 </p>
             </div>
         </div>

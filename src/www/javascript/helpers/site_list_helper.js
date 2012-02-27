@@ -8,6 +8,16 @@ function showSiteDetailScreen(event){
 	}
 }
 
-function attachClickEvents(id, callback){
-    $('.site_item').click(callback);
+function showActionItemEditScreen(event){
+	for(var id in devtrac.currentSite.actionItems){
+		var actionItem = devtrac.currentSite.actionItems[id];
+		if(this.id == actionItem.id){
+//			devtrac.currentSite = site;
+			devtrac.actionItemController.edit(devtrac.currentSite.actionItems[id]);
+		}
+	}
+}
+
+function attachClickEvents(selector, callback){
+    $("'"+ selector +"'").click(callback);
 }

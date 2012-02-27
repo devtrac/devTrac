@@ -62,5 +62,5 @@ fieldTripController.paintSites = function(){
     noSitesTip.hide();
     $(".sites_list").show();
     screens.show("sites_to_visit");
-    attachClickEvents("site_item", showSiteDetailScreen);
+    attachClickEvents(".site_item", showSiteDetailScreen);
 }
