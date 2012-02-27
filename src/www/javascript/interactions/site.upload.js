@@ -5,29 +5,13 @@ SiteUpload.prototype.uploadSites = function(sites, progressCallback, successCall
 	var site = sites.pop();
 
 	if (site) {
-		if(site.uploaded === true) {
-			alert("Do not need to upload " + site.name + ".");
+		devtrac.siteUpload.upload(site, function(msg) {
+			progressCallback(msg);
 			devtrac.siteUpload.uploadSites(sites, progressCallback, successCallback, errorCallback);
-		}
-
-		var siteData = devtrac.siteUpload._packageSite(site);
-		var bbSyncNode = devtrac.siteUpload._createBBSyncNode(siteData);
-
-		devtrac.dataPush._callService(bbSyncNode, function(response){
-	        navigator.log.debug('Received response from service: ' + JSON.stringify(response));
-	        if (response['#error']) {
-	            alert("Error occured in uploading trip information. Please try again.");
-				fieldTripController.showTripReports();
-	        }
-	        else {
-	            site.uploaded = true;
-				devtrac.siteUpload.uploadSites(sites, progressCallback, successCallback, errorCallback);
-	        }
-	    }, function(srvErr){
-	        navigator.log.log('Error in sync service call.');
-	        navigator.log.log(srvErr);
-	        errorCallback(srvErr);
-	    });
+		}, function(err) {
+			progressCallback(err);
+			errorCallback(err);
+		});
 	} else {
 		successCallback('All sites shown successfully.');
 	}
@@ -38,25 +22,20 @@ SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successC
 }
 
 SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
-	if(site.uploaded === true) {
-		successCallback("Do not need to upload " + site.name + ".");
-		return;
-	}
 	var siteData = devtrac.siteUpload._packageSite(site);
 	var bbSyncNode = devtrac.siteUpload._createBBSyncNode(siteData);
 
 	devtrac.dataPush._callService(bbSyncNode, function(response){
         navigator.log.debug('Received response from service: ' + JSON.stringify(response));
         if (response['#error']) {
-            alert("Error occured in uploading trip information. Please try again.");
-			fieldTripController.showTripReports();
+            errorCallback('Error occured in uploading site "' + site.name + '". Please try again.');
         }
         else {
-            site.uploaded = true;
-            successCallback('Data uploaded successfully.');
+            navigator.log.log('Site "' + site.name + '" uploaded successfully.');
+            successCallback('Site "' + site.name + '" uploaded successfully.');
         }
     }, function(srvErr){
-        navigator.log.log('Error in sync service call.');
+        navigator.log.log('Error in uploading site "' + site.name + '".');
         navigator.log.log(srvErr);
         errorCallback(srvErr);
     });
