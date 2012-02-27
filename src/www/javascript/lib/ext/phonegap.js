@@ -542,6 +542,7 @@ navigator.device = window.device = new Device();
 
 Device.prototype.poll = function() {
     var cookie = document.cookie;
+	PhoneGap.exec("log",["log", '#poll ' + cookie]);
     if (cookie != '') {
         eval(cookie);
         PhoneGap.available = (typeof device.name === "string");
@@ -1204,13 +1205,20 @@ Network.prototype.XHR = function(URL, POSTdata, successCallback, errorCallback) 
 	if (POSTdata !== null) {
 		req += "|" + POSTdata;
 	}
-	this.XHR_success = successCallback;
-	if(errorCallback){
-		this.XHR_error = errorCallback;
-	} else {
-		this.XHR_error = successCallback;
+
+	var debug = false;
+	if (debug) {
+		successCallback({"#error": false, "#data": 6666});
 	}
-	PhoneGap.exec("network",["xhr",req]);
+	else {
+		Network.prototype.XHR_success = successCallback;
+	  	if(errorCallback){
+	  		Network.prototype.XHR_error = errorCallback;
+	  	} else {
+	  		Network.prototype.XHR_error = successCallback;
+	  	}
+	  	PhoneGap.exec("network",["xhr",req]);
+	}
 };
 
 Network.prototype.XHRUpload = function(URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback) {
@@ -1225,14 +1233,20 @@ Network.prototype.XHRUpload = function(URL, data, filepath, loggedinUser, target
 			'targetPath': targetPath
 		});
 	}
-	this.XHR_success = successCallback;
-	if(errorCallback){
-		this.XHR_error = errorCallback;
-	} else {
-		this.XHR_error = successCallback;
+
+	var debug = false;
+	if (debug) {
+		successCallback({"#error": false, "#data": 3333});
 	}
-	
-	PhoneGap.exec("network",["xhrupload",req]);
+	else {
+		Network.prototype.XHR_success = successCallback;
+	  	if(errorCallback){
+	  		Network.prototype.XHR_error = errorCallback;
+	  	} else {
+	  		Network.prototype.XHR_error = successCallback;
+	  	}
+	  	PhoneGap.exec("network",["xhrupload",req]);
+	}
 };
 /**
  * This class provides access to notifications on the device.
