@@ -7,7 +7,7 @@ DataPush.prototype.uploadData = function(progressCallback, callback, errorCallba
     devtrac.dataPush.uploadImages(progressCallback, function(msg){
         progressCallback(msg);
 
-        devtrac.siteUpload.uploadSites(devtrac.fieldTrip.sites, progressCallback, function(response){
+        devtrac.siteUpload.uploadMultiple(devtrac.fieldTrip.sites, progressCallback, function(response){
             callback('Data uploaded successfully. Trip will be re-downloaded.');
             devtrac.dataPush.clearAndResync();
         }, function(srvErr){
