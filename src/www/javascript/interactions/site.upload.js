@@ -2,7 +2,7 @@ function SiteUpload(){
 }
 
 SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successCallback, errorCallback){
-	devtrac.siteUpload._uploadInternal(sites, {}, progressCallback, successCallback, errorCallback);
+	devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
 }
 
 SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
@@ -45,12 +45,12 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
     });
 }
 
-SiteUpload.prototype._uploadInternal = function(sites, uploadedSites, progressCallback, successCallback, errorCallback){
+SiteUpload.prototype._uploadInternal = function(sites, progressCallback, successCallback, errorCallback){
 	var siteToUpload = sites.pop();
 	if (siteToUpload) {
 		devtrac.siteUpload.upload(siteToUpload, function(msg) {
 			progressCallback(msg);
-			devtrac.siteUpload._uploadInternal(sites, uploadedSites, progressCallback, successCallback, errorCallback);
+			devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
 		}, function(err) {
 			progressCallback(err);
 			errorCallback(err);
