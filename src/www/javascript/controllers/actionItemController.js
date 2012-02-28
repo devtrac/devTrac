@@ -35,10 +35,15 @@ ActionItemController.prototype.editSave = function(){
         return;
     }
 
-	currentActionItem.id = 0;
-    currentActionItem.title = title;
-    currentActionItem.task = task;
-    currentActionItem.assignedTo = assignedTo;
+	for(var id in devtrac.currentSite.actionItems){
+		var actionItem = devtrac.currentSite.actionItems[id];
+		if(currentActionItem.id == actionItem.id){
+			devtrac.currentSite.actionItems[id].title = title;
+			devtrac.currentSite.actionItems[id].task = task;
+			devtrac.currentSite.actionItems[id].assignedTo= assignedTo;
+		}
+	}
+
     devtrac.dataStore.saveCurrentSite(function(){
         alert("Edited action item.");
         navigator.log.debug("Edited action item. Will display list.");
@@ -69,8 +74,8 @@ ActionItemController.prototype.show = function(){
 	var previousContainer = $("#previous_action_items_list");
     $("#no_action_items").hide();
 
-	devtrac.actionItemController.displayActionItem(devtrac.currentSite.actionItems, devtrac.profiles, container, true);
-	devtrac.actionItemController.displayActionItem(fakeItems, devtrac.profiles, previousContainer, false);
+	devtrac.actionItemController.displayActionItemInCurrentSection(devtrac.currentSite.actionItems);
+	devtrac.actionItemController.displayActionItemInHistorySection(fakeItems);
 	actionItemGrid.show();
 
 	navigator.log.debug("Displayed action items");
@@ -78,23 +83,33 @@ ActionItemController.prototype.show = function(){
 	attachClickEvents(".action_item", showActionItemEditScreen);
 }
 
-ActionItemController.prototype.displayActionItem = function(actionItems, userProfiles, container, isCurrent){
+ActionItemController.prototype.displayActionItemInCurrentSection = function(actionItems){
+	var container = $("#action_items_list");
 	container.html("");
 	$.each(actionItems, function(index, item){
-		var profiles = $.grep(userProfiles, function(profile){
-			return item.assignedTo == profile.username;
-        });
-		var name = profiles.length > 0 ? profiles[0].name : "N/A";
+		var name =devtrac.actionItemController._parseProfileName(item);
 		var id = item.id;
-        var html;
-		if (isCurrent) {
-			html = "<div class='grid_row'><div id='" + id + "' class='col1 action_item link'>" + item.title + "</div><div class='col2'>" + name + "</div></div>";
-		}
-		else{
-			html = "<div class='grid_row'><div id='" + id + "' class='col1 action_item'>" + item.title + "</div><div class='col2'>" + name + "</div></div>";
-		}
+		var	html = "<div class='grid_row'><div id='" + id + "' class='col1 action_item link'>" + item.title + "</div><div class='col2'>" + name + "</div></div>";
         container.append(html);
     });
+}
+
+ActionItemController.prototype.displayActionItemInHistorySection = function(actionItems){
+	var container = $("#previous_action_items_list");
+	container.html("");
+	$.each(actionItems, function(index, item){
+		var name =devtrac.actionItemController._parseProfileName(item);
+		var id = item.id;
+        var html = "<div class='grid_row'><div id='" + id + "' class='col1'>" + item.title + "</div><div class='col2'>" + name + "</div></div>";
+		container.append(html);
+    });
+}
+
+ActionItemController.prototype._parseProfileName= function(actionItem){
+	var profiles = $.grep(devtrac.profiles, function(profile){
+			return actionItem.assignedTo == profile.username;
+        });
+	return profiles.length > 0 ? profiles[0].name : "N/A";
 }
 
 ActionItemController.prototype.add = function(){
