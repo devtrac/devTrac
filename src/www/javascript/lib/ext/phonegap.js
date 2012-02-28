@@ -1204,20 +1204,13 @@ Network.prototype.XHR = function(URL, POSTdata, successCallback, errorCallback) 
 	if (POSTdata !== null) {
 		req += "|" + POSTdata;
 	}
-
-	var debug = false;
-	if (debug) {
-		successCallback({"#error": false, "#data": 6666});
+	this.XHR_success = successCallback;
+	if(errorCallback){
+		this.XHR_error = errorCallback;
+	} else {
+		this.XHR_error = successCallback;
 	}
-	else {
-		Network.prototype.XHR_success = successCallback;
-	  	if(errorCallback){
-	  		Network.prototype.XHR_error = errorCallback;
-	  	} else {
-	  		Network.prototype.XHR_error = successCallback;
-	  	}
-	  	PhoneGap.exec("network",["xhr",req]);
-	}
+	PhoneGap.exec("network",["xhr",req]);
 };
 
 Network.prototype.XHRUpload = function(URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback) {
@@ -1232,20 +1225,14 @@ Network.prototype.XHRUpload = function(URL, data, filepath, loggedinUser, target
 			'targetPath': targetPath
 		});
 	}
-
-	var debug = false;
-	if (debug) {
-		successCallback({"#error": false, "#data": 3333});
+	this.XHR_success = successCallback;
+	if(errorCallback){
+		this.XHR_error = errorCallback;
+	} else {
+		this.XHR_error = successCallback;
 	}
-	else {
-		Network.prototype.XHR_success = successCallback;
-	  	if(errorCallback){
-	  		Network.prototype.XHR_error = errorCallback;
-	  	} else {
-	  		Network.prototype.XHR_error = successCallback;
-	  	}
-	  	PhoneGap.exec("network",["xhrupload",req]);
-	}
+	
+	PhoneGap.exec("network",["xhrupload",req]);
 };
 /**
  * This class provides access to notifications on the device.
