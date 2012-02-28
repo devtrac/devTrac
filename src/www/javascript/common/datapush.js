@@ -22,6 +22,16 @@ DataPush.prototype.uploadData = function(progressCallback, callback, errorCallba
     });
 }
 
+DataPush.prototype.isAllSitesUploaded = function(){
+	for (index in devtrac.fieldTrip.sites) {
+		var site = devtrac.fieldTrip.sites[index];
+		if (!site.uploaded) {
+			return false;
+        }
+	}
+	return true;
+}
+
 DataPush.prototype.clearAndResync = function(){
     devtrac.dataStore.removeFieldTrip(function(){
         devtrac.fieldTrip = new FieldTrip();

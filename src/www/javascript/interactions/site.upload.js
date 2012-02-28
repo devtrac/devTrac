@@ -6,6 +6,12 @@ SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successC
 }
 
 SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
+	if (site.uploaded) {
+		navigator.log.log('Site "' + site.name + '" is skipped as it is unchanged.');
+		successCallback('Site "' + site.name + '" is skipped as it is unchanged.');
+		return;
+	}
+
 	var siteData = devtrac.siteUpload._packageSite(site);
 	var bbSyncNode = devtrac.siteUpload._createBBSyncNode(siteData);
 
@@ -15,6 +21,11 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
             errorCallback('Error occured in uploading site "' + site.name + '". Please try again.');
         }
         else {
+            site.uploaded = true;
+            devtrac.currentSite = site;
+            devtrac.dataStore.saveCurrentSite(function(){
+                navigator.log.log('Site "' + site.name + '" is marked as uploaded.');
+            });
             navigator.log.log('Site "' + site.name + '" uploaded successfully.');
             successCallback('Site "' + site.name + '" uploaded successfully.');
         }

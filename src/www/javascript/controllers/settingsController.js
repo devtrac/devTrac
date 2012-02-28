@@ -31,6 +31,11 @@ SettingsController.prototype.performWipeout = function(){
 }
 
 SettingsController.prototype.uploadData = function(){
+	if (devtrac.dataPush.isAllSitesUploaded()){
+		alert('No site has been changed since last synchronization.');
+		return;
+	}
+
     screens.show("upload_progress");
     $('.upload_progress_log').html("");
     devtrac.dataPush.uploadData(function(msg){
