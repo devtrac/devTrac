@@ -12,7 +12,16 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 		return;
 	}
 
-	var siteData = devtrac.siteUpload._packageSite(site);
+	var siteData;
+	try {
+		siteData = devtrac.siteUpload._packageSite(site);
+	} catch(ex) {
+		navigator.log.log('Error while creating upload node');
+		navigator.log.log('Error: ' + ex);
+		errorCallback(ex);
+		return;
+	}
+
 	var bbSyncNode = devtrac.siteUpload._createBBSyncNode(siteData);
 
 	devtrac.dataPush._callService(bbSyncNode, function(response){
