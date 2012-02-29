@@ -1,6 +1,6 @@
-package test.helper;
+package helper;
 
-import test.com.phonegap.util.NetworkSuffixGeneratorTest;
+import com.phonegap.util.NetworkSuffixGeneratorTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

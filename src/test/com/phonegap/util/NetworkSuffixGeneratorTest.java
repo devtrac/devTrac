@@ -1,6 +1,4 @@
-package test.com.phonegap.util;
-
-import com.phonegap.util.*;
+package com.phonegap.util;
 import junit.framework.TestCase;
 import org.mockito.Mockito;
 
