@@ -14,10 +14,12 @@ public class NetworkSuffixGenerator {
 		
 		if (hasBESCoverage().booleanValue()) {
 			suffix += ";deviceside=false";
-		}else {
+		} else if (hasBISCoverage().booleanValue()) {
+			suffix += ";deviceside=false;ConnectionType=mds-public";
+		} else {
 			suffix += ";deviceside=true";
 			suffix += createWifiSuffix();
-		} 
+		}
 		return suffix;
 	}
 
@@ -36,8 +38,14 @@ public class NetworkSuffixGenerator {
 				CoverageInfo.isCoverageSufficient(CoverageInfo.COVERAGE_MDS));
 	}
 
+	public Boolean hasBISCoverage() {
+		return new Boolean(
+				CoverageInfo.isCoverageSufficient(CoverageInfo.COVERAGE_BIS_B));
+	}
+
 	public Boolean hasTCPCoverage() {
 		return new Boolean(CoverageInfo.isCoverageSufficient(
 		CoverageInfo.COVERAGE_DIRECT, RadioInfo.WAF_WLAN, true));
 	}
+
 }
