@@ -2,7 +2,6 @@ describe("Rendering action item view", function(){
 	var actionItemController = new ActionItemController();
 	var userProfiles;
 	beforeEach(function(){
-	beforeEach(function(){
 		var fixture = "<div id='list_action_item_screen' style='display: none'>" +
             "<div class='toolbar'>"+
                 "<h1>Action Item</h1>"+
