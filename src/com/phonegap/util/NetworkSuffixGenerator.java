@@ -2,6 +2,7 @@ package com.phonegap.util;
 
 import net.rim.device.api.system.CoverageInfo;
 import net.rim.device.api.system.RadioInfo;
+import net.rim.device.api.system.WLANInfo;
 
 public class NetworkSuffixGenerator {
 
@@ -16,17 +17,9 @@ public class NetworkSuffixGenerator {
 			suffix += ";deviceside=false";
 		} else if (hasBISCoverage().booleanValue()) {
 			suffix += ";deviceside=false;ConnectionType=mds-public";
-		} else {
+		} else if (hasTCPCoverage().booleanValue()) {
 			suffix += ";deviceside=true";
-			suffix += createWifiSuffix();
-		}
-		return suffix;
-	}
-
-	public String createWifiSuffix() {
-		String suffix = "";
-		if ((RadioInfo.getActiveWAFs() & RadioInfo.WAF_WLAN) != 0) {
-			if (hasTCPCoverage().booleanValue()) {
+			if (hasWiFiCoverage().booleanValue()) {
 				suffix += ";interface=wifi";
 			}
 		}
@@ -44,8 +37,12 @@ public class NetworkSuffixGenerator {
 	}
 
 	public Boolean hasTCPCoverage() {
-		return new Boolean(CoverageInfo.isCoverageSufficient(
-		CoverageInfo.COVERAGE_DIRECT, RadioInfo.WAF_WLAN, true));
+		return new Boolean(
+				CoverageInfo.isCoverageSufficient(CoverageInfo.COVERAGE_DIRECT));
 	}
 
+	public Boolean hasWiFiCoverage() {
+		return new Boolean(
+				WLANInfo.getWLANState() == WLANInfo.WLAN_STATE_CONNECTED);
+	}
 }
