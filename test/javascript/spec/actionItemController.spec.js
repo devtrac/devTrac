@@ -1,7 +1,8 @@
 describe("Rendering action item view", function(){
 	var actionItemController = new ActionItemController();
 	var userProfiles;
-	beforeEach(function(){		
+	beforeEach(function(){
+	beforeEach(function(){
 		var fixture = "<div id='list_action_item_screen' style='display: none'>" +
             "<div class='toolbar'>"+
                 "<h1>Action Item</h1>"+
@@ -40,27 +41,35 @@ describe("Rendering action item view", function(){
 
 		devtrac.profiles = [{username:"Bob", name:"Bob"}, {username:"Charlie", name:"Charlie"}];
 	});
-	
+
+
 	it("display action items in current section", function(){
 		var actionItems = [{title:"test action", assignedTo:"Bob"},{title:"test action 2", assignedTo:"Dick"}];
-		
-		actionItemController.displayActionItemInCurrentSection(actionItems);
-		
+
+
+		actionItemController.displayActionItemsInCurrentSection(actionItems);
+
+
 		expect($('#action_items_list div.col1:first')).toHaveText( actionItems[0].title);
 		expect($('#action_items_list div.col1:eq(1)')).toHaveText( actionItems[1].title);
-		
+
+
 		expect($('#action_items_list div.col2:eq(0)')).toHaveText( actionItems[0].assignedTo);
 		expect($('#action_items_list div.col2:eq(1)')).toHaveText( "N/A");
 	});
-	
+
+
 	it("display fake action items in history section", function(){
 		var fakeActionItems = [{title:"test fake", assignedTo:"Bob"},{title:"test fake 2", assignedTo:"Dick"}];
-		
-		actionItemController.displayActionItemInHistorySection(fakeActionItems);
-		
+
+
+		actionItemController.displayActionItemsInHistorySection(fakeActionItems);
+
+
 		expect($('#previous_action_items_list div.col1:eq(0)')).toHaveText( fakeActionItems[0].title);
 		expect($('#previous_action_items_list div.col1:eq(1)')).toHaveText( fakeActionItems[1].title);
-		
+
+
 		expect($('#previous_action_items_list div.col2:eq(0)')).toHaveText( fakeActionItems[0].assignedTo);
 		expect($('#previous_action_items_list div.col2:eq(1)')).toHaveText( "N/A");
 	});
@@ -104,6 +113,7 @@ describe("Editing action item", function(){
 			'</div></body>';
 		setFixtures(fixture);
 		actionItem = {id:0, title:"test action", task:"test 1", assignedTo:"Bob"};
+		var user1 = "Terra Weikel";
 		devtrac.profiles = [{name:user1},{name:"Rebecca Kwagala"}];
 	})
 
@@ -119,7 +129,8 @@ describe("Editing action item", function(){
 		actionItemController.edit(actionItem);
         var newTitle = "test changed";
         var newTask = "task changed";
-        var user1 = "Terra Weikel";
+
+
 
 		$("#action_item_title_edit").val(newTitle);
 		$("#action_item_task_edit").val(newTask);

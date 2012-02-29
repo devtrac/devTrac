@@ -51,15 +51,8 @@ ActionItemController.prototype.show = function(){
     navigator.log.debug("Showing action items");
     screens.show("loading");
     var actionItemGrid = $(".action_item_grid");
-	
-    var fakeItems = [];
-    var fakeActionItem = new ActionItem();
-    fakeActionItem.id = 1;
-    fakeActionItem.title = "fake 1";
-    fakeActionItem.task = "test fake";
-    fakeActionItem.assignedTo = "Me";
-    fakeItems.push(fakeActionItem);
-    if (devtrac.currentSite.actionItems.length == 0 && fakeItems.length == 0) {
+
+    if (devtrac.currentSite.actionItems.length == 0) {
         $("#no_action_items").show();
         actionItemGrid.hide();
         screens.show("list_action_items");
@@ -68,8 +61,7 @@ ActionItemController.prototype.show = function(){
 
     $("#no_action_items").hide();
 
-    devtrac.actionItemController.displayActionItemInCurrentSection(devtrac.currentSite.actionItems);
-    devtrac.actionItemController.displayActionItemInHistorySection(fakeItems);
+    devtrac.actionItemController.displayActionItemsInCurrentSection(devtrac.currentSite.actionItems);
     actionItemGrid.show();
 
     navigator.log.debug("Displayed action items");
@@ -77,7 +69,7 @@ ActionItemController.prototype.show = function(){
     attachClickEvents(".action_item", showActionItemEditScreen);
 }
 
-ActionItemController.prototype.displayActionItemInCurrentSection = function(actionItems){
+ActionItemController.prototype.displayActionItemsInCurrentSection = function(actionItems){
     var container = $("#action_items_list");
     container.html("");
     $.each(actionItems, function(index, item){
@@ -88,7 +80,7 @@ ActionItemController.prototype.displayActionItemInCurrentSection = function(acti
     });
 }
 
-ActionItemController.prototype.displayActionItemInHistorySection = function(actionItems){
+ActionItemController.prototype.displayActionItemsInHistorySection = function(actionItems){
     var container = $("#previous_action_items_list");
     container.html("");
     $.each(actionItems, function(index, item){
