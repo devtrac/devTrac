@@ -16,7 +16,7 @@
     <property name="bin.test" value="${basedir}/bin/test" />
     <property name="src.main" value="${basedir}/src/main" />
     <property name="src.test" value="${basedir}/src/test" />
-    <property name="deliverables" value="${basedir}/deliverables" />
+    <property name="deliverables" value="${basedir}/deliverables/Standard/4.6.0" />
     <property name="dir.src" value="${basedir}/src"/>
     <property name="dir.test" value="${basedir}/src/test"/>
     <property name="target" value="${basedir}/target"/>
@@ -41,10 +41,20 @@
         </fileset>
     </path>
 
-    <target depends="cleanall" name="init">
-        <mkdir dir="bin"/>
+    <!-- Initialize -->
+    <target depends="clean.main" name="init.main">
         <mkdir dir="${bin.main}"/>
+    </target>
+
+    <target depends="clean.test" name="init.test">
         <mkdir dir="${bin.test}"/>
+    </target>
+
+    <target depends="clean.deliverables" name="init.deliverables">
+        <mkdir dir="${deliverables}"/>
+    </target>
+
+    <target depends="cleanall, init.main, init.test, init.deliverables" name="init">
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
                 <exclude name="**/*.launch"/>
