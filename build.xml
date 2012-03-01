@@ -81,35 +81,25 @@
 
     <target depends="cleanall, init.main, init.test, init.deliverables" name="init"/>
 
-    <target depends="build-subprojects,build-main" name="build"/>
-    <target name="build-subprojects"/>
-
-    <target depends="init" name="build-main">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="${bin.main}" source="${source.version}" target="${target.version}">
+    <!-- Compile -->
+    <target depends="init.main" name="compile.main">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="${bin.main}" source="${source.version}" target="${target.version}" includeantruntime="false">
             <src path="${src.main}"/>
             <classpath refid="devTrac-Blackberry-46.classpath"/>
         </javac>
     </target>
 
-    <target name="compile.src">
-        <mkdir dir="${target.product.classes}"/>
-        <javac srcdir="${dir.src}" destdir="${target.product.classes}" >
-            <include name="*.java" />
-        </javac>
-    </target>
-
-    <target name="compile.test">
-        <javac debug="true" debuglevel="${debuglevel}" destdir="${bin.test}" source="${source.version}" target="${target.version}">
+    <target depends="init.test, compile.main" name="compile.test">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="${bin.test}" source="${source.version}" target="${target.version}" includeantruntime="false">
             <src path="${src.test}"/>
             <include name="**/*.java" />
             <classpath refid="test.classpath"/>
         </javac>
     </target>
 
-    <target name="compile" depends="build-main, compile.test"/>
+    <target depends="init, compile.main, compile.test" name="compile"/>
 
-    <target name="UT" description="Run all JUnit tests." depends="clean, compile">
+    <target name="UT" description="Run all JUnit tests." depends="compile">
         <mkdir dir="${target.reports}"/>
         <junit fork="yes" haltonfailure="yes">
             <formatter type="plain" usefile="false" />
@@ -121,6 +111,7 @@
             </batchtest>
         </junit>
     </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+
+    <target depends="compile" name="build"/>
 </project>
 
