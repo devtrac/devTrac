@@ -11,29 +11,38 @@
     <property name="source.version" value="1.3"/>
 	<property name="lib" value="${basedir}/lib" />
 	<property name="classes" value="${basedir}/classes" />
+	<property name="bin.main" value="${basedir}/bin/main" />
+	<property name="bin.test" value="${basedir}/bin/test" />
+	<property name="src.main" value="${basedir}/src/main" />
+	<property name="src.test" value="${basedir}/src/test" />
 	<property name="dir.src" value="${basedir}/src"/>
-	<property name="dir.test" value="${basedir}/test"/>
+	<property name="dir.test" value="${basedir}/src/test"/>
 	<property name="target" value="${basedir}/target"/>
 	<property name="target.reports" value="${target}/reports"/>
-	<property name="target.product.classes" value="${target}/compile/product"/>
-	<property name="target.test.classes" value="${target}/compile/test"/>
 	
     <path id="devTrac-Blackberry-46.classpath">
-        <pathelement location="bin"/>
+        <pathelement location="bin/main"/>
         <pathelement location="lib/net_rim_api.jar"/>
     </path>
 
 	<path id="test.classpath">
+          <pathelement location="bin/main"/>
+          <pathelement location="bin/test"/>
+
 	  <pathelement location="${target.product.classes}" />
 	  <pathelement location="${target.test.classes}" />
-	  <pathelement location="${dir.test}/lib/junit.jar" />
+
+	  <pathelement location="${src.test}/lib/junit.jar" />
+
 	  <fileset dir="${lib}">
 	    <include name="**/*.jar"/>
 	  </fileset>
 	</path>
 	
-    <target name="init">
+    <target depends="cleanall" name="init">
         <mkdir dir="bin"/>
+        <mkdir dir="${bin.main}"/>
+        <mkdir dir="${bin.test}"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
                 <exclude name="**/*.launch"/>
@@ -46,13 +55,13 @@
 		<delete dir="${target}"/>
     </target>
     <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
+    <target depends="build-subprojects,build-main" name="build"/>
     <target name="build-subprojects"/>
 
-    <target depends="init" name="build-project">
+    <target depends="init" name="build-main">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source.version}" target="${target.version}">
-            <src path="src"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="${bin.main}" source="${source.version}" target="${target.version}">
+            <src path="${src.main}"/>
             <classpath refid="devTrac-Blackberry-46.classpath"/>
         </javac>
     </target>
@@ -65,13 +74,14 @@
 	</target>
 	
 	<target name="compile.test">
-		<mkdir dir="${target.test.classes}"/>
-		<javac srcdir="${dir.test}" destdir="${target.test.classes}" >			
-			<include name="*.java" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="${bin.test}" source="${source.version}" target="${target.version}">
+			<src path="${src.test}"/>
+			<include name="**/*.java" />
+			<classpath refid="test.classpath"/>
 		</javac>
 	</target>
 	
-	<target name="compile" depends="compile.src, compile.test"/>
+	<target name="compile" depends="build-main, compile.test"/>
 
 	<target name="UT" description="Run all JUnit tests." depends="clean, compile">
 		<mkdir dir="${target.reports}"/>
@@ -87,3 +97,4 @@
 	</target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
 </project>
+
