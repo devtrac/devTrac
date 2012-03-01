@@ -9,36 +9,36 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target.version" value="1.2"/>
     <property name="source.version" value="1.3"/>
-	<property name="lib" value="${basedir}/lib" />
-	<property name="classes" value="${basedir}/classes" />
-	<property name="bin.main" value="${basedir}/bin/main" />
-	<property name="bin.test" value="${basedir}/bin/test" />
-	<property name="src.main" value="${basedir}/src/main" />
-	<property name="src.test" value="${basedir}/src/test" />
-	<property name="dir.src" value="${basedir}/src"/>
-	<property name="dir.test" value="${basedir}/src/test"/>
-	<property name="target" value="${basedir}/target"/>
-	<property name="target.reports" value="${target}/reports"/>
-	
+    <property name="lib" value="${basedir}/lib" />
+    <property name="classes" value="${basedir}/classes" />
+    <property name="bin.main" value="${basedir}/bin/main" />
+    <property name="bin.test" value="${basedir}/bin/test" />
+    <property name="src.main" value="${basedir}/src/main" />
+    <property name="src.test" value="${basedir}/src/test" />
+    <property name="dir.src" value="${basedir}/src"/>
+    <property name="dir.test" value="${basedir}/src/test"/>
+    <property name="target" value="${basedir}/target"/>
+    <property name="target.reports" value="${target}/reports"/>
+
     <path id="devTrac-Blackberry-46.classpath">
         <pathelement location="bin/main"/>
         <pathelement location="lib/net_rim_api.jar"/>
     </path>
 
-	<path id="test.classpath">
-          <pathelement location="bin/main"/>
-          <pathelement location="bin/test"/>
+    <path id="test.classpath">
+        <pathelement location="bin/main"/>
+        <pathelement location="bin/test"/>
 
-	  <pathelement location="${target.product.classes}" />
-	  <pathelement location="${target.test.classes}" />
+        <pathelement location="${target.product.classes}" />
+        <pathelement location="${target.test.classes}" />
 
-	  <pathelement location="${src.test}/lib/junit.jar" />
+        <pathelement location="${src.test}/lib/junit.jar" />
 
-	  <fileset dir="${lib}">
-	    <include name="**/*.jar"/>
-	  </fileset>
-	</path>
-	
+        <fileset dir="${lib}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
     <target depends="cleanall" name="init">
         <mkdir dir="bin"/>
         <mkdir dir="${bin.main}"/>
@@ -52,7 +52,7 @@
     </target>
     <target name="clean">
         <delete dir="bin"/>
-		<delete dir="${target}"/>
+        <delete dir="${target}"/>
     </target>
     <target depends="clean" name="cleanall"/>
     <target depends="build-subprojects,build-main" name="build"/>
@@ -65,36 +65,36 @@
             <classpath refid="devTrac-Blackberry-46.classpath"/>
         </javac>
     </target>
-	
-	<target name="compile.src">
-		<mkdir dir="${target.product.classes}"/>
-		<javac srcdir="${dir.src}" destdir="${target.product.classes}" >			
-			<include name="*.java" />
-		</javac>
-	</target>
-	
-	<target name="compile.test">
-		<javac debug="true" debuglevel="${debuglevel}" destdir="${bin.test}" source="${source.version}" target="${target.version}">
-			<src path="${src.test}"/>
-			<include name="**/*.java" />
-			<classpath refid="test.classpath"/>
-		</javac>
-	</target>
-	
-	<target name="compile" depends="build-main, compile.test"/>
 
-	<target name="UT" description="Run all JUnit tests." depends="clean, compile">
-		<mkdir dir="${target.reports}"/>
-		<junit fork="yes" haltonfailure="yes"> 
-			<formatter type="plain" usefile="false" />
-		    <classpath refid="test.classpath" />
-			<batchtest todir="${target.reports}">
+    <target name="compile.src">
+        <mkdir dir="${target.product.classes}"/>
+        <javac srcdir="${dir.src}" destdir="${target.product.classes}" >
+            <include name="*.java" />
+        </javac>
+    </target>
+
+    <target name="compile.test">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="${bin.test}" source="${source.version}" target="${target.version}">
+            <src path="${src.test}"/>
+            <include name="**/*.java" />
+            <classpath refid="test.classpath"/>
+        </javac>
+    </target>
+
+    <target name="compile" depends="build-main, compile.test"/>
+
+    <target name="UT" description="Run all JUnit tests." depends="clean, compile">
+        <mkdir dir="${target.reports}"/>
+        <junit fork="yes" haltonfailure="yes">
+            <formatter type="plain" usefile="false" />
+            <classpath refid="test.classpath" />
+            <batchtest todir="${target.reports}">
                 <fileset dir="${dir.test}">
                     <include name="**/*Test.java"/>
                 </fileset>
             </batchtest>
-		</junit>
-	</target>
+        </junit>
+    </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
 </project>
 
