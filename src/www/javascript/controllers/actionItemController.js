@@ -40,6 +40,7 @@ ActionItemController.prototype.editSave = function(){
         }
     }
 
+    devtrac.currentSite.uploaded = false;
     devtrac.dataStore.saveCurrentSite(function(){
         alert("Edited action item.");
         navigator.log.debug("Edited action item. Will display list.");
