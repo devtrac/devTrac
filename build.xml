@@ -41,6 +41,25 @@
         </fileset>
     </path>
 
+    <!-- Clean -->
+    <target name="clean.main">
+        <delete dir="${bin.main}"/>
+    </target>
+
+    <target name="clean.test">
+        <delete dir="${bin.test}"/>
+    </target>
+
+    <target name="clean.deliverables">
+        <delete dir="${deliverables}"/>
+    </target>
+
+    <target depends="clean.main, clean.test, clean.deliverables" name="clean">
+        <delete dir="${bin}"/>
+    </target>
+
+    <target depends="clean" name="cleanall"/>
+
     <!-- Initialize -->
     <target depends="clean.main" name="init.main">
         <mkdir dir="${bin.main}"/>
@@ -62,25 +81,6 @@
             </fileset>
         </copy>
     </target>
-
-    <!-- Clean -->
-    <target name="clean.main">
-        <delete dir="${bin.main}"/>
-    </target>
-
-    <target name="clean.test">
-        <delete dir="${bin.test}"/>
-    </target>
-
-    <target name="clean.deliverables">
-        <delete dir="${deliverables}"/>
-    </target>
-
-    <target depends="clean.main, clean.test, clean.deliverables" name="clean">
-        <delete dir="${bin}"/>
-    </target>
-
-    <target depends="clean" name="cleanall"/>
 
     <target depends="build-subprojects,build-main" name="build"/>
     <target name="build-subprojects"/>
