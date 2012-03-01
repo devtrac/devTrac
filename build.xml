@@ -16,9 +16,8 @@
     <property name="bin.test" value="${basedir}/bin/test" />
     <property name="src.main" value="${basedir}/src/main" />
     <property name="src.test" value="${basedir}/src/test" />
-    <property name="deliverables" value="${basedir}/deliverables/Standard/4.6.0" />
-    <property name="dir.src" value="${basedir}/src"/>
-    <property name="dir.test" value="${basedir}/src/test"/>
+    <property name="deliverables" value="${basedir}/deliverables" />
+    <property name="build.dependency" value="${basedir}/build/dependency" />
     <property name="target" value="${basedir}/target"/>
     <property name="target.reports" value="${target}/reports"/>
 
@@ -48,6 +47,7 @@
 
     <target name="clean.test">
         <delete dir="${bin.test}"/>
+        <delete dir="${target.reports}"/>
     </target>
 
     <target name="clean.deliverables">
@@ -73,10 +73,12 @@
 
     <target depends="clean.test" name="init.test">
         <mkdir dir="${bin.test}"/>
+        <mkdir dir="${target.reports}"/>
     </target>
 
     <target depends="clean.deliverables" name="init.deliverables">
-        <mkdir dir="${deliverables}"/>
+        <mkdir dir="${deliverables}/Standard/4.6.0"/>
+        <copy file="${build.dependency}/devTracBB.alx" todir="${deliverables}/Standard"/>
     </target>
 
     <target depends="cleanall, init.main, init.test, init.deliverables" name="init"/>
@@ -99,19 +101,22 @@
 
     <target depends="init, compile.main, compile.test" name="compile"/>
 
-    <target name="UT" description="Run all JUnit tests." depends="compile">
-        <mkdir dir="${target.reports}"/>
+    <!-- Test -->
+    <target depends="compile" name="test.java" description="Run all JUnit tests.">
         <junit fork="yes" haltonfailure="yes">
             <formatter type="plain" usefile="false" />
             <classpath refid="test.classpath" />
             <batchtest todir="${target.reports}">
-                <fileset dir="${dir.test}">
+                <fileset dir="${src.test}">
                     <include name="**/*Test.java"/>
                 </fileset>
             </batchtest>
         </junit>
     </target>
 
-    <target depends="compile" name="build"/>
+    <target depends="test.java" name="test" description="Run all tests."/>
+
+    <!-- Build -->
+    <target depends="test" name="build"/>
 </project>
 
