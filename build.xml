@@ -63,6 +63,12 @@
     <!-- Initialize -->
     <target depends="clean.main" name="init.main">
         <mkdir dir="${bin.main}"/>
+        <copy includeemptydirs="false" todir="${bin.main}">
+            <fileset dir="${src.main}">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
     </target>
 
     <target depends="clean.test" name="init.test">
@@ -73,14 +79,7 @@
         <mkdir dir="${deliverables}"/>
     </target>
 
-    <target depends="cleanall, init.main, init.test, init.deliverables" name="init">
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
+    <target depends="cleanall, init.main, init.test, init.deliverables" name="init"/>
 
     <target depends="build-subprojects,build-main" name="build"/>
     <target name="build-subprojects"/>
