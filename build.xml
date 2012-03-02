@@ -54,14 +54,14 @@
         <delete dir="${deliverables}"/>
     </target>
 
-    <target depends="clean.main, clean.test, clean.deliverables" name="clean">
+    <target name="clean" depends="clean.main, clean.test, clean.deliverables">
         <delete dir="${bin}"/>
     </target>
 
-    <target depends="clean" name="cleanall"/>
+    <target name="cleanall" depends="clean"/>
 
     <!-- Initialize -->
-    <target depends="clean.main" name="init.main">
+    <target name="init.main" depends="clean.main">
         <mkdir dir="${bin.main}"/>
         <copy includeemptydirs="false" todir="${bin.main}">
             <fileset dir="${src.main}">
@@ -71,27 +71,27 @@
         </copy>
     </target>
 
-    <target depends="clean.test" name="init.test">
+    <target name="init.test" depends="clean.test">
         <mkdir dir="${bin.test}"/>
         <mkdir dir="${target.reports}"/>
     </target>
 
-    <target depends="clean.deliverables" name="init.deliverables">
+    <target name="init.deliverables" depends="clean.deliverables">
         <mkdir dir="${deliverables}/Standard/4.6.0"/>
         <copy file="${build.dependency}/devTracBB.alx" todir="${deliverables}/Standard"/>
     </target>
 
-    <target depends="cleanall, init.main, init.test, init.deliverables" name="init"/>
+    <target name="init" depends="cleanall, init.main, init.test, init.deliverables"/>
 
     <!-- Compile -->
-    <target depends="init.main" name="compile.main">
+    <target name="compile.main" depends="init.main">
         <javac debug="true" debuglevel="${debuglevel}" destdir="${bin.main}" source="${source.version}" target="${target.version}" includeantruntime="false">
             <src path="${src.main}"/>
             <classpath refid="devTrac-Blackberry-46.classpath"/>
         </javac>
     </target>
 
-    <target depends="init.test, compile.main" name="compile.test">
+    <target name="compile.test" depends="init.test, compile.main">
         <javac debug="true" debuglevel="${debuglevel}" destdir="${bin.test}" source="${source.version}" target="${target.version}" includeantruntime="false">
             <src path="${src.test}"/>
             <include name="**/*.java" />
@@ -99,10 +99,10 @@
         </javac>
     </target>
 
-    <target depends="init, compile.main, compile.test" name="compile"/>
+    <target name="compile" depends="init, compile.main, compile.test"/>
 
     <!-- Test -->
-    <target depends="compile" name="test.java" description="Run all JUnit tests.">
+    <target name="test.java" depends="compile" description="Run all JUnit tests.">
         <junit fork="yes" haltonfailure="yes">
             <formatter type="plain" usefile="false" />
             <classpath refid="test.classpath" />
@@ -114,9 +114,9 @@
         </junit>
     </target>
 
-    <target depends="test.java" name="test" description="Run all tests."/>
+    <target name="test" depends="test.java" description="Run all tests."/>
 
     <!-- Build -->
-    <target depends="test" name="build"/>
+    <target name="build" depends="test"/>
 </project>
 
