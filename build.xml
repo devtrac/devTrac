@@ -116,7 +116,28 @@
 
     <target name="test" depends="test.java" description="Run all tests."/>
 
+    <!-- Package -->
+    <target name="package" depends="test" description="Generate .cod files.">
+        <java jar="build/dependency/rapc.jar" fork="true" failonerror="true" maxmemory="128m">
+            <arg line="-convertpng codename=deliverables/Standard/4.6.0/devTracBB -sourceroot=src/main -import=lib/net_rim_api.jar build/dependency/devTracBB.rapc bin/main"/>
+        </java>
+    </target>
+
+    <!-- Sign Keys -->
+    <target name="sign" depends="package" description="Sign .cod files with BB keys.">
+        <java jar="build/dependency/SignatureTool.jar" fork="true" failonerror="true" maxmemory="128m">
+            <arg line="-a -C -p r0ys1ngh4m deliverables/Standard/4.6.0/devTracBB.cod"/>
+        </java>
+    </target>
+
+    <!-- Load .cod Files into Simulator -->
+    <target name="load" description="Load .cod into a running simulator(Ensure you have simulator[Bold 9000] running and checked 'Menu'->'Simulate'->'USB cable connected').">
+        <exec dir="${basedir}" executable="${build.dependency}/JavaLoader.exe">
+            <arg line="-u load deliverables/Standard/4.6.0/devTracBB.cod"/>
+        </exec>
+    </target>
+
     <!-- Build -->
-    <target name="build" depends="test" description="Build project: Compile, Run tests..."/>
+    <target name="build" depends="package" description="Build project: Compile, Run tests..."/>
 </project>
 
