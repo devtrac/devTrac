@@ -41,27 +41,27 @@
     </path>
 
     <!-- Clean -->
-    <target name="clean.main">
+    <target name="clean.main" description="Clean up compiled files and www artifacts.">
         <delete dir="${bin.main}"/>
     </target>
 
-    <target name="clean.test">
+    <target name="clean.test" description="Clean up test compiled files and reports.">
         <delete dir="${bin.test}"/>
         <delete dir="${target.reports}"/>
     </target>
 
-    <target name="clean.deliverables">
+    <target name="clean.deliverables" description="Clean up deliverables.">
         <delete dir="${deliverables}"/>
     </target>
 
-    <target name="clean" depends="clean.main, clean.test, clean.deliverables">
+    <target name="clean" depends="clean.main, clean.test, clean.deliverables" description="Clean up all build artifacts.">
         <delete dir="${bin}"/>
     </target>
 
-    <target name="cleanall" depends="clean"/>
+    <target name="cleanall" depends="clean" description="Alias to `clean`"/>
 
     <!-- Initialize -->
-    <target name="init.main" depends="clean.main">
+    <target name="init.main" depends="clean.main" description="Create necessary folder structure for building main program.">
         <mkdir dir="${bin.main}"/>
         <copy includeemptydirs="false" todir="${bin.main}">
             <fileset dir="${src.main}">
@@ -71,27 +71,27 @@
         </copy>
     </target>
 
-    <target name="init.test" depends="clean.test">
+    <target name="init.test" depends="clean.test" description="Create necessary folder structure for building test.">
         <mkdir dir="${bin.test}"/>
         <mkdir dir="${target.reports}"/>
     </target>
 
-    <target name="init.deliverables" depends="clean.deliverables">
+    <target name="init.deliverables" depends="clean.deliverables" description="Create necessary folder structure for building deliverables.">
         <mkdir dir="${deliverables}/Standard/4.6.0"/>
         <copy file="${build.dependency}/devTracBB.alx" todir="${deliverables}/Standard"/>
     </target>
 
-    <target name="init" depends="cleanall, init.main, init.test, init.deliverables"/>
+    <target name="init" depends="cleanall, init.main, init.test, init.deliverables" description="Set up buiding environment."/>
 
     <!-- Compile -->
-    <target name="compile.main" depends="init.main">
+    <target name="compile.main" depends="init.main" description="Compile main program.">
         <javac debug="true" debuglevel="${debuglevel}" destdir="${bin.main}" source="${source.version}" target="${target.version}" includeantruntime="false">
             <src path="${src.main}"/>
             <classpath refid="devTrac-Blackberry-46.classpath"/>
         </javac>
     </target>
 
-    <target name="compile.test" depends="init.test, compile.main">
+    <target name="compile.test" depends="init.test, compile.main" description="Compile test source files.">
         <javac debug="true" debuglevel="${debuglevel}" destdir="${bin.test}" source="${source.version}" target="${target.version}" includeantruntime="false">
             <src path="${src.test}"/>
             <include name="**/*.java" />
@@ -99,10 +99,10 @@
         </javac>
     </target>
 
-    <target name="compile" depends="init, compile.main, compile.test"/>
+    <target name="compile" depends="init, compile.main, compile.test" description="Compile all source files, include main and test."/>
 
     <!-- Test -->
-    <target name="test.java" depends="compile" description="Run all JUnit tests.">
+    <target name="test.java" depends="compile" description="Run JUnit tests.">
         <junit fork="yes" haltonfailure="yes">
             <formatter type="plain" usefile="false" />
             <classpath refid="test.classpath" />
@@ -117,6 +117,6 @@
     <target name="test" depends="test.java" description="Run all tests."/>
 
     <!-- Build -->
-    <target name="build" depends="test"/>
+    <target name="build" depends="test" description="Build project: Compile, Run tests..."/>
 </project>
 
