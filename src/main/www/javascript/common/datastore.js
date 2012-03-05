@@ -15,10 +15,10 @@ DataStore.prototype.init = function(callback){
             });
         }
         else {
-            screens.show("login");
+            callback();
         }
     }, function(error){
-        screens.show("login");
+        callback();
     }, "user");
 }
 

@@ -24,7 +24,7 @@ LoginController.prototype.login = function(){
         alert("Please enter username and password.");
         return;
     }
-    
+
     var renderView = function(){
         navigator.store.put(function(){
             devtrac.dataStore.getQuestions(function(){
@@ -64,7 +64,7 @@ LoginController.prototype.login = function(){
     };
     
     var loginFailed = function(){
-        screens.show("login");
+        devtrac.loginController.show();
     };
     screens.show("loading");
 	devtrac.user.authenticate(userName, password, renderView, loginFailed);
@@ -82,13 +82,13 @@ LoginController.prototype.logout = function(){
             devtrac.user.uid = 0;
             devtrac.fieldTrip = new FieldTrip();
 			navigator.log.debug("Showing login screen.");
-            screens.show("login");
+            devtrac.loginController.show();
         }, function(){
             devtrac.common.logAndShowGenericError("Error occured in deleting user: " + devtrac.user.name);
-            screens.show("login");
+            devtrac.loginController.show();
         }, "user");
     }, function(){
 		navigator.log.debug("Couldn't do normal logout. Just displaying login screen.");
-        screens.show("login");
+        devtrac.loginController.show();
     })
 };
