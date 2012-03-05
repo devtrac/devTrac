@@ -59,11 +59,12 @@ SettingsController.prototype.showLog = function(){
     });
 }
 SettingsController.prototype.setDebugMode = function(){
-    var debugToggle = !$("#log_debug_mode").is(':checked');
-    navigator.log.setDebug(debugToggle, function(success){
-        var debugMode = "Debug mode is " + (debugToggle ? "ON" : "OFF") + ".";
-        navigator.log.log(debugMode);
-        navigator.log.debug(debugMode);
-        alert(debugMode);
+    navigator.log.getDebug(function(isDebugOn){
+        var debugMode = !isDebugOn;
+	    navigator.log.setDebug(debugMode, function(success){
+	        var hint = "Debug mode is " + (debugMode ? "ON" : "OFF") + ".";
+	        navigator.log.log(hint);
+	        alert(hint);
+        });
     });
 }
