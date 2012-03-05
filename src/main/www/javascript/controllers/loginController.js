@@ -4,12 +4,12 @@ function LoginController(){
 
 LoginController.prototype.show = function(){
 	navigator.log.debug("In show of login controller.");
-    if (devtrac.user && devtrac.fieldTrip) {
+    if (devtrac.user.loggedIn && (devtrac.fieldTrip.title != undefined)) {
 		navigator.log.debug("User is logged in and has a field trip. Showing trip reports.");
         fieldTripController.showTripReports();
         return;
     }
-	navigator.log.debug("User is logged in but either information is not saved or doesn't have field trips. Showing login screen.");
+    navigator.log.debug("User is not logged in or either information is not saved or doesn't have field trips. Showing login screen.");
     screens.show("login");
     navigator.log.getDebug(function(isDebugOn){
         $("#login_log_debug_mode").attr('checked', isDebugOn);
