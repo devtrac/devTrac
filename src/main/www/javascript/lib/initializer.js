@@ -65,6 +65,7 @@ function initializeApplicationEvents(){
     function attachLoginButtons(){
         $("#login").click(devtrac.loginController.login);
         $("#logout").click(devtrac.loginController.logout);
+        $("#login_show_log").click(devtrac.settingsController.showLog);
     }
     
     function attachGlobalErrorHandler(){
