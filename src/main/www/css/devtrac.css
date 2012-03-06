@@ -196,8 +196,10 @@ p.submit {
 	width: 228px;
 }
 
-#login {
+#login_settings_button {
     float: right;
+    padding-top: 3px;
+    padding-right: 3px;
 }
 
 /**Grid Style **/
