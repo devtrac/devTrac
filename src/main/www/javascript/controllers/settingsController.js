@@ -71,7 +71,6 @@ SettingsController.prototype.setDebugMode = function(){
 	    navigator.log.setDebug(debugMode, function(success){
 	        var hint = "Debug mode is " + (debugMode ? "ON" : "OFF") + ".";
 	        navigator.log.log(hint);
-	        alert(hint);
         });
     });
 }
