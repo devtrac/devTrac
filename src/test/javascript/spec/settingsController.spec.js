@@ -68,6 +68,24 @@ describe("SettingsController", function(){
                 expect($('#log_debug_mode')).toBeVisible();
             })
         })
+
+        describe("When user logged in AGAIN", function(){
+
+            beforeEach(function(){
+				devtrac.user.loggedIn = false;
+                devtrac.settingsController.show();
+                devtrac.user.loggedIn = true;
+                devtrac.settingsController.show();
+            })
+
+            it("'Download Database' should be shown AGAIN", function(){
+                expect($('#update_question_places')).toBeVisible();
+            })
+
+            it("'DELETE Data' should be shown AGAIN", function(){
+                expect($('#wipe_out_data')).toBeVisible();
+            })
+        })
     })
 })
 

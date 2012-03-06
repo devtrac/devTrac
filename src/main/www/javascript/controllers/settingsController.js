@@ -10,6 +10,9 @@ SettingsController.prototype.show = function(){
     if (!devtrac.user.loggedIn) {
         $("#update_question_places").hide();
         $("#wipe_out_data").hide();
+    } else {
+        $("#update_question_places").show();
+        $("#wipe_out_data").show();
     }
 }
 
