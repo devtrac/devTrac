@@ -193,7 +193,11 @@ p.submit {
 }
 #login_screen .content {
 	margin: 0 auto;
-	width: 200px;
+	width: 228px;
+}
+
+#login {
+    float: right;
 }
 
 /**Grid Style **/
