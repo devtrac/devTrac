@@ -11,9 +11,6 @@ LoginController.prototype.show = function(){
     }
     navigator.log.debug("User is not logged in or either information is not saved or doesn't have field trips. Showing login screen.");
     screens.show("login");
-    navigator.log.getDebug(function(isDebugOn){
-        $("#login_log_debug_mode").attr('checked', isDebugOn);
-    });
 }
 
 LoginController.prototype.login = function(){
