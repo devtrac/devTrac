@@ -2,6 +2,11 @@
 
 set -e
 
+if [ "z$1" == "zdelievery" ]
+then
+    sh ./build/switch_endpoint_to_production
+fi
+
 ant_log="ant.log.$$"
 
 # Build

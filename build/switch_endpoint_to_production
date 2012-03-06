@@ -1,0 +1,12 @@
+#! /bin/sh
+
+sed -i -e '/\/\*/{
+h
+d
+}
+/\*\//{
+x
+}
+$ G
+' src/main/www/javascript/lib/constants.js
+
