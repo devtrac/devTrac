@@ -65,7 +65,6 @@ function initializeApplicationEvents(){
     function attachLoginButtons(){
         $("#login").click(devtrac.loginController.login);
         $("#logout").click(devtrac.loginController.logout);
-        $("#login_show_log").click(devtrac.settingsController.showLog);
         $("#login_log_debug_mode").click(devtrac.settingsController.setDebugMode);
     }
     
