@@ -2,10 +2,10 @@ describe("user.login", function(){
 
     describe("authenticate", function(){
 
-        describe("When authenticate success", function(){
+        var successCallback;
+        var failedCallback;
 
-            var successCallback;
-            var failedCallback;
+        describe("When success", function(){
 
             beforeEach(function(){
                 successCallback = jasmine.createSpy();
@@ -28,6 +28,28 @@ describe("user.login", function(){
 
             it("'failedCallback' should NOT be invoked", function(){
                 expect(failedCallback).not.toHaveBeenCalled();
+            })
+        })
+
+        describe("When failed", function(){
+
+            beforeEach(function(){
+                successCallback = jasmine.createSpy();
+                failedCallback = jasmine.createSpy();
+
+                spyOn(devtrac.common, "callService").andCallFake(function(data, callback, errorCallback){
+                    errorCallback();
+                })
+
+                authenticate("username", "password", successCallback, failedCallback);
+            })
+
+            it("'successCallback' should NOT be invoked", function(){
+                expect(successCallback).not.toHaveBeenCalled();
+            })
+
+            it("'failedCallback' should be invoked", function(){
+                expect(failedCallback).toHaveBeenCalled();
             })
         })
     })
