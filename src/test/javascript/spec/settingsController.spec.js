@@ -72,7 +72,7 @@ describe("SettingsController", function(){
         describe("When user logged in AGAIN", function(){
 
             beforeEach(function(){
-				devtrac.user.loggedIn = false;
+                devtrac.user.loggedIn = false;
                 devtrac.settingsController.show();
                 devtrac.user.loggedIn = true;
                 devtrac.settingsController.show();
