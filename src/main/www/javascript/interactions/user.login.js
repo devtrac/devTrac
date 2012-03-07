@@ -1,11 +1,11 @@
 function authenticate(userName, password, successCallback, failedCallback){
     var connectCallback = function(data){
-		var sessionId = data[DT.DATA_REF][DT.SESSION_ID_REF];
         if (userLoggedIn(data)) {
 			successCallback(data);
         }
         else {
             var timestamp = Math.round(new Date().getTime() / 1000);
+            var sessionId = data[DT.DATA_REF][DT.SESSION_ID_REF];
             var params = {
                 method: DT.USER_LOGIN,
                 sessid: sessionId,
