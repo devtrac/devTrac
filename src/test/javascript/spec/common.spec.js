@@ -28,6 +28,30 @@ describe("Common", function(){
                 expect(errorCallback).not.toHaveBeenCalled();
             })
         });
+
+        describe("when network error occurred", function(){
+            var errorMessage;
+
+            beforeEach(function(){
+                successCallback = jasmine.createSpy("'successCallback'");
+                errorCallback = jasmine.createSpy("'errorCallback'");
+                errorMessage = "Network error occurred.";
+
+                spyOn(navigator.network, 'XHR').andCallFake(function(URL, POSTdata, successCallback, errorCallback){
+                    errorCallback(errorMessage);
+                })
+
+                devtrac.common.callService({}, successCallback, errorCallback);
+            })
+
+            it("'errorCallback' should be called with network error message", function(){
+                expect(errorCallback).toHaveBeenCalledWith(errorMessage);
+            })
+
+            it("'successCallback' should NOT be called", function(){
+                expect(successCallback).not.toHaveBeenCalled();
+            })
+        });
     });
 });
 
