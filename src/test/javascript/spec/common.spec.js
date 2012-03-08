@@ -3,15 +3,15 @@ describe("Common", function(){
     var successCallback;
     var errorCallback;
 
+    var successData = "OK";
+
     describe("callService", function(){
 
         describe("when success", function(){
-            var successData;
 
             beforeEach(function(){
                 successCallback = jasmine.createSpy("'successCallback'");
                 errorCallback = jasmine.createSpy("'errorCallback'");
-                successData = {'#data': 'data_string'};
 
                 spyOn(navigator.network, 'XHR').andCallFake(function(URL, POSTdata, successCallback, errorCallback){
                     successCallback(successData);
