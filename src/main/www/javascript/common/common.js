@@ -1,4 +1,34 @@
 function Common(){
+    this.callServiceWithTimeout = function(data, timeout, successCallback, failedCallback, timeoutCallback){
+        var responsed = false;
+        var start = new Date().getTime();
+
+        var success = function(response) {
+            if (responsed) {
+                return;
+            }
+            clearTimeout(timer);
+            responsed = true;
+            successCallback({"data": response});
+        };
+
+        var error = function(response) {
+            if (responsed) {
+                return;
+            }
+            clearTimeout(timer);
+            responsed = true;
+            failedCallback({"error": response});
+        }
+
+        var timer = setTimeout(function() {
+            responsed = true;
+            timeoutCallback({"error": "Request timeout."});
+        }, timeout);
+
+        devtrac.common.callService(data, success, error);
+    }
+
     this.callService = function(data, callback, errorCallback){
         navigator.log.debug("Network call with data: " + JSON.stringify(data));
         navigator.network.XHR(DT.SERVICE_ENDPOINT, devtrac.common.convertHash(data), callback, errorCallback);
