@@ -1,0 +1,102 @@
+# src_files
+#
+# Return an array of filepaths relative to src_dir to include before jasmine specs.
+# Default: []
+#
+# EXAMPLE:
+#
+# src_files:
+#   - lib/source1.js
+#   - lib/source2.js
+#   - dist/**/*.js
+#
+src_files:
+    - lib/jasmine/jasmine-jquery.js
+    - src/main/www/javascript/lib/ext/phonegap.js
+    - src/main/www/javascript/lib/ext/json2.js
+    - src/main/www/javascript/lib/ext/crypto_sha256.js
+    - src/main/www/javascript/lib/ext/hmac.js
+    - src/main/www/javascript/lib/ext/jquery.1.4.4.min.js
+    - src/main/www/javascript/lib/initializer.js
+    - src/main/www/javascript/lib/constants.js
+    - src/main/www/javascript/common/common.js
+    - src/main/www/javascript/common/datapull.js
+    - src/main/www/javascript/common/datapush.js
+    - src/main/www/javascript/common/datastore.js
+    - src/main/www/javascript/common/screens.js
+    - src/main/www/javascript/interactions/user.login.js
+    - src/main/www/javascript/interactions/remote.view.js
+    - src/main/www/javascript/interactions/photo.upload.js
+    - src/main/www/javascript/interactions/site.upload.js
+    - src/main/www/javascript/models/user.js
+    - src/main/www/javascript/models/dataModel.js
+    - src/main/www/javascript/controllers/loginController.js
+    - src/main/www/javascript/controllers/fieldTripController.js
+    - src/main/www/javascript/controllers/questionsController.js
+    - src/main/www/javascript/controllers/siteController.js
+    - src/main/www/javascript/controllers/siteDetailController.js
+    - src/main/www/javascript/controllers/contactInfoController.js
+    - src/main/www/javascript/controllers/actionItemController.js
+    - src/main/www/javascript/controllers/settingsController.js
+    - src/main/www/javascript/controllers/photoController.js
+    - src/main/www/javascript/helpers/site_list_helper.js
+    - src/main/www/javascript/main.js
+
+# stylesheets
+#
+# Return an array of stylesheet filepaths relative to src_dir to include before jasmine specs.
+# Default: []
+#
+# EXAMPLE:
+#
+# stylesheets:
+#   - css/style.css
+#   - stylesheets/*.css
+#
+stylesheets:
+
+# helpers
+#
+# Return an array of filepaths relative to spec_dir to include before jasmine specs.
+# Default: ["helpers/**/*.js"]
+#
+# EXAMPLE:
+#
+# helpers:
+#   - helpers/**/*.js
+#
+helpers:
+
+# spec_files
+#
+#  Return an array of filepaths relative to spec_dir to include.
+# Default: ["**/*[sS]pec.js"]
+#
+# EXAMPLE:
+#
+# spec_files:
+#   - **/*[sS]pec.js
+#
+spec_files: 
+
+# src_dir
+#
+# Source directory path. Your src_files must be returned relative to this path. Will use root if left blank.
+# Default: project root
+#
+# EXAMPLE:
+#
+# src_dir: public
+#
+src_dir:
+
+# spec_dir
+#
+# Spec directory path. Your spec_files must be returned relative to this path.
+# Default: spec/javascripts
+#
+# EXAMPLE:
+#
+# spec_dir: spec/javascripts
+#
+spec_dir: src/test/javascript/spec
