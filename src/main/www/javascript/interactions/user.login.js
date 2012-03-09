@@ -1,4 +1,6 @@
 function authenticate(userName, password, successCallback, failedCallback){
+    var timeout = 30000;
+
     var connectCallback = function(data){
         if (userLoggedIn(data)) {
 			successCallback(data);
@@ -17,12 +19,13 @@ function authenticate(userName, password, successCallback, failedCallback){
                 nonce: timestamp,
                 hash: devtrac.common.generateHash(DT.USER_LOGIN, timestamp)
             };
-            devtrac.common.callService(params, successCallback, failedCallback);
+            devtrac.common.callServiceWithTimeout(params, timeout, successCallback, failedCallback, failedCallback);
         }
     };
-	devtrac.common.callService({
+
+	devtrac.common.callServiceWithTimeout({
         method: DT.SYSTEM_CONNECT
-    }, connectCallback, failedCallback);
+    }, timeout, connectCallback, failedCallback, failedCallback);
 }
 
 function logout(successCallback, failedCallback){

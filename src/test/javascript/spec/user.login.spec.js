@@ -11,8 +11,8 @@ describe("user.login", function(){
                 successCallback = jasmine.createSpy();
                 failedCallback = jasmine.createSpy();
 
-                spyOn(devtrac.common, "callService").andCallFake(function(data, callback, errorCallback){
-                    callback({
+                spyOn(navigator.network, 'XHR').andCallFake(function(URL, POSTdata, successCallback, errorCallback){
+                    successCallback({
                         "#data": {
                             "sessid": 0
                         }
@@ -37,8 +37,8 @@ describe("user.login", function(){
                 successCallback = jasmine.createSpy();
                 failedCallback = jasmine.createSpy();
 
-                spyOn(devtrac.common, "callService").andCallFake(function(data, callback, errorCallback){
-                    errorCallback();
+                spyOn(navigator.network, 'XHR').andCallFake(function(URL, POSTdata, successCallback, errorCallback){
+                    errorCallback("Network error.");
                 })
 
                 authenticate("username", "password", successCallback, failedCallback);
