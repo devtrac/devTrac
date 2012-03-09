@@ -30,7 +30,7 @@ function Common(){
     }
 
     this.callService = function(data, callback, errorCallback){
-        navigator.log.debug("Network call with data: " + JSON.stringify(data));
+        navigator.log.log("Network call with data: " + JSON.stringify(data));
         navigator.network.XHR(DT.SERVICE_ENDPOINT, devtrac.common.convertHash(data), callback, errorCallback);
     }
     
