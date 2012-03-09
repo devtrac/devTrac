@@ -20,27 +20,9 @@ function authenticate(userName, password, successCallback, failedCallback){
             devtrac.common.callService(params, successCallback, failedCallback);
         }
     };
-
-    var called = false;
-    var timer = setTimeout(failedCallback, 500);
-
-    var connectSuccess = function(data){
-        if(called){
-            return;
-        }
-        called = true;
-        clearTimeout(timer);
-        connectCallback(data);
-    }
-
-    var connectFailed = function(){
-        called = true;
-        failedCallback();
-    }
-
-    devtrac.common.callService({
+	devtrac.common.callService({
         method: DT.SYSTEM_CONNECT
-    }, connectSuccess, connectFailed);
+    }, connectCallback, failedCallback);
 }
 
 function logout(successCallback, failedCallback){
