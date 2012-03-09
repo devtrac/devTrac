@@ -4,6 +4,7 @@ describe("Common", function(){
     var delay = 500;
     var successData = "OK";
     var errorData = "Network error";
+    var timeoutData = "Request timeout.";
 
     var successCallback;
     var errorCallback;
@@ -74,7 +75,7 @@ describe("Common", function(){
                 })
 
                 spyOn(callback, "success").andCallFake(function(response){
-                    data = response["data"];
+                    data = response;
                 });
                 spyOn(callback, "error");
                 spyOn(callback, "timeout");
@@ -108,7 +109,7 @@ describe("Common", function(){
 
                 spyOn(callback, "success");
                 spyOn(callback, "error").andCallFake(function(response){
-                    data = response["error"];
+                    data = response;
                 });
                 spyOn(callback, "timeout");
 
@@ -125,6 +126,10 @@ describe("Common", function(){
 
             it("'timeoutCallback' should NOT be called", function(){
                 expect(callback.timeout).not.toHaveBeenCalled();
+            })
+
+            it("error message should be received", function(){
+                expect(data).toEqual(errorData);
             })
         })
 
@@ -162,6 +167,10 @@ describe("Common", function(){
 
             it("'timeoutCallback' should be called", function(){
                 expect(callback.timeout).toHaveBeenCalled();
+            })
+
+            it("timeout message should be received", function(){
+                expect(data).toEqual(timeoutData);
             })
         })
     })

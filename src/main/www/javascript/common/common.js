@@ -9,7 +9,7 @@ function Common(){
             }
             clearTimeout(timer);
             responsed = true;
-            successCallback({"data": response});
+            successCallback(response);
         };
 
         var error = function(response) {
@@ -18,7 +18,7 @@ function Common(){
             }
             clearTimeout(timer);
             responsed = true;
-            failedCallback({"error": response});
+            failedCallback(response);
         }
 
         var timer = setTimeout(function() {
