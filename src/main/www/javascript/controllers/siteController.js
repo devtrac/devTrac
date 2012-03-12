@@ -21,6 +21,7 @@ siteController.create = function(){
 	navigator.log.debug("Creating a new site");
     var site = new Site();
     site.id = Math.round(new Date().getTime() / 1000);
+    site.uploaded = false;
     site.offline = true;
     site.name = $("#site_title").val();
     site.type = $("#sitetypes").val();
