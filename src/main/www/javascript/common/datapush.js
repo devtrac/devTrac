@@ -8,8 +8,10 @@ DataPush.prototype.uploadData = function(progressCallback, callback, errorCallba
         progressCallback(msg);
 
         devtrac.siteUpload.uploadMultiple(devtrac.fieldTrip.sites, progressCallback, function(response){
-            callback('Data uploaded successfully. Trip will be re-downloaded.');
-            devtrac.dataPush.clearAndResync();
+            setTimeout(function(){
+                callback('Data uploaded successfully. Trip will be re-downloaded.');
+                devtrac.dataPush.clearAndResync();
+            }, 1000)
         }, function(srvErr){
             navigator.log.log('Error in sync service call.');
             navigator.log.log(srvErr);
