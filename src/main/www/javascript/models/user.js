@@ -18,8 +18,8 @@ User.prototype.authenticate = function(userName, password, successCallback, fail
         }
     };
     
-    var failed = function(response, textStatus){
-        devtrac.common.logAndShowGenericError("Error occured in authenticating. Details: [" + textStatus + "], " + JSON.stringify(response));
+    var failed = function(response){
+        devtrac.common.logAndShowGenericError("Error in authenticating. Details: " + JSON.stringify(response));
         failedCallback();
     };
 	authenticate(userName, password, success, failed);

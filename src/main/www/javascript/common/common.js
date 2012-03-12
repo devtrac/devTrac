@@ -122,7 +122,7 @@ function Common(){
     
     this.logAndShowGenericError = function(message){
         navigator.log.log(message);
-        alert("Error occured while processing. Refer to log console for more details.");
+        alert(message);
     }
     
     this.validateAssignedTo = function(assignedValue){
