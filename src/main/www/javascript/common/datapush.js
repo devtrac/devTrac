@@ -3,7 +3,6 @@ function DataPush(){
 
 DataPush.prototype.uploadData = function(progressCallback, callback, errorCallback){
     navigator.log.debug('Data sync started');
-    navigator.log.debug('Starting image upload');
     devtrac.dataPush.uploadImages(progressCallback, function(msg){
         progressCallback(msg);
 
@@ -338,7 +337,8 @@ DataPush.prototype._createNodeSaveParams = function(nodeData){
 }
 
 DataPush.prototype.uploadImages = function(progressCallback, callback, errorCallback){
-    progressCallback("Starting image upload");
+    navigator.log.debug('Start uploading images...');
+    progressCallback('Start uploading images...');
     var filesToUpload = [];
     var boolHasImages = false;
     $.each(devtrac.fieldTrip.sites, function(index, site){
