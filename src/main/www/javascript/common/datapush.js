@@ -6,13 +6,15 @@ DataPush.prototype.uploadData = function(progressCallback, callback, errorCallba
     devtrac.dataPush.uploadImages(progressCallback, function(msg){
         progressCallback(msg);
 
+        progressCallback('Start uploading ' + devtrac.fieldTrip.sites.length + ' sites...');
         devtrac.siteUpload.uploadMultiple(devtrac.fieldTrip.sites, progressCallback, function(response){
+            progressCallback('All sites are already uploaded.');
             setTimeout(function(){
                 callback('Data uploaded successfully. Trip will be re-downloaded.');
                 devtrac.dataPush.clearAndResync();
             }, 1000)
         }, function(srvErr){
-            navigator.log.log('Error in sync service call.');
+            navigator.log.log('Error in uploading site.');
             navigator.log.log(srvErr);
             errorCallback(srvErr);
         });

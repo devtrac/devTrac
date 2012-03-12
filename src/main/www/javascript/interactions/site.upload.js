@@ -1,7 +1,9 @@
 function SiteUpload(){
+    var siteCounts;
 }
 
 SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successCallback, errorCallback){
+	siteCounts = sites.length;
 	devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
 }
 
@@ -48,6 +50,8 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 SiteUpload.prototype._uploadInternal = function(sites, progressCallback, successCallback, errorCallback){
 	var siteToUpload = sites.pop();
 	if (siteToUpload) {
+		var index = siteCounts - sites.length;
+		progressCallback('Site ' + index + ' of ' + siteCounts + ' is uploading...');
 		devtrac.siteUpload.upload(siteToUpload, function(msg) {
 			progressCallback(msg);
 			devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
