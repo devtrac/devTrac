@@ -23,7 +23,7 @@ function Common(){
 
         var timer = setTimeout(function() {
             responsed = true;
-            timeoutCallback({"error": "Request timeout."});
+            timeoutCallback("Request timeout");
         }, timeout);
 
         devtrac.common.callService(data, success, error);

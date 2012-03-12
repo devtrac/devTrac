@@ -4,7 +4,7 @@ describe("Common", function(){
     var delay = 500;
     var successData = "OK";
     var errorData = "Network error";
-    var timeoutData = "Request timeout.";
+    var timeoutData = "Request timeout";
 
     var successCallback;
     var errorCallback;
@@ -150,7 +150,7 @@ describe("Common", function(){
                 spyOn(callback, "success");
                 spyOn(callback, "error");
                 spyOn(callback, "timeout").andCallFake(function(response){
-                    data = response["error"];
+                    data = response;
                 });
 
                 devtrac.common.callServiceWithTimeout({}, timeout, callback.success, callback.error, callback.timeout);
