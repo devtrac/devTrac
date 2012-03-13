@@ -4,7 +4,7 @@ function SiteUpload(){
 
 SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successCallback, errorCallback){
 	siteCounts = sites.length;
-	devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
+	devtrac.siteUpload._uploadInternal(sites.slice(), progressCallback, successCallback, errorCallback);
 }
 
 SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
@@ -48,7 +48,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 }
 
 SiteUpload.prototype._uploadInternal = function(sites, progressCallback, successCallback, errorCallback){
-	var siteToUpload = sites.pop();
+	var siteToUpload = sites.shift();
 	if (siteToUpload) {
 		var index = siteCounts - sites.length;
 		progressCallback('Site ' + index + ' of ' + siteCounts + ' is uploading...');

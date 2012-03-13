@@ -93,5 +93,51 @@ describe("SiteUpload", function(){
             expect(site.uploaded).toEqual(false);
         })
     })
+
+    describe("uploadMultiple", function(){
+
+        beforeEach(function(){
+            sites = [{name: "YES", uploaded: false}, {name: "NO", uploaded: false}];
+
+            progressCallback = jasmine.createSpy('progressCallback');
+            successCallback = jasmine.createSpy('successCallback');
+            errorCallback = jasmine.createSpy('errorCallback');
+
+            spyOn(devtrac.siteUpload, "_packageSite").andCallFake(function(site){
+                return [site.name];
+            })
+            spyOn(devtrac.common, "callService").andCallFake(function(data, successCallback, errorCallback){
+                if (/YES/.test(JSON.stringify(data))) {
+                    successCallback({"#error": false});
+                } else {
+                    errorCallback({"#error": true});
+                }
+            })
+
+            devtrac.siteUpload.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
+        })
+
+        describe("when success", function(){
+
+            it("origin sites array length should be unchanged", function(){
+                expect(sites.length).toEqual(2);
+            })
+
+            it("uploaded should be true", function(){
+                expect(sites[0].uploaded).toBeTruthy();
+            })
+        })
+
+        describe("when error", function(){
+
+            it("origin sites array length should be unchanged", function(){
+                expect(sites.length).toEqual(2);
+            })
+
+            it("uploaded should be false", function(){
+                expect(sites[1].uploaded).toBeFalsy();
+            })
+        })
+    })
 })
 
