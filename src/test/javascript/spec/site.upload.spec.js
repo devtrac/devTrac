@@ -20,7 +20,7 @@ describe("SiteUpload", function(){
 		})
 
 		it("should call progress callback for right times", function(){
-			expect(progressCallback.callCount).toEqual(3);
+			expect(progressCallback.callCount).toEqual(6);
 		});
 
 		it("should call success callback", function(){
