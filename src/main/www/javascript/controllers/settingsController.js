@@ -48,13 +48,17 @@ SettingsController.prototype.uploadData = function(){
     devtrac.dataPush.uploadData(function(msg){
         $('.upload_progress_log').append("<br/>" + msg);
     }, function(msg){
-        alert(msg);
-        $('.upload_progress_log').html("");
-        fieldTripController.showTripReports();
+        setTimeout(function(){
+            alert(msg);
+            $('.upload_progress_log').html("");
+            devtrac.dataPush.clearAndResync();
+        }, 1000);
     }, function(msg){
-        alert(msg);
-        $('.upload_progress_log').html("");
-        fieldTripController.showTripReports();
+        setTimeout(function(){
+            alert(msg);
+            $('.upload_progress_log').html("");
+            fieldTripController.showTripReports();
+        }, 1000);
     });
 }
 

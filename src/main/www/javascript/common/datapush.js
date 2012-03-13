@@ -9,10 +9,7 @@ DataPush.prototype.uploadData = function(progressCallback, callback, errorCallba
         progressCallback('Start uploading ' + devtrac.fieldTrip.sites.length + ' sites...');
         devtrac.siteUpload.uploadMultiple(devtrac.fieldTrip.sites, progressCallback, function(response){
             progressCallback('All sites are already uploaded.');
-            setTimeout(function(){
-                callback('Data uploaded successfully. Trip will be re-downloaded.');
-                devtrac.dataPush.clearAndResync();
-            }, 1000)
+            callback('Data uploaded successfully. Trip will be re-downloaded.');
         }, function(srvErr){
             navigator.log.log('Error in uploading site.');
             navigator.log.log(srvErr);
