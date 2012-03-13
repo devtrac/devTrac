@@ -18,7 +18,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 	try {
 		siteData = devtrac.siteUpload._packageSite(site);
 	} catch(ex) {
-		navigator.log.log('Error while creating upload node');
+		alert('Error occurs while packeting site');
 		navigator.log.log('Error: ' + ex);
 		errorCallback(ex);
 		return;
