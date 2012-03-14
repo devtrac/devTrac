@@ -8,13 +8,13 @@ describe("SiteUpload", function(){
 
     describe("upload all sites successfully", function(){
         beforeEach(function(){
-            sites = [1, 2, 3];
+            sites = [{name: "YES", uploaded: false}, {name: "NO", uploaded: false}, {name: "YES", uploaded: false}];
             progressCallback = jasmine.createSpy('uploader.progressCallback');
             successCallback = jasmine.createSpy('uploader.successCallback');
             errorCallback = jasmine.createSpy('uploader.errorCallback');
 
             spyOn(devtrac.siteUpload, '_packageSite').andCallFake(function(site){
-                return [{'name':site}];
+                return [{'data': site}];
             })
             spyOn(devtrac.dataPush, 'serviceSyncSaveNode').andCallThrough();
             spyOn(navigator.network, 'XHR').andCallFake(function(URL, POSTdata, successCallback, errorCallback){
@@ -41,7 +41,7 @@ describe("SiteUpload", function(){
         });
 
         it("should call createBBSync with correct node data", function(){
-            expect(devtrac.dataPush.serviceSyncSaveNode.mostRecentCall.args).toEqual([[{'name':3}]]);
+            expect(devtrac.dataPush.serviceSyncSaveNode.mostRecentCall.args).toEqual([[{'data': { name : 'YES', uploaded : true }}]]);
         })
     });
 
