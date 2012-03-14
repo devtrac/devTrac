@@ -1,12 +1,12 @@
 function SiteUpload(){
     var siteCounts;
-    var tripSites;
+    var sites;
 }
 
-SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successCallback, errorCallback){
-    siteCounts = sites.length;
-    tripSites = sites;
-    devtrac.siteUpload._uploadInternal(sites.slice(), progressCallback, successCallback, errorCallback);
+SiteUpload.prototype.uploadMultiple = function(sitesToUpload, progressCallback, successCallback, errorCallback){
+    siteCounts = sitesToUpload.length;
+    sites = sitesToUpload;
+    devtrac.siteUpload._uploadInternal(sitesToUpload.slice(), progressCallback, successCallback, errorCallback);
 }
 
 SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
@@ -49,22 +49,22 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
     });
 }
 
-SiteUpload.prototype._uploadInternal = function(sites, progressCallback, successCallback, errorCallback){
-    var siteToUpload = sites.shift();
+SiteUpload.prototype._uploadInternal = function(sitesToUpload, progressCallback, successCallback, errorCallback){
+    var site = sitesToUpload.shift();
     var haveError = false;
-    if (siteToUpload) {
-        var index = siteCounts - sites.length;
+    if (site) {
+        var index = siteCounts - sitesToUpload.length;
         progressCallback('Site ' + index + ' of ' + siteCounts + ' is uploading...');
-        devtrac.siteUpload.upload(siteToUpload, function(msg) {
+        devtrac.siteUpload.upload(site, function(msg) {
             progressCallback(msg);
-            devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
+            devtrac.siteUpload._uploadInternal(sitesToUpload, progressCallback, successCallback, errorCallback);
         }, function(err) {
             progressCallback(err);
-            devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
+            devtrac.siteUpload._uploadInternal(sitesToUpload, progressCallback, successCallback, errorCallback);
         });
     } else {
-        for(var i= 0; i< tripSites.length ; i++){
-            if(!tripSites[i].uploaded){
+        for(var i= 0; i< sites.length ; i++){
+            if(!sites[i].uploaded){
                 haveError = true;
                 break;
             }
