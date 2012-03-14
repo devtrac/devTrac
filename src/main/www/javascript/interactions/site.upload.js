@@ -52,12 +52,11 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 }
 
 SiteUpload.prototype._uploadInternal = function(sitesToUpload, progressCallback, successCallback, errorCallback){
-    var site = sitesToUpload.shift();
     var haveError = false;
-    if (site) {
+    if (sitesToUpload.length > 0) {
         var index = siteCounts - sitesToUpload.length;
         progressCallback('Site ' + index + ' of ' + siteCounts + ' is uploading...');
-        devtrac.siteUpload.upload(site, function(msg) {
+        devtrac.siteUpload.upload(sitesToUpload.shift(), function(msg) {
             progressCallback(msg);
             devtrac.siteUpload._uploadInternal(sitesToUpload, progressCallback, successCallback, errorCallback);
         }, function(err) {
