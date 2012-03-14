@@ -4,31 +4,31 @@ function SiteUpload(){
 }
 
 SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successCallback, errorCallback){
-	siteCounts = sites.length;
+    siteCounts = sites.length;
     tripSites = sites;
-	devtrac.siteUpload._uploadInternal(sites.slice(), progressCallback, successCallback, errorCallback);
+    devtrac.siteUpload._uploadInternal(sites.slice(), progressCallback, successCallback, errorCallback);
 }
 
 SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
-	if (site.uploaded) {
-		navigator.log.log('Site "' + site.name + '" is skipped as it is unchanged.');
-		successCallback('Site "' + site.name + '" is skipped as it is unchanged.');
-		return;
-	}
+    if (site.uploaded) {
+        navigator.log.log('Site "' + site.name + '" is skipped as it is unchanged.');
+        successCallback('Site "' + site.name + '" is skipped as it is unchanged.');
+        return;
+    }
 
-	var siteData;
-	try {
-		siteData = devtrac.siteUpload._packageSite(site);
-	} catch(ex) {
-		alert('Error occurs while packeting site');
-		navigator.log.log('Error: ' + ex);
-		errorCallback(ex);
-		return;
-	}
+    var siteData;
+    try {
+        siteData = devtrac.siteUpload._packageSite(site);
+    } catch(ex) {
+        alert('Error occurs while packeting site');
+        navigator.log.log('Error: ' + ex);
+        errorCallback(ex);
+        return;
+    }
 
-	var bbSyncNode = devtrac.siteUpload._createBBSyncNode(siteData);
+    var bbSyncNode = devtrac.siteUpload._createBBSyncNode(siteData);
 
-	devtrac.dataPush._callService(bbSyncNode, function(response){
+    devtrac.dataPush._callService(bbSyncNode, function(response){
         navigator.log.debug('Received response from service: ' + JSON.stringify(response));
         if (response['#error']) {
             errorCallback('Error occured in uploading site "' + site.name + '". Please try again.');
@@ -50,19 +50,19 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 }
 
 SiteUpload.prototype._uploadInternal = function(sites, progressCallback, successCallback, errorCallback){
-	var siteToUpload = sites.shift();
+    var siteToUpload = sites.shift();
     var haveError = false;
-	if (siteToUpload) {
-		var index = siteCounts - sites.length;
-		progressCallback('Site ' + index + ' of ' + siteCounts + ' is uploading...');
-		devtrac.siteUpload.upload(siteToUpload, function(msg) {
-			progressCallback(msg);
-			devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
-		}, function(err) {
-			progressCallback(err);
-			devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
-		});
-	} else {
+    if (siteToUpload) {
+        var index = siteCounts - sites.length;
+        progressCallback('Site ' + index + ' of ' + siteCounts + ' is uploading...');
+        devtrac.siteUpload.upload(siteToUpload, function(msg) {
+            progressCallback(msg);
+            devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
+        }, function(err) {
+            progressCallback(err);
+            devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
+        });
+    } else {
         for(var i= 0; i< tripSites.length ; i++){
             if(!tripSites[i].uploaded){
                 haveError = true;
@@ -78,10 +78,10 @@ SiteUpload.prototype._uploadInternal = function(sites, progressCallback, success
 }
 
 SiteUpload.prototype._packageSite = function(site){
-	var siteData = [];
-	
-	siteData.push(devtrac.dataPush.createUpdatePlaceNode(site));
-    
+    var siteData = [];
+
+    siteData.push(devtrac.dataPush.createUpdatePlaceNode(site));
+
     if (site.offline) {
         navigator.log.debug('Collecting data for Creating new site ' + ((site && site.name) ? site.name : ''));
         site.id = "%REPORTITEMID%";
@@ -97,7 +97,7 @@ SiteUpload.prototype._packageSite = function(site){
         navigator.log.debug('Collecting data for creating ActionItem ' + ((actionItem && actionItem.title) ? actionItem.title : '') + ' node');
         siteData.push(devtrac.dataPush.createActionItemNode(site.id, site.placeId, actionItem));
     });
-    
+
     navigator.log.debug('Collecting data for Updating answers data');
     if (site.submission && site.submission.length && site.submission.length > 0) {
         var questionsNode = devtrac.dataPush.questionsSaveNode(site);
@@ -105,7 +105,7 @@ SiteUpload.prototype._packageSite = function(site){
             siteData.push(questionsNode);
         }
     }
-    
+
     return siteData;
 }
 
