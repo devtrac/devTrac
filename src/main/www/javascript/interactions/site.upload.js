@@ -52,7 +52,6 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 }
 
 SiteUpload.prototype._uploadInternal = function(sitesToUpload, progressCallback, successCallback, errorCallback){
-    var haveError = false;
     if (sitesToUpload.length > 0) {
         var index = siteCounts - sitesToUpload.length;
         progressCallback('Site ' + index + ' of ' + siteCounts + ' is uploading...');
@@ -64,17 +63,7 @@ SiteUpload.prototype._uploadInternal = function(sitesToUpload, progressCallback,
             devtrac.siteUpload._uploadInternal(sitesToUpload, progressCallback, successCallback, errorCallback);
         });
     } else {
-        for(var i= 0; i< sites.length ; i++){
-            if(!sites[i].uploaded){
-                haveError = true;
-                break;
-            }
-        }
-        if(haveError){
-            errorCallback();
-        } else {
-            successCallback('All sites uploaded successfully.');
-        }
+        devtrac.siteUpload._processResult(successCallback, errorCallback);
     }
 }
 
@@ -117,3 +106,19 @@ SiteUpload.prototype._createBBSyncNode = function(siteData){
     navigator.log.debug('Calling upload service with ' + length + ' byte data.');
     return serviceSyncNode;
 }
+
+SiteUpload.prototype._processResult = function(successCallback, errorCallback){
+    var failedCounts = 0;
+    for(var i= 0; i< sites.length ; i++){
+        failedCounts += (sites[i].uploaded ? 0 : 1);
+    }
+
+    var msg = 'Uploading finished. ' + failedCounts + ' failure in ' + siteCounts + (siteCounts > 1 ? ' sites' : ' site') + '.';
+
+    if (failedCounts > 0) {
+        errorCallback(msg);
+    } else {
+        successCallback(msg);
+    }
+}
+
