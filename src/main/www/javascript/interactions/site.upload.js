@@ -1,9 +1,11 @@
 function SiteUpload(){
     var siteCounts;
+    var tripSites;
 }
 
 SiteUpload.prototype.uploadMultiple = function(sites, progressCallback, successCallback, errorCallback){
 	siteCounts = sites.length;
+    tripSites = sites;
 	devtrac.siteUpload._uploadInternal(sites.slice(), progressCallback, successCallback, errorCallback);
 }
 
@@ -49,6 +51,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 
 SiteUpload.prototype._uploadInternal = function(sites, progressCallback, successCallback, errorCallback){
 	var siteToUpload = sites.shift();
+    var haveError = false;
 	if (siteToUpload) {
 		var index = siteCounts - sites.length;
 		progressCallback('Site ' + index + ' of ' + siteCounts + ' is uploading...');
@@ -57,11 +60,21 @@ SiteUpload.prototype._uploadInternal = function(sites, progressCallback, success
 			devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
 		}, function(err) {
 			progressCallback(err);
-			errorCallback(err);
+			devtrac.siteUpload._uploadInternal(sites, progressCallback, successCallback, errorCallback);
 		});
 	} else {
-		successCallback('All sites uploaded successfully.');
-	}
+        for(var i= 0; i< tripSites.length ; i++){
+            if(!tripSites[i].uploaded){
+                haveError = true;
+                break;
+            }
+        }
+        if(haveError){
+            errorCallback();
+        } else {
+            successCallback('All sites uploaded successfully.');
+        }
+    }
 }
 
 SiteUpload.prototype._packageSite = function(site){

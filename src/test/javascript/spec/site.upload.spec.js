@@ -97,8 +97,6 @@ describe("SiteUpload", function(){
     describe("uploadMultiple", function(){
 
         beforeEach(function(){
-            sites = [{name: "YES", uploaded: false}, {name: "NO", uploaded: false}];
-
             progressCallback = jasmine.createSpy('progressCallback');
             successCallback = jasmine.createSpy('successCallback');
             errorCallback = jasmine.createSpy('errorCallback');
@@ -114,10 +112,13 @@ describe("SiteUpload", function(){
                 }
             })
 
-            devtrac.siteUpload.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
         })
 
         describe("when success", function(){
+            beforeEach(function(){
+                sites = [{name: "YES", uploaded: false}, {name: "YES", uploaded: false}];
+                devtrac.siteUpload.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
+            })
 
             it("origin sites array length should be unchanged", function(){
                 expect(sites.length).toEqual(2);
@@ -126,16 +127,40 @@ describe("SiteUpload", function(){
             it("uploaded should be true", function(){
                 expect(sites[0].uploaded).toBeTruthy();
             })
+
+            it("successCallback should be called", function(){
+                expect(successCallback).toHaveBeenCalled();
+            })
+
+            it("errorCallback should NOT be called", function(){
+                expect(errorCallback).not.toHaveBeenCalled();
+            })
         })
 
         describe("when error", function(){
-
-            it("origin sites array length should be unchanged", function(){
-                expect(sites.length).toEqual(2);
+            beforeEach(function(){
+                sites = [{name: "YES", uploaded: false}, {name: "NO", uploaded: false}, {name: "YES", uploaded: false}];
+                devtrac.siteUpload.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
             })
 
-            it("uploaded should be false", function(){
+            it("origin sites array length should be unchanged", function(){
+                expect(sites.length).toEqual(3);
+            })
+
+            it("uploaded should be false when uploading failed", function(){
                 expect(sites[1].uploaded).toBeFalsy();
+            })
+
+            it("uploaded should be true for site after a failed site", function(){
+                expect(sites[2].uploaded).toBeTruthy();
+            })
+
+            it("successCallback should NOT be called", function(){
+                expect(successCallback).not.toHaveBeenCalled();
+            })
+
+            it("errorCallback should be called", function(){
+                expect(errorCallback).toHaveBeenCalled();
             })
         })
     })
