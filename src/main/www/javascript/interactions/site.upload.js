@@ -31,7 +31,9 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
     devtrac.dataPush._callService(bbSyncNode, function(response){
         navigator.log.debug('Received response from service: ' + JSON.stringify(response));
         if (response['#error']) {
-            errorCallback('Error occured in uploading site "' + site.name + '". Please try again.');
+            var error = 'Error occured in uploading site "' + site.name + '". Please try again.';
+            navigator.log.log(error);
+            errorCallback(error);
         }
         else {
             site.uploaded = true;
