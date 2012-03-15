@@ -115,6 +115,6 @@ SiteUpload.prototype._processResult = function(successCallback, errorCallback){
 
     var msg = 'Uploading finished. ' + failedCounts + ' failure in ' + siteCounts + (siteCounts > 1 ? ' sites' : ' site') + '.';
 
-    failedCounts >0 ? errorCallback(msg):successCallback(msg);
+    failedCounts > 0 ? errorCallback(msg) : successCallback(msg);
 }
 
