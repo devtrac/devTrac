@@ -114,7 +114,13 @@
         </junit>
     </target>
 
-    <target name="test" depends="test.java" description="Run all tests."/>
+    <target name="test.js" depends="compile" description="Run Jasmine tests.">
+        <exec failonerror="true" executable="rake">
+            <arg line="jasmine:ci"/>
+        </exec>
+    </target>
+
+    <target name="test" depends="test.java, test.js" description="Run all tests."/>
 
     <!-- Package -->
     <target name="package" depends="test" description="Generate .cod files.">
