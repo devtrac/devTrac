@@ -122,8 +122,14 @@
 
     <target name="test" depends="test.java, test.js" description="Run all tests."/>
 
+    <target name="uncomment.alert" depends="test.js" description="Uncomment PhoneGap alert">
+        <exec executable="sh">
+            <arg line="./build/uncomment_alert ./src/main/www/javascript/lib/ext/phonegap.js"/>
+        </exec>
+   </target>
+
     <!-- Package -->
-    <target name="package" depends="test" description="Generate .cod files.">
+    <target name="package" depends="test, uncomment.alert" description="Generate .cod files.">
         <java jar="build/dependency/rapc.jar" fork="true" failonerror="true" maxmemory="128m">
             <arg line="-convertpng codename=deliverables/Standard/4.6.0/devTracBB -sourceroot=src/main -import=lib/net_rim_api.jar build/dependency/devTracBB.rapc bin/main"/>
         </java>
