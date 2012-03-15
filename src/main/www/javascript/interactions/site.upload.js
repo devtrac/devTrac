@@ -109,8 +109,8 @@ SiteUpload.prototype._createBBSyncNode = function(siteData){
 
 SiteUpload.prototype._processResult = function(successCallback, errorCallback){
     var failedCounts = 0;
-    for(var i= 0; i< sites.length ; i++){
-        failedCounts += (sites[i].uploaded ? 0 : 1);
+    for(index in sites){
+        failedCounts += (sites[index].uploaded ? 0 : 1);
     }
 
     var msg = 'Uploading finished. ' + failedCounts + ' failure in ' + siteCounts + (siteCounts > 1 ? ' sites' : ' site') + '.';
