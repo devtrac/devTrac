@@ -1,4 +1,0 @@
-#! /bin/sh
-
-sed -i '' -e 's/\(.*Error initializing\.\)/\/\/\1/' "$*"
-
