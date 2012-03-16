@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-jasmine-node test/javascript --color --verbose "$@"
-
