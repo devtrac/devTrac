@@ -1,0 +1,8 @@
+#! /bin/sh
+
+sed -i '' -e 's/\(.*Error initializing\.\)/\/\/\1/' "$*"
+
+rake jasmine:ci
+
+sed -i '' -e 's/\/\/\(.*Error initializing\.\)/\1/' "$*"
+
