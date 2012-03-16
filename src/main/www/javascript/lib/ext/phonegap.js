@@ -562,7 +562,7 @@ Device.prototype.init = function() {
         PhoneGap.exec("initialize");
         this.poll();
     } catch(e) {
-//        alert("[PhoneGap Error] Error initializing.");
+        alert("[PhoneGap Error] Error initializing.");
     }
 };
 
