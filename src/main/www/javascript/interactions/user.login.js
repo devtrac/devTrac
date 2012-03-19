@@ -22,10 +22,7 @@ function authenticate(userName, password, successCallback, failedCallback){
             devtrac.common.callServiceWithTimeout(params, timeout, successCallback, failedCallback, failedCallback);
         }
     };
-
-	devtrac.common.callServiceWithTimeout({
-        method: DT.SYSTEM_CONNECT
-    }, timeout, connectCallback, failedCallback, failedCallback);
+    devtrac.common.callServiceWithTimeoutAndUrl(DT_D7.SYSTEM_CONNECT, '', timeout, connectCallback, failedCallback, failedCallback);
 }
 
 function logout(successCallback, failedCallback){

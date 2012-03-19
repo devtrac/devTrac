@@ -38,3 +38,7 @@ DT = {
 	QUESTIONS_SAVE: 'questionnaire.submit',		
 	FILE_UPLOAD_PATH: 'sites/default/files/blackberry/<UID>/'
 };
+
+DT_D7 = {
+    SYSTEM_CONNECT: 'http://devtrac.mountbatten.net:8001/my_services/system/connect.json'
+};
