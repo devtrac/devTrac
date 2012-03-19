@@ -1,0 +1,31 @@
+GET http://devtrac.mountbatten.net:8001/api/views/api_user.json
+GET http://devtrac.mountbatten.net:8001/api/views/api_user.json?display_id=users
+GET http://devtrac.mountbatten.net:8001/api/views/api_user.json?display_id=users&offset=0&limit=0&filters[1]
+
+[
+  {
+    "users_name": "thoughwks",
+    "uid": "146",
+    "users_status": "0",
+    "realname_realname": "thoughwks",
+    "realname_uid": "146",
+    "users_created": "1328167329"
+  },
+  {
+    "users_name": "tester1",
+    "uid": "29",
+    "users_status": "0",
+    "realname_realname": "tester1",
+    "realname_uid": "29",
+    "users_created": "1295869437"
+  },
+  {
+    "users_name": "",
+    "uid": "0",
+    "users_status": "0",
+    "realname_realname": "%1 %2",
+    "realname_uid": "0",
+    "users_created": "0"
+  }
+]
+

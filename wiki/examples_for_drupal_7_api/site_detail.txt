@@ -1,0 +1,1075 @@
+GET http:///devtrac.mountbatten.net:8001/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=5257
+
+[
+  {
+    "vid": "582",
+    "uid": "8",
+    "title": "Site Visit at Gulu PTC Demo PS Primary School",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "582",
+    "type": "ftritem",
+    "language": "und",
+    "created": "1300940304",
+    "changed": "1321109637",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109637",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_8": [
+      
+    ],
+    "taxonomy_vocabulary_1": [
+      
+    ],
+    "taxonomy_vocabulary_7": {
+      "und": [
+        {
+          "tid": "209"
+        }
+      ]
+    },
+    "field_ftritem_date_visited": {
+      "und": [
+        {
+          "value": "2011-03-24T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_ftritem_images": [
+      
+    ],
+    "field_ftritem_lat_long": [
+      
+    ],
+    "field_ftritem_narrative": {
+      "und": [
+        {
+          "value": "Please provide a full report.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_public_summary": {
+      "und": [
+        {
+          "value": "Please Provide a small summary for the public.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_status": {
+      "und": [
+        {
+          "value": "Submitted"
+        }
+      ]
+    },
+    "field_ftritem_field_trip": {
+      "und": [
+        {
+          "target_id": "580",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_ftritem_place": {
+      "und": [
+        {
+          "target_id": "581",
+          "target_type": "node"
+        }
+      ]
+    },
+    "cid": 0,
+    "last_comment_timestamp": "1300940304",
+    "last_comment_name": "",
+    "last_comment_uid": "8",
+    "comment_count": 0,
+    "name": "terraw",
+    "picture": "0",
+    "data": "a:5:{s:13:\"form_build_id\";s:37:\"form-1050f68a726df9c11f0702f838f43047\";s:14:\"picture_delete\";s:0:\"\";s:14:\"picture_upload\";s:0:\"\";s:29:\"taxonomy_image_disable_images\";i:0;s:7:\"contact\";i:1;}"
+  },
+  {
+    "vid": "584",
+    "uid": "8",
+    "title": "Site Visit at BOSCO ICT and Research Centre, Bardege NGO",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "584",
+    "type": "ftritem",
+    "language": "und",
+    "created": "1300940387",
+    "changed": "1321109637",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109637",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_8": [
+      
+    ],
+    "taxonomy_vocabulary_1": [
+      
+    ],
+    "taxonomy_vocabulary_7": {
+      "und": [
+        {
+          "tid": "209"
+        }
+      ]
+    },
+    "field_ftritem_date_visited": {
+      "und": [
+        {
+          "value": "2011-03-24T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_ftritem_images": {
+      "und": [
+        {
+          "fid": "262",
+          "alt": "",
+          "title": "",
+          "width": null,
+          "height": null,
+          "uid": "8",
+          "filename": "drum_ready_to_be_mounted.jpg",
+          "uri": "public:\/\/filefield\/8\/580\/drum_ready_to_be_mounted.jpg",
+          "filemime": "image\/jpeg",
+          "filesize": "250404",
+          "status": "1",
+          "timestamp": "1302501506",
+          "type": "jpeg"
+        },
+        {
+          "fid": "263",
+          "alt": "",
+          "title": "",
+          "width": null,
+          "height": null,
+          "uid": "8",
+          "filename": "drum_installed.jpg",
+          "uri": "public:\/\/filefield\/8\/580\/drum_installed.jpg",
+          "filemime": "image\/jpeg",
+          "filesize": "376973",
+          "status": "1",
+          "timestamp": "1302501544",
+          "type": "jpeg"
+        },
+        {
+          "fid": "265",
+          "alt": "",
+          "title": "",
+          "width": null,
+          "height": null,
+          "uid": "8",
+          "filename": "emma_on_roof_800.jpg",
+          "uri": "public:\/\/filefield\/8\/580\/emma_on_roof_800.jpg",
+          "filemime": "image\/jpeg",
+          "filesize": "193567",
+          "status": "1",
+          "timestamp": "1302501727",
+          "type": "jpeg"
+        }
+      ]
+    },
+    "field_ftritem_lat_long": [
+      
+    ],
+    "field_ftritem_narrative": {
+      "und": [
+        {
+          "value": "Following up on Sammy's assessment, I visited the Bardege site yesterday. I agree with what he (see below) and Stella (see previous email) have reported. There were lots of children and youth at the site, it is clean and bright, and has a central location in Gulu, but is not on a busy street. It is a library and now computer center, so there are also some books there. It is within walking distance of a few schools. The manger seems very good and the youth were readily working on the computers. There was a significant number of girls there, which is often a challenge at some Bosco sites.\r\n\r\nThey plan to begin ICT classes there as early as Friday - I think this should be followed up on in advance of the Natcom visit. The Bosco technical team is happy to host the Drum. They think it will attract more people to the site, and they think it will give more of an opportunity for the children (as opposed to the youth) to have time on the computer.\r\n\r\nThe site is willing to stay open later (past 5 or 6 which is what they do now) if they can get volunteers who will keep it open - they think they will need to as demand increases. They do want to make sure that it is still safe for girls to walk home though, that is one concern they have. Out-of-school kids use the site as well, and there are some disabled students attending, one of whom is a huge computer fan.\r\n\r\n2 possible areas of concern: there are only 2 toilets, and they are not indicated by gender. And the security system is fairly weak - just a gate - although there is going to be a guard engaged by the neighboring compound soon. All in all I still would see this as a promising site for the Drum.\r\n\r\nThe team saw one alternate Bosco site today, more rural, and quite popular, but there were some issues, mainly that few girls go there and it is near a small pub. So not really appropriate to take the Natcom I think, although in all other ways seems a good site to support and they have even built their own rugged cases for the computers so things aren't stolen.\r\n\r\nIf everyone is OK then we will move forward with the installation plan - we have explained to Bosco that this is a trial run\/testing unit and they can help us gather feedback from the users, while benefiting from the extra computers. When the Uganda Portal (content package) is done they will have it for all their computers and they are excited about that.",
+          "format": "1",
+          "safe_value": "<p>Following up on Sammy's assessment, I visited the Bardege site yesterday. I agree with what he (see below) and Stella (see previous email) have reported. There were lots of children and youth at the site, it is clean and bright, and has a central location in Gulu, but is not on a busy street. It is a library and now computer center, so there are also some books there. It is within walking distance of a few schools. The manger seems very good and the youth were readily working on the computers. There was a significant number of girls there, which is often a challenge at some Bosco sites.<\/p>\n<p>They plan to begin ICT classes there as early as Friday - I think this should be followed up on in advance of the Natcom visit. The Bosco technical team is happy to host the Drum. They think it will attract more people to the site, and they think it will give more of an opportunity for the children (as opposed to the youth) to have time on the computer.<\/p>\n<p>The site is willing to stay open later (past 5 or 6 which is what they do now) if they can get volunteers who will keep it open - they think they will need to as demand increases. They do want to make sure that it is still safe for girls to walk home though, that is one concern they have. Out-of-school kids use the site as well, and there are some disabled students attending, one of whom is a huge computer fan.<\/p>\n<p>2 possible areas of concern: there are only 2 toilets, and they are not indicated by gender. And the security system is fairly weak - just a gate - although there is going to be a guard engaged by the neighboring compound soon. All in all I still would see this as a promising site for the Drum.<\/p>\n<p>The team saw one alternate Bosco site today, more rural, and quite popular, but there were some issues, mainly that few girls go there and it is near a small pub. So not really appropriate to take the Natcom I think, although in all other ways seems a good site to support and they have even built their own rugged cases for the computers so things aren't stolen.<\/p>\n<p>If everyone is OK then we will move forward with the installation plan - we have explained to Bosco that this is a trial run\/testing unit and they can help us gather feedback from the users, while benefiting from the extra computers. When the Uganda Portal (content package) is done they will have it for all their computers and they are excited about that.<\/p>\n"
+        }
+      ]
+    },
+    "field_ftritem_public_summary": {
+      "und": [
+        {
+          "value": "Our technical team visited the new BOSCO site to see if they were ready to host the first Digital Drum. We found the site to be very interesting - a combination library and computer center ... with wifi for the community at a very reduced rate (2000\/month instead of 1500\/hour)",
+          "format": "1",
+          "safe_value": "<p>Our technical team visited the new BOSCO site to see if they were ready to host the first Digital Drum. We found the site to be very interesting - a combination library and computer center ... with wifi for the community at a very reduced rate (2000\/month instead of 1500\/hour)<\/p>\n"
+        }
+      ]
+    },
+    "field_ftritem_status": {
+      "und": [
+        {
+          "value": "Submitted"
+        }
+      ]
+    },
+    "field_ftritem_field_trip": {
+      "und": [
+        {
+          "target_id": "580",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_ftritem_place": {
+      "und": [
+        {
+          "target_id": "583",
+          "target_type": "node"
+        }
+      ]
+    },
+    "cid": 0,
+    "last_comment_timestamp": "1300940387",
+    "last_comment_name": "",
+    "last_comment_uid": "8",
+    "comment_count": 0,
+    "name": "terraw",
+    "picture": "0",
+    "data": "a:5:{s:13:\"form_build_id\";s:37:\"form-1050f68a726df9c11f0702f838f43047\";s:14:\"picture_delete\";s:0:\"\";s:14:\"picture_upload\";s:0:\"\";s:29:\"taxonomy_image_disable_images\";i:0;s:7:\"contact\";i:1;}"
+  },
+  {
+    "vid": "587",
+    "uid": "11",
+    "title": "Focus Group Meeting at Patongo Health Centre III",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "587",
+    "type": "ftritem",
+    "language": "und",
+    "created": "1300948842",
+    "changed": "1321109637",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109637",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_8": [
+      
+    ],
+    "taxonomy_vocabulary_1": [
+      
+    ],
+    "taxonomy_vocabulary_7": {
+      "und": [
+        {
+          "tid": "209"
+        }
+      ]
+    },
+    "field_ftritem_date_visited": {
+      "und": [
+        {
+          "value": "2011-03-24T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_ftritem_images": {
+      "und": [
+        {
+          "fid": "177",
+          "alt": "",
+          "title": "",
+          "width": null,
+          "height": null,
+          "uid": "11",
+          "filename": "20000101-gulu-0004.jpg",
+          "uri": "public:\/\/filefield\/11\/585\/20000101-gulu-0004.jpg",
+          "filemime": "image\/jpeg",
+          "filesize": "260136",
+          "status": "1",
+          "timestamp": "1300949347",
+          "type": "jpeg"
+        },
+        {
+          "fid": "175",
+          "alt": "",
+          "title": "",
+          "width": null,
+          "height": null,
+          "uid": "11",
+          "filename": "20000101-gulu-0150.jpg",
+          "uri": "public:\/\/filefield\/11\/585\/20000101-gulu-0150.jpg",
+          "filemime": "image\/jpeg",
+          "filesize": "187340",
+          "status": "1",
+          "timestamp": "1300949316",
+          "type": "jpeg"
+        },
+        {
+          "fid": "176",
+          "alt": "",
+          "title": "",
+          "width": null,
+          "height": null,
+          "uid": "11",
+          "filename": "20000101-gulu-0061.jpg",
+          "uri": "public:\/\/filefield\/11\/585\/20000101-gulu-0061.jpg",
+          "filemime": "image\/jpeg",
+          "filesize": "199559",
+          "status": "1",
+          "timestamp": "1300949330",
+          "type": "jpeg"
+        }
+      ]
+    },
+    "field_ftritem_lat_long": [
+      
+    ],
+    "field_ftritem_narrative": {
+      "und": [
+        {
+          "value": "Patongo had DSTV and solar power, yet no internet connectivity. General condition of HCIII was poor.  Many used needles, caps, vials on the ground, inpatient treatment bedframes with no mattresses.  Overall, seemed to be fairly underutilized in spite of many new structures.  OTP was conducted in a shed by a VHT.  Health facility staff responsible for these activities were not involved.  New record books were also stored in a shed and already showing signs of water damage. Health Assistant, who oversees VHTs, was unavailable for interview due to being away and drunk, as reported by acting in-charge.\r\n\r\nOn a positive note, VHTs were notified of the meeting via SMS rather than radio for a fraction of the cost, with a dramatic improvement in attendance: more VHTs arrived by the end than were sent the initial SMS message (notably, in a district where no VHTs were currently active with the RapidSMS system).\r\n\r\n",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_public_summary": {
+      "und": [
+        {
+          "value": "Meeting with approx 40 VHTs (at least 4 PVHTs). ",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_status": {
+      "und": [
+        {
+          "value": "Submitted"
+        }
+      ]
+    },
+    "field_ftritem_field_trip": {
+      "und": [
+        {
+          "target_id": "585",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_ftritem_place": {
+      "und": [
+        {
+          "target_id": "586",
+          "target_type": "node"
+        }
+      ]
+    },
+    "cid": 0,
+    "last_comment_timestamp": "1300948842",
+    "last_comment_name": "",
+    "last_comment_uid": "11",
+    "comment_count": 0,
+    "name": "Sean Blaschke",
+    "picture": "0",
+    "data": "a:6:{s:13:\"form_build_id\";s:37:\"form-59e71a1b413fb05d207e8ed5c1db4c31\";s:7:\"contact\";i:1;s:14:\"picture_delete\";i:0;s:14:\"picture_upload\";s:0:\"\";s:5:\"piwik\";a:1:{s:16:\"piwik_token_auth\";s:9:\"anonymous\";}s:29:\"taxonomy_image_disable_images\";i:0;}"
+  },
+  {
+    "vid": "589",
+    "uid": "11",
+    "title": "Focus Group Discussion at Pajule Health Center Health Unit",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "589",
+    "type": "ftritem",
+    "language": "und",
+    "created": "1300949080",
+    "changed": "1321109637",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109637",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_8": [
+      
+    ],
+    "taxonomy_vocabulary_1": [
+      
+    ],
+    "taxonomy_vocabulary_7": {
+      "und": [
+        {
+          "tid": "209"
+        }
+      ]
+    },
+    "field_ftritem_date_visited": {
+      "und": [
+        {
+          "value": "2011-03-24T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_ftritem_images": [
+      
+    ],
+    "field_ftritem_lat_long": [
+      
+    ],
+    "field_ftritem_narrative": {
+      "und": [
+        {
+          "value": "Pajule had solar-powered computers and a LAN set up, however no internet connectivity.  In the absence of proper guidance on how to use the hardware that the MoH had set up, they employed excel spreadsheets to collect the data and sent it on a regular basis to the ministry via USB. In Padjule, 70% of VHTs present said that they have books that they record data in daily, the rest gather statistics from memory.  VHTs have not been given registers or any district-approved forms for capturing or recording data for nearly the past 2 years (both in Padjule and Patongo).  Only training materials from MedAir, 5 years old, are being used to diagnose diseases in the community.  No access to updated materials such as sick child job aids currently exists.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_public_summary": {
+      "und": [
+        {
+          "value": "Met with approx 30 VHTs to discuss RapidSMS CVS",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_status": {
+      "und": [
+        {
+          "value": "Submitted"
+        }
+      ]
+    },
+    "field_ftritem_field_trip": {
+      "und": [
+        {
+          "target_id": "585",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_ftritem_place": {
+      "und": [
+        {
+          "target_id": "588",
+          "target_type": "node"
+        }
+      ]
+    },
+    "cid": 0,
+    "last_comment_timestamp": "1300949080",
+    "last_comment_name": "",
+    "last_comment_uid": "11",
+    "comment_count": 0,
+    "name": "Sean Blaschke",
+    "picture": "0",
+    "data": "a:6:{s:13:\"form_build_id\";s:37:\"form-59e71a1b413fb05d207e8ed5c1db4c31\";s:7:\"contact\";i:1;s:14:\"picture_delete\";i:0;s:14:\"picture_upload\";s:0:\"\";s:5:\"piwik\";a:1:{s:16:\"piwik_token_auth\";s:9:\"anonymous\";}s:29:\"taxonomy_image_disable_images\";i:0;}"
+  },
+  {
+    "vid": "592",
+    "uid": "11",
+    "title": "Solar Charging Station",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "592",
+    "type": "ftritem",
+    "language": "und",
+    "created": "1300949879",
+    "changed": "1321109637",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109637",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_8": [
+      
+    ],
+    "taxonomy_vocabulary_1": [
+      
+    ],
+    "taxonomy_vocabulary_7": {
+      "und": [
+        {
+          "tid": "210"
+        }
+      ]
+    },
+    "field_ftritem_date_visited": {
+      "und": [
+        {
+          "value": "2011-03-24T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_ftritem_images": {
+      "und": [
+        {
+          "fid": "178",
+          "alt": "",
+          "title": "",
+          "width": null,
+          "height": null,
+          "uid": "11",
+          "filename": "20000101-gulu-0100-1.jpg",
+          "uri": "public:\/\/filefield\/11\/585\/20000101-gulu-0100-1.jpg",
+          "filemime": "image\/jpeg",
+          "filesize": "262430",
+          "status": "1",
+          "timestamp": "1300949876",
+          "type": "jpeg"
+        }
+      ]
+    },
+    "field_ftritem_lat_long": [
+      
+    ],
+    "field_ftritem_narrative": {
+      "und": [
+        {
+          "value": "How can UNICEF best support local enterprise, and not stunt it by bringing in commodities from outside Uganda, while staying within our core mandate?",
+          "format": "1",
+          "safe_value": "<p>How can UNICEF best support local enterprise, and not stunt it by bringing in commodities from outside Uganda, while staying within our core mandate?<\/p>\n"
+        }
+      ]
+    },
+    "field_ftritem_public_summary": {
+      "und": [
+        {
+          "value": "Panels used for charging phones, car batteries.",
+          "format": "1",
+          "safe_value": "<p>Panels used for charging phones, car batteries.<\/p>\n"
+        }
+      ]
+    },
+    "field_ftritem_status": {
+      "und": [
+        {
+          "value": "Submitted"
+        }
+      ]
+    },
+    "field_ftritem_field_trip": {
+      "und": [
+        {
+          "target_id": "585",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_ftritem_place": [
+      
+    ],
+    "cid": 0,
+    "last_comment_timestamp": "1300949879",
+    "last_comment_name": "",
+    "last_comment_uid": "11",
+    "comment_count": 0,
+    "name": "Sean Blaschke",
+    "picture": "0",
+    "data": "a:6:{s:13:\"form_build_id\";s:37:\"form-59e71a1b413fb05d207e8ed5c1db4c31\";s:7:\"contact\";i:1;s:14:\"picture_delete\";i:0;s:14:\"picture_upload\";s:0:\"\";s:5:\"piwik\";a:1:{s:16:\"piwik_token_auth\";s:9:\"anonymous\";}s:29:\"taxonomy_image_disable_images\";i:0;}"
+  },
+  {
+    "vid": "593",
+    "uid": "11",
+    "title": "Charcoal selling",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "593",
+    "type": "ftritem",
+    "language": "und",
+    "created": "1300950393",
+    "changed": "1321109637",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109637",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_8": [
+      
+    ],
+    "taxonomy_vocabulary_1": [
+      
+    ],
+    "taxonomy_vocabulary_7": {
+      "und": [
+        {
+          "tid": "210"
+        }
+      ]
+    },
+    "field_ftritem_date_visited": {
+      "und": [
+        {
+          "value": "2011-03-24T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_ftritem_images": {
+      "und": [
+        {
+          "fid": "179",
+          "alt": "",
+          "title": "",
+          "width": null,
+          "height": null,
+          "uid": "11",
+          "filename": "20000101-gulu-0095-1.jpg",
+          "uri": "public:\/\/filefield\/11\/585\/20000101-gulu-0095-1.jpg",
+          "filemime": "image\/jpeg",
+          "filesize": "313294",
+          "status": "1",
+          "timestamp": "1300950382",
+          "type": "jpeg"
+        }
+      ]
+    },
+    "field_ftritem_lat_long": [
+      
+    ],
+    "field_ftritem_narrative": {
+      "und": [
+        {
+          "value": "What role should UNICEF play in environmental degradation where it effects the lives of children?",
+          "format": "1",
+          "safe_value": "<p>What role should UNICEF play in environmental degradation where it effects the lives of children?<\/p>\n"
+        }
+      ]
+    },
+    "field_ftritem_public_summary": {
+      "und": [
+        {
+          "value": "Making and selling charcoal is a common livelihood in many communities, but can be very destructive to the environment.",
+          "format": "1",
+          "safe_value": "<p>Making and selling charcoal is a common livelihood in many communities, but can be very destructive to the environment.<\/p>\n"
+        }
+      ]
+    },
+    "field_ftritem_status": {
+      "und": [
+        {
+          "value": "Submitted"
+        }
+      ]
+    },
+    "field_ftritem_field_trip": {
+      "und": [
+        {
+          "target_id": "585",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_ftritem_place": [
+      
+    ],
+    "cid": 0,
+    "last_comment_timestamp": "1300950393",
+    "last_comment_name": "",
+    "last_comment_uid": "11",
+    "comment_count": 0,
+    "name": "Sean Blaschke",
+    "picture": "0",
+    "data": "a:6:{s:13:\"form_build_id\";s:37:\"form-59e71a1b413fb05d207e8ed5c1db4c31\";s:7:\"contact\";i:1;s:14:\"picture_delete\";i:0;s:14:\"picture_upload\";s:0:\"\";s:5:\"piwik\";a:1:{s:16:\"piwik_token_auth\";s:9:\"anonymous\";}s:29:\"taxonomy_image_disable_images\";i:0;}"
+  },
+  {
+    "vid": "606",
+    "uid": "26",
+    "title": "Site Visit at Kisojo Primary School",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "606",
+    "type": "ftritem",
+    "language": "und",
+    "created": "1300969198",
+    "changed": "1321109637",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109637",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_8": [
+      
+    ],
+    "taxonomy_vocabulary_1": [
+      
+    ],
+    "taxonomy_vocabulary_7": {
+      "und": [
+        {
+          "tid": "209"
+        }
+      ]
+    },
+    "field_ftritem_date_visited": {
+      "und": [
+        {
+          "value": "2011-03-24T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_ftritem_images": [
+      
+    ],
+    "field_ftritem_lat_long": [
+      
+    ],
+    "field_ftritem_narrative": {
+      "und": [
+        {
+          "value": "Please provide a full report.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_public_summary": {
+      "und": [
+        {
+          "value": "Please Provide a small summary for the public.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_status": {
+      "und": [
+        {
+          "value": "Submitted"
+        }
+      ]
+    },
+    "field_ftritem_field_trip": {
+      "und": [
+        {
+          "target_id": "601",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_ftritem_place": {
+      "und": [
+        {
+          "target_id": "605",
+          "target_type": "node"
+        }
+      ]
+    },
+    "cid": 0,
+    "last_comment_timestamp": "1300969198",
+    "last_comment_name": "",
+    "last_comment_uid": "26",
+    "comment_count": 0,
+    "name": "hakullu",
+    "picture": "0",
+    "data": "a:5:{s:7:\"contact\";i:1;s:29:\"taxonomy_image_disable_images\";i:0;s:14:\"picture_delete\";i:0;s:14:\"picture_upload\";s:0:\"\";s:13:\"form_build_id\";s:37:\"form-d13af5fcd8529ad32b9acc6f84a98c23\";}"
+  },
+  {
+    "vid": "609",
+    "uid": "26",
+    "title": "Site Visit at Nyantungo B Primary School",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "609",
+    "type": "ftritem",
+    "language": "und",
+    "created": "1300969341",
+    "changed": "1321109637",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109637",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_8": [
+      
+    ],
+    "taxonomy_vocabulary_1": [
+      
+    ],
+    "taxonomy_vocabulary_7": {
+      "und": [
+        {
+          "tid": "209"
+        }
+      ]
+    },
+    "field_ftritem_date_visited": {
+      "und": [
+        {
+          "value": "2011-03-24T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_ftritem_images": [
+      
+    ],
+    "field_ftritem_lat_long": [
+      
+    ],
+    "field_ftritem_narrative": {
+      "und": [
+        {
+          "value": "Please provide a full report.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_public_summary": {
+      "und": [
+        {
+          "value": "Please Provide a small summary for the public.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_status": {
+      "und": [
+        {
+          "value": "Submitted"
+        }
+      ]
+    },
+    "field_ftritem_field_trip": {
+      "und": [
+        {
+          "target_id": "601",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_ftritem_place": {
+      "und": [
+        {
+          "target_id": "608",
+          "target_type": "node"
+        }
+      ]
+    },
+    "cid": 0,
+    "last_comment_timestamp": "1300969341",
+    "last_comment_name": "",
+    "last_comment_uid": "26",
+    "comment_count": 0,
+    "name": "hakullu",
+    "picture": "0",
+    "data": "a:5:{s:7:\"contact\";i:1;s:29:\"taxonomy_image_disable_images\";i:0;s:14:\"picture_delete\";i:0;s:14:\"picture_upload\";s:0:\"\";s:13:\"form_build_id\";s:37:\"form-d13af5fcd8529ad32b9acc6f84a98c23\";}"
+  },
+  {
+    "vid": "611",
+    "uid": "26",
+    "title": "Site Visit at Rubona Primary School",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "611",
+    "type": "ftritem",
+    "language": "und",
+    "created": "1300969391",
+    "changed": "1321109637",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109637",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_8": [
+      
+    ],
+    "taxonomy_vocabulary_1": [
+      
+    ],
+    "taxonomy_vocabulary_7": {
+      "und": [
+        {
+          "tid": "209"
+        }
+      ]
+    },
+    "field_ftritem_date_visited": {
+      "und": [
+        {
+          "value": "2011-03-24T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_ftritem_images": [
+      
+    ],
+    "field_ftritem_lat_long": [
+      
+    ],
+    "field_ftritem_narrative": {
+      "und": [
+        {
+          "value": "Please provide a full report.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_public_summary": {
+      "und": [
+        {
+          "value": "Please Provide a small summary for the public.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_status": {
+      "und": [
+        {
+          "value": "Submitted"
+        }
+      ]
+    },
+    "field_ftritem_field_trip": {
+      "und": [
+        {
+          "target_id": "601",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_ftritem_place": {
+      "und": [
+        {
+          "target_id": "610",
+          "target_type": "node"
+        }
+      ]
+    },
+    "cid": 0,
+    "last_comment_timestamp": "1300969391",
+    "last_comment_name": "",
+    "last_comment_uid": "26",
+    "comment_count": 0,
+    "name": "hakullu",
+    "picture": "0",
+    "data": "a:5:{s:7:\"contact\";i:1;s:29:\"taxonomy_image_disable_images\";i:0;s:14:\"picture_delete\";i:0;s:14:\"picture_upload\";s:0:\"\";s:13:\"form_build_id\";s:37:\"form-d13af5fcd8529ad32b9acc6f84a98c23\";}"
+  },
+  {
+    "vid": "613",
+    "uid": "26",
+    "title": "Site Visit at Lwauna Moslem Primary School",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "613",
+    "type": "ftritem",
+    "language": "und",
+    "created": "1300969436",
+    "changed": "1321109637",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109637",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_8": [
+      
+    ],
+    "taxonomy_vocabulary_1": [
+      
+    ],
+    "taxonomy_vocabulary_7": {
+      "und": [
+        {
+          "tid": "209"
+        }
+      ]
+    },
+    "field_ftritem_date_visited": {
+      "und": [
+        {
+          "value": "2011-03-24T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_ftritem_images": [
+      
+    ],
+    "field_ftritem_lat_long": [
+      
+    ],
+    "field_ftritem_narrative": {
+      "und": [
+        {
+          "value": "Please provide a full report.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_public_summary": {
+      "und": [
+        {
+          "value": "Please Provide a small summary for the public.",
+          "format": null
+        }
+      ]
+    },
+    "field_ftritem_status": {
+      "und": [
+        {
+          "value": "Submitted"
+        }
+      ]
+    },
+    "field_ftritem_field_trip": {
+      "und": [
+        {
+          "target_id": "601",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_ftritem_place": {
+      "und": [
+        {
+          "target_id": "612",
+          "target_type": "node"
+        }
+      ]
+    },
+    "cid": 0,
+    "last_comment_timestamp": "1300969436",
+    "last_comment_name": "",
+    "last_comment_uid": "26",
+    "comment_count": 0,
+    "name": "hakullu",
+    "picture": "0",
+    "data": "a:5:{s:7:\"contact\";i:1;s:29:\"taxonomy_image_disable_images\";i:0;s:14:\"picture_delete\";i:0;s:14:\"picture_upload\";s:0:\"\";s:13:\"form_build_id\";s:37:\"form-d13af5fcd8529ad32b9acc6f84a98c23\";}"
+  }
+]
+

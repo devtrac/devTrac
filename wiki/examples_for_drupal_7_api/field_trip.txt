@@ -1,0 +1,222 @@
+GET http:///devtrac.mountbatten.net:8001/api/views/api_fieldtrips.json?display_id=current_trip
+
+[
+  {
+    "vid": "5752",
+    "uid": "32",
+    "title": "test",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "5752",
+    "type": "fieldtrip",
+    "language": "und",
+    "created": "1329127998",
+    "changed": "1329128417",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1329128417",
+    "revision_uid": "5",
+    "taxonomy_vocabulary_6": {
+      "und": [
+        {
+          "tid": "121"
+        }
+      ]
+    },
+    "field_fieldtrip_approval_date": {
+      "und": [
+        {
+          "value": "2012-02-13T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_fieldtrip_narrative": [
+      
+    ],
+    "field_fieldtrip_proms_ta_id": {
+      "und": [
+        {
+          "value": "1234",
+          "format": null,
+          "safe_value": "1234"
+        }
+      ]
+    },
+    "field_fieldtrip_public_summary": {
+      "und": [
+        {
+          "value": "This is a test case",
+          "format": "1",
+          "safe_value": "<p>This is a test case<\/p>\n"
+        }
+      ]
+    },
+    "field_fieldtrip_start_end_date": {
+      "und": [
+        {
+          "value": "2012-02-13T00:00:00",
+          "value2": "2012-02-15T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_fieldtrip_status": {
+      "und": [
+        {
+          "value": "In Progress"
+        }
+      ]
+    },
+    "field_fieldtrip_places": {
+      "und": [
+        {
+          "target_id": "1276",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_fieldtrip_approved_by": [
+      
+    ],
+    "field_fieldtrip_user": {
+      "und": [
+        {
+          "target_id": "32",
+          "target_type": "user"
+        }
+      ]
+    },
+    "field_fieldtrip_fc_purpose": [
+      
+    ],
+    "cid": 0,
+    "last_comment_timestamp": "1329127998",
+    "last_comment_name": "",
+    "last_comment_uid": "32",
+    "comment_count": 0,
+    "oldstatus": "In Progress",
+    "oldpublishingstatus": "1",
+    "name": "tester2",
+    "picture": "0",
+    "data": "a:6:{s:7:\"contact\";i:1;s:14:\"picture_delete\";s:0:\"\";s:14:\"picture_upload\";s:0:\"\";s:13:\"form_build_id\";s:37:\"form-557ec27ac104213f5cec77b52f27a601\";s:21:\"force_password_change\";i:0;s:29:\"taxonomy_image_disable_images\";i:0;}"
+  },
+  {
+    "vid": "1275",
+    "uid": "5",
+    "title": "Visit to Mountbatten Office",
+    "log": "",
+    "status": "1",
+    "comment": "0",
+    "promote": "0",
+    "sticky": "0",
+    "nid": "1275",
+    "type": "fieldtrip",
+    "language": "und",
+    "created": "1304929709",
+    "changed": "1321109644",
+    "tnid": "0",
+    "translate": "0",
+    "revision_timestamp": "1321109644",
+    "revision_uid": "0",
+    "taxonomy_vocabulary_6": {
+      "und": [
+        {
+          "tid": "121"
+        }
+      ]
+    },
+    "field_fieldtrip_approval_date": [
+      
+    ],
+    "field_fieldtrip_narrative": {
+      "und": [
+        {
+          "value": "So DONT delete, please, sean, just unpublish",
+          "format": "1",
+          "safe_value": "<p>So DONT delete, please, sean, just unpublish<\/p>\n"
+        }
+      ]
+    },
+    "field_fieldtrip_proms_ta_id": {
+      "und": [
+        {
+          "value": "mou-12389473987",
+          "format": null,
+          "safe_value": "mou-12389473987"
+        }
+      ]
+    },
+    "field_fieldtrip_public_summary": {
+      "und": [
+        {
+          "value": "This is a test-visit we use sometimes to test",
+          "format": "1",
+          "safe_value": "<p>This is a test-visit we use sometimes to test<\/p>\n"
+        }
+      ]
+    },
+    "field_fieldtrip_start_end_date": {
+      "und": [
+        {
+          "value": "2011-05-09T00:00:00",
+          "value2": "2011-05-31T00:00:00",
+          "timezone": "Africa\/Kampala",
+          "timezone_db": "Africa\/Kampala",
+          "date_type": "date"
+        }
+      ]
+    },
+    "field_fieldtrip_status": {
+      "und": [
+        {
+          "value": "Approved"
+        }
+      ]
+    },
+    "field_fieldtrip_places": {
+      "und": [
+        {
+          "target_id": "1276",
+          "target_type": "node"
+        }
+      ]
+    },
+    "field_fieldtrip_approved_by": [
+      
+    ],
+    "field_fieldtrip_user": {
+      "und": [
+        {
+          "target_id": "5",
+          "target_type": "user"
+        }
+      ]
+    },
+    "field_fieldtrip_fc_purpose": {
+      "und": [
+        {
+          "value": "80"
+        }
+      ]
+    },
+    "cid": 0,
+    "last_comment_timestamp": "1304929709",
+    "last_comment_name": "",
+    "last_comment_uid": "5",
+    "comment_count": 0,
+    "oldstatus": "Approved",
+    "oldpublishingstatus": "1",
+    "name": "reinier",
+    "picture": "0",
+    "data": "a:6:{s:13:\"form_build_id\";s:37:\"form-294b8c011bb6a8a87f63672d7145c263\";s:14:\"picture_delete\";s:0:\"\";s:14:\"picture_upload\";s:0:\"\";s:29:\"taxonomy_image_disable_images\";i:0;s:7:\"contact\";i:1;s:5:\"piwik\";a:1:{s:16:\"piwik_token_auth\";s:9:\"anonymous\";}}"
+  }
+]
+

@@ -1,0 +1,335 @@
+GET http://devtrac.mountbatten.net:8001/api/views/api_vocabularies.json?display_id=placetypes
+
+[
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Water Points",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "23",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Borehole",
+    "taxonomy_term_data_vid": "1",
+    "tid": "204",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Government Office",
+    "taxonomy_term_data_vid": "1",
+    "tid": "3",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Health Facilities",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "2",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Health Centre",
+    "taxonomy_term_data_vid": "1",
+    "tid": "197",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Schools",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Primary School",
+    "taxonomy_term_data_vid": "1",
+    "tid": "195",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Water Points",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "23",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Deep Borehole",
+    "taxonomy_term_data_vid": "1",
+    "tid": "191",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Health Facilities",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "2",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Health Centre II",
+    "taxonomy_term_data_vid": "1",
+    "tid": "8",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "NGO",
+    "taxonomy_term_data_vid": "1",
+    "tid": "47",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Schools",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Secondary School",
+    "taxonomy_term_data_vid": "1",
+    "tid": "206",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Faith-based Organisation",
+    "taxonomy_term_data_vid": "1",
+    "tid": "48",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Water Points",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "23",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Gfs or Tap",
+    "taxonomy_term_data_vid": "1",
+    "tid": "205",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Health Facilities",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "2",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Health Centre III",
+    "taxonomy_term_data_vid": "1",
+    "tid": "7",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Schools",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Primary Community School",
+    "taxonomy_term_data_vid": "1",
+    "tid": "57",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Youth Centre",
+    "taxonomy_term_data_vid": "1",
+    "tid": "212",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Health Facilities",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "2",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Health Centre IV",
+    "taxonomy_term_data_vid": "1",
+    "tid": "50",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Office",
+    "taxonomy_term_data_vid": "1",
+    "tid": "58",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Schools",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Primary Government School",
+    "taxonomy_term_data_vid": "1",
+    "tid": "4",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Water Points",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "23",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Protected Spring",
+    "taxonomy_term_data_vid": "1",
+    "tid": "192",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Child Protection Committee",
+    "taxonomy_term_data_vid": "1",
+    "tid": "200",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Health Facilities",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "2",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Health Unit",
+    "taxonomy_term_data_vid": "1",
+    "tid": "56",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Schools",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Primary Private School",
+    "taxonomy_term_data_vid": "1",
+    "tid": "59",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Water Points",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "23",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Tap",
+    "taxonomy_term_data_vid": "1",
+    "tid": "53",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Health Facilities",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "2",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Hospital",
+    "taxonomy_term_data_vid": "1",
+    "tid": "51",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Household",
+    "taxonomy_term_data_vid": "1",
+    "tid": "201",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Schools",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Secondary Community School",
+    "taxonomy_term_data_vid": "1",
+    "tid": "6",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Water Points",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "23",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Well",
+    "taxonomy_term_data_vid": "1",
+    "tid": "25",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Health Facilities",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "2",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Other Health Centre",
+    "taxonomy_term_data_vid": "1",
+    "tid": "52",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Schools",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Secondary Government School",
+    "taxonomy_term_data_vid": "1",
+    "tid": "5",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Water Points",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "23",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Shallow Well",
+    "taxonomy_term_data_vid": "1",
+    "tid": "207",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Shop or Market",
+    "taxonomy_term_data_vid": "1",
+    "tid": "202",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Police Station",
+    "taxonomy_term_data_vid": "1",
+    "tid": "203",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Schools",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Secondary Private School",
+    "taxonomy_term_data_vid": "1",
+    "tid": "60",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Water Points",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "23",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Unknown Waterpoint",
+    "taxonomy_term_data_vid": "1",
+    "tid": "55",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  },
+  {
+    "taxonomy_term_data_taxonomy_term_hierarchy_name": "Schools",
+    "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy_tid": "1",
+    "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+    "taxonomy_term_data_name": "Other School",
+    "taxonomy_term_data_vid": "1",
+    "tid": "61",
+    "taxonomy_vocabulary_machine_name": "vocabulary_1"
+  }
+]
+
