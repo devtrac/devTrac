@@ -1,5 +1,9 @@
 function Common(){
     this.callServiceWithTimeout = function(data, timeout, successCallback, failedCallback, timeoutCallback){
+        this.callServiceWithTimeoutAndUrl(DT.SERVICE_ENDPOINT, data, timeout, successCallback, failedCallback, timeoutCallback);
+    }
+
+    this.callServiceWithTimeoutAndUrl= function(url, data, timeout, successCallback, failedCallback, timeoutCallback){
         var responsed = false;
         var start = new Date().getTime();
 
@@ -19,21 +23,21 @@ function Common(){
             clearTimeout(timer);
             responsed = true;
             failedCallback(response);
-        }
+        };
 
         var timer = setTimeout(function() {
             responsed = true;
             timeoutCallback("Request timeout");
         }, timeout);
 
-        devtrac.common.callService(data, success, error);
-    }
+        navigator.network.XHR(url, devtrac.common.convertHash(data), success, error);
+	}
 
     this.callService = function(data, callback, errorCallback){
         navigator.log.log("Network call with data: " + JSON.stringify(data));
         navigator.network.XHR(DT.SERVICE_ENDPOINT, devtrac.common.convertHash(data), callback, errorCallback);
     }
-    
+
     this.convertHash = function(hash){
         var paramStr = "";
         for (param in hash) {
