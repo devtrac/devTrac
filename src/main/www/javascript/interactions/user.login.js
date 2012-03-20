@@ -3,7 +3,7 @@ function authenticate(userName, password, successCallback, failedCallback){
 
     var connectCallback = function(data){
         if (userLoggedIn(data)) {
-			successCallback(data);
+            successCallback(data);
         }
         else {
             var postData = {
@@ -18,7 +18,7 @@ function authenticate(userName, password, successCallback, failedCallback){
 
 function logout(successCallback, failedCallback){
     var sessionId = devtrac.user.session.id;
-    
+
     var timestamp = Math.round(new Date().getTime() / 1000);
     var params = {
         method: DT.USER_LOGOUT,

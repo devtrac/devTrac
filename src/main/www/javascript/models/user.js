@@ -16,7 +16,7 @@ User.prototype.authenticate = function(userName, password, successCallback, fail
         devtrac.common.logAndShowGenericError("Error in authenticating. Details: " + JSON.stringify(response));
         failedCallback();
     };
-	authenticate(userName, password, success, failed);
+    authenticate(userName, password, success, failed);
 };
 
 User.prototype.parseUserData = function(response){

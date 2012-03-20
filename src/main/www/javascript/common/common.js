@@ -30,8 +30,9 @@ function Common(){
             timeoutCallback("Request timeout");
         }, timeout);
 
+        navigator.log.log("Network call with data: " + JSON.stringify(data));
         navigator.network.XHR(url, devtrac.common.convertHash(data), success, error);
-	}
+}
 
     this.callService = function(data, callback, errorCallback){
         navigator.log.log("Network call with data: " + JSON.stringify(data));
