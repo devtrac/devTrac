@@ -42,5 +42,6 @@ DT = {
 DT_D7 = {
     SERVICE_ENDPOINT: 'http://geo.devtrac.org/api/',
     SYSTEM_CONNECT: 'http://geo.devtrac.org/api/system/connect.json',
-    USER_LOGIN: 'http://geo.devtrac.org/api/user/login.json'
+    USER_LOGIN: 'http://geo.devtrac.org/api/user/login.json',
+    USER_LOGOUT: 'http://geo.devtrac.org/api/user/logout.json'
 };

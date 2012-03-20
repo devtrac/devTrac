@@ -17,19 +17,7 @@ function authenticate(userName, password, successCallback, failedCallback){
 }
 
 function logout(successCallback, failedCallback){
-    var sessionId = devtrac.user.session.id;
-
-    var timestamp = Math.round(new Date().getTime() / 1000);
-    var params = {
-        method: DT.USER_LOGOUT,
-        sessid: sessionId,
-        domain_name: DT.DOMAIN,
-        domain_time_stamp: timestamp,
-        api_key: DT.API_KEY,
-        nonce: timestamp,
-        hash: devtrac.common.generateHash(DT.USER_LOGIN, timestamp)
-    };
-    devtrac.common.callService(params, successCallback, failedCallback);
+    devtrac.common.callServiceWithTimeoutAndUrl(DT_D7.USER_LOGOUT, {}, 10000, successCallback, failedCallback, failedCallback);
 }
 
 function userLoggedIn(response){
