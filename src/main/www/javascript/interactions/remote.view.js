@@ -23,7 +23,7 @@ RemoteView.prototype.call = function(viewName, displayId, viewArgs, successCallb
 
 RemoteView.prototype.callWithUrl = function(url, displayId, successCallback, failedCallback){
     var params = {
-        display_id: displayId,
+        display_id: displayId
     };
     devtrac.common.callServiceWithUrl(url, params, successCallback, failedCallback);
 }

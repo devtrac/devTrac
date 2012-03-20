@@ -143,22 +143,16 @@ DataPull.prototype.tripDetails = function(callback){
     $("#status").html("");
 	navigator.log.debug("Requesting trip details.");
     var tripSuccess = function(tripResponse){
-        if (devtrac.common.hasError(tripResponse)) {
-            devtrac.common.logAndShowGenericError(devtrac.common.getErrorMessage(tripResponse));
-            callback();
-        }
-        else {
-			navigator.log.debug("Received trip details response.");
-            if (tripResponse.length > 0) {
-                devtrac.dataPull.fieldTrip.id = tripResponse[0]["nid"];
-                devtrac.dataPull.fieldTrip.title = tripResponse[0]["title"];
-                devtrac.dataPull.tripSiteDetails(callback);
-				navigator.log.debug("Processed trip with id: " + devtrac.dataPull.fieldTrip.id);
-                return;
-            }
-            alert("You don't have any active field trip. Please create a field trip.");
-            devtrac.loginController.logout();
-        }
+    navigator.log.debug("Received trip details response.");
+    if (tripResponse.length > 0) {
+        devtrac.dataPull.fieldTrip.id = tripResponse[0]["nid"];
+        devtrac.dataPull.fieldTrip.title = tripResponse[0]["title"];
+        devtrac.dataPull.tripSiteDetails(callback);
+        navigator.log.debug("Processed trip with id: " + devtrac.dataPull.fieldTrip.id);
+        return;
+    }
+    alert("You don't have any active field trip. Please create a field trip.");
+        devtrac.loginController.logout();
     };
     
     var tripFailed = function(){
