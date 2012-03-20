@@ -52,42 +52,5 @@ describe("user.login", function(){
                 expect(failedCallback).toHaveBeenCalled();
             })
         })
-        
-
-        describe("When user name and password is correct", function(){
-
-            beforeEach(function(){
-                successCallback = jasmine.createSpy();
-                failedCallback = jasmine.createSpy();
-
-                authenticate("tester2", "Bl1ckberry", successCallback, failedCallback);
-            })
-
-            it("'successCallback' should invoked", function(){
-                expect(successCallback).toHaveBeenCalled();
-            })
-
-            it("'failedCallback' should not be invoked", function(){
-                expect(failedCallback).not.toHaveBeenCalled();
-            })
-        })
-
-        describe("When user name and password is incorrect", function(){
-
-            beforeEach(function(){
-                successCallback = jasmine.createSpy();
-                failedCallback = jasmine.createSpy();
-
-                authenticate("tester2", "Bl1ckberry", successCallback, failedCallback);
-            })
-
-            it("'successCallback' should NOT be invoked", function(){
-                expect(successCallback).not.toHaveBeenCalled();
-            })
-
-            it("'failedCallback' should be invoked", function(){
-                expect(failedCallback).toHaveBeenCalled();
-            })
-        })
     })
 })
