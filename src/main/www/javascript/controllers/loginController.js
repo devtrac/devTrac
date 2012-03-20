@@ -73,13 +73,19 @@ LoginController.prototype.logout = function(){
             devtrac.user.uid = 0;
             devtrac.fieldTrip = new FieldTrip();
 			navigator.log.debug("Showing login screen.");
+            $("#username").val("");
+            $("#password").val("");
             devtrac.loginController.show();
         }, function(){
             devtrac.common.logAndShowGenericError("Error occured in deleting user: " + devtrac.user.name);
+            $("#username").val("");
+            $("#password").val("");
             devtrac.loginController.show();
         }, "user");
     }, function(){
 		navigator.log.debug("Couldn't do normal logout. Just displaying login screen.");
+        $("#username").val("");
+        $("#password").val("");
         devtrac.loginController.show();
     })
 };
