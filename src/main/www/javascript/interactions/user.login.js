@@ -6,20 +6,11 @@ function authenticate(userName, password, successCallback, failedCallback){
 			successCallback(data);
         }
         else {
-            var timestamp = Math.round(new Date().getTime() / 1000);
-            var sessionId = data[DT.DATA_REF][DT.SESSION_ID_REF];
-            var params = {
-                method: DT.USER_LOGIN,
-                sessid: sessionId,
+            var postData = {
                 username: userName,
-                password: password,
-                domain_name: DT.DOMAIN,
-                domain_time_stamp: timestamp,
-                api_key: DT.API_KEY,
-                nonce: timestamp,
-                hash: devtrac.common.generateHash(DT.USER_LOGIN, timestamp)
+                password: password
             };
-            devtrac.common.callServiceWithTimeout(params, timeout, successCallback, failedCallback, failedCallback);
+            devtrac.common.callServiceWithTimeoutAndUrl(DT_D7.USER_LOGIN, postData, timeout, successCallback, failedCallback, failedCallback);
         }
     };
     devtrac.common.callServiceWithTimeoutAndUrl(DT_D7.SYSTEM_CONNECT, '', timeout, connectCallback, failedCallback, failedCallback);

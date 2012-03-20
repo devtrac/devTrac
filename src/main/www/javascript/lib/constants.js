@@ -40,5 +40,7 @@ DT = {
 };
 
 DT_D7 = {
-    SYSTEM_CONNECT: 'http://devtrac.mountbatten.net:8001/my_services/system/connect.json'
+    SERVICE_ENDPOINT: 'http://geo.devtrac.org/api/',
+    SYSTEM_CONNECT: 'http://geo.devtrac.org/api/system/connect.json',
+    USER_LOGIN: 'http://geo.devtrac.org/api/user/login.json'
 };
