@@ -35,8 +35,12 @@ function Common(){
 }
 
     this.callService = function(data, callback, errorCallback){
-        navigator.log.log("Network call with data: " + JSON.stringify(data));
-        navigator.network.XHR(DT.SERVICE_ENDPOINT, devtrac.common.convertHash(data), callback, errorCallback);
+        this.callServiceWithUrl(DT.SERVICE_ENDPOINT, data, callback, errorCallback);
+    }
+    
+    this.callServiceWithUrl = function(url, data, callback, errorCallback){
+		navigator.log.log("Network call with data: " + JSON.stringify(data));
+	    navigator.network.XHR(url, devtrac.common.convertHash(data), callback, errorCallback);
     }
 
     this.convertHash = function(hash){

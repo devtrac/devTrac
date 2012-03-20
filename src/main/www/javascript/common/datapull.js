@@ -149,9 +149,9 @@ DataPull.prototype.tripDetails = function(callback){
         }
         else {
 			navigator.log.debug("Received trip details response.");
-            if (tripResponse["#data"].length > 0) {
-                devtrac.dataPull.fieldTrip.id = tripResponse["#data"][0]["nid"];
-                devtrac.dataPull.fieldTrip.title = tripResponse["#data"][0]["title"];
+            if (tripResponse.length > 0) {
+                devtrac.dataPull.fieldTrip.id = tripResponse[0]["nid"];
+                devtrac.dataPull.fieldTrip.title = tripResponse[0]["title"];
                 devtrac.dataPull.tripSiteDetails(callback);
 				navigator.log.debug("Processed trip with id: " + devtrac.dataPull.fieldTrip.id);
                 return;
@@ -169,7 +169,7 @@ DataPull.prototype.tripDetails = function(callback){
     
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving field trip information.");
-    devtrac.remoteView.call('api_fieldtrips', 'page_1', '["' + devtrac.user.uid + '"]', tripSuccess, tripFailed);
+    devtrac.remoteView.callWithUrl(DT_D7.CURRENT_TRIP, 'current_trip', tripSuccess, tripFailed);
 }
 
 DataPull.prototype.tripSiteDetails = function(callback){
