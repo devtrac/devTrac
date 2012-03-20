@@ -21,8 +21,8 @@ function logout(successCallback, failedCallback){
 }
 
 function userLoggedIn(response){
-    return response[DT.DATA_REF] && response[DT.DATA_REF][DT.USER_REF] &&
-    response[DT.DATA_REF][DT.USER_REF][DT.NAME_REF] &&
-    response[DT.DATA_REF][DT.USER_REF][DT.PASSWORD_REF];
+    return response[DT.USER_REF] &&
+    response[DT.USER_REF][DT.NAME_REF] &&
+    response[DT.USER_REF][DT.PASSWORD_REF];
 }
 

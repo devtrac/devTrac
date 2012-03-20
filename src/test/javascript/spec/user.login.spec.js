@@ -53,4 +53,13 @@ describe("user.login", function(){
             })
         })
     })
+
+    describe('userLoggedIn', function(){
+        it('should return parsed data', function(){
+            var response = {user:{name:'tester', pass:'tester'}};
+            var result = userLoggedIn(response);
+
+            expect(result).toBeTruthy();
+        })
+    })
 })
