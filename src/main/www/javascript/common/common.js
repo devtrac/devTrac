@@ -43,6 +43,11 @@ function Common(){
 	    navigator.network.XHR(url, devtrac.common.convertHash(data), callback, errorCallback);
     }
 
+    this.callServiceGet = function(url, callback, errorCallback){
+    	url += "cookie:" + devtrac.user.session.name + "=" + devtrac.user.session.id;
+    	navigator.network.XHR(url, null, callback, errorCallback);
+    }
+
     this.convertHash = function(hash){
         var paramStr = "";
         for (param in hash) {
