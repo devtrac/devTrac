@@ -219,10 +219,11 @@ p.submit {
 .grid .col2{
 	float: left;
 	padding: 5px;
-    width: 25%;
+    width: 20%;
 }
 .grid .col3 {
-        float: left;
+    float: left;
+    padding: 5px;
 }
 .grid_row {
 	border-bottom: 1px solid #D6D6D6;
