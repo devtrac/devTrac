@@ -44,5 +44,5 @@ DT_D7 = {
     SYSTEM_CONNECT: 'http://geo.devtrac.org/api/system/connect.json',
     USER_LOGIN: 'http://geo.devtrac.org/api/user/login.json',
     USER_LOGOUT: 'http://geo.devtrac.org/api/user/logout.json',
-    CURRENT_TRIP: 'http://geo.devtrac.org/api/views/api_fieldtrips.json'
+    CURRENT_TRIP: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=current_trip'
 };

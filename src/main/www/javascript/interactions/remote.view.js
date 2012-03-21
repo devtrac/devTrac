@@ -21,10 +21,12 @@ RemoteView.prototype.call = function(viewName, displayId, viewArgs, successCallb
 	devtrac.common.callService(params, successCallback, failedCallback);
 }
 
-RemoteView.prototype.callWithUrl = function(url, displayId, successCallback, failedCallback){
-    var params = {
-        display_id: displayId
-    };
-    devtrac.common.callServiceWithUrl(url, params, successCallback, failedCallback);
+RemoteView.prototype.callWithUrl = function(url, successCallback, failedCallback){
+    devtrac.common.callServiceWithUrl(url, '', successCallback, failedCallback);
+}
+
+RemoteView.prototype.get = function(url, successCallback, failedCallback){
+	navigator.log.log("Remote view get.");
+	devtrac.common.callServiceGet(url, successCallback, failedCallback);
 }
 

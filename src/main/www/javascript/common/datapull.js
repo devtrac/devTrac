@@ -163,7 +163,8 @@ DataPull.prototype.tripDetails = function(callback){
     
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving field trip information.");
-    devtrac.remoteView.callWithUrl(DT_D7.CURRENT_TRIP, 'current_trip', tripSuccess, tripFailed);
+    devtrac.remoteView.get(DT_D7.CURRENT_TRIP, tripSuccess, tripFailed);
+
 }
 
 DataPull.prototype.tripSiteDetails = function(callback){
