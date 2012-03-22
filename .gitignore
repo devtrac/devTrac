@@ -6,3 +6,5 @@ deliverables
 *.tmp_*
 LogFile.txt
 build.sh~
+script/image.data
+script/site_image.png.data
