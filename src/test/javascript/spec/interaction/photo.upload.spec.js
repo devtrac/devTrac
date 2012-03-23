@@ -5,15 +5,31 @@ describe("PhotoUpload", function(){
         successCallback = jasmine.createSpy('photoUpload.successCallback');
         errorCallback = jasmine.createSpy('photoUpload.errorCallback');
 
-        it("should return fid", function(){
-            devtrac.user.uid = 23;
-            var filePath = "twer/image/image.jpg";
-            spyOn(navigator.network, 'XHRUpload').andCallFake(function(URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback){
-                successCallback({'fid':'15'});
-            })
-            devtrac.photoUpload.upload(filePath, successCallback, errorCallback);
+        describe("When succeed", function(){
+            it("should return fid", function(){
+                devtrac.user.uid = 23;
+                var filePath = "twer/image/image.jpg";
+                spyOn(navigator.network, 'XHRUpload').andCallFake(function(URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback){
+                    successCallback({'fid':'15'});
+                })
 
-            expect(successCallback).toHaveBeenCalledWith('15');
+                devtrac.photoUpload.upload(filePath, successCallback, errorCallback);
+
+                expect(successCallback).toHaveBeenCalledWith('15');
+            })
+        })
+
+        describe("When failed", function(){
+            it("error callBack should be called", function(){
+                devtrac.user.uid = 23;
+                var filePath = "twer/image/image.jpg";
+                spyOn(navigator.network, 'XHRUpload').andCallFake(function(URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback){
+                    errorCallback({'error':'true'});
+                })
+                devtrac.photoUpload.upload(filePath, successCallback, errorCallback);
+
+                expect(errorCallback).toHaveBeenCalled();
+            })
         })
     })
 })
