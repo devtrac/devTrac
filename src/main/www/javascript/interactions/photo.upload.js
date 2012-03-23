@@ -2,20 +2,8 @@ function PhotoUpload(){
 }
 
 PhotoUpload.prototype.upload = function(filePath, successCallback, errorCallback){
-    var sessionId = devtrac.user.session.id;
     var userId = devtrac.user.uid;
-    var timestamp = Math.round(new Date().getTime() / 1000);
     var fileUploadPath = DT.FILE_UPLOAD_PATH.replace('<UID>', userId)
-    var params = {
-        method: DT.FILE_SAVE,
-        sessid: sessionId,
-        domain_name: DT.DOMAIN,
-        domain_time_stamp: timestamp,
-        api_key: DT.API_KEY,
-        nonce: timestamp,
-        hash: devtrac.common.generateHash(DT.FILE_SAVE, timestamp)
-    }
-    var paramsHash = devtrac.common.convertHash(params);
 
     devtrac.common.callServiceUpload(DT_D7.FILE_SAVE, filePath, userId, fileUploadPath, successCallback, errorCallback);
 }
