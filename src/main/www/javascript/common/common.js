@@ -44,7 +44,6 @@ function Common(){
     }
 
     this.callServiceGet = function(url, callback, errorCallback){
-    	url += "cookie:" + devtrac.user.session.name + "=" + devtrac.user.session.id;
     	navigator.network.XHR(url, null, callback, errorCallback);
     }
 

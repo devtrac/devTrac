@@ -49,8 +49,18 @@ public class ConnectionThread extends Thread {
         }
     }
 
-    public void setCookie(String cookie) {
-        _cookie = cookie;
+    public void updateCookie(String header) {
+        if (isDrupal6()) return;
+        if (null == header) return;
+        this._cookie = header.substring(0, header.indexOf(';'));
+    }
+
+    private boolean isDrupal6() {
+        return (_POSTdata != null) && (_POSTdata.indexOf("views.get") != -1);
+    }
+
+    public String getCookie() {
+        return _cookie;
     }
 
     /**
@@ -121,7 +131,7 @@ public class ConnectionThread extends Thread {
                             "application/x-www-form-urlencoded");
 
                     if (_cookie != null) {
-                        httpConn.setRequestProperty("Cookie", _cookie);
+                        httpConn.setRequestProperty("Cookie", getCookie());
                     }
 
                     // Here's an example of setting the Accept header to a
@@ -153,6 +163,8 @@ public class ConnectionThread extends Thread {
                     // (Not Acceptable), the Accept header might be not set
                     // to some satisfactory value by the server.
                     if (status == HttpConnection.HTTP_OK) {
+                        updateCookie(httpConn.getHeaderField("Set-Cookie"));
+
                         InputStream input = s.openInputStream();
                         byte[] data = new byte[256];
                         int len = 0;

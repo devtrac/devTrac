@@ -119,17 +119,6 @@ public class NetworkCommand implements Command {
                 reqURL = reqURL.substring(0, pipeIndex);
             }
 
-            if (reqURL.indexOf("cookie") != -1) {
-                String cookie = reqURL.substring(reqURL.indexOf("cookie:"));
-                reqURL = reqURL.substring(0, reqURL.length() - cookie.length());
-                cookie = cookie.substring("cookie:".length());
-
-                connThread.setCookie(cookie);
-
-                LogCommand.LOG("The url is: " + reqURL);
-                LogCommand.LOG("The cookie is: " + cookie);
-            }
-
             reqURL += new NetworkSuffixGenerator().generateNetworkSuffix();
 
             LogCommand.LOG("Request url is:" + reqURL);
