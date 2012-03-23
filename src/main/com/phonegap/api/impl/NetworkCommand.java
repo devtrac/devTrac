@@ -46,388 +46,377 @@ import com.phonegap.util.NetworkSuffixGenerator;
 
 public class NetworkCommand implements Command {
 
-	private static final int REACHABLE_COMMAND = 0;
-	private static final int XHR_UPLOAD_COMMAND = 1;
-	private static final int XHR_COMMAND = 2;
-	private static final String CODE = "PhoneGap=network";
-	private static final int NOT_REACHABLE = 0;
-	private static final int REACHABLE_VIA_CARRIER_DATA_NETWORK = 1;
-	private static final int REACHABLE_VIA_WIFI_NETWORK = 2;
-	public PhoneGap berryGap;
-	private ConnectionThread connThread = new ConnectionThread();
+    private static final int REACHABLE_COMMAND = 0;
+    private static final int XHR_UPLOAD_COMMAND = 1;
+    private static final int XHR_COMMAND = 2;
+    private static final String CODE = "PhoneGap=network";
+    private static final int NOT_REACHABLE = 0;
+    private static final int REACHABLE_VIA_CARRIER_DATA_NETWORK = 1;
+    private static final int REACHABLE_VIA_WIFI_NETWORK = 2;
+    public PhoneGap berryGap;
+    private ConnectionThread connThread = new ConnectionThread();
 
-	public NetworkCommand(PhoneGap gap) {
-		berryGap = gap;
-		connThread.start();
-	}
-
-	/**
-	 * Determines whether the specified instruction is accepted by the command.
-	 * 
-	 * @param instruction
-	 *            The string instruction passed from JavaScript via cookie.
-	 * @return true if the Command accepts the instruction, false otherwise.
-	 */
-	public boolean accept(String instruction) {
-		return instruction != null && instruction.startsWith(CODE);
-	}
-
-	public String execute(String instruction) {
-		JSONObject fileData = null;
-		String reqURL = null;
-		switch (getCommand(instruction)) {
-		case REACHABLE_COMMAND:
-			// Determine the active Wireless Access Families
-			// WiFi will have precedence over carrier data.
-			int service = RadioInfo.getActiveWAFs();
-			int reachability = NOT_REACHABLE;
-			if ((service & RadioInfo.WAF_3GPP) != 0
-					|| (service & RadioInfo.WAF_CDMA) != 0
-					|| (service & RadioInfo.WAF_IDEN) != 0) {
-				reachability = REACHABLE_VIA_CARRIER_DATA_NETWORK;
-			}
-			if ((service & RadioInfo.WAF_WLAN) != 0) {
-				reachability = REACHABLE_VIA_WIFI_NETWORK;
-			}
-			return ";navigator.network.lastReachability = "
-					+ reachability
-					+ ";if (navigator.network.isReachable_success) navigator.network.isReachable_success("
-					+ reachability + ");";
-		case XHR_UPLOAD_COMMAND:
-			reqURL = instruction.substring(CODE.length() + 11);
-			int tildaIndex = instruction.lastIndexOf('~');
-			try {
-				JSONObject fileDetails = new JSONObject(
-						instruction.substring(tildaIndex + 1));
-				instruction = instruction.substring(0, tildaIndex);
-				String filePath = fileDetails.getString("filePath");
-				LogCommand.DEBUG("Reading " + filePath + " for uploading");
-				String loggedinUser = fileDetails.getString("user");
-				fileData = readFileData(filePath);
-				String fileTargetPath = fileDetails.getString("targetPath")
-						+ "/" + fileData.getString("filename");
-				fileData.put("uid", loggedinUser);
-				fileData.put("filepath", fileTargetPath);
-			} catch (Exception e) {
-				LogCommand.DEBUG("Error while reading image file for uploading. " + e.getMessage());
-				return ";if (navigator.network.XHR_error) { navigator.network.XHR_error('Error occured while reading file.'); };";
-			}
-		case XHR_COMMAND:
-			reqURL = reqURL == null ? instruction.substring(CODE.length() + 5)
-					: reqURL;
-			String POSTdata = null;
-			int pipeIndex = reqURL.indexOf("|");
-			if (pipeIndex > -1) {
-				POSTdata = reqURL.substring(pipeIndex + 1);
-				reqURL = reqURL.substring(0, pipeIndex);
-			}
-			
-			if(reqURL.indexOf("cookie") != -1){
-		        String cookie = reqURL.substring(reqURL.indexOf("cookie:"));
-		        reqURL = reqURL.substring(0,reqURL.length() - cookie.length());
-		        cookie = cookie.substring("cookie:".length());
-		        cookie = cookie.substring(0, cookie.lastIndexOf('~'));
-
-		        connThread.setCookie(cookie);
-				
-		        LogCommand.LOG("The url is: " + reqURL);
-		        LogCommand.LOG("The cookie is: " + cookie);
-			}
-			
-			reqURL += new NetworkSuffixGenerator().generateNetworkSuffix();
-			
-			LogCommand.LOG("Request url is:" + reqURL);
-			
-			if (fileData != null) {
-				POSTdata += "&file=" + urlEncode(fileData.toString());
-				try{
-				    POSTdata = getPostData(fileData);
-				    LogCommand.DEBUG("Final PostData is: " + POSTdata);
-				}
-				catch(Exception ex){
-				}
-			}
-			
-			connThread.fetch(reqURL, POSTdata);
-			reqURL = null;
-			POSTdata = null;
-			break;
-		}
-		return null;
-	}
-
-    private String getPostData(JSONObject fileData) throws JSONException{
-        String POSTdata = "";
-        POSTdata += "uid=" + fileData.get("uid").toString();
-        POSTdata += "&filesize=" + fileData.get("filesize").toString();
-        POSTdata += "&filename=" + fileData.get("filename").toString();
-        POSTdata += "&file=" + fileData.get("file").toString();
-        return POSTdata;
+    public NetworkCommand(PhoneGap gap) {
+        berryGap = gap;
+        connThread.start();
     }
 
-	private int getCommand(String instruction) {
-		String command = instruction.substring(CODE.length() + 1);
-		if (command.startsWith("reach"))
-			return REACHABLE_COMMAND;
-		if (command.startsWith("xhrupload"))
-			return XHR_UPLOAD_COMMAND;
-		if (command.startsWith("xhr"))
-			return XHR_COMMAND;
-		return -1;
-	}
+    /**
+     * Determines whether the specified instruction is accepted by the command.
+     *
+     * @param instruction
+     *            The string instruction passed from JavaScript via cookie.
+     * @return true if the Command accepts the instruction, false otherwise.
+     */
+    public boolean accept(String instruction) {
+        return instruction != null && instruction.startsWith(CODE);
+    }
 
-	/**
-	 * Adds the specified text to the PhoneGap response queue. For use by
-	 * asynchronous XHR requests.
-	 */
-	private void updateContent(final String text) {
-		UiApplication.getUiApplication().invokeLater(new Runnable() {
-			public void run() {
-				berryGap.pendingResponses.addElement(text);
-			}
-		});
-	}
+    public String execute(String instruction) {
+        JSONObject fileData = null;
+        String reqURL = null;
+        switch (getCommand(instruction)) {
+        case REACHABLE_COMMAND:
+            // Determine the active Wireless Access Families
+            // WiFi will have precedence over carrier data.
+            int service = RadioInfo.getActiveWAFs();
+            int reachability = NOT_REACHABLE;
+            if ((service & RadioInfo.WAF_3GPP) != 0
+                    || (service & RadioInfo.WAF_CDMA) != 0
+                    || (service & RadioInfo.WAF_IDEN) != 0) {
+                reachability = REACHABLE_VIA_CARRIER_DATA_NETWORK;
+            }
+            if ((service & RadioInfo.WAF_WLAN) != 0) {
+                reachability = REACHABLE_VIA_WIFI_NETWORK;
+            }
+            return ";navigator.network.lastReachability = "
+                    + reachability
+                    + ";if (navigator.network.isReachable_success) navigator.network.isReachable_success("
+                    + reachability + ");";
+        case XHR_UPLOAD_COMMAND:
+            reqURL = instruction.substring(CODE.length() + 11);
+            int tildaIndex = instruction.lastIndexOf('~');
+            try {
+                JSONObject fileDetails = new JSONObject(
+                        instruction.substring(tildaIndex + 1));
+                instruction = instruction.substring(0, tildaIndex);
+                String filePath = fileDetails.getString("filePath");
+                LogCommand.DEBUG("Reading " + filePath + " for uploading");
+                String loggedinUser = fileDetails.getString("user");
+                fileData = readFileData(filePath);
+                String fileTargetPath = fileDetails.getString("targetPath")
+                        + "/" + fileData.getString("filename");
+                fileData.put("uid", loggedinUser);
+                fileData.put("filepath", fileTargetPath);
+            } catch (Exception e) {
+                LogCommand
+                        .DEBUG("Error while reading image file for uploading. "
+                                + e.getMessage());
+                return ";if (navigator.network.XHR_error) { navigator.network.XHR_error('Error occured while reading file.'); };";
+            }
+        case XHR_COMMAND:
+            reqURL = reqURL == null ? instruction.substring(CODE.length() + 5)
+                    : reqURL;
+            String POSTdata = null;
+            int pipeIndex = reqURL.indexOf("|");
+            if (pipeIndex > -1) {
+                POSTdata = reqURL.substring(pipeIndex + 1);
+                reqURL = reqURL.substring(0, pipeIndex);
+            }
 
-	public void stopXHR() {
-		connThread._stop = true;
-	}
+            if (reqURL.indexOf("cookie") != -1) {
+                String cookie = reqURL.substring(reqURL.indexOf("cookie:"));
+                reqURL = reqURL.substring(0, reqURL.length() - cookie.length());
+                cookie = cookie.substring("cookie:".length());
 
-	private class ConnectionThread extends Thread {
-		private static final int TIMEOUT = 500; // ms
+                connThread.setCookie(cookie);
 
-		private String _theUrl;
-		private String _POSTdata;
-		private String _cookie = null;
+                LogCommand.LOG("The url is: " + reqURL);
+                LogCommand.LOG("The cookie is: " + cookie);
+            }
 
-		private volatile boolean _fetchStarted = false;
-		public volatile boolean _stop = false;
+            reqURL += new NetworkSuffixGenerator().generateNetworkSuffix();
 
-		// Retrieve the URL.
-		private synchronized String getUrl() {
-			return _theUrl;
-		}
+            LogCommand.LOG("Request url is:" + reqURL);
 
-		private synchronized String getPOSTdata() {
-			return _POSTdata;
-		}
+            if (fileData != null) {
+                POSTdata += "&file=" + urlEncode(fileData.toString());
+            }
 
-		// Fetch a page.
-		// Synchronized so that we don't miss requests.
-		private void fetch(String url, String POSTdata) {
-			synchronized (this) {
-				_fetchStarted = true;
-				_theUrl = url;
-				_POSTdata = POSTdata;
-			}
-		}
-		
-		public void setCookie(String cookie){
-			_cookie = cookie;
-		}
+            connThread.fetch(reqURL, POSTdata);
+            reqURL = null;
+            POSTdata = null;
+            break;
+        }
+        return null;
+    }
 
-		public void run() {
-			for (;;) {
-				_stop = false;
-				// Thread control
-				while (!_fetchStarted && !_stop) {
-					// Sleep for a bit so we don't spin.
-					try {
-						sleep(TIMEOUT);
-					} catch (InterruptedException e) {
-						System.err.println(e.toString());
-					}
-				}
+    private int getCommand(String instruction) {
+        String command = instruction.substring(CODE.length() + 1);
+        if (command.startsWith("reach"))
+            return REACHABLE_COMMAND;
+        if (command.startsWith("xhrupload"))
+            return XHR_UPLOAD_COMMAND;
+        if (command.startsWith("xhr"))
+            return XHR_COMMAND;
+        return -1;
+    }
 
-				// Exit condition
-				if (_stop) {
-					continue;
-				}
+    /**
+     * Adds the specified text to the PhoneGap response queue. For use by
+     * asynchronous XHR requests.
+     */
+    private void updateContent(final String text) {
+        UiApplication.getUiApplication().invokeLater(new Runnable() {
+            public void run() {
+                berryGap.pendingResponses.addElement(text);
+            }
+        });
+    }
 
-				// This entire block is synchronized. This ensures we won't miss
-				// fetch requests
-				// made while we process a page.
-				synchronized (this) {
-					String content = "";
-					HttpConnection httpConn = null;
-					StreamConnection s = null;
-					String postData = getPOSTdata();
-					// Open the connection and extract the data.
-					try {
-						if (postData != null) {
-							s = (StreamConnection) Connector.open(getUrl(),
-									Connector.READ_WRITE);
-						} else {
-							s = (StreamConnection) Connector.open(getUrl());
-						}
-						httpConn = (HttpConnection) s;
-						httpConn.setRequestMethod((postData != null) ? HttpConnection.POST
-								: HttpConnection.GET);
-						// === SET HTTP REQUEST HEADERS HERE ===
-						// Set the user agent string. Could try to parse out
-						// device models/numbers, but do I really want to? Yes,
-						// I do, according to this KB article:
-						// http://www.blackberry.com/knowledgecenterpublic/livelink.exe/fetch/2000/348583/800451/800563/How_To_-_Use_reliable_push_without_making_a_BlackBerry_Browser_request.html?nodeid=1222784&vernum=0
-						httpConn.setRequestProperty("user-agent",
-								"BlackBerry" + DeviceInfo.getDeviceName() + "/"
-										+ DeviceInfo.getSoftwareVersion());
-						// Also need to set profile header according to above
-						// article.
-						httpConn.setRequestProperty("profile",
-								"http://www.blackberry.net/go/mobile/profiles/uaprof/"
-										+ DeviceInfo.getDeviceName() + "/"
-										+ DeviceInfo.getSoftwareVersion()
-										+ ".rdf");
-						httpConn.setRequestProperty("Content-Type",
-								"application/x-www-form-urlencoded");
-						
-						if(_cookie != null){
-							httpConn.setRequestProperty("Cookie", _cookie);
-						}
-						
-						// Here's an example of setting the Accept header to a
-						// particular subset of MIME types. By the HTTP spec, if
-						// none is specified the assumed value is 'all' types
-						// are accepted.
-						// httpConn.setRequestProperty("Accept","text/plain,text/html,application/rss+xml,text/javascript,text/xml");
-						// Setting the accepted character set. Same as above,
-						// default is all, so don't have to set it.
-						// httpConn.setRequestProperty("Accept-Charset","UTF-8,*");
-						// === WRITE OUT POST DATA HERE ===
-						if (postData != null) {
-							httpConn.setRequestProperty("Content-length",
-									String.valueOf(postData.length()));
-							DataOutputStream dos = httpConn
-									.openDataOutputStream();
-							byte[] postBytes = postData.getBytes();
-							for (int i = 0; i < postBytes.length; i++) {
-								dos.writeByte(postBytes[i]);
-							}
-							dos.flush();
-							dos.close();
-							dos = null;
-						}
-						int status = httpConn.getResponseCode();
-						// Tip: If you're not getting the expected response from
-						// an XHR call, pop a breakpoint here and see if the
-						// HTTP response code is 200. If you're getting a 406
-						// (Not Acceptable), the Accept header might be not set
-						// to some satisfactory value by the server.
-						if (status == HttpConnection.HTTP_OK) {
-							InputStream input = s.openInputStream();
-							byte[] data = new byte[256];
-							int len = 0;
-							int size = 0;
-							StringBuffer raw = new StringBuffer();
+    public void stopXHR() {
+        connThread._stop = true;
+    }
 
-							while (-1 != (len = input.read(data))) {
-								raw.append(new String(data, 0, len));
-								size += len;
-							}
-							content = raw.toString();
-							raw = null;
-							input.close();
-							input = null;
-						}
-						if (_stop)
-							continue;
-						updateContent(";if (navigator.network.XHR_success) { navigator.network.XHR_success("
-								+ (!content.equals("") ? content
-										: "{error:true,message:'Bad server response.',httpcode:"
-												+ status + "}") + "); };");
-						s.close();
-					} catch (IOException e) {
-						if (_stop)
-							continue;
-						String resp = e.getMessage().toLowerCase();
-						if (content.equals("")) {
-							if (resp.indexOf("tunnel") > -1
-									|| resp.indexOf("Tunnel") > -1
-									|| resp.indexOf("apn") > -1
-									|| resp.indexOf("APN") > -1) {
-								resp = "{error:true,message:'There was a communication error. Are your APN settings configured (BlackBerry menu -> Options -> Advanced Options -> TCP/IP). Contact your service provider for details on how to set up your APN settings.'}";
-							} else {
-								resp = "{error:true,message:'IOException during HTTP request: "
-										+ e.getMessage().replace('\'', ' ')
-										+ "',httpcode:null}";
-							}
-						} else {
-							resp = content;
-						}
-						
-						LogCommand.LOG("Error while service call " + resp);
-						
-						updateContent(";if (navigator.network.XHR_error) { navigator.network.XHR_error("
-								+ resp + "); };");
-						resp = null;
-					} finally {
-						content = null;
-						s = null;
-						httpConn = null;
-						postData = null;
-					}
-					// We're finished with the operation so reset the start
-					// state.
-					_fetchStarted = false;
-				}
-			}
-		}
-	}
+    private class ConnectionThread extends Thread {
+        private static final int TIMEOUT = 500; // ms
 
-	private JSONObject readFileData(String filePath) throws Exception {
-		FileConnection fileConnection = null;
-		try {
-			fileConnection = (FileConnection) Connector.open(filePath,
-					Connector.READ);
-			long fileSize = fileConnection.fileSize();
-			long lastModified = fileConnection.lastModified();
-			String fileName = fileConnection.getName();
-			InputStream fileStream = fileConnection.openInputStream();
-			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-			Base64OutputStream base64OutStream = new Base64OutputStream(
-					outStream);
-			int byteRead = 0;
-			while ((byteRead = fileStream.read()) != -1) {
-				base64OutStream.write(byteRead);
-			}
-			base64OutStream.flush();
-			base64OutStream.close();
-			outStream.flush();
-			String base64Data = outStream.toString();
-			outStream.close();
+        private String _theUrl;
+        private String _POSTdata;
+        private String _cookie = null;
 
-			JSONObject fileData = new JSONObject();
-			fileData.put("file", base64Data);
-			fileData.put("filename", fileName);
-			fileData.put("filesize", fileSize);
-			fileData.put("timestamp", lastModified);
-			fileData.put("filemime", getMimeType(fileName));
-			LogCommand.DEBUG("Successfully read file " + filePath + ". Base 64 Data length is "+ base64Data.length());
-			return fileData;
-		} catch(Exception e){
-			LogCommand.LOG("Fail to read file " + filePath + ". " + e.getMessage());
-			throw e;
-		} finally {
-			if (fileConnection != null && fileConnection.isOpen()) {
-				try {
-					fileConnection.close();
-				} catch (IOException e) {
-				}
-			}
-		}
+        private volatile boolean _fetchStarted = false;
+        public volatile boolean _stop = false;
 
-	}
-	
-	private String urlEncode(String value) {
-		value = PhoneGap.replace(value, "+", "%2B");	
-		value = PhoneGap.replace(value, "=", "%3D");	
-		value = PhoneGap.replace(value, "/", "%2F");	
-		return value;
-	}
+        // Retrieve the URL.
+        private synchronized String getUrl() {
+            return _theUrl;
+        }
 
-	private String getMimeType(String fileName) {
-		int dotPos = fileName.lastIndexOf('.');
-		if (dotPos == -1)
-			return "image/unknown";
-		return "image/" + fileName.toLowerCase().substring(dotPos + 1);
-	}
+        private synchronized String getPOSTdata() {
+            return _POSTdata;
+        }
+
+        // Fetch a page.
+        // Synchronized so that we don't miss requests.
+        private void fetch(String url, String POSTdata) {
+            synchronized (this) {
+                _fetchStarted = true;
+                _theUrl = url;
+                _POSTdata = POSTdata;
+            }
+        }
+
+        public void setCookie(String cookie) {
+            _cookie = cookie;
+        }
+
+        public void run() {
+            for (;;) {
+                _stop = false;
+                // Thread control
+                while (!_fetchStarted && !_stop) {
+                    // Sleep for a bit so we don't spin.
+                    try {
+                        sleep(TIMEOUT);
+                    } catch (InterruptedException e) {
+                        System.err.println(e.toString());
+                    }
+                }
+
+                // Exit condition
+                if (_stop) {
+                    continue;
+                }
+
+                // This entire block is synchronized. This ensures we won't miss
+                // fetch requests
+                // made while we process a page.
+                synchronized (this) {
+                    String content = "";
+                    HttpConnection httpConn = null;
+                    StreamConnection s = null;
+                    String postData = getPOSTdata();
+                    // Open the connection and extract the data.
+                    try {
+                        if (postData != null) {
+                            s = (StreamConnection) Connector.open(getUrl(),
+                                    Connector.READ_WRITE);
+                        } else {
+                            s = (StreamConnection) Connector.open(getUrl());
+                        }
+                        httpConn = (HttpConnection) s;
+                        httpConn.setRequestMethod((postData != null) ? HttpConnection.POST
+                                : HttpConnection.GET);
+                        // === SET HTTP REQUEST HEADERS HERE ===
+                        // Set the user agent string. Could try to parse out
+                        // device models/numbers, but do I really want to? Yes,
+                        // I do, according to this KB article:
+                        // http://www.blackberry.com/knowledgecenterpublic/livelink.exe/fetch/2000/348583/800451/800563/How_To_-_Use_reliable_push_without_making_a_BlackBerry_Browser_request.html?nodeid=1222784&vernum=0
+                        httpConn.setRequestProperty("user-agent",
+                                "BlackBerry" + DeviceInfo.getDeviceName() + "/"
+                                        + DeviceInfo.getSoftwareVersion());
+                        // Also need to set profile header according to above
+                        // article.
+                        httpConn.setRequestProperty("profile",
+                                "http://www.blackberry.net/go/mobile/profiles/uaprof/"
+                                        + DeviceInfo.getDeviceName() + "/"
+                                        + DeviceInfo.getSoftwareVersion()
+                                        + ".rdf");
+                        httpConn.setRequestProperty("Content-Type",
+                                "application/x-www-form-urlencoded");
+
+                        if (_cookie != null) {
+                            httpConn.setRequestProperty("Cookie", _cookie);
+                        }
+
+                        // Here's an example of setting the Accept header to a
+                        // particular subset of MIME types. By the HTTP spec, if
+                        // none is specified the assumed value is 'all' types
+                        // are accepted.
+                        // httpConn.setRequestProperty("Accept","text/plain,text/html,application/rss+xml,text/javascript,text/xml");
+                        // Setting the accepted character set. Same as above,
+                        // default is all, so don't have to set it.
+                        // httpConn.setRequestProperty("Accept-Charset","UTF-8,*");
+                        // === WRITE OUT POST DATA HERE ===
+                        if (postData != null) {
+                            httpConn.setRequestProperty("Content-length",
+                                    String.valueOf(postData.length()));
+                            DataOutputStream dos = httpConn
+                                    .openDataOutputStream();
+                            byte[] postBytes = postData.getBytes();
+                            for (int i = 0; i < postBytes.length; i++) {
+                                dos.writeByte(postBytes[i]);
+                            }
+                            dos.flush();
+                            dos.close();
+                            dos = null;
+                        }
+                        int status = httpConn.getResponseCode();
+                        // Tip: If you're not getting the expected response from
+                        // an XHR call, pop a breakpoint here and see if the
+                        // HTTP response code is 200. If you're getting a 406
+                        // (Not Acceptable), the Accept header might be not set
+                        // to some satisfactory value by the server.
+                        if (status == HttpConnection.HTTP_OK) {
+                            InputStream input = s.openInputStream();
+                            byte[] data = new byte[256];
+                            int len = 0;
+                            int size = 0;
+                            StringBuffer raw = new StringBuffer();
+
+                            while (-1 != (len = input.read(data))) {
+                                raw.append(new String(data, 0, len));
+                                size += len;
+                            }
+                            content = raw.toString();
+                            raw = null;
+                            input.close();
+                            input = null;
+                        }
+                        if (_stop)
+                            continue;
+                        updateContent(";if (navigator.network.XHR_success) { navigator.network.XHR_success("
+                                + (!content.equals("") ? content
+                                        : "{error:true,message:'Bad server response.',httpcode:"
+                                                + status + "}") + "); };");
+                        s.close();
+                    } catch (IOException e) {
+                        if (_stop)
+                            continue;
+                        String resp = e.getMessage().toLowerCase();
+                        if (content.equals("")) {
+                            if (resp.indexOf("tunnel") > -1
+                                    || resp.indexOf("Tunnel") > -1
+                                    || resp.indexOf("apn") > -1
+                                    || resp.indexOf("APN") > -1) {
+                                resp = "{error:true,message:'There was a communication error. Are your APN settings configured (BlackBerry menu -> Options -> Advanced Options -> TCP/IP). Contact your service provider for details on how to set up your APN settings.'}";
+                            } else {
+                                resp = "{error:true,message:'IOException during HTTP request: "
+                                        + e.getMessage().replace('\'', ' ')
+                                        + "',httpcode:null}";
+                            }
+                        } else {
+                            resp = content;
+                        }
+
+                        LogCommand.LOG("Error while service call " + resp);
+
+                        updateContent(";if (navigator.network.XHR_error) { navigator.network.XHR_error("
+                                + resp + "); };");
+                        resp = null;
+                    } finally {
+                        content = null;
+                        s = null;
+                        httpConn = null;
+                        postData = null;
+                    }
+                    // We're finished with the operation so reset the start
+                    // state.
+                    _fetchStarted = false;
+                }
+            }
+        }
+    }
+
+    private JSONObject readFileData(String filePath) throws Exception {
+        FileConnection fileConnection = null;
+        try {
+            fileConnection = (FileConnection) Connector.open(filePath,
+                    Connector.READ);
+            long fileSize = fileConnection.fileSize();
+            long lastModified = fileConnection.lastModified();
+            String fileName = fileConnection.getName();
+            InputStream fileStream = fileConnection.openInputStream();
+            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+            Base64OutputStream base64OutStream = new Base64OutputStream(
+                    outStream);
+            int byteRead = 0;
+            while ((byteRead = fileStream.read()) != -1) {
+                base64OutStream.write(byteRead);
+            }
+            base64OutStream.flush();
+            base64OutStream.close();
+            outStream.flush();
+            String base64Data = outStream.toString();
+            outStream.close();
+
+            JSONObject fileData = new JSONObject();
+            fileData.put("file", base64Data);
+            fileData.put("filename", fileName);
+            fileData.put("filesize", fileSize);
+            fileData.put("timestamp", lastModified);
+            fileData.put("filemime", getMimeType(fileName));
+            LogCommand.DEBUG("Successfully read file " + filePath
+                    + ". Base 64 Data length is " + base64Data.length());
+            return fileData;
+        } catch (Exception e) {
+            LogCommand.LOG("Fail to read file " + filePath + ". "
+                    + e.getMessage());
+            throw e;
+        } finally {
+            if (fileConnection != null && fileConnection.isOpen()) {
+                try {
+                    fileConnection.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+
+    }
+
+    private String urlEncode(String value) {
+        value = PhoneGap.replace(value, "+", "%2B");
+        value = PhoneGap.replace(value, "=", "%3D");
+        value = PhoneGap.replace(value, "/", "%2F");
+        return value;
+    }
+
+    private String getMimeType(String fileName) {
+        int dotPos = fileName.lastIndexOf('.');
+        if (dotPos == -1)
+            return "image/unknown";
+        return "image/" + fileName.toLowerCase().substring(dotPos + 1);
+    }
 }
+
