@@ -37,6 +37,7 @@ import net.rim.device.api.system.DeviceInfo;
 import net.rim.device.api.system.RadioInfo;
 import net.rim.device.api.ui.UiApplication;
 
+import org.json.me.JSONException;
 import org.json.me.JSONObject;
 
 import com.phonegap.PhoneGap;
@@ -107,6 +108,7 @@ public class NetworkCommand implements Command {
 						+ "/" + fileData.getString("filename");
 				fileData.put("uid", loggedinUser);
 				fileData.put("filepath", fileTargetPath);
+				reqURL = instruction.substring(CODE.length() + 11);
 			} catch (Exception e) {
 				LogCommand.DEBUG("Error while reading image file for uploading. " + e.getMessage());
 				return ";if (navigator.network.XHR_error) { navigator.network.XHR_error('Error occured while reading file.'); };";
@@ -138,6 +140,12 @@ public class NetworkCommand implements Command {
 			
 			if (fileData != null) {
 				POSTdata += "&file=" + urlEncode(fileData.toString());
+				try{
+				    POSTdata = getPostData(fileData);
+				    LogCommand.DEBUG("Final PostData is: " + POSTdata);
+				}
+				catch(Exception ex){
+				}
 			}
 			
 			connThread.fetch(reqURL, POSTdata);
@@ -148,6 +156,14 @@ public class NetworkCommand implements Command {
 		return null;
 	}
 
+    private String getPostData(JSONObject fileData) throws JSONException{
+        String POSTdata = "";
+        POSTdata += "uid=" + fileData.get("uid").toString();
+        POSTdata += "&filesize=" + fileData.get("filesize").toString();
+        POSTdata += "&filename=" + fileData.get("filename").toString();
+        POSTdata += "&file=" + fileData.get("file").toString();
+        return POSTdata;
+    }
 
 	private int getCommand(String instruction) {
 		String command = instruction.substring(CODE.length() + 1);
