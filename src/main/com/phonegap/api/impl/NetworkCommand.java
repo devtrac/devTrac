@@ -53,11 +53,10 @@ public class NetworkCommand implements Command {
     private static final int NOT_REACHABLE = 0;
     private static final int REACHABLE_VIA_CARRIER_DATA_NETWORK = 1;
     private static final int REACHABLE_VIA_WIFI_NETWORK = 2;
-    public PhoneGap berryGap;
-    private ConnectionThread connThread = new ConnectionThread();
+    private ConnectionThread connThread;
 
     public NetworkCommand(PhoneGap gap) {
-        berryGap = gap;
+        connThread = new ConnectionThread(gap);
         connThread.start();
     }
 
@@ -162,23 +161,11 @@ public class NetworkCommand implements Command {
         return -1;
     }
 
-    /**
-     * Adds the specified text to the PhoneGap response queue. For use by
-     * asynchronous XHR requests.
-     */
-    private void updateContent(final String text) {
-        UiApplication.getUiApplication().invokeLater(new Runnable() {
-            public void run() {
-                berryGap.pendingResponses.addElement(text);
-            }
-        });
-    }
-
     public void stopXHR() {
         connThread._stop = true;
     }
 
-    private class ConnectionThread extends Thread {
+    public static class ConnectionThread extends Thread {
         private static final int TIMEOUT = 500; // ms
 
         private String _theUrl;
@@ -187,6 +174,12 @@ public class NetworkCommand implements Command {
 
         private volatile boolean _fetchStarted = false;
         public volatile boolean _stop = false;
+
+        private PhoneGap berryGap;
+
+        public ConnectionThread(PhoneGap gap) {
+            berryGap = gap;
+        }
 
         // Retrieve the URL.
         private synchronized String getUrl() {
@@ -209,6 +202,18 @@ public class NetworkCommand implements Command {
 
         public void setCookie(String cookie) {
             _cookie = cookie;
+        }
+
+        /**
+         * Adds the specified text to the PhoneGap response queue. For use by
+         * asynchronous XHR requests.
+         */
+        private void updateContent(final String text) {
+            UiApplication.getUiApplication().invokeLater(new Runnable() {
+                public void run() {
+                    berryGap.pendingResponses.addElement(text);
+                }
+            });
         }
 
         public void run() {
