@@ -16,9 +16,8 @@ PhotoUpload.prototype.upload = function(filePath, successCallback, errorCallback
         hash: devtrac.common.generateHash(DT.FILE_SAVE, timestamp)
     }
     var paramsHash = devtrac.common.convertHash(params);
-    navigator.network.XHRUpload(DT.SERVICE_ENDPOINT, paramsHash, filePath, userId, fileUploadPath, function(response){
-	        successCallback(response["#data"]);
-	    }, errorCallback);
+
+    devtrac.common.callServiceUpload(DT_D7.FILE_SAVE, filePath, userId, fileUploadPath, successCallback, errorCallback);
 }
 
 PhotoUpload.prototype.uploadMultiple = function(filePaths, successCallback, progressCallback, errorCallback){
