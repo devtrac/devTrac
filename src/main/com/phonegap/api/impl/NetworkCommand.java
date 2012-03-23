@@ -108,7 +108,6 @@ public class NetworkCommand implements Command {
 						+ "/" + fileData.getString("filename");
 				fileData.put("uid", loggedinUser);
 				fileData.put("filepath", fileTargetPath);
-				reqURL = instruction.substring(CODE.length() + 11);
 			} catch (Exception e) {
 				LogCommand.DEBUG("Error while reading image file for uploading. " + e.getMessage());
 				return ";if (navigator.network.XHR_error) { navigator.network.XHR_error('Error occured while reading file.'); };";
@@ -127,6 +126,7 @@ public class NetworkCommand implements Command {
 		        String cookie = reqURL.substring(reqURL.indexOf("cookie:"));
 		        reqURL = reqURL.substring(0,reqURL.length() - cookie.length());
 		        cookie = cookie.substring("cookie:".length());
+		        cookie = cookie.substring(0, cookie.lastIndexOf('~'));
 
 		        connThread.setCookie(cookie);
 				
