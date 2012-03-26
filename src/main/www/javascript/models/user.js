@@ -25,5 +25,4 @@ User.prototype.parseUserData = function(response){
     this.email = response[DT.USER_REF]['mail'];
     this.uid = response[DT.USER_REF]['uid'];
     this.session.id = response[DT.SESSION_ID_REF];
-    this.session.name = response[DT.SESSION_NAME_REF];
 };
