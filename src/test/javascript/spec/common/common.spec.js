@@ -174,5 +174,18 @@ describe("Common", function(){
             })
         })
     })
+
+    describe("callServiceGet", function(){
+
+        it("postData should be 'method=GET'", function(){
+            var successCallback, errorCallback, postData, URL;
+
+            spyOn(navigator.network, 'XHR').andCallFake(function(URL, POSTdata, successCallback, errorCallback){
+            })
+
+            devtrac.common.callServiceGet(URL, successCallback, errorCallback);
+            expect(navigator.network.XHR).toHaveBeenCalledWith(URL, "method=GET", successCallback, errorCallback);
+        })
+    })
 });
 
