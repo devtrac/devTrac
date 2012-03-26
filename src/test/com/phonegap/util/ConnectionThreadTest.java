@@ -19,7 +19,7 @@ public class ConnectionThreadTest extends TestCase {
 	public void test_cookie_should_be_updated() {
 		connectionThread.updateCookie(header);
 
-		Assert.assertEquals(cookie, connectionThread.getCookie());
+		assertEquals(cookie, connectionThread.getCookie());
 	}
 
 	public void test_cookie_should_NOT_be_updated_when_cookie_does_not_exist() {
@@ -30,4 +30,19 @@ public class ConnectionThreadTest extends TestCase {
 		assertEquals(cookie, connectionThread.getCookie());
 	}
 
+	public void test_request_method_should_be_GET(){
+	    assertEquals("GET",connectionThread.generateRequestMethod("method=GET&test"));
+	}
+
+	public void test_the_default_request_method_should_be_GET(){
+	   assertEquals("GET",connectionThread.generateRequestMethod("asdfasdf"));
+	}
+
+    public void test_request_method_should_be_POST(){
+        assertEquals("POST",connectionThread.generateRequestMethod("method=POST&test"));
+    }
+
+    public void test_request_method_should_be_PUT(){
+        assertEquals("PUT",connectionThread.generateRequestMethod("method=PUT&test"));
+    }
 }

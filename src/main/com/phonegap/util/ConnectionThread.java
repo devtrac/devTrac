@@ -110,8 +110,7 @@ public class ConnectionThread extends Thread {
                         s = (StreamConnection) Connector.open(getUrl());
                     }
                     httpConn = (HttpConnection) s;
-                    httpConn.setRequestMethod((postData != null) ? HttpConnection.POST
-                            : HttpConnection.GET);
+                    httpConn.setRequestMethod(generateRequestMethod(postData));
                     // === SET HTTP REQUEST HEADERS HERE ===
                     // Set the user agent string. Could try to parse out
                     // device models/numbers, but do I really want to? Yes,
@@ -220,5 +219,13 @@ public class ConnectionThread extends Thread {
                 _fetchStarted = false;
             }
         }
+    }
+
+    public String generateRequestMethod(String postData) {
+        int indexOfMehod = postData.indexOf("method=");
+        if(-1 == indexOfMehod){
+            return "GET";
+        }
+        return postData.substring(indexOfMehod + "method=".length(), postData.indexOf("&"));
     }
 }
