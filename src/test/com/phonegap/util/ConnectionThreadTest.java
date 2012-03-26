@@ -31,7 +31,7 @@ public class ConnectionThreadTest extends TestCase {
 	}
 
 	public void test_request_method_should_be_GET(){
-	    assertEquals("GET",connectionThread.generateRequestMethod("method=GET&test"));
+	    assertEquals("GET",connectionThread.generateRequestMethod("method=GET"));
 	}
 
 	public void test_the_default_request_method_should_be_GET(){

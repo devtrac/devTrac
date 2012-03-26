@@ -223,9 +223,13 @@ public class ConnectionThread extends Thread {
 
     public String generateRequestMethod(String postData) {
         int indexOfMehod = postData.indexOf("method=");
+        int indexOfAnd = postData.indexOf("&");
+
         if(-1 == indexOfMehod){
             return "GET";
         }
-        return postData.substring(indexOfMehod + "method=".length(), postData.indexOf("&"));
+
+        return postData.substring(indexOfMehod + "method=".length(),
+                indexOfAnd == -1 ? postData.length() : indexOfAnd);
     }
 }
