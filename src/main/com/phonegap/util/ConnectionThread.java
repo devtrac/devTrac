@@ -168,12 +168,10 @@ public class ConnectionThread extends Thread {
                         InputStream input = s.openInputStream();
                         byte[] data = new byte[256];
                         int len = 0;
-                        int size = 0;
                         StringBuffer raw = new StringBuffer();
 
                         while (-1 != (len = input.read(data))) {
                             raw.append(new String(data, 0, len));
-                            size += len;
                         }
                         content = raw.toString();
                         raw = null;
