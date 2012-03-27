@@ -73,12 +73,11 @@ DataPull.prototype.placeTypes = function(callback){
             });
 
             navigator.store.put(function(){
-                devtrac.dataPull.updateStatus("Saved " + places.length + " place types successfully.");
+                devtrac.dataPull.updateStatusAndLog("Saved " + places.length + " place types successfully.", navigator.log.debug);
                 devtrac.places = places;
                 devtrac.dataPull.userProfiles(callback);
             }, function(){
-                devtrac.dataPull.updateStatus("Error in saving place types");
-                navigator.log.log("Error in saving place types");
+                devtrac.dataPull.updateStatusAndLog("Error in saving place types", navigator.log.log);
                 callback();
             }, "placeTypes", JSON.stringify(places));
 
@@ -332,6 +331,11 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving action item details for '" + site.name + "'.");
     devtrac.remoteView.call('api_fieldtrips', 'page_5', '["' + site.id + '"]', actionItemSuccess, actionItemFailed);
+}
+
+DataPull.prototype.updateStatusAndLog = function(message, logCallback){
+    devtrac.dataPull.updateStatus(message);
+    logCallback(message);
 }
 
 DataPull.prototype.updateStatus = function(message){
