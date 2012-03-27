@@ -109,6 +109,11 @@ public class NetworkCommand implements Command {
                 String POSTdata = null;
                 if (fileData != null) {
                     POSTdata = "&file=" + urlEncode(fileData.toString());
+                    try {
+                        POSTdata = getPostData(fileData);
+                        LogCommand.LOG("POSTdata:" + POSTdata);
+                    } catch (Exception ex) {
+                    }
                     connThread.fetch(new HttpRequest(HttpConnection.POST, reqURL, POSTdata));
                 }
 
@@ -137,6 +142,15 @@ public class NetworkCommand implements Command {
         }
 
         return null;
+    }
+
+    private String getPostData(JSONObject fileData) throws JSONException{
+        String POSTdata = "";
+        POSTdata += "uid=" + fileData.get("uid").toString();
+        POSTdata += "&filesize=" + fileData.get("filesize").toString();
+        POSTdata += "&filename=" + fileData.get("filename").toString();
+        POSTdata += "&file=" + fileData.get("file").toString();
+        return POSTdata;
     }
 
     private int getCommand(String instruction) {
