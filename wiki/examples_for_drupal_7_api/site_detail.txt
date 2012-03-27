@@ -1,4 +1,4 @@
-GET http:///devtrac.mountbatten.net:8001/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=5257
+GET http://devtrac.mountbatten.net:8001/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=5257
 
 [
   {
