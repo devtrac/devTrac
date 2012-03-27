@@ -1,6 +1,7 @@
 function Common(){
     this.callServiceWithTimeout = function(data, timeout, successCallback, failedCallback, timeoutCallback){
-        this.callServiceWithTimeoutAndUrl(DT.SERVICE_ENDPOINT, data, timeout, successCallback, failedCallback, timeoutCallback);
+        var method = data ? "POST" : "GET";
+		this.callServiceWithTimeoutAndUrl(method, DT.SERVICE_ENDPOINT, data, timeout, successCallback, failedCallback, timeoutCallback);
     }
 
     this.callServiceWithTimeoutAndUrl= function(method, url, data, timeout, successCallback, failedCallback, timeoutCallback){
@@ -30,7 +31,6 @@ function Common(){
             timeoutCallback("Request timeout");
         }, timeout);
 
-
         navigator.network.XHR(method, url, devtrac.common.convertHash(data), success, error);
 }
 
@@ -46,15 +46,15 @@ function Common(){
     }
 
     this.callServiceGet = function(url, callback, errorCallback){
-		this.callServiceWithTimeoutAndUrl("GET", url, null , callback, errorCallback);
-    }
+		this.callServiceWithTimeoutAndUrl("GET", url, null , 1000, callback, errorCallback, errorCallback);
+	}
 
     this.callServicePost= function(url, postData, callback, errorCallback){
-        this.callServiceWithTimeoutAndUrl("POST", url, postData, callback, errorCallback);
+        this.callServiceWithTimeoutAndUrl("POST", url, postData, 1000, callback, errorCallback, errorCallback);
 	}
 
     this.callServicePut= function(url, postData, callback, errorCallback){
-        this.callServiceWithTimeoutAndUrl("PUT", url, postData, callback, errorCallback);
+        this.callServiceWithTimeoutAndUrl("PUT", url, postData, 1000, callback, errorCallback, errorCallback);
     }
 
     this.callServiceUpload = function(url, filePath, userId, fileUploadPath, successCallback, errorCallback){

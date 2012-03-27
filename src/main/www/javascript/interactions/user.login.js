@@ -10,10 +10,10 @@ function authenticate(userName, password, successCallback, failedCallback){
                 username: userName,
                 password: password
             };
-            devtrac.common.callServicePost(DT_D7.USER_LOGIN, postData, timeout, successCallback, failedCallback, failedCallback);
+            devtrac.common.callServicePost(DT_D7.USER_LOGIN, postData, successCallback, failedCallback, failedCallback);
         }
     };
-    devtrac.common.callServicePost(DT_D7.SYSTEM_CONNECT, '', timeout, connectCallback, failedCallback, failedCallback);
+    devtrac.common.callServicePost(DT_D7.SYSTEM_CONNECT, null, connectCallback, failedCallback, failedCallback);
 }
 
 function logout(successCallback, failedCallback){
