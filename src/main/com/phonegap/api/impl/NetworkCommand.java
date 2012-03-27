@@ -91,8 +91,8 @@ public class NetworkCommand implements Command {
                     + ";if (navigator.network.isReachable_success) navigator.network.isReachable_success("
                     + reachability + ");";
         case XHR_UPLOAD_COMMAND:
-            reqURL = instruction.substring(CODE.length() + 11);
             int tildaIndex = instruction.lastIndexOf('~');
+            reqURL = instruction.substring(CODE.length() + 11, tildaIndex);
             try {
                 JSONObject fileDetails = new JSONObject(
                         instruction.substring(tildaIndex + 1));
