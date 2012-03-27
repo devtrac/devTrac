@@ -85,7 +85,7 @@ function Common(){
         else {
             if (response["#data"]) {
                 var data = response["#data"];
-                if (data["#error"]) {
+                if (data["#error"] || data["error"]) {
                     return true;
                 }
                 else {
