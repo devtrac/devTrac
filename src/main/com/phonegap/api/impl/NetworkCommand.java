@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.microedition.io.Connector;
+import javax.microedition.io.HttpConnection;
 import javax.microedition.io.file.FileConnection;
 
 import net.rim.device.api.io.Base64OutputStream;
@@ -38,6 +39,7 @@ import org.json.me.JSONObject;
 import com.phonegap.PhoneGap;
 import com.phonegap.api.Command;
 import com.phonegap.util.ConnectionThread;
+import com.phonegap.util.HttpRequest;
 import com.phonegap.util.NetworkSuffixGenerator;
 
 public class NetworkCommand implements Command {
@@ -103,6 +105,17 @@ public class NetworkCommand implements Command {
                         + "/" + fileData.getString("filename");
                 fileData.put("uid", loggedinUser);
                 fileData.put("filepath", fileTargetPath);
+                reqURL += new NetworkSuffixGenerator().generateNetworkSuffix();
+
+                String POSTdata = null;
+                if (fileData != null) {
+                    POSTdata = "&file=" + urlEncode(fileData.toString());
+                    connThread.fetch(new HttpRequest(HttpConnection.POST, reqURL, POSTdata));
+                }
+
+                reqURL = null;
+                POSTdata = null;
+                break;
             } catch (Exception e) {
                 LogCommand
                         .DEBUG("Error while reading image file for uploading. "
@@ -112,26 +125,25 @@ public class NetworkCommand implements Command {
         case XHR_COMMAND:
             reqURL = reqURL == null ? instruction.substring(CODE.length() + 5)
                     : reqURL;
-            String POSTdata = null;
+
             int pipeIndex = reqURL.indexOf("|");
+            HttpRequest httpRequest = HttpRequest.defaultGetRequest(reqURL);
             if (pipeIndex > -1) {
-                POSTdata = reqURL.substring(pipeIndex + 1);
-                reqURL = reqURL.substring(0, pipeIndex);
+                httpRequest = HttpRequest.parse(reqURL);
+                reqURL = httpRequest.getUrl();
             }
 
-            reqURL += new NetworkSuffixGenerator().generateNetworkSuffix();
+            httpRequest.addNetworkSuffix();
 
-            LogCommand.LOG("Request url is:" + reqURL);
+            LogCommand.LOG("Request url is: " + httpRequest.getUrl());
+            LogCommand.LOG("Request method is: " + httpRequest.getMethod());
+            LogCommand.LOG("Request data is: " + httpRequest.getData());
 
-            if (fileData != null) {
-                POSTdata += "&file=" + urlEncode(fileData.toString());
-            }
-
-            connThread.fetch(reqURL, POSTdata);
+            connThread.fetch(httpRequest);
             reqURL = null;
-            POSTdata = null;
             break;
         }
+
         return null;
     }
 

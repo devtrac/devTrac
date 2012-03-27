@@ -10,14 +10,14 @@ function authenticate(userName, password, successCallback, failedCallback){
                 username: userName,
                 password: password
             };
-            devtrac.common.callServiceWithTimeoutAndUrl(DT_D7.USER_LOGIN, postData, timeout, successCallback, failedCallback, failedCallback);
+            devtrac.common.callServicePost(DT_D7.USER_LOGIN, postData, timeout, successCallback, failedCallback, failedCallback);
         }
     };
-    devtrac.common.callServiceWithTimeoutAndUrl(DT_D7.SYSTEM_CONNECT, '', timeout, connectCallback, failedCallback, failedCallback);
+    devtrac.common.callServicePost(DT_D7.SYSTEM_CONNECT, '', timeout, connectCallback, failedCallback, failedCallback);
 }
 
 function logout(successCallback, failedCallback){
-    devtrac.common.callServiceWithTimeoutAndUrl(DT_D7.USER_LOGOUT, {}, 10000, successCallback, failedCallback, failedCallback);
+    devtrac.common.callServicePost(DT_D7.USER_LOGOUT, {}, 10000, successCallback, failedCallback, failedCallback);
 }
 
 function userLoggedIn(response){

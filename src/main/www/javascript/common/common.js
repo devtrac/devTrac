@@ -3,7 +3,7 @@ function Common(){
         this.callServiceWithTimeoutAndUrl(DT.SERVICE_ENDPOINT, data, timeout, successCallback, failedCallback, timeoutCallback);
     }
 
-    this.callServiceWithTimeoutAndUrl= function(url, data, timeout, successCallback, failedCallback, timeoutCallback){
+    this.callServiceWithTimeoutAndUrl= function(method, url, data, timeout, successCallback, failedCallback, timeoutCallback){
         var responsed = false;
         var start = new Date().getTime();
 
@@ -30,8 +30,8 @@ function Common(){
             timeoutCallback("Request timeout");
         }, timeout);
 
-        navigator.log.log("Network call with data: " + JSON.stringify(data));
-        navigator.network.XHR(url, devtrac.common.convertHash(data), success, error);
+
+        navigator.network.XHR(method, url, devtrac.common.convertHash(data), success, error);
 }
 
     this.callService = function(data, callback, errorCallback){
@@ -39,16 +39,22 @@ function Common(){
     }
 
     this.callServiceWithUrl = function(url, data, callback, errorCallback){
-		navigator.log.log("Network call with data: " + JSON.stringify(data));
-	    navigator.network.XHR(url, devtrac.common.convertHash(data), callback, errorCallback);
+        var method = data ? "POST" : "GET";
+
+        navigator.log.log("Network call with data: " + JSON.stringify(data));
+        navigator.network.XHR(method, url, devtrac.common.convertHash(data), callback, errorCallback);
     }
 
     this.callServiceGet = function(url, callback, errorCallback){
-        var postData = "method=GET";
-		navigator.network.XHR(url,postData , callback, errorCallback);
+		this.callServiceWithTimeoutAndUrl("GET", url, null , callback, errorCallback);
     }
 
     this.callServicePost= function(url, postData, callback, errorCallback){
+        this.callServiceWithTimeoutAndUrl("POST", url, postData, callback, errorCallback);
+	}
+
+    this.callServicePut= function(url, postData, callback, errorCallback){
+        this.callServiceWithTimeoutAndUrl("PUT", url, postData, callback, errorCallback);
     }
 
     this.callServiceUpload = function(url, filePath, userId, fileUploadPath, successCallback, errorCallback){
@@ -59,6 +65,10 @@ function Common(){
     }
 
     this.convertHash = function(hash){
+		if(!hash){
+			return hash;
+		}
+
         var paramStr = "";
         for (param in hash) {
             paramStr += param;
@@ -68,11 +78,11 @@ function Common(){
         }
         return paramStr;
     }
-    
+
     this.generateHash = function(method, timestamp){
         return Crypto.HMAC(Crypto.SHA256, timestamp + ";" + DT.DOMAIN + ";" + timestamp + ";" + method, DT.API_KEY)
     }
-    
+
     this.hasError = function(response){
         if (response["#error"]) {
             return true;

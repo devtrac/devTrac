@@ -19,6 +19,7 @@ public class ConnectionThread extends Thread {
 
     private String _theUrl;
     private String _POSTdata;
+    private String _method;
     private String _cookie = null;
 
     private volatile boolean _fetchStarted = false;
@@ -41,11 +42,12 @@ public class ConnectionThread extends Thread {
 
     // Fetch a page.
     // Synchronized so that we don't miss requests.
-    public void fetch(String url, String POSTdata) {
+    public void fetch(HttpRequest httpRequest) {
         synchronized (this) {
-            _fetchStarted = true;
-            _theUrl = url;
-            _POSTdata = POSTdata;
+            this._fetchStarted = true;
+            this._theUrl = httpRequest.getUrl();
+            this._POSTdata = httpRequest.getData();
+            this._method = httpRequest.getMethod();
         }
     }
 
@@ -110,7 +112,9 @@ public class ConnectionThread extends Thread {
                         s = (StreamConnection) Connector.open(getUrl());
                     }
                     httpConn = (HttpConnection) s;
-                    httpConn.setRequestMethod(generateRequestMethod(postData));
+                    LogCommand.LOG("HttpConnection with the method " + _method);
+                    httpConn.setRequestMethod(this._method);
+
                     // === SET HTTP REQUEST HEADERS HERE ===
                     // Set the user agent string. Could try to parse out
                     // device models/numbers, but do I really want to? Yes,
@@ -232,4 +236,5 @@ public class ConnectionThread extends Thread {
         return postData.substring(indexOfMehod + "method=".length(),
                 indexOfAnd == -1 ? postData.length() : indexOfAnd);
     }
+
 }
