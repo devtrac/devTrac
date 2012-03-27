@@ -25,7 +25,6 @@ DT = {
     API_KEY: 'ed189296f0507fde20b1b9863c6fc21a',
     DATA_REF: '#data',
     SESSION_ID_REF: 'sessid',
-    SESSION_NAME_REF: 'session_name',
     USER_REF: 'user',
     NAME_REF: 'name',
     PASSWORD_REF: 'pass',

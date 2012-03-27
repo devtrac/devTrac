@@ -58,7 +58,6 @@ function Common(){
     }
 
     this.callServiceUpload = function(url, filePath, userId, fileUploadPath, successCallback, errorCallback){
-        url += "cookie:" + devtrac.user.session.name + "=" + devtrac.user.session.id;
         navigator.network.XHRUpload(url, null, filePath, userId, fileUploadPath, function(response){
             successCallback(response["fid"]);
       }, errorCallback);
