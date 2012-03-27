@@ -56,6 +56,7 @@ DataPull.prototype.questions = function(callback){
 DataPull.prototype.placeTypes = function(callback){
     navigator.log.debug("Requesting places to download.");
     var placesSuccess = function(placesResponse){
+        placesResponse = {"#data": placesResponse};
         if (devtrac.common.hasError(placesResponse)) {
             devtrac.common.logAndShowGenericError(devtrac.common.getErrorMessage(placesResponse));
             callback();
@@ -65,8 +66,8 @@ DataPull.prototype.placeTypes = function(callback){
             var places = $.map(placesResponse['#data'], function(item){
                 var placeType = new PlaceType();
                 placeType.id = item.tid;
-                placeType.name = item.term_data_name;
-                placeType.parentId = item.term_data_term_hierarchy_tid ? item.term_data_term_hierarchy_tid : item.tid;
+                placeType.name = item.taxonomy_term_data_name;
+                placeType.parentId = item.taxonomy_term_data_taxonomy_term_hierarchy_tid ? item.taxonomy_term_data_taxonomy_term_hierarchy_tid : item.tid;
                 navigator.log.debug("Processed place with id: " + placeType.id);
                 return placeType;
             });
@@ -91,7 +92,7 @@ DataPull.prototype.placeTypes = function(callback){
 
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving location types.");
-    devtrac.remoteView.call('api_placetypes', 'page_1', '', placesSuccess, placesFailed);
+    devtrac.remoteView.get(DT_D7.PLACE_TYPES, placesSuccess, placesFailed);
 }
 
 

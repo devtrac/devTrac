@@ -40,11 +40,12 @@ DT = {
 };
 
 DT_D7 = {
+    TIME_OUT: 30000,
     SERVICE_ENDPOINT: 'http://geo.devtrac.org/api/',
     SYSTEM_CONNECT: 'http://geo.devtrac.org/api/system/connect.json',
     USER_LOGIN: 'http://geo.devtrac.org/api/user/login.json',
     USER_LOGOUT: 'http://geo.devtrac.org/api/user/logout.json',
     CURRENT_TRIP: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=current_trip',
-    FILE_SAVE: 'http://geo.devtrac.org/api/file',
-    TIME_OUT: 30000
+    PLACE_TYPES: 'http://geo.devtrac.org/api/views/api_vocabularies.json?display_id=placetypes',
+    FILE_SAVE: 'http://geo.devtrac.org/api/file'
 };
