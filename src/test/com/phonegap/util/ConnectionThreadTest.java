@@ -29,20 +29,4 @@ public class ConnectionThreadTest extends TestCase {
 
 		assertEquals(cookie, connectionThread.getCookie());
 	}
-
-	public void test_request_method_should_be_GET(){
-	    assertEquals("GET",connectionThread.generateRequestMethod("method=GET"));
-	}
-
-	public void test_the_default_request_method_should_be_GET(){
-	   assertEquals("GET",connectionThread.generateRequestMethod("asdfasdf"));
-	}
-
-    public void test_request_method_should_be_POST(){
-        assertEquals("POST",connectionThread.generateRequestMethod("method=POST&test"));
-    }
-
-    public void test_request_method_should_be_PUT(){
-        assertEquals("PUT",connectionThread.generateRequestMethod("method=PUT&test"));
-    }
 }
