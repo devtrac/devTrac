@@ -98,6 +98,7 @@ DataPull.prototype.placeTypes = function(callback){
 DataPull.prototype.userProfiles = function(callback){
     navigator.log.debug("Requesting user profiles download.");
     var profilesSuccess = function(profilesResponse){
+        profilesResponse = {"#data": profilesResponse};
         if (devtrac.common.hasError(profilesResponse)) {
             devtrac.common.logAndShowGenericError(devtrac.common.getErrorMessage(profilesResponse));
             callback();
@@ -106,10 +107,9 @@ DataPull.prototype.userProfiles = function(callback){
             navigator.log.debug("Received user profiles response.");
             var profiles = $.map(profilesResponse['#data'], function(item){
                 var profile = new UserProfile();
-                profile.nid = item.nid;
                 profile.uid = item.uid;
-                profile.name = item.title;
-                profile.username = item.name;
+                profile.name = item.realname_realname;
+                profile.username = item.users_name;
                 navigator.log.debug("Processed user profile with id: " + profile.id);
                 return profile;
             });
@@ -136,7 +136,7 @@ DataPull.prototype.userProfiles = function(callback){
 
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving user profiles types.");
-    devtrac.remoteView.call('api_users', 'page_1', '', profilesSuccess, profilesFailed);
+    devtrac.remoteView.get(DT_D7.USER_PROFILES, profilesSuccess, profilesFailed);
 }
 
 DataPull.prototype.tripDetails = function(callback){

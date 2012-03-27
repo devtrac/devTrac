@@ -66,7 +66,6 @@ function ActionItem(){
 }
 
 function UserProfile(){
-	this.nid = "";
 	this.uid = "";
 	this.username = "";
 	this.name = "";
