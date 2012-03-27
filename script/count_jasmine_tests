@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+grep -r '\bit(' src/test/javascript/spec | wc -l | tr -d ' '
+
