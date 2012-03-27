@@ -26,7 +26,6 @@ RemoteView.prototype.callWithUrl = function(url, successCallback, failedCallback
 }
 
 RemoteView.prototype.get = function(url, successCallback, failedCallback){
-	navigator.log.log("Remote view get.");
 	devtrac.common.callServiceGet(url, successCallback, failedCallback);
 }
 
