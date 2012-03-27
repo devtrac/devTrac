@@ -132,9 +132,7 @@ public class NetworkCommand implements Command {
 
             HttpRequest httpRequest = HttpRequest.parseFrom(reqURL);
 
-            LogCommand.LOG("Request url is: " + httpRequest.getUrl());
-            LogCommand.LOG("Request method is: " + httpRequest.getMethod());
-            LogCommand.LOG("Request data is: " + httpRequest.getData());
+            LogCommand.LOG("Calling service " + httpRequest.getUrl());
 
             connThread.fetch(httpRequest);
             reqURL = null;
