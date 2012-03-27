@@ -289,6 +289,7 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
     var site = devtrac.dataPull.sitesForActionItems.pop();
     navigator.log.debug("Requesting action item details for site: " + site.id);
     var actionItemSuccess = function(actionItemResponse){
+        actionItemResponse = {"#data": actionItemResponse};
         if (devtrac.common.hasError(actionItemResponse)) {
             devtrac.common.logAndShowGenericError(devtrac.common.getErrorMessage(actionItemResponse));
             callback();
@@ -298,9 +299,9 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
                 var actionItem = new ActionItem();
                 actionItem.title = item.title;
                 actionItem.id = item.nid;
-                actionItem.task = item.field_actionitem_followuptask[0].value;
-                actionItem.assignedTo = $.map(item.field_actionitem_responsible, function(user){
-                    return user.uid;
+                actionItem.task = item.field_actionitem_followuptask["und"][0].value;
+                actionItem.assignedTo = $.map(item.field_actionitem_responsible["und"], function(user){
+                    return user.target_id;
                 }).join(", ");
                 navigator.log.debug("Processed action item: " + actionItem.title);
                 return actionItem;
@@ -330,7 +331,7 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
 
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving action item details for '" + site.name + "'.");
-    devtrac.remoteView.call('api_fieldtrips', 'page_5', '["' + site.id + '"]', actionItemSuccess, actionItemFailed);
+    devtrac.remoteView.get(DT_D7.ACTION_ITEMS.replace('<SITE_NID>', site.id), actionItemSuccess, actionItemFailed);
 }
 
 DataPull.prototype.updateStatusAndLog = function(message, logCallback){

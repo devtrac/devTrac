@@ -48,5 +48,6 @@ DT_D7 = {
     CURRENT_TRIP: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=current_trip',
     PLACE_TYPES: 'http://geo.devtrac.org/api/views/api_vocabularies.json?display_id=placetypes',
     USER_PROFILES: 'http://geo.devtrac.org/api/views/api_user.json?display_id=users',
+    ACTION_ITEMS: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=actionitems&args[nid]=<SITE_NID>',
     FILE_SAVE: 'http://geo.devtrac.org/api/file'
 };
