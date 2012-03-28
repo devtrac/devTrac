@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-grep -r '[[:space:]]\+it(' src/test/javascript/spec | wc -l | tr -d ' '
+grep -r '[[:space:]]\+it(' `find src/test/javascript/spec -name "*.spec.js"` | wc -l | tr -d ' '
 
