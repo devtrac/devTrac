@@ -41,15 +41,15 @@ DT = {
 
 DT_D7 = {
     TIME_OUT: 30000,
-    SERVICE_ENDPOINT: 'http://geo.devtrac.org/api/',
-    SYSTEM_CONNECT: 'http://geo.devtrac.org/api/system/connect.json',
-    USER_LOGIN: 'http://geo.devtrac.org/api/user/login.json',
-    USER_LOGOUT: 'http://geo.devtrac.org/api/user/logout.json',
-    CURRENT_TRIP: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=current_trip',
-    PLACE_TYPES: 'http://geo.devtrac.org/api/views/api_vocabularies.json?display_id=placetypes',
-    USER_PROFILES: 'http://geo.devtrac.org/api/views/api_user.json?display_id=users',
-    ACTION_ITEMS: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=actionitems&args[nid]=<SITE_NID>',
-    SITE_PLACES: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=place&filters[nid]=<SITE_NID>',
-    SITE_DETAILS: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=<FIELD_TRIP_NID>',
-    FILE_SAVE: 'http://geo.devtrac.org/api/file'
+    SERVICE_ENDPOINT: 'http://devtracd7.mountbatten.net/api/',
+    SYSTEM_CONNECT: 'http://devtracd7.mountbatten.net/api/system/connect.json',
+    USER_LOGIN: 'http://devtracd7.mountbatten.net/api/user/login.json',
+    USER_LOGOUT: 'http://devtracd7.mountbatten.net/api/user/logout.json',
+    CURRENT_TRIP: 'http://devtracd7.mountbatten.net/api/views/api_fieldtrips.json?display_id=current_trip',
+    PLACE_TYPES: 'http://devtracd7.mountbatten.net/api/views/api_vocabularies.json?display_id=placetypes',
+    USER_PROFILES: 'http://devtracd7.mountbatten.net/api/views/api_user.json?display_id=users',
+    ACTION_ITEMS: 'http://devtracd7.mountbatten.net/api/views/api_fieldtrips.json?display_id=actionitems&args[nid]=<SITE_NID>',
+    SITE_PLACES: 'http://devtracd7.mountbatten.net/api/views/api_fieldtrips.json?display_id=place&filters[nid]=<SITE_NID>',
+    SITE_DETAILS: 'http://devtracd7.mountbatten.net/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=<FIELD_TRIP_NID>',
+    FILE_SAVE: 'http://devtracd7.mountbatten.net/api/file'
 };
