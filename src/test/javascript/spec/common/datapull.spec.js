@@ -8,35 +8,35 @@ describe("DataPull", function(){
             beforeEach(function() {
                 callback = jasmine.createSpy("Callback");
                 placeTypes = [{
-                                      "taxonomy_term_data_taxonomy_term_hierarchy_name": "Water Points",
-                                      "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
-                                      "taxonomy_term_data_taxonomy_term_hierarchy_tid": "23",
-                                      "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
-                                      "taxonomy_term_data_name": "Borehole",
-                                      "taxonomy_term_data_vid": "1",
-                                      "tid": "204",
-                                      "taxonomy_vocabulary_machine_name": "vocabulary_1"
-                                  },
-                                  {
-                                      "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
-                                      "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
-                                      "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
-                                      "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
-                                      "taxonomy_term_data_name": "Government Office",
-                                      "taxonomy_term_data_vid": "1",
-                                      "tid": "3",
-                                      "taxonomy_vocabulary_machine_name": "vocabulary_1"
-                                  },
-                                  {
-                                      "taxonomy_term_data_taxonomy_term_hierarchy_name": "Health Facilities",
-                                      "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
-                                      "taxonomy_term_data_taxonomy_term_hierarchy_tid": "2",
-                                      "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
-                                      "taxonomy_term_data_name": "Health Centre",
-                                      "taxonomy_term_data_vid": "1",
-                                      "tid": "197",
-                                      "taxonomy_vocabulary_machine_name": "vocabulary_1"
-                                  }];
+                                  "taxonomy_term_data_taxonomy_term_hierarchy_name": "Water Points",
+                                  "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+                                  "taxonomy_term_data_taxonomy_term_hierarchy_tid": "23",
+                                  "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+                                  "taxonomy_term_data_name": "Borehole",
+                                  "taxonomy_term_data_vid": "1",
+                                  "tid": "204",
+                                  "taxonomy_vocabulary_machine_name": "vocabulary_1"
+                              },
+                              {
+                                  "taxonomy_term_data_taxonomy_term_hierarchy_name": "Other Locations",
+                                  "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+                                  "taxonomy_term_data_taxonomy_term_hierarchy_tid": "49",
+                                  "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+                                  "taxonomy_term_data_name": "Government Office",
+                                  "taxonomy_term_data_vid": "1",
+                                  "tid": "3",
+                                  "taxonomy_vocabulary_machine_name": "vocabulary_1"
+                              },
+                              {
+                                  "taxonomy_term_data_taxonomy_term_hierarchy_name": "Health Facilities",
+                                  "taxonomy_term_data_taxonomy_term_hierarchy_vid": "1",
+                                  "taxonomy_term_data_taxonomy_term_hierarchy_tid": "2",
+                                  "taxonomy_term_data_taxonomy_term_hierarchy__taxonomy_vocabul": "vocabulary_1",
+                                  "taxonomy_term_data_name": "Health Centre",
+                                  "taxonomy_term_data_vid": "1",
+                                  "tid": "197",
+                                  "taxonomy_vocabulary_machine_name": "vocabulary_1"
+                              }];
 
                 spyOn(devtrac.remoteView, "get").andCallFake(function(url, successCallback, failedCallback) {
                     successCallback(placeTypes);
