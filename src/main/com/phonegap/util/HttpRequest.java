@@ -15,7 +15,7 @@ public class HttpRequest {
        
     }
 
-    public static HttpRequest parse(String req) {
+    private static HttpRequest parse(String req) {
         String method = req.substring(0, req.indexOf("|"));
 
         String url = null;
@@ -31,6 +31,15 @@ public class HttpRequest {
         }
 
         return new HttpRequest(method, url, data);
+    }
+    
+    public static HttpRequest parseFrom(String reqURL) {
+        int pipeIndex = reqURL.indexOf("|");
+        HttpRequest httpRequest = defaultGetRequest(reqURL);
+        if (pipeIndex > -1) {
+            httpRequest = parse(reqURL);
+        }
+        return httpRequest;
     }
 
     private static boolean onlyOnePipe(String req) {
@@ -53,7 +62,7 @@ public class HttpRequest {
         return this.data;
     }
 
-    public static HttpRequest defaultGetRequest(String reqURL) {
+    private static HttpRequest defaultGetRequest(String reqURL) {
         return new HttpRequest(HttpConnection.GET, reqURL, null);
     }
 

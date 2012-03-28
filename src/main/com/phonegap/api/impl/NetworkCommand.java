@@ -125,11 +125,7 @@ public class NetworkCommand implements Command {
             reqURL = reqURL == null ? instruction.substring(CODE.length() + 5)
                     : reqURL;
 
-            int pipeIndex = reqURL.indexOf("|");
-            HttpRequest httpRequest = HttpRequest.defaultGetRequest(reqURL);
-            if (pipeIndex > -1) {
-                httpRequest = HttpRequest.parse(reqURL);
-            }
+            HttpRequest httpRequest = HttpRequest.parseFrom(reqURL);
 
             LogCommand.LOG("Request url is: " + httpRequest.getUrl());
             LogCommand.LOG("Request method is: " + httpRequest.getMethod());
