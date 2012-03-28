@@ -105,7 +105,6 @@ public class NetworkCommand implements Command {
                         + "/" + fileData.getString("filename");
                 fileData.put("uid", loggedinUser);
                 fileData.put("filepath", fileTargetPath);
-                reqURL += new NetworkSuffixGenerator().generateNetworkSuffix();
 
                 String POSTdata = null;
                 if (fileData != null) {
@@ -130,10 +129,7 @@ public class NetworkCommand implements Command {
             HttpRequest httpRequest = HttpRequest.defaultGetRequest(reqURL);
             if (pipeIndex > -1) {
                 httpRequest = HttpRequest.parse(reqURL);
-                reqURL = httpRequest.getUrl();
             }
-
-            httpRequest.addNetworkSuffix();
 
             LogCommand.LOG("Request url is: " + httpRequest.getUrl());
             LogCommand.LOG("Request method is: " + httpRequest.getMethod());

@@ -2,7 +2,10 @@ package com.phonegap.util;
 
 import javax.microedition.io.HttpConnection;
 
+import org.mockito.Mockito;
+
 import com.phonegap.util.HttpRequest;
+import com.phonegap.util.NetworkSuffixGenerator;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
@@ -27,5 +30,18 @@ public class HttpRequestTest extends TestCase {
         HttpRequest httpRequest = HttpRequest
                 .defaultGetRequest("http://devtrac.test.org");
         assertEquals(HttpConnection.GET, httpRequest.getMethod());
+    }
+    
+    public void xtest_get_url_should_contains_suffix_info() {
+        String url = "http://devtrac.org";
+        HttpRequest httpRequest = new HttpRequest(HttpConnection.GET, url, null);
+        NetworkSuffixGenerator mock = (NetworkSuffixGenerator) Mockito
+                .mock(NetworkSuffixGenerator.class);
+        
+        String suffix = ";device=true";
+        Mockito.when(mock.generateNetworkSuffix()).thenReturn(suffix);
+        
+        assertEquals(url + suffix, httpRequest.getUrlWithSuffix());
+        
     }
 }

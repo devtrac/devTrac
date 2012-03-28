@@ -45,7 +45,7 @@ public class ConnectionThread extends Thread {
     public void fetch(HttpRequest httpRequest) {
         synchronized (this) {
             this._fetchStarted = true;
-            this._theUrl = httpRequest.getUrl();
+            this._theUrl = httpRequest.getUrlWithSuffix();
             this._POSTdata = httpRequest.getData();
             this._method = httpRequest.getMethod();
         }
