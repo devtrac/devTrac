@@ -7,7 +7,6 @@ import org.mockito.Mockito;
 import com.phonegap.util.HttpRequest;
 import com.phonegap.util.NetworkSuffixGenerator;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
 public class HttpRequestTest extends TestCase {
@@ -15,14 +14,14 @@ public class HttpRequestTest extends TestCase {
     public void test_should_parse_correct() {
         HttpRequest httpRequest = HttpRequest
                 .parseFrom("POST|http://devtrac.org|postdata");
-        assertEquals("POST", httpRequest.getMethod());
+        assertEquals(HttpConnection.POST, httpRequest.getMethod());
         assertEquals("http://devtrac.org", httpRequest.getUrl());
         assertEquals("postdata", httpRequest.getData());
     }
     
     public void test_should_parse_correct_when_req_without_post_data() {
         HttpRequest httpRequest = HttpRequest.parseFrom("GET|http://devtrac.org");
-        assertEquals("GET", httpRequest.getMethod());
+        assertEquals(HttpConnection.GET, httpRequest.getMethod());
         assertEquals("http://devtrac.org", httpRequest.getUrl());
         assertNull(httpRequest.getData());
     }
