@@ -12,7 +12,35 @@ public class HttpRequest {
         this.method = method;
         this.url = url;
         this.data = data;
-       
+    }
+
+    public static HttpRequest parseFrom(String reqURL) {
+        int pipeIndex = reqURL.indexOf("|");
+        HttpRequest httpRequest = defaultGetRequest(reqURL);
+        if (pipeIndex > -1) {
+            httpRequest = parse(reqURL);
+        }
+        return httpRequest;
+    }
+
+    public void addNetworkSuffix(){
+        this.url += new NetworkSuffixGenerator().generateNetworkSuffix();
+    }
+
+    public String getMethod() {
+        return this.method;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getData() {
+        return this.data;
+    }
+
+    public String getUrlWithSuffix() {
+        return this.url + new NetworkSuffixGenerator().generateNetworkSuffix();
     }
 
     private static HttpRequest parse(String req) {
@@ -32,41 +60,13 @@ public class HttpRequest {
 
         return new HttpRequest(method, url, data);
     }
-    
-    public static HttpRequest parseFrom(String reqURL) {
-        int pipeIndex = reqURL.indexOf("|");
-        HttpRequest httpRequest = defaultGetRequest(reqURL);
-        if (pipeIndex > -1) {
-            httpRequest = parse(reqURL);
-        }
-        return httpRequest;
-    }
 
     private static boolean onlyOnePipe(String req) {
         return req.indexOf('|') == req.lastIndexOf('|');
-    }
-
-    public void addNetworkSuffix(){
-        this.url += new NetworkSuffixGenerator().generateNetworkSuffix();
-    }
-
-    public String getMethod() {
-        return this.method;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getData() {
-        return this.data;
     }
 
     private static HttpRequest defaultGetRequest(String reqURL) {
         return new HttpRequest(HttpConnection.GET, reqURL, null);
     }
 
-    public String getUrlWithSuffix() {
-        return this.url + new NetworkSuffixGenerator().generateNetworkSuffix();
-    }
 }
