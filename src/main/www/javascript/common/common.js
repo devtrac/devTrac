@@ -65,10 +65,6 @@ function Common(){
     }
 
     this.convertHash = function(hash){
-		if(!hash){
-			return hash;
-		}
-
         var paramStr = "";
         for (param in hash) {
             paramStr += param;

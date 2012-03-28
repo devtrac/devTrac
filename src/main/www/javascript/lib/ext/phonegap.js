@@ -1200,8 +1200,7 @@ Network.prototype.isReachable = function(hostName, successCallback, options) {
 };
 // Temporary implementation of XHR. Soon-to-be modeled as the w3c implementation.
 Network.prototype.XHR = function(method, URL, POSTdata, successCallback, errorCallback) {
-	var req = URL;
-	req = method + '|' + req;
+	req = method + '|' + URL;
 
 	if (POSTdata !== null) {
 		req += "|" + POSTdata;
