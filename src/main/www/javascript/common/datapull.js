@@ -170,6 +170,7 @@ DataPull.prototype.tripDetails = function(callback){
 DataPull.prototype.tripSiteDetails = function(callback){
     navigator.log.debug("Requesting trip site details.");
     var siteSuccess = function(siteResponse){
+        siteResponse = {"#data": siteResponse};
         if (devtrac.common.hasError(siteResponse)) {
             devtrac.common.logAndShowGenericError(devtrac.common.getErrorMessage(siteResponse));
             callback();
@@ -180,11 +181,11 @@ DataPull.prototype.tripSiteDetails = function(callback){
                 var site = new Site();
                 site.id = item.nid;
                 site.name = item.title;
-                if (item.field_ftritem_place.length > 0 && item.field_ftritem_place[0].nid) {
-                    site.placeId = item.field_ftritem_place[0].nid;
+                if (item.field_ftritem_place["und"].length > 0 && item.field_ftritem_place["und"][0].target_id) {
+                    site.placeId = item.field_ftritem_place["und"][0].target_id;
                 }
-                if (item.field_ftritem_narrative.length > 0 && item.field_ftritem_narrative[0].value) {
-                    site.narrative = item.field_ftritem_narrative[0].value;
+                if (item.field_ftritem_narrative["und"].length > 0 && item.field_ftritem_narrative["und"][0].value) {
+                    site.narrative = item.field_ftritem_narrative["und"][0].value;
                 }
                 navigator.log.debug("Processed site with id: " + site.id);
                 devtrac.dataPull.sites.push(site);
@@ -208,8 +209,7 @@ DataPull.prototype.tripSiteDetails = function(callback){
 
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving sites for '" + devtrac.dataPull.fieldTrip.title + "'.");
-
-    devtrac.remoteView.call('api_fieldtrips', 'page_2', '["' + devtrac.dataPull.fieldTrip.id + '"]', siteSuccess, siteFailed);
+    devtrac.remoteView.get(DT_D7.SITE_DETAILS.replace('<FIELD_TRIP_NID>', devtrac.dataPull.fieldTrip.id), siteSuccess, siteFailed);
 }
 
 DataPull.prototype.placeDetailsForSite = function(callback){

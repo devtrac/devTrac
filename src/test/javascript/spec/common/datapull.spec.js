@@ -125,6 +125,241 @@ describe("DataPull", function(){
         })
     })
 
+    describe("tripSiteDetails", function(){
+        var callback;
+
+        describe("when success", function(){
+            var siteDetails;
+            var fieldTripID = 0;
+
+            beforeEach(function() {
+                siteDetails = [{
+                                "vid": "582",
+                                "uid": "8",
+                                "title": "Site Visit at Gulu PTC Demo PS Primary School",
+                                "log": "",
+                                "status": "1",
+                                "comment": "0",
+                                "promote": "0",
+                                "sticky": "0",
+                                "nid": "582",
+                                "type": "ftritem",
+                                "language": "und",
+                                "created": "1300940304",
+                                "changed": "1321109637",
+                                "tnid": "0",
+                                "translate": "0",
+                                "revision_timestamp": "1321109637",
+                                "revision_uid": "0",
+                                "taxonomy_vocabulary_8": [
+                                ],
+                                "taxonomy_vocabulary_1": [
+                                ],
+                                "taxonomy_vocabulary_7": {
+                                  "und": [
+                                    {
+                                      "tid": "209"
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_date_visited": {
+                                  "und": [
+                                    {
+                                      "value": "2011-03-24T00:00:00",
+                                      "timezone": "Africa\/Kampala",
+                                      "timezone_db": "Africa\/Kampala",
+                                      "date_type": "date"
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_images": [
+                                ],
+                                "field_ftritem_lat_long": [
+                                ],
+                                "field_ftritem_narrative": {
+                                  "und": [
+                                    {
+                                      "value": "Please provide a full report.",
+                                      "format": null
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_public_summary": {
+                                  "und": [
+                                    {
+                                      "value": "Please Provide a small summary for the public.",
+                                      "format": null
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_status": {
+                                  "und": [
+                                    {
+                                      "value": "Submitted"
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_field_trip": {
+                                  "und": [
+                                    {
+                                      "target_id": "580",
+                                      "target_type": "node"
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_place": {
+                                  "und": [
+                                    {
+                                      "target_id": "581",
+                                      "target_type": "node"
+                                    }
+                                  ]
+                                },
+                                "cid": 0,
+                                "last_comment_timestamp": "1300940304",
+                                "last_comment_name": "",
+                                "last_comment_uid": "8",
+                                "comment_count": 0,
+                                "name": "terraw",
+                                "picture": "0",
+                                "data": "a:5:{s:13:\"form_build_id\";s:37:\"form-1050f68a726df9c11f0702f838f43047\";s:14:\"picture_delete\";s:0:\"\";s:14:\"picture_upload\";s:0:\"\";s:29:\"taxonomy_image_disable_images\";i:0;s:7:\"contact\";i:1;}"
+                              },
+                              {
+                                "vid": "606",
+                                "uid": "26",
+                                "title": "Site Visit at Kisojo Primary School",
+                                "log": "",
+                                "status": "1",
+                                "comment": "0",
+                                "promote": "0",
+                                "sticky": "0",
+                                "nid": "606",
+                                "type": "ftritem",
+                                "language": "und",
+                                "created": "1300969198",
+                                "changed": "1321109637",
+                                "tnid": "0",
+                                "translate": "0",
+                                "revision_timestamp": "1321109637",
+                                "revision_uid": "0",
+                                "taxonomy_vocabulary_8": [
+                                ],
+                                "taxonomy_vocabulary_1": [
+                                ],
+                                "taxonomy_vocabulary_7": {
+                                  "und": [
+                                    {
+                                      "tid": "209"
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_date_visited": {
+                                  "und": [
+                                    {
+                                      "value": "2011-03-24T00:00:00",
+                                      "timezone": "Africa\/Kampala",
+                                      "timezone_db": "Africa\/Kampala",
+                                      "date_type": "date"
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_images": [
+                                ],
+                                "field_ftritem_lat_long": [
+                                ],
+                                "field_ftritem_narrative": {
+                                  "und": [
+                                    {
+                                      "value": "Please provide a full report.",
+                                      "format": null
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_public_summary": {
+                                  "und": [
+                                    {
+                                      "value": "Please Provide a small summary for the public.",
+                                      "format": null
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_status": {
+                                  "und": [
+                                    {
+                                      "value": "Submitted"
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_field_trip": {
+                                  "und": [
+                                    {
+                                      "target_id": "601",
+                                      "target_type": "node"
+                                    }
+                                  ]
+                                },
+                                "field_ftritem_place": {
+                                  "und": [
+                                    {
+                                      "target_id": "605",
+                                      "target_type": "node"
+                                    }
+                                  ]
+                                },
+                                "cid": 0,
+                                "last_comment_timestamp": "1300969198",
+                                "last_comment_name": "",
+                                "last_comment_uid": "26",
+                                "comment_count": 0,
+                                "name": "hakullu",
+                                "picture": "0",
+                                "data": "a:5:{s:7:\"contact\";i:1;s:29:\"taxonomy_image_disable_images\";i:0;s:14:\"picture_delete\";i:0;s:14:\"picture_upload\";s:0:\"\";s:13:\"form_build_id\";s:37:\"form-d13af5fcd8529ad32b9acc6f84a98c23\";}"
+                            }];
+
+                fieldTripID = 5257;
+                devtrac.dataPull.fieldTrip = {"id": fieldTripID};
+
+                callback = jasmine.createSpy("Callback");
+                spyOn(devtrac.remoteView, "get").andCallFake(function(url, successCallback, failedCallback) {
+                    successCallback(siteDetails);
+                });
+                spyOn(devtrac.common, "logAndShowGenericError");
+                spyOn(navigator.store, "put");
+                spyOn(devtrac.dataPull, "placeDetailsForSite");
+
+                devtrac.dataPull.tripSiteDetails(callback);
+            });
+
+            it("should call new method to get remote views with correct URL", function(){
+                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual('http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=' + fieldTripID);
+            })
+
+            it("response should be wrapped in '#data' to ensure forward compatibility", function() {
+                expect(devtrac.common.logAndShowGenericError).not.toHaveBeenCalled();
+            });
+
+            it("parse user profiles correctly", function() {
+                var expected_sites = [];
+
+                var site = new Site();
+                site.id = '582';
+                site.name = "Site Visit at Gulu PTC Demo PS Primary School";
+                site.placeId = '581';
+                site.narrative = "Please provide a full report.";
+                expected_sites.push(site);
+
+                site = new Site();
+                site.id = '606';
+                site.name = "Site Visit at Kisojo Primary School";
+                site.placeId = '605';
+                site.narrative = "Please provide a full report.";
+                expected_sites.push(site);
+
+                expect(devtrac.dataPull.fieldTrip.sites).toEqual(expected_sites)
+            })
+        })
+    })
+
     describe("actionItemDetailsForSite", function(){
         var callback;
 
