@@ -49,6 +49,7 @@ DT_D7 = {
     PLACE_TYPES: 'http://geo.devtrac.org/api/views/api_vocabularies.json?display_id=placetypes',
     USER_PROFILES: 'http://geo.devtrac.org/api/views/api_user.json?display_id=users',
     ACTION_ITEMS: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=actionitems&args[nid]=<SITE_NID>',
+    SITE_PLACES: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=place&filters[nid]=<SITE_NID>',
     SITE_DETAILS: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=<FIELD_TRIP_NID>',
     FILE_SAVE: 'http://geo.devtrac.org/api/file'
 };

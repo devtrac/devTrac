@@ -222,6 +222,7 @@ DataPull.prototype.placeDetailsForSite = function(callback){
     var site = devtrac.dataPull.sites.pop();
     navigator.log.debug("Requesting place details for site: " + site.id);
     var placeSuccess = function(placeResponse){
+        placeResponse = {"#data": placeResponse};
         if (devtrac.common.hasError(placeResponse)) {
             devtrac.common.logAndShowGenericError(devtrac.common.getErrorMessage(placeResponse));
             callback();
@@ -232,13 +233,13 @@ DataPull.prototype.placeDetailsForSite = function(callback){
                 var placeDetails = placeResponse["#data"][0];
                 site.placeId = placeDetails.nid;
                 site.placeName = placeDetails.title;
-                site.placeGeo = placeDetails.field_place_lat_long.openlayers_wkt;
-                site.contactInfo.name = placeDetails.field_place_responsible_person[0].value;
-                site.contactInfo.phone = placeDetails.field_place_phone[0].value;
-                site.contactInfo.email = placeDetails.field_place_email[0].email;
+                site.placeGeo = placeDetails.field_place_lat_long["und"][0].wkt;
+                site.contactInfo.name = placeDetails.field_place_responsible_person["und"][0].value;
+                site.contactInfo.phone = placeDetails.field_place_phone["und"][0].value;
+                site.contactInfo.email = placeDetails.field_place_email["und"][0].email;
                 site.placeTaxonomy = [];
-                for (var index in placeDetails.taxonomy) {
-                    var item = placeDetails.taxonomy[index];
+                for (var index in placeDetails.taxonomy_vocabulary_1["und"]) {
+                    var item = placeDetails.taxonomy_vocabulary_1["und"][index];
                     var placeType = devtrac.dataPull.getPlaceTypeFor(item.tid);
                     if (placeType) {
                         var placeTaxonomy = new PlaceTaxonomy();
@@ -276,7 +277,7 @@ DataPull.prototype.placeDetailsForSite = function(callback){
 
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving site details for '" + site.name + "'.");
-    devtrac.remoteView.call('api_fieldtrips', 'page_4', '["' + site.id + '"]', placeSuccess, placeFailed);
+    devtrac.remoteView.get(DT_D7.SITE_PLACES.replace('<SITE_NID>', site.id), placeSuccess, placeFailed);
 }
 
 
