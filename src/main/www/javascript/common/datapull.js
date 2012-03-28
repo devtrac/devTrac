@@ -181,11 +181,13 @@ DataPull.prototype.tripSiteDetails = function(callback){
                 var site = new Site();
                 site.id = item.nid;
                 site.name = item.title;
-                if (item.field_ftritem_place["und"].length > 0 && item.field_ftritem_place["und"][0].target_id) {
-                    site.placeId = item.field_ftritem_place["und"][0].target_id;
+                var places = devtrac.dataPull.undNode(item, "field_ftritem_place", []);
+                if (places.length > 0 && places[0].target_id) {
+                    site.placeId = places[0].target_id;
                 }
-                if (item.field_ftritem_narrative["und"].length > 0 && item.field_ftritem_narrative["und"][0].value) {
-                    site.narrative = item.field_ftritem_narrative["und"][0].value;
+                var narrative = devtrac.dataPull.undNode(item, "field_ftritem_narrative", []);
+                if (narrative.length > 0 && narrative[0].value) {
+                    site.narrative = narrative[0].value;
                 }
                 navigator.log.debug("Processed site with id: " + site.id);
                 devtrac.dataPull.sites.push(site);
@@ -233,13 +235,26 @@ DataPull.prototype.placeDetailsForSite = function(callback){
                 var placeDetails = placeResponse["#data"][0];
                 site.placeId = placeDetails.nid;
                 site.placeName = placeDetails.title;
-                site.placeGeo = placeDetails.field_place_lat_long["und"][0].wkt;
-                site.contactInfo.name = placeDetails.field_place_responsible_person["und"][0].value;
-                site.contactInfo.phone = placeDetails.field_place_phone["und"][0].value;
-                site.contactInfo.email = placeDetails.field_place_email["und"][0].email;
+                var lat_long = devtrac.dataPull.undNode(placeDetails, "field_place_lat_long", []);
+                if (lat_long.length > 0 && lat_long[0].wkt) {
+                    site.placeGeo = lat_long[0].wkt;
+                }
+                var persons = devtrac.dataPull.undNode(placeDetails, "field_place_responsible_person", []);
+                if (persons.length > 0 && persons[0].value) {
+                    site.contactInfo.name = persons[0].value;
+                }
+                var phones = devtrac.dataPull.undNode(placeDetails, "field_place_phone", []);
+                if (phones.length > 0 && phones[0].value) {
+                    site.contactInfo.phone = phones[0].value;
+                }
+                var emails = devtrac.dataPull.undNode(placeDetails, "field_place_email", []);
+                if (emails.length > 0 && emails[0].email) {
+                    site.contactInfo.email = emails[0].email;
+                }
                 site.placeTaxonomy = [];
-                for (var index in placeDetails.taxonomy_vocabulary_1["und"]) {
-                    var item = placeDetails.taxonomy_vocabulary_1["und"][index];
+                var taxonomies = devtrac.dataPull.undNode(placeDetails, "taxonomy_vocabulary_1", []);
+                for (var index in taxonomies) {
+                    var item = taxonomies[index];
                     var placeType = devtrac.dataPull.getPlaceTypeFor(item.tid);
                     if (placeType) {
                         var placeTaxonomy = new PlaceTaxonomy();
@@ -300,8 +315,11 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
                 var actionItem = new ActionItem();
                 actionItem.title = item.title;
                 actionItem.id = item.nid;
-                actionItem.task = item.field_actionitem_followuptask["und"][0].value;
-                actionItem.assignedTo = $.map(item.field_actionitem_responsible["und"], function(user){
+                var tasks = devtrac.dataPull.undNode(item, "field_actionitem_followuptask", []);
+                if (tasks.length > 0 && tasks[0].value) {
+                    actionItem.task = tasks[0].value;
+                }
+                actionItem.assignedTo = $.map(devtrac.dataPull.undNode(item, "field_actionitem_responsible", []), function(user){
                     return user.target_id;
                 }).join(", ");
                 navigator.log.debug("Processed action item: " + actionItem.title);
@@ -333,6 +351,10 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving action item details for '" + site.name + "'.");
     devtrac.remoteView.get(DT_D7.ACTION_ITEMS.replace('<SITE_NID>', site.id), actionItemSuccess, actionItemFailed);
+}
+
+DataPull.prototype.undNode = function(node, field, defaultValue) {
+    return (node && node[field] && node[field]["und"]) ? node[field]["und"] : defaultValue;
 }
 
 DataPull.prototype.updateStatusAndLog = function(message, logCallback){
