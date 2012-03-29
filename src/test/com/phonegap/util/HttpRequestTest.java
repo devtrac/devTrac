@@ -10,7 +10,7 @@ import com.phonegap.util.NetworkSuffixGenerator;
 import junit.framework.TestCase;
 
 public class HttpRequestTest extends TestCase {
-    
+
     public void test_should_parse_correct() {
         HttpRequest httpRequest = HttpRequest
                 .parseFrom("POST|http://devtrac.org|postdata");
@@ -18,7 +18,7 @@ public class HttpRequestTest extends TestCase {
         assertEquals("http://devtrac.org", httpRequest.getUrl());
         assertEquals("postdata", httpRequest.getData());
     }
-    
+
     public void test_should_parse_correct_when_req_without_post_data() {
         HttpRequest httpRequest = HttpRequest.parseFrom("GET|http://devtrac.org");
         assertEquals(HttpConnection.GET, httpRequest.getMethod());
@@ -31,17 +31,17 @@ public class HttpRequestTest extends TestCase {
                 .parseFrom("http://devtrac.test.org");
         assertEquals(HttpConnection.GET, httpRequest.getMethod());
     }
-    
+
     public void xtest_get_url_should_contains_suffix_info() {
         String url = "http://devtrac.org";
         HttpRequest httpRequest = new HttpRequest(HttpConnection.GET, url, null);
         NetworkSuffixGenerator mock = (NetworkSuffixGenerator) Mockito
                 .mock(NetworkSuffixGenerator.class);
-        
+
         String suffix = ";device=true";
         Mockito.when(mock.generateNetworkSuffix()).thenReturn(suffix);
-        
+
         assertEquals(url + suffix, httpRequest.getUrlWithSuffix());
-        
+
     }
 }
