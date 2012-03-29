@@ -1,7 +1,7 @@
 /*
  * SecondaryResourceFetchThread.java
  *
- * Copyright © 1998-2008 Research In Motion Ltd.
+ * Copyright (c) 1998-2008 Research In Motion Ltd.
  * 
  * Note: For the sake of simplicity, this sample application may not leverage
  * resource bundles and resource strings.  However, it is STRONGLY recommended
