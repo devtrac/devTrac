@@ -46,5 +46,6 @@ DT_D7 = {
     USER_LOGIN: 'http://geo.devtrac.org/api/user/login.json',
     USER_LOGOUT: 'http://geo.devtrac.org/api/user/logout.json',
     CURRENT_TRIP: 'http://geo.devtrac.org/api/views/api_fieldtrips.json?display_id=current_trip',
-    FILE_SAVE: 'http://geo.devtrac.org/api/file'
+    FILE_SAVE: 'http://geo.devtrac.org/api/file',
+    TIME_OUT: 30000
 };

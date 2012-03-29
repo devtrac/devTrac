@@ -46,15 +46,15 @@ function Common(){
     }
 
     this.callServiceGet = function(url, callback, errorCallback){
-		this.callServiceWithTimeoutAndUrl("GET", url, null , 1000, callback, errorCallback, errorCallback);
+		this.callServiceWithTimeoutAndUrl("GET", url, null , DT_D7.TIME_OUT, callback, errorCallback, errorCallback);
 	}
 
     this.callServicePost= function(url, postData, callback, errorCallback){
-        this.callServiceWithTimeoutAndUrl("POST", url, postData, 1000, callback, errorCallback, errorCallback);
+        this.callServiceWithTimeoutAndUrl("POST", url, postData, DT_D7.TIME_OUT, callback, errorCallback, errorCallback);
 	}
 
     this.callServicePut= function(url, postData, callback, errorCallback){
-        this.callServiceWithTimeoutAndUrl("PUT", url, postData, 1000, callback, errorCallback, errorCallback);
+        this.callServiceWithTimeoutAndUrl("PUT", url, postData, DT_D7.TIME_OUT, callback, errorCallback, errorCallback);
     }
 
     this.callServiceUpload = function(url, filePath, userId, fileUploadPath, successCallback, errorCallback){
