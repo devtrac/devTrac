@@ -31,17 +31,4 @@ public class HttpRequestTest extends TestCase {
                 .parseFrom("http://devtrac.test.org");
         assertEquals(HttpConnection.GET, httpRequest.getMethod());
     }
-
-    public void xtest_get_url_should_contains_suffix_info() {
-        String url = "http://devtrac.org";
-        HttpRequest httpRequest = new HttpRequest(HttpConnection.GET, url, null);
-        NetworkSuffixGenerator mock = (NetworkSuffixGenerator) Mockito
-                .mock(NetworkSuffixGenerator.class);
-
-        String suffix = ";device=true";
-        Mockito.when(mock.generateNetworkSuffix()).thenReturn(suffix);
-
-        assertEquals(url + suffix, httpRequest.getUrlWithSuffix());
-
-    }
 }
