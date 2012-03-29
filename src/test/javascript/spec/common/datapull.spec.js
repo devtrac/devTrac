@@ -338,7 +338,7 @@ describe("DataPull", function(){
                 expect(devtrac.common.logAndShowGenericError).not.toHaveBeenCalled();
             });
 
-            it("parse user profiles correctly", function() {
+            it("parse trip site details correctly", function() {
                 var expected_sites = [];
 
                 var site = new Site();
