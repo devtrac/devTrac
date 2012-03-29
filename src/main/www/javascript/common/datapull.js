@@ -181,14 +181,13 @@ DataPull.prototype.tripSiteDetails = function(callback){
                 var site = new Site();
                 site.id = item.nid;
                 site.name = item.title;
+
                 var places = devtrac.dataPull.undNode(item, "field_ftritem_place", []);
-                if (places.length > 0 && places[0].target_id) {
-                    site.placeId = places[0].target_id;
-                }
+                site.placeId = devtrac.dataPull.getFieldFromJsonArray(places, "target_id", site.placeId);
+
                 var narrative = devtrac.dataPull.undNode(item, "field_ftritem_narrative", []);
-                if (narrative.length > 0 && narrative[0].value) {
-                    site.narrative = narrative[0].value;
-                }
+                site.narrative = devtrac.dataPull.getFieldFromJsonArray(narrative, "value", site.narrative);
+
                 navigator.log.debug("Processed site with id: " + site.id);
                 devtrac.dataPull.sites.push(site);
                 return site;
@@ -236,21 +235,17 @@ DataPull.prototype.placeDetailsForSite = function(callback){
                 site.placeId = placeDetails.nid;
                 site.placeName = placeDetails.title;
                 var lat_long = devtrac.dataPull.undNode(placeDetails, "field_place_lat_long", []);
-                if (lat_long.length > 0 && lat_long[0].wkt) {
-                    site.placeGeo = lat_long[0].wkt;
-                }
+                site.placeGeo = devtrac.dataPull.getFieldFromJsonArray(lat_long, "wkt", site.placeGeo);
+
                 var persons = devtrac.dataPull.undNode(placeDetails, "field_place_responsible_person", []);
-                if (persons.length > 0 && persons[0].value) {
-                    site.contactInfo.name = persons[0].value;
-                }
+                site.contactInfo.name = devtrac.dataPull.getFieldFromJsonArray(persons, "value", site.contactInfo.name);
+
                 var phones = devtrac.dataPull.undNode(placeDetails, "field_place_phone", []);
-                if (phones.length > 0 && phones[0].value) {
-                    site.contactInfo.phone = phones[0].value;
-                }
+                site.contactInfo.phone = devtrac.dataPull.getFieldFromJsonArray(phones, "value", site.contactInfo.phone);
+
                 var emails = devtrac.dataPull.undNode(placeDetails, "field_place_email", []);
-                if (emails.length > 0 && emails[0].email) {
-                    site.contactInfo.email = emails[0].email;
-                }
+                site.contactInfo.email = devtrac.dataPull.getFieldFromJsonArray(emails, "email", site.contactInfo.email);
+
                 site.placeTaxonomy = [];
                 var taxonomies = devtrac.dataPull.undNode(placeDetails, "taxonomy_vocabulary_1", []);
                 for (var index in taxonomies) {
@@ -315,10 +310,10 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
                 var actionItem = new ActionItem();
                 actionItem.title = item.title;
                 actionItem.id = item.nid;
+
                 var tasks = devtrac.dataPull.undNode(item, "field_actionitem_followuptask", []);
-                if (tasks.length > 0 && tasks[0].value) {
-                    actionItem.task = tasks[0].value;
-                }
+                actionItem.task = devtrac.dataPull.getFieldFromJsonArray(tasks, "value", actionItem.task);
+
                 actionItem.assignedTo = $.map(devtrac.dataPull.undNode(item, "field_actionitem_responsible", []), function(user){
                     return user.target_id;
                 }).join(", ");
@@ -355,6 +350,10 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
 
 DataPull.prototype.undNode = function(node, field, defaultValue) {
     return (node && node[field] && node[field]["und"]) ? node[field]["und"] : defaultValue;
+}
+
+DataPull.prototype.getFieldFromJsonArray = function(array, field, defaultValue){
+    return((array.length > 0) && array[0][field]) ? array[0][field] : defaultValue;
 }
 
 DataPull.prototype.updateStatusAndLog = function(message, logCallback){
