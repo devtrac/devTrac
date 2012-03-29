@@ -40,7 +40,6 @@ import com.phonegap.PhoneGap;
 import com.phonegap.api.Command;
 import com.phonegap.util.ConnectionThread;
 import com.phonegap.util.HttpRequest;
-import com.phonegap.util.NetworkSuffixGenerator;
 
 public class NetworkCommand implements Command {
 
