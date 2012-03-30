@@ -30,6 +30,19 @@ function Site(){
     this.uploaded = true;
 }
 
+Site.prototype.package = function(user) {
+    var data = "";
+    data += "nid=" + this.id + "&";
+    data += "title=" + this.name + "&";
+    data += "uid=" + user.uid + "&";
+    data += "name=" + user.name + "&";
+    data += "type=" + this.type + "&";
+    data += "field_ftritem_narrative[und][0][value]=" + this.narrative + "&";
+    data += "field_ftritem_summary[und][0][value]=" + this.narrative + "&";
+    data += "field_ftritem_date_visited[und][0][value][date]=" + this.dateVisited + "&";
+    return data;
+}
+
 function PlaceTaxonomy(){
 	this.id = "";
 	this.name = "";
