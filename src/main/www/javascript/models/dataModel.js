@@ -11,7 +11,7 @@ function Site(){
 	this.placeName = "";
 	this.placeGeo = "";
 	this.placeTaxonomy = [];
-    this.type = "";
+    this.type = DT_D7.NODE_TYPE.SITE;
     this.offline = false;
     this.complete = false;
 	this.narrative = "";
