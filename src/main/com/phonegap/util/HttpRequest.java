@@ -52,7 +52,7 @@ public class HttpRequest {
     }
 
     protected String[] splitRequestUrl(String reqURL){
-        String []  result = new String [REQUEST_FIELD_NUM] ;
+        String [] result = new String [REQUEST_FIELD_NUM] ;
         int i = 0 , pipeIndex;
 
         while ((pipeIndex = reqURL.indexOf("|")) != -1){
