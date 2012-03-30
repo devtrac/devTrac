@@ -1,13 +1,12 @@
 package com.phonegap.util;
 
-import javax.microedition.io.HttpConnection;
-
 public class HttpRequest {
 
     private String method;
     private String url;
     private String data;
     private String cookie;
+    private static final int REQUEST_FIELD_NUM = 4;
 
     public HttpRequest() {
     }
@@ -20,27 +19,12 @@ public class HttpRequest {
     }
 
     public void parseFrom(String reqURL) {
-        reqURL = takeOffCookie(reqURL);
-        reqURL = takeOffMethod(reqURL);
-        this.data = takeOffUrl(reqURL).equals("null") ? null : takeOffUrl(reqURL);
-    }
+        String [] requests = this.splitRequestUrl(reqURL);
 
-    private String takeOffUrl(String reqURL) {
-        int pipeIndex = reqURL.indexOf("|");
-        this.url = reqURL.substring(0, pipeIndex);
-        return reqURL.substring(pipeIndex + 1);
-    }
-
-    private String takeOffMethod(String reqURL) {
-        int pipeIndex = reqURL.indexOf("|");
-        this.method = reqURL.substring(0, pipeIndex);
-        return reqURL.substring(pipeIndex + 1);
-    }
-
-    private String takeOffCookie(String reqURL) {
-        int pipeIndex = reqURL.indexOf("|");
-        this.cookie = reqURL.substring(0, pipeIndex);
-        return reqURL.substring(pipeIndex + 1);
+        this.cookie = requests[0];
+        this.method = requests[1];
+        this.url = requests[2];
+        this.data = (requests[3].equals("null")) ? null : requests[3];
     }
 
     public void addNetworkSuffix() {
@@ -61,6 +45,20 @@ public class HttpRequest {
 
     public String getData() {
         return this.data;
+    }
+
+    protected String[] splitRequestUrl(String reqURL){
+        String []  result = new String [REQUEST_FIELD_NUM] ;
+        int i = 0 , pipeIndex;
+
+        while ((pipeIndex = reqURL.indexOf("|")) != -1){
+            result [i] = reqURL.substring(0, pipeIndex);
+            reqURL = reqURL.substring(pipeIndex + 1);
+            i ++;
+        }
+        result[i++] = reqURL;
+
+        return result;
     }
 
     public String getUrlWithSuffix() {
