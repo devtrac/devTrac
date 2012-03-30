@@ -113,7 +113,7 @@ public class NetworkCommand implements Command {
                         LogCommand.LOG("POSTdata:" + POSTdata);
                     } catch (Exception ex) {
                     }
-                    connThread.fetch(new HttpRequest(HttpConnection.POST, reqURL, POSTdata));
+                    connThread.fetch(new HttpRequest(null, HttpConnection.POST, reqURL, POSTdata));
                 }
 
                 reqURL = null;
@@ -129,7 +129,8 @@ public class NetworkCommand implements Command {
             reqURL = reqURL == null ? instruction.substring(CODE.length() + 5)
                     : reqURL;
 
-            HttpRequest httpRequest = HttpRequest.parseFrom(reqURL);
+            HttpRequest httpRequest = new HttpRequest();
+            httpRequest.parseFrom(reqURL);
 
             LogCommand.LOG("Calling service " + httpRequest.getUrl());
 

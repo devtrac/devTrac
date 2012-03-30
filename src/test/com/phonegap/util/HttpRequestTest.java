@@ -12,23 +12,29 @@ import junit.framework.TestCase;
 public class HttpRequestTest extends TestCase {
 
     public void test_should_parse_correct() {
-        HttpRequest httpRequest = HttpRequest
-                .parseFrom("POST|http://devtrac.org|postdata");
+        HttpRequest httpRequest = new HttpRequest();
+        httpRequest.parseFrom("sessionName=sessionID|POST|http://devtrac.org|postdata");
+
+        assertEquals("sessionName=sessionID", httpRequest.getCookie());
         assertEquals(HttpConnection.POST, httpRequest.getMethod());
         assertEquals("http://devtrac.org", httpRequest.getUrl());
         assertEquals("postdata", httpRequest.getData());
     }
 
     public void test_should_parse_correct_when_req_without_post_data() {
-        HttpRequest httpRequest = HttpRequest.parseFrom("GET|http://devtrac.org");
+        HttpRequest httpRequest = new HttpRequest();
+        httpRequest.parseFrom("sessionName=sessionID|GET|http://devtrac.org|null");
+        assertEquals("sessionName=sessionID", httpRequest.getCookie());
         assertEquals(HttpConnection.GET, httpRequest.getMethod());
         assertEquals("http://devtrac.org", httpRequest.getUrl());
         assertNull(httpRequest.getData());
     }
 
     public void test_default_http_request_should_be_GET_method() {
-        HttpRequest httpRequest = HttpRequest
-                .parseFrom("http://devtrac.test.org");
+        HttpRequest httpRequest = new HttpRequest();
+        httpRequest.parseFrom("sessionName=sessionID|http://devtrac.org");
+        assertEquals("sessionName=sessionID", httpRequest.getCookie());
         assertEquals(HttpConnection.GET, httpRequest.getMethod());
+        assertEquals("http://devtrac.org", httpRequest.getUrl());
     }
 }

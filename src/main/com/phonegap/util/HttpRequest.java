@@ -7,24 +7,58 @@ public class HttpRequest {
     private String method;
     private String url;
     private String data;
+    private String cookie;
 
-    public HttpRequest(String method, String url, String data) {
+    public HttpRequest() {
+    }
+
+    public HttpRequest(String cookie, String method, String url, String data) {
+        this.cookie = cookie;
         this.method = method;
         this.url = url;
         this.data = data;
     }
 
-    public static HttpRequest parseFrom(String reqURL) {
-        int pipeIndex = reqURL.indexOf("|");
-        HttpRequest httpRequest = defaultGetRequest(reqURL);
-        if (pipeIndex > -1) {
-            httpRequest = parse(reqURL);
+    public void parseFrom(String reqURL) {
+        reqURL = takeOffCookie(reqURL);
+        if (reqURL.indexOf("|") == -1) {
+            this.method = HttpConnection.GET;
+            this.url = reqURL;
+        } else {
+            reqURL = takeOffMethod(reqURL);
+            this.data = takeOffUrl(reqURL);
         }
-        return httpRequest;
     }
 
-    public void addNetworkSuffix(){
+    private String takeOffUrl(String reqURL) {
+        int pipeIndex = reqURL.indexOf("|");
+        if (pipeIndex == -1) {
+            this.url = reqURL;
+        } else {
+            this.url = reqURL.substring(0, pipeIndex);
+            return reqURL.substring(pipeIndex + 1);
+        }
+        return null;
+    }
+
+    private String takeOffMethod(String reqURL) {
+        int pipeIndex = reqURL.indexOf("|");
+        this.method = reqURL.substring(0, pipeIndex);
+        return reqURL.substring(pipeIndex + 1);
+    }
+
+    private String takeOffCookie(String reqURL) {
+        int pipeIndex = reqURL.indexOf("|");
+        this.cookie = reqURL.substring(0, pipeIndex);
+        return reqURL.substring(pipeIndex + 1);
+    }
+
+    public void addNetworkSuffix() {
         this.url += new NetworkSuffixGenerator().generateNetworkSuffix();
+    }
+
+    public String getCookie() {
+        return this.cookie;
     }
 
     public String getMethod() {
@@ -41,32 +75,6 @@ public class HttpRequest {
 
     public String getUrlWithSuffix() {
         return this.url + new NetworkSuffixGenerator().generateNetworkSuffix();
-    }
-
-    private static HttpRequest parse(String req) {
-        String method = req.substring(0, req.indexOf("|"));
-
-        String url = null;
-        String data = null;
-
-        int firstIndex = req.indexOf('|');
-        if(onlyOnePipe(req)){
-           url = req.substring(firstIndex + 1);
-        }else{
-            int lastIndex = req.lastIndexOf('|');
-            url = req.substring(firstIndex + 1, lastIndex);
-            data = req.substring(lastIndex + 1);
-        }
-
-        return new HttpRequest(method, url, data);
-    }
-
-    private static boolean onlyOnePipe(String req) {
-        return req.indexOf('|') == req.lastIndexOf('|');
-    }
-
-    private static HttpRequest defaultGetRequest(String reqURL) {
-        return new HttpRequest(HttpConnection.GET, reqURL, null);
     }
 
 }
