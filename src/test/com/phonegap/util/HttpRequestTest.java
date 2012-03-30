@@ -29,12 +29,4 @@ public class HttpRequestTest extends TestCase {
         assertEquals("http://devtrac.org", httpRequest.getUrl());
         assertNull(httpRequest.getData());
     }
-
-    public void test_default_http_request_should_be_GET_method() {
-        HttpRequest httpRequest = new HttpRequest();
-        httpRequest.parseFrom("sessionName=sessionID|http://devtrac.org");
-        assertEquals("sessionName=sessionID", httpRequest.getCookie());
-        assertEquals(HttpConnection.GET, httpRequest.getMethod());
-        assertEquals("http://devtrac.org", httpRequest.getUrl());
-    }
 }

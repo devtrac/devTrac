@@ -21,24 +21,14 @@ public class HttpRequest {
 
     public void parseFrom(String reqURL) {
         reqURL = takeOffCookie(reqURL);
-        if (reqURL.indexOf("|") == -1) {
-            this.method = HttpConnection.GET;
-            this.url = reqURL;
-        } else {
-            reqURL = takeOffMethod(reqURL);
-            this.data = takeOffUrl(reqURL);
-        }
+        reqURL = takeOffMethod(reqURL);
+        this.data = takeOffUrl(reqURL).equals("null") ? null : takeOffUrl(reqURL);
     }
 
     private String takeOffUrl(String reqURL) {
         int pipeIndex = reqURL.indexOf("|");
-        if (pipeIndex == -1) {
-            this.url = reqURL;
-        } else {
-            this.url = reqURL.substring(0, pipeIndex);
-            return reqURL.substring(pipeIndex + 1);
-        }
-        return null;
+        this.url = reqURL.substring(0, pipeIndex);
+        return reqURL.substring(pipeIndex + 1);
     }
 
     private String takeOffMethod(String reqURL) {
