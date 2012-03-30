@@ -30,6 +30,10 @@ function Site(){
     this.uploaded = true;
 }
 
+Site.prototype.updateURL = function(){
+    return DT_D7.NODE_SAVE.replace('<NODE_ID>', this.id);
+}
+
 Site.prototype.package = function(user) {
     var data = "";
     data += "nid=" + this.id + "&";

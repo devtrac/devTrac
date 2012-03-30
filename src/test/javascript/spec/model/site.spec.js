@@ -57,4 +57,12 @@ describe("Site", function() {
 
         })
     })
+
+    describe("updateURL", function() {
+        it("should contain its own site ID", function() {
+            var site = new Site();
+            site.id = 303;
+            expect(site.updateURL()).toEqual('http://devtracd7.mountbatten.net/api/node/303.json');
+        })
+    })
 })
