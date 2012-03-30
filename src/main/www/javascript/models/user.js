@@ -1,9 +1,10 @@
-function User(){
+function User() {
     this.loggedIn = false;
     this.name = "";
     this.session = {};
     this.email = "";
     this.uid = "";
+    this.cookie = "";
 }
 
 User.prototype.authenticate = function(userName, password, successCallback, failedCallback){
@@ -25,4 +26,6 @@ User.prototype.parseUserData = function(response){
     this.email = response[DT.USER_REF]['mail'];
     this.uid = response[DT.USER_REF]['uid'];
     this.session.id = response[DT.SESSION_ID_REF];
+    this.cookie = response[DT.SESSION_NAME_REF] + '='
+            + response[DT.SESSION_ID_REF];
 };

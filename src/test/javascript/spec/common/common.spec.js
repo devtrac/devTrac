@@ -8,7 +8,7 @@ describe("Common", function(){
 
     var successCallback;
     var errorCallback;
-	var method, URL, POSTdata;
+	var cookie, method, URL, POSTdata;
 
     describe("callService", function(){
 
@@ -18,7 +18,7 @@ describe("Common", function(){
                 successCallback = jasmine.createSpy("'successCallback'");
                 errorCallback = jasmine.createSpy("'errorCallback'");
 
-                spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                     successCallback(successData);
                 })
 
@@ -42,7 +42,7 @@ describe("Common", function(){
                 errorCallback = jasmine.createSpy("'errorCallback'");
                 errorMessage = "Network error occurred.";
 
-                spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                     errorCallback(errorMessage);
                 })
 
@@ -72,7 +72,7 @@ describe("Common", function(){
         describe("when success", function(){
 
             beforeEach(function(){
-                spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                     successCallback(successData);
                 })
 
@@ -105,7 +105,7 @@ describe("Common", function(){
         describe("when some network error occurred", function(){
 
             beforeEach(function(){
-                spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                     errorCallback(errorData);
                 })
 
@@ -138,7 +138,7 @@ describe("Common", function(){
         describe("when request timeout", function(){
 
             beforeEach(function(){
-                spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                     var invokeSuccessCallback = function(){
                         successCallback(successData);
                     };
@@ -187,12 +187,12 @@ describe("Common", function(){
 			method = "GET";
 			POSTdata = null;
 
-            spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, success, error){
+            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, success, error){
             })
 
             devtrac.common.callServiceGet(URL, successCallback, errorCallback);
 
-            expect(navigator.network.XHR.mostRecentCall.args[0]).toEqual(method);
+            expect(navigator.network.XHR.mostRecentCall.args[1]).toEqual(method);
         })
     })
 });

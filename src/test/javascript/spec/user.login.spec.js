@@ -4,7 +4,7 @@ describe("user.login", function(){
 
         var successCallback;
         var failedCallback;
-		var method;
+		var cookie, method, URL;
 
         describe("When success", function(){
 
@@ -13,7 +13,7 @@ describe("user.login", function(){
                 failedCallback = jasmine.createSpy();
                 method = "POST";
 
-				spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, errorCallback){
+				spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                     successCallback({
                         "#data": {
                             "sessid": 0
@@ -41,7 +41,7 @@ describe("user.login", function(){
 
               method = 'POST';
 
-                spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, failedCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, failedCallback){
                     failedCallback("Network error.");
                 })
 

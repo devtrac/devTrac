@@ -5,7 +5,7 @@ describe("SiteUpload", function(){
     var progressCallback;
     var successCallback;
     var errorCallback;
-	var URL, method;
+	var cookie, URL, method;
 
     describe("upload all sites successfully", function(){
         beforeEach(function(){
@@ -18,7 +18,7 @@ describe("SiteUpload", function(){
                 return [{'data': site}];
             })
             spyOn(devtrac.dataPush, 'serviceSyncSaveNode').andCallThrough();
-            spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, errorCallback){
+            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                 successCallback({'#data':'data_string'});
             })
 
@@ -61,7 +61,7 @@ describe("SiteUpload", function(){
         it("should only upload the site which uploaded is false", function(){
             sites = [{'name':1,'uploaded':false},{'name':2,'uploaded':true},{'name':3,'uploaded':false} ];
 
-            spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, errorCallback){
+            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                 successCallback({'#data':'data_string'});
             })
 
@@ -73,7 +73,7 @@ describe("SiteUpload", function(){
         it("should update the uploaded status to true if uploading is succeeded", function(){
             var site ={'name':1,'uploaded':false};
 
-            spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, errorCallback){
+            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                 successCallback({'#data':'data_string'});
             })
 
@@ -85,7 +85,7 @@ describe("SiteUpload", function(){
         it("should update the uploaded status to false if uploading is failed", function(){
             var site ={'name':1,'uploaded':false};
 
-            spyOn(navigator.network, 'XHR').andCallFake(function(method, URL, POSTdata, successCallback, errorCallback){
+            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                 errorCallback({'#data':'data_string'});
             })
 

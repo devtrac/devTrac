@@ -1198,13 +1198,10 @@ Network.prototype.isReachable = function(hostName, successCallback, options) {
 	this.isReachable_success = successCallback;
 	PhoneGap.exec("network",["reach"]);
 };
-// Temporary implementation of XHR. Soon-to-be modeled as the w3c implementation.
-Network.prototype.XHR = function(method, URL, POSTdata, successCallback, errorCallback) {
-	req = method + '|' + URL;
 
-	if (POSTdata !== null) {
-		req += "|" + POSTdata;
-	}
+// Temporary implementation of XHR. Soon-to-be modeled as the w3c implementation.
+Network.prototype.XHR = function(cookie, method, URL, POSTdata, successCallback, errorCallback) {
+	var req = cookie + '|' + method + '|' + URL + '|' + POSTdata;
 
 	this.XHR_success = successCallback;
 	if(errorCallback){
