@@ -47,6 +47,10 @@ public class HttpRequest {
         return this.data;
     }
 
+    public void setData(String data){
+        this.data = data;
+    }
+
     protected String[] splitRequestUrl(String reqURL){
         String []  result = new String [REQUEST_FIELD_NUM] ;
         int i = 0 , pipeIndex;

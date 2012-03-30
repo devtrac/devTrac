@@ -92,6 +92,10 @@ public class NetworkCommand implements Command {
         case XHR_UPLOAD_COMMAND:
             int tildaIndex = instruction.lastIndexOf('~');
             reqURL = instruction.substring(CODE.length() + 11, tildaIndex);
+
+            HttpRequest httpRequest = new HttpRequest();
+            httpRequest.parseFrom(reqURL);
+
             try {
                 JSONObject fileDetails = new JSONObject(
                         instruction.substring(tildaIndex + 1));
@@ -109,11 +113,14 @@ public class NetworkCommand implements Command {
                 if (fileData != null) {
                     POSTdata = "&file=" + urlEncode(fileData.toString());
                     try {
-                        POSTdata = getPostData(fileData);
+                        POSTdata += getPostData(fileData);
                         LogCommand.LOG("POSTdata:" + POSTdata);
                     } catch (Exception ex) {
+                        LogCommand.LOG(ex.getMessage());
                     }
-                    connThread.fetch(new HttpRequest(null, HttpConnection.POST, reqURL, POSTdata));
+
+                    httpRequest.setData(POSTdata);
+                    connThread.fetch(httpRequest);
                 }
 
                 reqURL = null;
@@ -129,7 +136,7 @@ public class NetworkCommand implements Command {
             reqURL = reqURL == null ? instruction.substring(CODE.length() + 5)
                     : reqURL;
 
-            HttpRequest httpRequest = new HttpRequest();
+            httpRequest = new HttpRequest();
             httpRequest.parseFrom(reqURL);
 
             LogCommand.LOG("Calling service " + httpRequest.getUrl());

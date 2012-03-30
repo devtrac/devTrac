@@ -1213,11 +1213,12 @@ Network.prototype.XHR = function(cookie, method, URL, POSTdata, successCallback,
 	PhoneGap.exec("network",["xhr",req]);
 };
 
-Network.prototype.XHRUpload = function(URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback) {
-	var req = URL;
+Network.prototype.XHRUpload = function(cookie, method, URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback) {
+	var req = cookie + '|' + method + '|' + URL;
 	if (data !== null) {
 		req += "|" + data;
 	}
+
 	if (filepath !== null) {
 		req += "~" + JSON.stringify({
 			'filePath': filepath,
