@@ -188,6 +188,9 @@ DataPull.prototype.tripSiteDetails = function(callback){
                 var narrative = devtrac.dataPull.undNode(item, "field_ftritem_narrative", []);
                 site.narrative = devtrac.dataPull.getFieldFromJsonArray(narrative, "value", site.narrative);
 
+                var dateVisited = devtrac.dataPull.undNode(item, "field_ftritem_date_visited", []);
+                site.dateVisited = devtrac.dataPull.getFieldFromJsonArray(dateVisited, "value", site.dateVisited);
+
                 navigator.log.debug("Processed site with id: " + site.id);
                 devtrac.dataPull.sites.push(site);
                 return site;

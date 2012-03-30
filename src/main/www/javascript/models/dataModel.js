@@ -15,6 +15,7 @@ function Site(){
     this.offline = false;
     this.complete = false;
 	this.narrative = "";
+    this.dateVisited = "";
     this.contactInfo = {
         name: "",
         phone: "",
