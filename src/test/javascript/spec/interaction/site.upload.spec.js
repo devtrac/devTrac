@@ -165,5 +165,37 @@ describe("SiteUpload", function(){
             })
         })
     })
+
+    describe("uploadSite", function() {
+
+        beforeEach(function(){
+            progressCallback = jasmine.createSpy('progressCallback');
+            successCallback = jasmine.createSpy('successCallback');
+            errorCallback = jasmine.createSpy('errorCallback');
+        })
+
+        describe("when success", function() {
+            it("should use HTTP PUT to update node", function() {
+                var site = new Site();
+                spyOn(devtrac.common, "callServicePut");
+
+                devtrac.siteUpload.uploadSite(site, successCallback, errorCallback);
+
+                expect(devtrac.common.callServicePut).toHaveBeenCalled();
+            })
+
+            it("upload ItemActions if there any", function() {
+                var site = new Site();
+                spyOn(devtrac.siteUpload, "uploadActionItem");
+                spyOn(devtrac.common, "callServicePut").andCallFake(function(url, data, successCallback, errorCallback) {
+                    successCallback({"nid":"6648", "uri":"http://192.168.38.67/api/node/6648"});
+                });
+
+                devtrac.siteUpload.uploadSite(site, successCallback, errorCallback);
+
+                expect(devtrac.siteUpload.uploadActionItem).toHaveBeenCalled();
+            })
+        })
+    })
 })
 
