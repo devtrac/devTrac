@@ -8,7 +8,7 @@ describe("Site", function() {
             var siteId = 303;
             var siteTitle = "Visit to Jasmine";
             var siteNarrative = "This is testing site.";
-            var siteDateVisited = "2011-03-24T00:00:00";
+            var siteDateVisited = "03/31/2012";
             var siteData;
 
             beforeEach(function() {
@@ -53,6 +53,33 @@ describe("Site", function() {
             var site = new Site();
             site.id = 303;
             expect(Site.updateURL(site)).toEqual(DT_D7.NODE_SAVE.replace("<NODE_ID>", site.id));
+        })
+    })
+
+    describe("setDateVisited", function() {
+
+        describe("given format is 'yyyy-MM-ddT00:00:00'", function() {
+            var site;
+            var year = "2012";
+            var month = "03";
+            var day = "31";
+
+            beforeEach(function() {
+                site = new Site();
+                Site.setDateVisited(site, year + "-" + month + "-" + day + "T00:00:00");
+            })
+
+            it("parsed year from string", function() {
+                expect(site.dateVisited).toMatch(new RegExp("^\\d\\d/\\d\\d/" + year + "$"));
+            })
+
+            it("parsed month from string", function() {
+                expect(site.dateVisited).toMatch(new RegExp("^\\d\\d/" + month + "/\\d\\d\\d\\d$"));
+            })
+
+            it("parsed day from string", function() {
+                expect(site.dateVisited).toMatch(new RegExp("^" + day +"/\\d\\d/\\d\\d\\d\\d$"));
+            })
         })
     })
 })

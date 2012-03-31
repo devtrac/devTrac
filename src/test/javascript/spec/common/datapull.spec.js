@@ -346,7 +346,7 @@ describe("DataPull", function(){
                 site.name = "Site Visit at Gulu PTC Demo PS Primary School";
                 site.placeId = '581';
                 site.narrative = "Please provide a full report.";
-                site.dateVisited = "2011-03-24T00:00:00";
+                site.dateVisited = "24/03/2011";
                 expected_sites.push(site);
 
                 site = new Site();
@@ -354,7 +354,7 @@ describe("DataPull", function(){
                 site.name = "Site Visit at Kisojo Primary School";
                 site.placeId = '605';
                 site.narrative = "Please provide a full report.";
-                site.dateVisited = "2011-03-24T00:00:00";
+                site.dateVisited = "24/03/2011";
                 expected_sites.push(site);
 
                 expect(devtrac.dataPull.fieldTrip.sites).toEqual(expected_sites)

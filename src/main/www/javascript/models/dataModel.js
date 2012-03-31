@@ -34,6 +34,13 @@ Site.updateURL = function(site){
     return DT_D7.NODE_SAVE.replace('<NODE_ID>', site.id);
 }
 
+Site.setDateVisited = function(site, dateString){
+    var year = dateString.substring(0,4);
+    var month = dateString.substring(5,7);
+    var day = dateString.substring(8,10);
+    site.dateVisited = day+ "/" + month + "/" + year;
+}
+
 Site.packageData = function(site, user) {
     var data = {
         "title": site.name,
