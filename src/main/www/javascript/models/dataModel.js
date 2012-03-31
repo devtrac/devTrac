@@ -30,20 +30,20 @@ function Site(){
     this.uploaded = true;
 }
 
-Site.prototype.updateURL = function(){
-    return DT_D7.NODE_SAVE.replace('<NODE_ID>', this.id);
+Site.updateURL = function(site){
+    return DT_D7.NODE_SAVE.replace('<NODE_ID>', site.id);
 }
 
-Site.prototype.packageData = function(user) {
+Site.packageData = function(site, user) {
     var data = "";
-    data += "nid=" + this.id + "&";
-    data += "title=" + this.name + "&";
+    data += "nid=" + site.id + "&";
+    data += "title=" + site.name + "&";
     data += "uid=" + user.uid + "&";
     data += "name=" + user.name + "&";
-    data += "type=" + this.type + "&";
-    data += "field_ftritem_narrative[und][0][value]=" + this.narrative + "&";
-    data += "field_ftritem_summary[und][0][value]=" + this.narrative + "&";
-    data += "field_ftritem_date_visited[und][0][value][date]=" + this.dateVisited + "&";
+    data += "type=" + DT_D7.NODE_TYPE.SITE + "&";
+    data += "field_ftritem_narrative[und][0][value]=" + site.narrative + "&";
+    data += "field_ftritem_summary[und][0][value]=" + site.narrative + "&";
+    data += "field_ftritem_date_visited[und][0][value][date]=" + site.dateVisited + "&";
     return data;
 }
 

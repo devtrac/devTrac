@@ -23,35 +23,35 @@ describe("Site", function() {
             })
 
             it("site id should be packaged as nid=xxx&", function() {
-                expect(site.packageData(user)).toMatch(new RegExp("nid=" + siteId + "&"));
+                expect(Site.packageData(site, user)).toMatch(new RegExp("nid=" + siteId + "&"));
             })
 
             it("site title should be packaged as title=xxx&", function() {
-                expect(site.packageData(user)).toMatch(new RegExp("title=" + siteTitle + "&"));
+                expect(Site.packageData(site, user)).toMatch(new RegExp("title=" + siteTitle + "&"));
             })
 
             it("user id should be packaged as uid=xxx&", function() {
-                expect(site.packageData(user)).toMatch(new RegExp("uid=" + user.uid + "&"));
+                expect(Site.packageData(site, user)).toMatch(new RegExp("uid=" + user.uid + "&"));
             })
 
             it("user name should be packaged as name=xxx&", function() {
-                expect(site.packageData(user)).toMatch(new RegExp("name=" + user.name + "&"));
+                expect(Site.packageData(site, user)).toMatch(new RegExp("name=" + user.name + "&"));
             })
 
             it("type should be packaged as type=ftritem&", function() {
-                expect(site.packageData(user)).toMatch(new RegExp("type=" + DT_D7.NODE_TYPE.SITE + "&"));
+                expect(Site.packageData(site, user)).toMatch(new RegExp("type=" + DT_D7.NODE_TYPE.SITE + "&"));
             })
 
             it("narrative should be packaged as field_ftritem_narrative[und][0][value]=xxx&", function() {
-                expect(site.packageData(user)).toMatch(new RegExp("field_ftritem_narrative\\[und\\]\\[0\\]\\[value\\]=" + siteNarrative + "&"));
+                expect(Site.packageData(site, user)).toMatch(new RegExp("field_ftritem_narrative\\[und\\]\\[0\\]\\[value\\]=" + siteNarrative + "&"));
             })
 
             it("summary should be packaged as field_ftritem_public_summary[und][0][value]=xxx&", function() {
-                expect(site.packageData(user)).toMatch(new RegExp("field_ftritem_summary\\[und\\]\\[0\\]\\[value\\]=" + siteNarrative + "&"));
+                expect(Site.packageData(site, user)).toMatch(new RegExp("field_ftritem_summary\\[und\\]\\[0\\]\\[value\\]=" + siteNarrative + "&"));
             })
 
             it("date visited should be packaged as field_ftritem_date_visited[und][0][value][date]=xxx&", function() {
-                expect(site.packageData(user)).toMatch(new RegExp("field_ftritem_date_visited\\[und\\]\\[0\\]\\[value\\]\\[date\\]=" + siteDateVisited + "&"));
+                expect(Site.packageData(site, user)).toMatch(new RegExp("field_ftritem_date_visited\\[und\\]\\[0\\]\\[value\\]\\[date\\]=" + siteDateVisited + "&"));
             })
 
         })
@@ -61,7 +61,7 @@ describe("Site", function() {
         it("should contain its own site ID", function() {
             var site = new Site();
             site.id = 303;
-            expect(site.updateURL()).toEqual('http://devtracd7.mountbatten.net/api/node/303.json');
+            expect(Site.updateURL(site)).toEqual(DT_D7.NODE_SAVE.replace("<NODE_ID>", site.id));
         })
     })
 })
