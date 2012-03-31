@@ -4,6 +4,7 @@ set -e
 
 base_url='http://devtracd7.mountbatten.net/api'
 
+echo "# Authenticating..."
 login_result=`curl -d 'username=tester2&password=Bl1ckberry' "$base_url/user/login.json"`
 
 session_id=`echo $login_result | cut -d '"' -f4`
@@ -25,6 +26,9 @@ image_size=`cat ${image_path}.data | wc -c | tr -d ' \n'`
 
 post_data="uid=$user_id&filesize=$image_size&filename=$image_path"
 
+echo
+
+echo "# Uploading image..."
 upload_file_result=`curl -b "$cookie" -d "$post_data" --data-urlencode "file@${image_path}.data" "$base_url/file"`
 fid=`echo $upload_file_result | cut -d ' ' -f3`
 echo "fid = $fid"
