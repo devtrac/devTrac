@@ -9,6 +9,7 @@ describe("Site", function() {
             var siteTitle = "Visit to Jasmine";
             var siteNarrative = "This is testing site.";
             var siteDateVisited = "2011-03-24T00:00:00";
+            var siteData;
 
             beforeEach(function() {
                 site = new Site();
@@ -20,26 +21,28 @@ describe("Site", function() {
                 user = new User();
                 user.uid = 32;
                 user.name = "tester2";
+
+                siteData = devtrac.common.convertHash(Site.packageData(site, user));
             })
 
             it("site title should be packaged as title=xxx&", function() {
-                expect(Site.packageData(site, user)).toMatch(new RegExp("title=" + siteTitle + "&"));
+                expect(siteData).toMatch(new RegExp("title=" + siteTitle + "&"));
             })
 
             it("type should be packaged as type=ftritem&", function() {
-                expect(Site.packageData(site, user)).toMatch(new RegExp("type=" + DT_D7.NODE_TYPE.SITE + "&"));
+                expect(siteData).toMatch(new RegExp("type=" + DT_D7.NODE_TYPE.SITE + "&"));
             })
 
             it("narrative should be packaged as field_ftritem_narrative[und][0][value]=xxx&", function() {
-                expect(Site.packageData(site, user)).toMatch(new RegExp("field_ftritem_narrative\\[und\\]\\[0\\]\\[value\\]=" + siteNarrative + "&"));
+                expect(siteData).toMatch(new RegExp("field_ftritem_narrative\\[und\\]\\[0\\]\\[value\\]=" + siteNarrative + "&"));
             })
 
             it("summary should be packaged as field_ftritem_public_summary[und][0][value]=xxx&", function() {
-                expect(Site.packageData(site, user)).toMatch(new RegExp("field_ftritem_summary\\[und\\]\\[0\\]\\[value\\]=" + siteNarrative + "&"));
+                expect(siteData).toMatch(new RegExp("field_ftritem_public_summary\\[und\\]\\[0\\]\\[value\\]=" + siteNarrative + "&"));
             })
 
             it("date visited should be packaged as field_ftritem_date_visited[und][0][value][date]=xxx&", function() {
-                expect(Site.packageData(site, user)).toMatch(new RegExp("field_ftritem_date_visited\\[und\\]\\[0\\]\\[value\\]\\[date\\]=" + siteDateVisited + "&"));
+                expect(siteData).toMatch(new RegExp("field_ftritem_date_visited\\[und\\]\\[0\\]\\[value\\]\\[date\\]=" + siteDateVisited));
             })
 
         })

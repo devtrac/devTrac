@@ -35,15 +35,13 @@ Site.updateURL = function(site){
 }
 
 Site.packageData = function(site, user) {
-    var data = "";
-    data += "nid=" + site.id + "&";
-    data += "title=" + site.name + "&";
-    data += "uid=" + user.uid + "&";
-    data += "name=" + user.name + "&";
-    data += "type=" + DT_D7.NODE_TYPE.SITE + "&";
-    data += "field_ftritem_narrative[und][0][value]=" + site.narrative + "&";
-    data += "field_ftritem_summary[und][0][value]=" + site.narrative + "&";
-    data += "field_ftritem_date_visited[und][0][value][date]=" + site.dateVisited + "&";
+    var data = {
+        "title": site.name,
+        "type": DT_D7.NODE_TYPE.SITE,
+        "field_ftritem_narrative[und][0][value]" : site.narrative,
+        "field_ftritem_public_summary[und][0][value]" : site.narrative,
+        "field_ftritem_date_visited[und][0][value][date]" : site.dateVisited
+    };
     return data;
 }
 
