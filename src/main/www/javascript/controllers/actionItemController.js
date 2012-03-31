@@ -63,6 +63,7 @@ ActionItemController.prototype.show = function(){
     $("#no_action_items").hide();
 
     devtrac.actionItemController.displayActionItemsInCurrentSection(devtrac.currentSite.actionItems);
+    devtrac.actionItemController.displayActionItemsInHistorySection([{title:"test action item",id:"1",assignedTo:"tester" }]);
     actionItemGrid.show();
 
     navigator.log.debug("Displayed action items");
