@@ -48,7 +48,7 @@ describe("DataPull", function(){
             });
 
             it("should call new method to get remote views with correct URL", function() {
-                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual('http://devtracd7.mountbatten.net/api/views/api_vocabularies.json?display_id=placetypes');
+                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_D7.PLACE_TYPES);
             });
 
             it("response should be wrapped in '#data' to ensure forward compatibility", function() {
@@ -108,7 +108,7 @@ describe("DataPull", function(){
             });
 
             it("should call new method to get remote views with correct URL", function(){
-                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual('http://devtracd7.mountbatten.net/api/views/api_user.json?display_id=users');
+                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_D7.USER_PROFILES);
             })
 
             it("response should be wrapped in '#data' to ensure forward compatibility", function() {
@@ -331,7 +331,7 @@ describe("DataPull", function(){
             });
 
             it("should call new method to get remote views with correct URL", function(){
-                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual('http://devtracd7.mountbatten.net/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=' + fieldTripID);
+                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_SERVER_ENDPOINT.HOST + '/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=' + fieldTripID);
             })
 
             it("response should be wrapped in '#data' to ensure forward compatibility", function() {
@@ -506,7 +506,7 @@ describe("DataPull", function(){
             });
 
             it("should call new method to get remote views with correct URL", function(){
-                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual('http://devtracd7.mountbatten.net/api/views/api_fieldtrips.json?display_id=place&filters[nid]=' + siteID);
+                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_SERVER_ENDPOINT.HOST + '/api/views/api_fieldtrips.json?display_id=place&filters[nid]=' + siteID);
             })
 
             it("response should be wrapped in '#data' to ensure forward compatibility", function() {
@@ -739,7 +739,7 @@ describe("DataPull", function(){
             });
 
             it("should call new method to get remote views with correct URL", function(){
-                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual('http://devtracd7.mountbatten.net/api/views/api_fieldtrips.json?display_id=actionitems&args[nid]=' + siteID);
+                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_SERVER_ENDPOINT.HOST + '/api/views/api_fieldtrips.json?display_id=actionitems&args[nid]=' + siteID);
             })
 
             it("response should be wrapped in '#data' to ensure forward compatibility", function() {
