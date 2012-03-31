@@ -22,20 +22,8 @@ describe("Site", function() {
                 user.name = "tester2";
             })
 
-            it("site id should be packaged as nid=xxx&", function() {
-                expect(Site.packageData(site, user)).toMatch(new RegExp("nid=" + siteId + "&"));
-            })
-
             it("site title should be packaged as title=xxx&", function() {
                 expect(Site.packageData(site, user)).toMatch(new RegExp("title=" + siteTitle + "&"));
-            })
-
-            it("user id should be packaged as uid=xxx&", function() {
-                expect(Site.packageData(site, user)).toMatch(new RegExp("uid=" + user.uid + "&"));
-            })
-
-            it("user name should be packaged as name=xxx&", function() {
-                expect(Site.packageData(site, user)).toMatch(new RegExp("name=" + user.name + "&"));
             })
 
             it("type should be packaged as type=ftritem&", function() {
