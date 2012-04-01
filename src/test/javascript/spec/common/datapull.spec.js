@@ -331,7 +331,7 @@ describe("DataPull", function(){
             });
 
             it("should call new method to get remote views with correct URL", function(){
-                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_SERVER_ENDPOINT.HOST + '/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=' + fieldTripID);
+                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_D7.SITE_DETAILS.replace('<FIELD_TRIP_NID>', fieldTripID));
             })
 
             it("response should be wrapped in '#data' to ensure forward compatibility", function() {
@@ -506,7 +506,7 @@ describe("DataPull", function(){
             });
 
             it("should call new method to get remote views with correct URL", function(){
-                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_SERVER_ENDPOINT.HOST + '/api/views/api_fieldtrips.json?display_id=place&filters[nid]=' + siteID);
+                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_D7.SITE_PLACES.replace('<SITE_NID>', siteID));
             })
 
             it("response should be wrapped in '#data' to ensure forward compatibility", function() {
@@ -739,7 +739,7 @@ describe("DataPull", function(){
             });
 
             it("should call new method to get remote views with correct URL", function(){
-                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_SERVER_ENDPOINT.HOST + '/api/views/api_fieldtrips.json?display_id=actionitems&args[nid]=' + siteID);
+                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_D7.ACTION_ITEMS.replace('<SITE_NID>', siteID));
             })
 
             it("response should be wrapped in '#data' to ensure forward compatibility", function() {
