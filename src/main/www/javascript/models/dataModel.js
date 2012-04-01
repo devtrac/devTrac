@@ -12,6 +12,7 @@ function Site(){
 	this.placeGeo = "";
 	this.placeTaxonomy = [];
     this.type = "";
+    this.visitedDate = "";
     this.offline = false;
     this.complete = false;
 	this.narrative = "";
