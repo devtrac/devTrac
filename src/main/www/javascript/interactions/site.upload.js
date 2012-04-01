@@ -41,24 +41,6 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
     });
 }
 
-SiteUpload.prototype.uploadSite = function(site, successCallback, errorCallback) {
-    var data = Site.packageData(site, devtrac.user);
-
-    var success = function(response){
-        devtrac.siteUpload.uploadActionItem(site, successCallback, errorCallback);
-    }
-
-    var error = function(errMsg){
-        errorCallback(errMsg);
-    }
-
-    devtrac.common.callServicePut(Site.updateURL(site), data, success, error);
-}
-
-SiteUpload.prototype.uploadActionItem = function(site, successCallback, errorCallback) {
-    successCallback();
-}
-
 SiteUpload.prototype._uploadInternal = function(sitesToUpload, progressCallback, successCallback, errorCallback){
     if (sitesToUpload.length > 0) {
         var index = siteCounts - sitesToUpload.length;
