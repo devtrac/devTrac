@@ -64,6 +64,8 @@ function Common(){
     }
 
     this.convertHash = function(hash){
+        if (!(hash instanceof Object)) return hash;
+
         var paramStr = "";
         for (param in hash) {
             paramStr += param;

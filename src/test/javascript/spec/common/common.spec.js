@@ -195,4 +195,23 @@ describe("Common", function(){
             expect(navigator.network.XHR.mostRecentCall.args[1]).toEqual(method);
         })
     })
+
+    describe("convertHash", function(){
+
+        describe("when input is not JSON object", function(){
+            it("should return unchanged input", function(){
+                var input = "thisisastring";
+                var paramStr = devtrac.common.convertHash(input);
+                expect(paramStr).toEqual(input);
+            })
+        })
+
+        describe("when input is JSON object", function(){
+            it("should return parameter string", function(){
+                var input = {a:1, b:2};
+                var paramStr = devtrac.common.convertHash(input);
+                expect(paramStr).toEqual("a=1&b=2&");
+            })
+        })
+    })
 });
