@@ -1216,7 +1216,7 @@ Network.prototype.XHR = function(cookie, method, URL, POSTdata, successCallback,
 
 Network.prototype.XHRUpload = function(cookie, method, URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback) {
 	var req = cookie + '|' + method + '|' + URL + '|' + data;
-	
+
 	if (filepath !== null) {
 		req += "~" + JSON.stringify({
 			'filePath': filepath,
