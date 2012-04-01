@@ -1,6 +1,6 @@
 describe("SiteUpload", function(){
 
-    var sites;
+    var sites = [];
     var uploader = new SiteUpload();
     var progressCallback;
     var successCallback;
@@ -9,15 +9,24 @@ describe("SiteUpload", function(){
 
     describe("upload all sites successfully", function(){
         beforeEach(function(){
-            sites = [{name: "YES", uploaded: false}, {name: "NO", uploaded: false}, {name: "YES", uploaded: false}];
+            var site = new Site();
+            site.name = "YES";
+            site.uploaded = false;
+            sites.push(site);
+            site = new Site();
+            site.name = "NO";
+            site.uploaded = false;
+            sites.push(site);
+            site = new Site();
+            site.name = "YES";
+            site.uploaded = false;
+            sites.push(site);
+
             progressCallback = jasmine.createSpy('uploader.progressCallback');
             successCallback = jasmine.createSpy('uploader.successCallback');
             errorCallback = jasmine.createSpy('uploader.errorCallback');
 
-            spyOn(devtrac.siteUpload, '_packageSite').andCallFake(function(site){
-                return [{'data': site}];
-            })
-            spyOn(devtrac.dataPush, 'serviceSyncSaveNode').andCallThrough();
+            spyOn(devtrac.common, "callServicePut").andCallThrough();
             spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                 successCallback({'#data':'data_string'});
             })
@@ -41,8 +50,12 @@ describe("SiteUpload", function(){
             expect(navigator.network.XHR.callCount).toEqual(3);
         });
 
-        it("should call createBBSync with correct node data", function(){
-            expect(devtrac.dataPush.serviceSyncSaveNode.mostRecentCall.args).toEqual([[{'data': { name : 'YES', uploaded : true }}]]);
+        it("should use HTTP PUT to update node", function() {
+            expect(devtrac.common.callServicePut).toHaveBeenCalled();
+        })
+
+        it("should send data in format of parameter string", function() {
+            expect(navigator.network.XHR.mostRecentCall.args[3]).toEqual('title=YES&type=ftritem&field_ftritem_narrative[und][0][value]=&field_ftritem_public_summary[und][0][value]=&field_ftritem_date_visited[und][0][value][date]=&');
         })
     });
 
@@ -102,10 +115,7 @@ describe("SiteUpload", function(){
             successCallback = jasmine.createSpy('successCallback');
             errorCallback = jasmine.createSpy('errorCallback');
 
-            spyOn(devtrac.siteUpload, "_packageSite").andCallFake(function(site){
-                return [site.name];
-            })
-            spyOn(devtrac.common, "callService").andCallFake(function(data, successCallback, errorCallback){
+            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, data, successCallback, errorCallback){
                 if (/YES/.test(JSON.stringify(data))) {
                     successCallback({"#error": false});
                 } else {

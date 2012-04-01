@@ -16,19 +16,9 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
         return;
     }
 
-    var siteData;
-    try {
-        siteData = devtrac.siteUpload._packageSite(site);
-    } catch(ex) {
-        alert('Error occurs while packeting site');
-        navigator.log.log('Error: ' + ex);
-        errorCallback(ex);
-        return;
-    }
+    var siteData = Site.packageData(site, devtrac.user);
 
-    var bbSyncNode = devtrac.siteUpload._createBBSyncNode(siteData);
-
-    devtrac.dataPush._callService(bbSyncNode, function(response){
+    devtrac.common.callServicePut(Site.updateURL(site), siteData, function(response){
         navigator.log.debug('Received response from service: ' + JSON.stringify(response));
         if (response['#error']) {
             var error = 'Error occured in uploading site "' + site.name + '". Please try again.';
@@ -73,7 +63,7 @@ SiteUpload.prototype._uploadInternal = function(sitesToUpload, progressCallback,
     if (sitesToUpload.length > 0) {
         var index = siteCounts - sitesToUpload.length;
         progressCallback('Site ' + (index + 1) + ' of ' + siteCounts + ' is uploading...');
-        devtrac.siteUpload.uploadSite(sitesToUpload.shift(), function(msg) {
+        devtrac.siteUpload.upload(sitesToUpload.shift(), function(msg) {
             progressCallback(msg);
             devtrac.siteUpload._uploadInternal(sitesToUpload, progressCallback, successCallback, errorCallback);
         }, function(err) {
