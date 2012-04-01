@@ -32,7 +32,7 @@ function Common(){
         }, timeout);
 
         navigator.network.XHR(devtrac.user.cookie, method, url, devtrac.common.convertHash(data), success, error);
-}
+    }
 
     this.callService = function(data, callback, errorCallback){
         this.callServiceWithUrl(DT.SERVICE_ENDPOINT, data, callback, errorCallback);
