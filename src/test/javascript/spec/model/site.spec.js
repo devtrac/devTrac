@@ -62,7 +62,7 @@ describe("Site", function() {
         it("should contain its own site ID", function() {
             var site = new Site();
             site.id = 303;
-            expect(Site.updateURL(site)).toEqual(DT_D7.NODE_SAVE.replace("<NODE_ID>", site.id));
+            expect(Site.url(site)).toEqual(DT_D7.NODE_SAVE.replace("<NODE_ID>", site.id));
         })
     })
 

@@ -18,7 +18,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 
     var siteData = Site.packageData(site, devtrac.user);
 
-    devtrac.common.callServicePut(Site.updateURL(site), siteData, function(response){
+    devtrac.common.callServicePut(Site.url(site), siteData, function(response){
         navigator.log.debug('Received response from service: ' + JSON.stringify(response));
         if (response['#error']) {
             var error = 'Error occured in uploading site "' + site.name + '". Please try again.';
