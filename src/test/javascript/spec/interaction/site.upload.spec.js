@@ -184,6 +184,18 @@ describe("SiteUpload", function(){
                 expect(devtrac.common.callServicePut).toHaveBeenCalled();
             })
 
+            it("should send data in format of parameter string", function() {
+                var site = new Site();
+                var data;
+                spyOn(navigator.network, "XHR").andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback) {
+                    data = POSTdata;
+                });
+
+                devtrac.siteUpload.uploadSite(site, successCallback, errorCallback);
+
+                expect(data).toEqual('title=&type=ftritem&field_ftritem_narrative[und][0][value]=&field_ftritem_public_summary[und][0][value]=&field_ftritem_date_visited[und][0][value][date]=&');
+            })
+
             it("upload ItemActions if there any", function() {
                 var site = new Site();
                 spyOn(devtrac.siteUpload, "uploadActionItem");
