@@ -23,14 +23,14 @@ image_data_file="${image_path}.data"
 
 openssl enc -base64 -in $image_path | tr -d '\n' > "$image_data_file"
 
-image_size=`cat ${image_path}.data | wc -c | tr -d ' \n'`
+image_size=`cat ${image_data_file} | wc -c | tr -d ' \n'`
 
 post_data="uid=$user_id&filesize=$image_size&filename=$image_name"
 
 echo
 
 echo "# Uploading image..."
-upload_file_result=`curl -b "$cookie" -d "$post_data" --data-urlencode "file@${image_path}.data" "$base_url/file"`
+upload_file_result=`curl -b "$cookie" -d "$post_data" --data-urlencode "file@${image_data_file}" "$base_url/file"`
 fid=`echo $upload_file_result | cut -d ' ' -f3`
 echo "fid = $fid"
 
