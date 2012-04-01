@@ -1,7 +1,7 @@
 function Common(){
     this.callServiceWithTimeout = function(data, timeout, successCallback, failedCallback, timeoutCallback){
         var method = data ? "POST" : "GET";
-		this.callServiceWithTimeoutAndUrl(method, DT.SERVICE_ENDPOINT, data, timeout, successCallback, failedCallback, timeoutCallback);
+        this.callServiceWithTimeoutAndUrl(method, DT.SERVICE_ENDPOINT, data, timeout, successCallback, failedCallback, timeoutCallback);
     }
 
     this.callServiceWithTimeoutAndUrl= function(method, url, data, timeout, successCallback, failedCallback, timeoutCallback){
@@ -46,12 +46,12 @@ function Common(){
     }
 
     this.callServiceGet = function(url, callback, errorCallback){
-		this.callServiceWithTimeoutAndUrl("GET", url, null , DT_D7.TIME_OUT, callback, errorCallback, errorCallback);
-	}
+        this.callServiceWithTimeoutAndUrl("GET", url, null , DT_D7.TIME_OUT, callback, errorCallback, errorCallback);
+    }
 
     this.callServicePost= function(url, postData, callback, errorCallback){
         this.callServiceWithTimeoutAndUrl("POST", url, postData, DT_D7.TIME_OUT, callback, errorCallback, errorCallback);
-	}
+    }
 
     this.callServicePut= function(url, postData, callback, errorCallback){
         this.callServiceWithTimeoutAndUrl("PUT", url, postData, DT_D7.TIME_OUT, callback, errorCallback, errorCallback);

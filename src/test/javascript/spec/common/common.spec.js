@@ -8,7 +8,7 @@ describe("Common", function(){
 
     var successCallback;
     var errorCallback;
-	var cookie, method, URL, POSTdata;
+    var cookie, method, URL, POSTdata;
 
     describe("callService", function(){
 
@@ -67,7 +67,7 @@ describe("Common", function(){
 
         var callback = new Callback();
         var data;
-		method = "GET";
+        method = "GET";
 
         describe("when success", function(){
 
@@ -180,12 +180,12 @@ describe("Common", function(){
     describe("callServiceGet", function(){
 
         it("Method should be GET", function(){
-			successCallback = jasmine.createSpy("'successCallback'");
+            successCallback = jasmine.createSpy("'successCallback'");
             errorCallback = jasmine.createSpy("'errorCallback'");
             var success = jasmine.any;
             var error = jasmine.any;
-			method = "GET";
-			POSTdata = null;
+            method = "GET";
+            POSTdata = null;
 
             spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, success, error){
             })
@@ -196,4 +196,3 @@ describe("Common", function(){
         })
     })
 });
-
