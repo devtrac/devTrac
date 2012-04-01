@@ -180,7 +180,7 @@ public class NetworkCommand implements Command {
                     Connector.READ);
             long fileSize = fileConnection.fileSize();
             long lastModified = fileConnection.lastModified();
-            String photoName = extractPhotoName(fileConnection.getName());
+            String fileName = extractFileName(fileConnection.getName());
 
             InputStream fileStream = fileConnection.openInputStream();
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -198,10 +198,10 @@ public class NetworkCommand implements Command {
 
             JSONObject fileData = new JSONObject();
             fileData.put("file", base64Data);
-            fileData.put("filename", photoName);
+            fileData.put("filename", fileName);
             fileData.put("filesize", fileSize);
             fileData.put("timestamp", lastModified);
-            fileData.put("filemime", getMimeType(photoName));
+            fileData.put("filemime", getMimeType(fileName));
             LogCommand.DEBUG("Successfully read file " + filePath
                     + ". Base 64 Data length is " + base64Data.length());
             return fileData;
@@ -220,15 +220,15 @@ public class NetworkCommand implements Command {
 
     }
 
-    public String extractPhotoName(String path) {
-		String photoName = path;
+    public String extractFileName(String path) {
+		String fileName = path;
 
         int indexOfUnderline = path.indexOf("_640x480", path.indexOf("."));
         if(indexOfUnderline > -1){
-            photoName = path.substring(0, indexOfUnderline);
+            fileName = path.substring(0, indexOfUnderline);
         }
 
-		return photoName;
+		return fileName;
 	}
 
 	private String urlEncode(String value) {
