@@ -1,27 +1,30 @@
 describe("Site", function() {
 
     describe("packageData", function() {
+        var site;
+        var user;
+        var siteId = 303;
+        var siteTitle = "Visit to Jasmine";
+        var siteNarrative = "This is testing site.";
+        var siteDateVisited = "03/31/2012";
+        var fieldTripId = 5752;
+        var siteData;
 
-        describe("given an existing site without image", function() {
-            var site;
-            var user;
-            var siteId = 303;
-            var siteTitle = "Visit to Jasmine";
-            var siteNarrative = "This is testing site.";
-            var siteDateVisited = "03/31/2012";
-            var siteData;
-
-            beforeEach(function() {
+        beforeEach(function() {
                 site = new Site();
                 site.id = siteId;
                 site.name = siteTitle;
                 site.narrative = siteNarrative;
                 site.dateVisited = siteDateVisited;
+                site.offline = false;
 
                 user = new User();
                 user.uid = 32;
                 user.name = "tester2";
+        })
 
+        describe("given an existing site without image", function() {
+            beforeEach(function(){
                 siteData = devtrac.common.convertHash(Site.packageData(site, user));
             })
 
@@ -44,7 +47,14 @@ describe("Site", function() {
             it("date visited should be packaged as field_ftritem_date_visited[und][0][value][date]=xxx&", function() {
                 expect(siteData).toMatch(new RegExp("field_ftritem_date_visited\\[und\\]\\[0\\]\\[value\\]\\[date\\]=" + siteDateVisited));
             })
+        })
 
+        describe("given an new site without image", function(){
+            it("target id should be assigned", function(){
+                site.offline = true;
+                siteData = devtrac.common.convertHash(Site.packageData(site, user, fieldTripId));
+                expect(siteData).toMatch(new RegExp("field_ftritem_field_trip\\[und\\]\\[0\\]\\[target_id\\]=" + fieldTripId));
+            })
         })
     })
 
