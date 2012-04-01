@@ -17,14 +17,15 @@ echo "session_id = $session_id"
 
 cookie="$session_name=$session_id"
 
-image_path="script/site_image.png"
+image_name="site_image.png"
+image_path="./script/${image_name}"
 image_data_file="${image_path}.data"
 
 openssl enc -base64 -in $image_path | tr -d '\n' > "$image_data_file"
 
 image_size=`cat ${image_path}.data | wc -c | tr -d ' \n'`
 
-post_data="uid=$user_id&filesize=$image_size&filename=$image_path"
+post_data="uid=$user_id&filesize=$image_size&filename=$image_name"
 
 echo
 
