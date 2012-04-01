@@ -113,7 +113,6 @@ public class NetworkCommand implements Command {
                 if (fileData != null) {
                     try {
                         POSTdata = getPostData(fileData);
-                        LogCommand.LOG("Image Upload POSTdata is: " + POSTdata);
                     } catch (Exception ex) {
                         LogCommand.LOG(ex.getMessage());
                     }
