@@ -180,7 +180,8 @@ public class NetworkCommand implements Command {
                     Connector.READ);
             long fileSize = fileConnection.fileSize();
             long lastModified = fileConnection.lastModified();
-            String fileName = fileConnection.getName();
+            String photoName = extractPhotoName(fileConnection.getName());
+
             InputStream fileStream = fileConnection.openInputStream();
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             Base64OutputStream base64OutStream = new Base64OutputStream(
@@ -197,10 +198,10 @@ public class NetworkCommand implements Command {
 
             JSONObject fileData = new JSONObject();
             fileData.put("file", base64Data);
-            fileData.put("filename", fileName);
+            fileData.put("filename", photoName);
             fileData.put("filesize", fileSize);
             fileData.put("timestamp", lastModified);
-            fileData.put("filemime", getMimeType(fileName));
+            fileData.put("filemime", getMimeType(photoName));
             LogCommand.DEBUG("Successfully read file " + filePath
                     + ". Base 64 Data length is " + base64Data.length());
             return fileData;
@@ -219,7 +220,18 @@ public class NetworkCommand implements Command {
 
     }
 
-    private String urlEncode(String value) {
+    public String extractPhotoName(String path) {
+		String photoName = path;
+
+        int indexOfUnderline = path.indexOf("_640x480", path.indexOf("."));
+        if(indexOfUnderline > -1){
+            photoName = path.substring(0, indexOfUnderline);
+        }
+
+		return photoName;
+	}
+
+	private String urlEncode(String value) {
         value = PhoneGap.replace(value, "+", "%2B");
         value = PhoneGap.replace(value, "=", "%3D");
         value = PhoneGap.replace(value, "/", "%2F");
