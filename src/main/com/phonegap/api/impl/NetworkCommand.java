@@ -180,7 +180,7 @@ public class NetworkCommand implements Command {
                     Connector.READ);
             long fileSize = fileConnection.fileSize();
             long lastModified = fileConnection.lastModified();
-            String fileName = extractFileName(fileConnection.getName());
+            String fileName = fileConnection.getName();
 
             InputStream fileStream = fileConnection.openInputStream();
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -218,17 +218,6 @@ public class NetworkCommand implements Command {
             }
         }
 
-    }
-
-    public String extractFileName(String path) {
-        String fileName = path;
-
-        int indexOfUnderline = path.indexOf("_640x480", path.indexOf("."));
-        if(indexOfUnderline > -1){
-            fileName = path.substring(0, indexOfUnderline);
-        }
-
-        return fileName;
     }
 
     private String urlEncode(String value) {
