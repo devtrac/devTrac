@@ -221,17 +221,17 @@ public class NetworkCommand implements Command {
     }
 
     public String extractFileName(String path) {
-		String fileName = path;
+        String fileName = path;
 
         int indexOfUnderline = path.indexOf("_640x480", path.indexOf("."));
         if(indexOfUnderline > -1){
             fileName = path.substring(0, indexOfUnderline);
         }
 
-		return fileName;
-	}
+        return fileName;
+    }
 
-	private String urlEncode(String value) {
+    private String urlEncode(String value) {
         value = PhoneGap.replace(value, "+", "%2B");
         value = PhoneGap.replace(value, "=", "%3D");
         value = PhoneGap.replace(value, "/", "%2F");
