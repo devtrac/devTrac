@@ -31,7 +31,7 @@ function Site(){
     this.uploaded = true;
 }
 
-Site.url = function(site){
+Site.updateURL = function(site){
     return DT_D7.NODE_SAVE.replace('<NODE_ID>', site.id);
 }
 

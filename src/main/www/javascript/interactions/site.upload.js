@@ -45,7 +45,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
     if (site.offline) {
         devtrac.common.callServicePost(Site.url(site), siteData, success, error);
     } else {
-        devtrac.common.callServicePut(Site.url(site), siteData, success, error);
+        devtrac.common.callServicePut(Site.updateURL(site), siteData, success, error);
     }
 }
 
