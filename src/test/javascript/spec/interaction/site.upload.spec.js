@@ -59,6 +59,22 @@ describe("SiteUpload", function(){
         })
     });
 
+    describe("upload new sites", function(){
+        it("should use HTTP POST method to create node", function(){
+            var site = new Site();
+            site.name = "YES";
+            site.uploaded = false;
+            site.offline = true;
+            sites.push(site);
+
+            spyOn(devtrac.common, "callServicePost").andCallThrough();
+
+            uploader.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
+            expect(devtrac.common.callServicePost).toHaveBeenCalled();
+        })
+
+    })
+
     describe("should only upload the site which has been modified", function(){
 
         beforeEach(function(){

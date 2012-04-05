@@ -18,7 +18,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 
     var siteData = Site.packageData(site, devtrac.user);
 
-    devtrac.common.callServicePut(Site.url(site), siteData, function(response){
+    var success = function(response) {
         navigator.log.debug('Received response from service: ' + JSON.stringify(response));
         if (response['#error']) {
             var error = 'Error occured in uploading site "' + site.name + '". Please try again.';
@@ -34,11 +34,19 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
             navigator.log.log('Site "' + site.name + '" uploaded successfully.');
             successCallback('Site "' + site.name + '" uploaded successfully.');
         }
-    }, function(srvErr){
+    }
+
+    var error = function(srvErr) {
         navigator.log.log('Error in uploading site "' + site.name + '".');
         navigator.log.log(srvErr);
         errorCallback(srvErr);
-    });
+    }
+
+    if (site.offline) {
+        devtrac.common.callServicePost(Site.url(site), siteData, success, error);
+    } else {
+        devtrac.common.callServicePut(Site.url(site), siteData, success, error);
+    }
 }
 
 SiteUpload.prototype._uploadInternal = function(sitesToUpload, progressCallback, successCallback, errorCallback){
