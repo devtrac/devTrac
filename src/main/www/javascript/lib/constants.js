@@ -65,6 +65,7 @@ DT_D7 = (function(){
 	    SITE_PLACES: get_full_url('/api/views/api_fieldtrips.json?display_id=place&filters[nid]=<SITE_NID>'),
 	    SITE_DETAILS: get_full_url('/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_nid]=<FIELD_TRIP_NID>'),
 	    NODE_SAVE: get_full_url('/api/node/<NODE_ID>.json'),
+	    NODE_CREATE: get_full_url('/api/node.json'),
 	    FILE_SAVE: get_full_url('/api/file')
 	};
 })();

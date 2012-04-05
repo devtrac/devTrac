@@ -35,6 +35,10 @@ Site.updateURL = function(site){
     return DT_D7.NODE_SAVE.replace('<NODE_ID>', site.id);
 }
 
+Site.createURL = function(){
+    return DT_D7.NODE_CREATE;
+}
+
 Site.setDateVisited = function(site, dateString){
     var year = dateString.substring(0,4);
     var month = dateString.substring(5,7);
