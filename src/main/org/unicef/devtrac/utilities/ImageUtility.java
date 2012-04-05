@@ -20,15 +20,7 @@ public class ImageUtility {
 		byte[] resized = JPEGEncodedImage.encode(resizedBitmap, 75).getData();
 
 		FileConnection fcImg = null;
-		String imageExtension = "";
-		String imagePathWintoutExtension = path;
-		if (path.lastIndexOf('.') != -1) {
-			imageExtension = path.substring(path.lastIndexOf('.'));
-			imagePathWintoutExtension = path
-					.substring(0, path.lastIndexOf('.'));
-		}
-		String resizedPath = imagePathWintoutExtension + "_" + requiredWidth
-				+ "x" + requiredHeight + imageExtension;
+		String resizedPath = getResizedPath(path, requiredWidth, requiredHeight);
 		try {
 			fcImg = (FileConnection) Connector.open(resizedPath,
 					Connector.READ_WRITE);
@@ -50,6 +42,27 @@ public class ImageUtility {
 			} catch (Exception e) {
 			}
 		}
+		return resizedPath;
+	}
+
+	protected static String getResizedPath(String path, int requiredWidth, int requiredHeight) {
+		String imageExtension = "";
+		String imagePathWithoutExtension = path;
+		if (path.lastIndexOf('.') != -1) {
+			imageExtension = path.substring(path.lastIndexOf('.'));
+			imagePathWithoutExtension = path.substring(0, path.lastIndexOf('.'));
+
+			if(imageExtension.indexOf(".rem") > -1){
+				imageExtension = imagePathWithoutExtension
+						.substring(imagePathWithoutExtension.lastIndexOf('.'))
+						+ imageExtension;
+				imagePathWithoutExtension = imagePathWithoutExtension
+						.substring(0, imagePathWithoutExtension.lastIndexOf('.'));
+			}
+		}
+
+		String resizedPath = imagePathWithoutExtension + "_" + requiredWidth
+				+ "x" + requiredHeight + imageExtension;
 		return resizedPath;
 	}
 
