@@ -7,7 +7,7 @@ describe("SiteUpload", function(){
     var errorCallback;
 	var cookie, URL, method;
 
-    describe("upload all sites successfully", function(){
+    describe("upload existing sites", function(){
         beforeEach(function(){
             var site = new Site();
             site.name = "YES";
