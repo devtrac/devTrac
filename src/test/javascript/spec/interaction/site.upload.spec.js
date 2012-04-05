@@ -1,11 +1,16 @@
 describe("SiteUpload", function(){
 
-    var sites = [];
-    var uploader = new SiteUpload();
+    var sites;
+    var uploader ;
     var progressCallback;
     var successCallback;
     var errorCallback;
-	var cookie, URL, method;
+    var cookie, URL, method;
+
+    beforeEach(function() {
+        sites = [];
+        uploader = new SiteUpload();
+    })
 
     describe("upload existing sites", function(){
         beforeEach(function(){
@@ -72,7 +77,6 @@ describe("SiteUpload", function(){
             uploader.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
             expect(devtrac.common.callServicePost).toHaveBeenCalled();
         })
-
     })
 
     describe("should only upload the site which has been modified", function(){
