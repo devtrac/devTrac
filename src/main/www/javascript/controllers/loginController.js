@@ -10,7 +10,7 @@ LoginController.prototype.show = function(){
 LoginController.prototype.login = function(){
     var userName = $("#username").val();
     var password = $("#password").val();
-    
+
     if (!userName || !password) {
         alert("Please enter username and password.");
         return;
@@ -48,18 +48,31 @@ LoginController.prototype.login = function(){
                     })
                 });
             });
-            
+
         }, function(){
             devtrac.common.logAndShowGenericError("Error in saving: " + devtrac.user.name);
         }, "user", JSON.stringify(devtrac.user));
     };
-    
+
     var loginFailed = function(){
         devtrac.loginController.show();
     };
     screens.show("loading");
 	devtrac.user.authenticate(userName, password, renderView, loginFailed);
 };
+
+LoginController.prototype.getGPS = function(){
+	var success = function(response){
+		alert('get gps success!');
+		alert(JSON.stringify(response));
+	}
+
+	var failed = function(){
+		alert('get gps failed');
+	}
+
+	navigator.geolocation.getCurrentPosition(success, failed);
+}
 
 LoginController.prototype.logout = function(){
 	navigator.log.debug("Logging out user.");
