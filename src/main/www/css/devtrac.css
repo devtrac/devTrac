@@ -241,3 +241,17 @@ p.submit {
 	margin-top: 10px;
 	margin-bottom: 40px;
 }
+
+/**GPS Info**/
+fieldset {
+    width: 200px;
+    height: 100px;
+}
+
+#capture_gps_button{
+    margin-top: 10px;
+}
+
+#location{
+    padding-top: 10px;
+}
