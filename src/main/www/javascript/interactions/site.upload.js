@@ -20,7 +20,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
 
     var success = function(response) {
         navigator.log.debug('Received response from service: ' + JSON.stringify(response));
-        if (response['#error']) {
+        if (response['error']) {
             var error = 'Error occured in uploading site "' + site.name + '". Please try again.';
             navigator.log.log(error);
             errorCallback(error);
