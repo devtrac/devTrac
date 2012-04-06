@@ -53,17 +53,23 @@ public class ImageUtility {
 			imagePathWithoutExtension = path.substring(0, path.lastIndexOf('.'));
 
 			if(imageExtension.indexOf(".rem") > -1){
-				imageExtension = imagePathWithoutExtension
-						.substring(imagePathWithoutExtension.lastIndexOf('.'))
-						+ imageExtension;
-				imagePathWithoutExtension = imagePathWithoutExtension
-						.substring(0, imagePathWithoutExtension.lastIndexOf('.'));
+				imageExtension = getRealExtension(imageExtension, imagePathWithoutExtension);
+				imagePathWithoutExtension = getRealPathWithoutExtension(imagePathWithoutExtension);
 			}
 		}
 
 		String resizedPath = imagePathWithoutExtension + "_" + requiredWidth
 				+ "x" + requiredHeight + imageExtension;
 		return resizedPath;
+	}
+
+	private static String getRealPathWithoutExtension(String imagePathWithoutExtension) {
+		return imagePathWithoutExtension.substring(0, imagePathWithoutExtension.lastIndexOf('.'));
+	}
+
+	private static String getRealExtension(String imageExtension, String imagePathWithoutExtension) {
+		return imagePathWithoutExtension.substring(imagePathWithoutExtension.lastIndexOf('.'))
+				+ imageExtension;
 	}
 
 	private static EncodedImage getResizedEncodedImage(
