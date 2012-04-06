@@ -39,4 +39,17 @@ siteController.create = function(){
         screens.show("sites_to_visit");
     }, devtrac.user.name, JSON.stringify(devtrac.fieldTrip));
 }
+siteController.getGPS = function (){
+    var successCallback = function(position){
+        alert("Capturing GPS location successfully");
+        navigator.geolocation.stop();
+        $("#latitude").text("Latitude: " + position.coords.latitude);
+        $("#longitude").text("Longitude: " + position.coords.longitude);
+    }
 
+    var errorCallback = function(error){
+        alert("Error occurred when capturing GPS location. Error message: " + error.message);
+    }
+
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+}
