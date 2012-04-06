@@ -64,3 +64,17 @@ fieldTripController.paintSites = function(){
     screens.show("sites_to_visit");
     attachClickEvents(".site_item", showSiteDetailScreen);
 }
+
+fieldTripController.getGPS = function (){
+    var successCallback = function(position){
+        alert("Capturing GPS location successfully");
+        navigator.geolocation.stop();
+        $("#location").text("GPS: " + position.coords.latitude + ", " + position.coords.longitude);
+    }
+
+    var errorCallback = function(error){
+        alert("Error occurred when capturing GPS location. Error message: " + error.message);
+    }
+
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+}

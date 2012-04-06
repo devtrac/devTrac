@@ -1373,7 +1373,7 @@ function Coordinates(lat, lng, alt, acc, head, vel, altAcc) {
 	/**
 	 * The altitude accuracy of the position.
 	 */
-	this.altitudeAccuracy = (altacc != 'undefined') ? altacc : null; 
+	this.altitudeAccuracy = (altAcc != 'undefined') ? altAcc : null;
 }
 
 /**
