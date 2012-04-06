@@ -61,19 +61,6 @@ LoginController.prototype.login = function(){
 	devtrac.user.authenticate(userName, password, renderView, loginFailed);
 };
 
-LoginController.prototype.getGPS = function(){
-	var success = function(response){
-		alert('get gps success!');
-		alert(JSON.stringify(response));
-	}
-
-	var failed = function(){
-		alert('get gps failed');
-	}
-
-	navigator.geolocation.getCurrentPosition(success, failed);
-}
-
 LoginController.prototype.logout = function(){
 	navigator.log.debug("Logging out user.");
     logout(function(){
