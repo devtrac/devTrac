@@ -47,7 +47,7 @@ Site.setDateVisited = function(site, dateString){
     site.dateVisited = day+ "/" + month + "/" + year;
 }
 
-Site.packageData = function(site, user, fieldTripId) {
+Site.packageData = function(site, fieldTripId) {
     var data = {
         "title": site.name,
         "type": DT_D7.NODE_TYPE.SITE,

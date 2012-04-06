@@ -25,7 +25,7 @@ describe("Site", function() {
 
         describe("given an existing site without image", function() {
             beforeEach(function(){
-                siteData = devtrac.common.convertHash(Site.packageData(site, user));
+                siteData = devtrac.common.convertHash(Site.packageData(site, fieldTripId));
             })
 
             it("site title should be packaged as title=xxx&", function() {
@@ -52,7 +52,7 @@ describe("Site", function() {
         describe("given an new site without image", function(){
             it("target id should be assigned", function(){
                 site.offline = true;
-                siteData = devtrac.common.convertHash(Site.packageData(site, user, fieldTripId));
+                siteData = devtrac.common.convertHash(Site.packageData(site, fieldTripId));
                 expect(siteData).toMatch(new RegExp("field_ftritem_field_trip\\[und\\]\\[0\\]\\[target_id\\]=" + fieldTripId));
             })
 

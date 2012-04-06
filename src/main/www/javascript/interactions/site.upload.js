@@ -16,7 +16,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
         return;
     }
 
-    var siteData = Site.packageData(site, devtrac.user);
+    var siteData = Site.packageData(site, devtrac.fieldTrip.id);
 
     var success = function(response) {
         navigator.log.debug('Received response from service: ' + JSON.stringify(response));
