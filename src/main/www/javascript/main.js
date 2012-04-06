@@ -15,6 +15,7 @@ var devtrac = {
     remoteView: new RemoteView(),
     photoUpload: new PhotoUpload(),
     siteUpload: new SiteUpload(),
+    actionItemUpload: new ActionItemUpload(),
     currentSite: "",
     places: "",
     questions: "",
