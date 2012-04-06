@@ -60,7 +60,7 @@ describe("SiteUpload", function(){
         })
 
         it("should send data in format of parameter string", function() {
-            expect(navigator.network.XHR.mostRecentCall.args[3]).toEqual('title=YES&type=ftritem&field_ftritem_narrative[und][0][value]=&field_ftritem_public_summary[und][0][value]=&field_ftritem_date_visited[und][0][value][date]=&');
+            expect(navigator.network.XHR.mostRecentCall.args[3]).toEqual('title=YES&type=ftritem&field_ftritem_narrative[und][0][value]=&field_ftritem_public_summary[und][0][value]=&field_ftritem_date_visited[und][0][value][date]=&language=und&');
         })
     });
 

@@ -47,6 +47,10 @@ describe("Site", function() {
             it("date visited should be packaged as field_ftritem_date_visited[und][0][value][date]=xxx&", function() {
                 expect(siteData).toMatch(new RegExp("field_ftritem_date_visited\\[und\\]\\[0\\]\\[value\\]\\[date\\]=" + siteDateVisited));
             })
+
+            it("language should be undefined (und)", function() {
+                expect(siteData).toMatch(new RegExp("language=und&"));
+            })
         })
 
         describe("given an new site without image", function(){
