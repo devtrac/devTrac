@@ -25,13 +25,13 @@ siteController.create = function(){
     site.offline = true;
     site.name = $("#site_title").val();
     site.type = $("#sitetypes").val();
-    site.visitedDate = $("#visitedDate").val();
+    site.dateVisited = $("#dateVisited").val();
     site.narrative = "Please provide a full report.";
 	devtrac.fieldTrip.sites.push(site);
 	navigator.store.put(function(){
         alert(site.name + " added successfuly.");
 		$("#site_title").val("");
-		$("#visitedDate").val("")
+		$("#dateVisited").val("")
 		navigator.log.debug("Saved newly created site.");
         fieldTripController.showTripReports();
     }, function(){
