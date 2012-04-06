@@ -18,6 +18,7 @@ src_files:
     - src/main/www/javascript/lib/ext/hmac.js
     - src/main/www/javascript/lib/ext/jquery.1.4.4.min.js
     - src/main/www/javascript/lib/initializer.js
+    - src/main/www/javascript/lib/validator.js
     - src/main/www/javascript/lib/constants.js
     - src/main/www/javascript/common/common.js
     - src/main/www/javascript/common/datapull.js
