@@ -106,3 +106,11 @@ function UserProfile(){
 	this.username = "";
 	this.name = "";
 }
+
+UserProfile.getUserIDbyUserName = function(username) {
+    for(var i in devtrac.profiles){
+        if(devtrac.profiles[i].username == username)
+          return devtrac.profiles[i].uid;
+    }
+    return 0;
+}
