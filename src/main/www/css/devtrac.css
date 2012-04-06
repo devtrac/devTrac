@@ -244,8 +244,8 @@ p.submit {
 
 /**GPS Info**/
 fieldset {
-    width: 200px;
-    height: 100px;
+    width: 240px;
+    height: 120px;
 }
 
 #capture_gps_button{

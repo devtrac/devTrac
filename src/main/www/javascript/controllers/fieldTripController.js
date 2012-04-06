@@ -69,7 +69,8 @@ fieldTripController.getGPS = function (){
     var successCallback = function(position){
         alert("Capturing GPS location successfully");
         navigator.geolocation.stop();
-        $("#location").text("GPS: " + position.coords.latitude + ", " + position.coords.longitude);
+        $("#latitude").text("Latitude: " + position.coords.latitude);
+        $("#longitude").text("Longitude: " + position.coords.longitude);
     }
 
     var errorCallback = function(error){
