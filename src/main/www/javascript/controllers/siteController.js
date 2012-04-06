@@ -40,7 +40,9 @@ siteController.create = function(){
     }, devtrac.user.name, JSON.stringify(devtrac.fieldTrip));
 }
 siteController.getGPS = function (){
+    $("#capture_gps_button").val("Capturing...");
     var successCallback = function(position){
+        $("#capture_gps_button").val("Capture GPS");
         alert("Capturing GPS location successfully");
         navigator.geolocation.stop();
         $("#latitude").text("Latitude: " + position.coords.latitude);
@@ -48,6 +50,7 @@ siteController.getGPS = function (){
     }
 
     var errorCallback = function(error){
+        $("#capture_gps_button").val("Capture GPS");
         alert("Error occurred when capturing GPS location. Error message: " + error.message);
     }
 
