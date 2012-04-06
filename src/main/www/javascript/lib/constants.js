@@ -52,7 +52,8 @@ DT_D7 = (function(){
 	return {
 	    TIME_OUT: 30000,
         NODE_TYPE: {
-            SITE: 'ftritem'
+            SITE: 'ftritem',
+            ACTIONITEM: 'actionitem'
         },
 	    SERVICE_ENDPOINT: get_full_url('/api/'),
 	    SYSTEM_CONNECT: get_full_url('/api/system/connect.json'),

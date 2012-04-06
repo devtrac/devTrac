@@ -101,6 +101,21 @@ function ActionItem(){
     this.assignedTo = "";
 }
 
+ActionItem.packageData = function(item, siteID, placeID){
+	var data = {
+		"title": item.title,
+		"type": DT_D7.NODE_TYPE.ACTIONITEM,
+		"field_actionitem_ftreportitem[und][0][target_id]": siteID,
+		"field_actionitem_resp_place[und][0][target_id]": placeID,
+		"field_actionitem_due_date[und][0][value][date]": devtrac.common.getOneMonthLaterDate(),
+		"field_actionitem_responsible[und][0][target_id]": item.assignedTo + " (" + UserProfile.getUserIDbyUserName(item.assignedTo) + ")",
+		"field_actionitem_followuptask[und][0][value]": item.task,
+		"field_actionitem_status[und][0][value]": 1,
+		"language": "und"
+	}
+	return data;
+}
+
 function UserProfile(){
 	this.uid = "";
 	this.username = "";
