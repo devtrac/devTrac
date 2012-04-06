@@ -65,17 +65,30 @@ describe("SiteUpload", function(){
     });
 
     describe("upload new sites", function(){
-        it("should use HTTP POST method to create node", function(){
+        beforeEach(function() {
             var site = new Site();
             site.name = "YES";
             site.uploaded = false;
             site.offline = true;
             sites.push(site);
+        })
 
+        it("should use HTTP POST method to create node", function(){
             spyOn(devtrac.common, "callServicePost").andCallThrough();
 
             uploader.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
+
             expect(devtrac.common.callServicePost).toHaveBeenCalled();
+        })
+
+        it("updated nid of the site", function() {
+            spyOn(devtrac.common, "callServicePost").andCallFake(function(url, postData, callback, errorCallback) {
+                callback({"nid":"6699","uri":"http://geo.devtrac.org/api/node/6699"});
+            });
+
+            uploader.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
+
+            expect(sites[0].id).toEqual("6699");
         })
     })
 

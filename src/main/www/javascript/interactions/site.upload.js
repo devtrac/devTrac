@@ -26,6 +26,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
             errorCallback(error);
         }
         else {
+            site.id = response['nid'];
             site.uploaded = true;
             devtrac.currentSite = site;
             devtrac.dataStore.saveCurrentSite(function(){
