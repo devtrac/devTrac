@@ -5,7 +5,8 @@ set -e
 base_url='http://devtracd7.mountbatten.net/api'
 
 echo "# Authenticating..."
-login_result=`curl -d 'username=tester2&password=Bl1ckberry' "$base_url/user/login.json"`
+auth_data="username=${1:?Username not found}&password=${2:?Password not found}"
+login_result=`curl -v -d "$auth_data" "$base_url/user/login.json"`
 
 session_id=`echo $login_result | cut -d '"' -f4`
 session_name=`echo $login_result | cut -d '"' -f8`
