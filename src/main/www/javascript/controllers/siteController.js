@@ -41,8 +41,11 @@ siteController.create = function(){
 }
 siteController.getGPS = function (){
     $("#capture_gps_button").val("Capturing...");
+    $("#capture_gps_button").attr('disabled','disabled');
+
     var successCallback = function(position){
         $("#capture_gps_button").val("Capture GPS");
+        $("#capture_gps_button").removeAttr('disabled');
         alert("Capturing GPS location successfully");
         navigator.geolocation.stop();
         $("#latitude").text("Latitude: " + position.coords.latitude);
@@ -51,6 +54,7 @@ siteController.getGPS = function (){
 
     var errorCallback = function(error){
         $("#capture_gps_button").val("Capture GPS");
+        $("#capture_gps_button").removeAttr('disabled');
         alert("Error occurred when capturing GPS location. Error message: " + error.message);
     }
 
