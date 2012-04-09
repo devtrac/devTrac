@@ -56,7 +56,7 @@ describe("SiteController", function(){
 
             expect(alert).toHaveBeenCalledWith('The date visited: ' + inValidDate + ' is invalid.');
             expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
-       })
+        })
 
         it("when datevisited is valid", function(){
             var validDate = "04/05/2012";
@@ -65,7 +65,7 @@ describe("SiteController", function(){
             siteController.create();
 
             expect(devtrac.fieldTrip.sites.push).toHaveBeenCalled();
-       })
+        })
 
         it('should be invalid when title is empty', function(){
             initSiteAttributes('','03/02/2012');
@@ -74,7 +74,7 @@ describe("SiteController", function(){
 
             expect(alert).toHaveBeenCalledWith('The title can not be empty.');
             expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
-       })
+        })
 
         it('should be invalid when title is blank', function(){
             initSiteAttributes('    ','03/02/2012');
@@ -83,7 +83,7 @@ describe("SiteController", function(){
 
             expect(alert).toHaveBeenCalledWith('The title can not be empty.');
             expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
-       })
+        })
 
         it("position data should be saved to site", function(){
             spyOn(navigator.store, "put").andCallThrough();
@@ -93,12 +93,12 @@ describe("SiteController", function(){
             var site = devtrac.fieldTrip.sites.pop();
             expect(site.latitude).toEqual("45");
             expect(site.longitude).toEqual("108");
+        })
     })
-  })
 
-function initSiteAttributes(title, date){
-    $("#site_title").val(title);
-    $("#sitetypes").val("school");
-    $("#dateVisited").val(date);
+    function initSiteAttributes(title, date){
+        $("#site_title").val(title);
+        $("#sitetypes").val("school");
+        $("#dateVisited").val(date);
     }
 })
