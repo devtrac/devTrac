@@ -62,8 +62,8 @@ describe("Site", function() {
 
             it("position info should be assigned if latitude and longitude have values", function(){
                 site.offline = true;
-                site.latitude = 30;
-                site.longitude = 108;
+                site.latitude = "30";
+                site.longitude = "108";
                 siteData = devtrac.common.convertHash(Site.packageData(site, user, fieldTripId));
                 expect(siteData).toMatch(new RegExp("field_ftritem_lat_long\\[und\\]\\[0\\]\\[wkt\\]=" + "POINT \\(30 108\\)"));
             })
