@@ -57,9 +57,6 @@ describe("ActionItem", function() {
                 expect(data).toMatch(new RegExp("field_actionitem_followuptask\\[und\\]\\[0\\]\\[value\\]=" + task + "&"));
             })
 
-            it("status should be open (1)", function() {
-                expect(data).toMatch(new RegExp("field_actionitem_status\\[und\\]\\[0\\]\\[value\\]=1&"));
-            })
 
             it("language should be undefined (und)", function() {
                 expect(data).toMatch(new RegExp("language=und&"));
