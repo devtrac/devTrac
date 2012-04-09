@@ -42,6 +42,36 @@ describe("SiteController", function(){
                 '</div> ';
 
         setFixtures("<body>"+ fixture +"</body>");
+        spyOn(window, "alert").andCallFake(function(){});
+        spyOn(devtrac.fieldTrip.sites, "push").andCallFake(function(){});
 
     });
+    describe('create',function(){
+      it("when datevisited is invalid", function(){
+         var inValidDate = "123";
+         initDateVisited(inValidDate);
+
+         siteController.create();
+
+         expect(alert).toHaveBeenCalledWith('The date visited: ' + inValidDate + ' is invalid.');
+         expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
+       })
+
+      it("when datevisited is valid", function(){
+         var validDate = "04/05/2012";
+         initDateVisited(validDate);
+
+         siteController.create();
+
+         expect(devtrac.fieldTrip.sites.push).toHaveBeenCalled();
+    })
+
+})
+
+function initDateVisited(date){
+    $("#site_title").val("title");
+    $("#sitetypes").val("school");
+    $("#dateVisited").val(date);
+    }
+
 })
