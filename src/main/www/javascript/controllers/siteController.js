@@ -39,6 +39,7 @@ siteController.create = function(){
         screens.show("sites_to_visit");
     }, devtrac.user.name, JSON.stringify(devtrac.fieldTrip));
 }
+
 siteController.getGPS = function (){
     $("#capture_gps_button").val("Capturing...");
     $("#capture_gps_button").attr('disabled','disabled');

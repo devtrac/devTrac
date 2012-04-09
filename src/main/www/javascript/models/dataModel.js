@@ -21,6 +21,8 @@ function Site(){
         phone: "",
         email: ""
     };
+    this.latitude = "";
+    this.longitude = "";
     this.submission = [];
     this.photos = {};
     this.actionItems = [];
@@ -53,9 +55,12 @@ Site.packageData = function(site, user, fieldTripId) {
         "field_ftritem_public_summary[und][0][value]" : site.narrative,
         "field_ftritem_date_visited[und][0][value][date]" : site.dateVisited
     };
-	if (site.offline) {
-		data["field_ftritem_field_trip[und][0][target_id]"] = fieldTripId;
-	}
+    if (site.offline) {
+        if (site.latitude != "" && site.longitude != "") {
+            data["field_ftritem_lat_long[und][0][wkt]"] = "POINT (" + site.latitude + " " + site.longitude + ")";
+        }
+        data["field_ftritem_field_trip[und][0][target_id]"] = fieldTripId;
+    }
     return data;
 }
 

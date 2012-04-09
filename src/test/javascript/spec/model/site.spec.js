@@ -55,6 +55,20 @@ describe("Site", function() {
                 siteData = devtrac.common.convertHash(Site.packageData(site, user, fieldTripId));
                 expect(siteData).toMatch(new RegExp("field_ftritem_field_trip\\[und\\]\\[0\\]\\[target_id\\]=" + fieldTripId));
             })
+
+            it("position info should be assigned if latitude and longitude have values", function(){
+                site.offline = true;
+                site.latitude = 30;
+                site.longitude = 108;
+                siteData = devtrac.common.convertHash(Site.packageData(site, user, fieldTripId));
+                expect(siteData).toMatch(new RegExp("field_ftritem_lat_long\\[und\\]\\[0\\]\\[wkt\\]=" + "POINT \\(30 108\\)"));
+            })
+
+            it("position info should be assigned if latitude and longitude have values", function(){
+                site.offline = true;
+                siteData = devtrac.common.convertHash(Site.packageData(site, user, fieldTripId));
+                expect(siteData).not.toMatch(new RegExp("field_ftritem_lat_long\\[und\\]\\[0\\]\\[wkt\\]=" + "POINT \\( \\)"));
+            })
         })
     })
 
