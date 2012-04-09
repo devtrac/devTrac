@@ -43,11 +43,12 @@ describe("SiteController", function(){
 
         setFixtures("<body>"+ fixture +"</body>");
         spyOn(window, "alert").andCallFake(function(){});
-        spyOn(devtrac.fieldTrip.sites, "push").andCallFake(function(){});
-
     });
 
     describe('create',function(){
+        beforeEach(function(){
+            spyOn(devtrac.fieldTrip.sites, "push").andCallThrough();
+        })
         it("when datevisited is invalid", function(){
             var inValidDate = "123";
             initSiteAttributes('title', inValidDate);
@@ -85,8 +86,12 @@ describe("SiteController", function(){
             expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
         })
 
+    })
+
+    describe("Create a new site", function(){
         it("position data should be saved to site", function(){
             spyOn(navigator.store, "put").andCallThrough();
+            initSiteAttributes('title', '04/05/2012');
             $("#latitude").text("Latitude: 45");
             $("#longitude").text("Longitude: 108");
             siteController.create();
