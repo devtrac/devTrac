@@ -19,6 +19,15 @@ siteController.list = function(){
 
 siteController.create = function(){
     navigator.log.debug("Creating a new site");
+
+    var isAllWhiteSpace = true;
+    var siteTitle = $("#site_title").val();
+
+    if(siteTitle.replace(/\s/g,'').length ==0){
+        alert('The title can not be empty.');
+        return;
+    }
+
     var dateVisited = $("#dateVisited").val();
     if(!new Validator().isValidDate(dateVisited)){
       alert('The date visited: '+ dateVisited + ' is invalid.');

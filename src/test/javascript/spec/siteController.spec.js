@@ -49,7 +49,7 @@ describe("SiteController", function(){
     describe('create',function(){
       it("when datevisited is invalid", function(){
          var inValidDate = "123";
-         initDateVisited(inValidDate);
+         initSiteAttributes('title', inValidDate);
 
          siteController.create();
 
@@ -59,17 +59,34 @@ describe("SiteController", function(){
 
       it("when datevisited is valid", function(){
          var validDate = "04/05/2012";
-         initDateVisited(validDate);
+         initSiteAttributes('title', validDate);
 
          siteController.create();
 
          expect(devtrac.fieldTrip.sites.push).toHaveBeenCalled();
-    })
+       })
 
-})
+       it('should be invalid when title is empty', function(){
+           initSiteAttributes('','03/02/2012');
 
-function initDateVisited(date){
-    $("#site_title").val("title");
+           siteController.create();
+
+           expect(alert).toHaveBeenCalledWith('The title can not be empty.');
+           expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
+       })
+
+       it('should be invalid when title is black', function(){
+          initSiteAttributes('    ','03/02/2012');
+
+          siteController.create();
+
+          expect(alert).toHaveBeenCalledWith('The title can not be empty.');
+          expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
+       })
+  })
+
+function initSiteAttributes(title, date){
+    $("#site_title").val(title);
     $("#sitetypes").val("school");
     $("#dateVisited").val(date);
     }
