@@ -252,6 +252,12 @@ fieldset {
     margin-top: 10px;
 }
 
+#capture_gps_button[disabled]{
+    margin-top: 10px;
+    border: 0px;
+    background: grey;
+}
+
 #location{
     padding-top: 10px;
 }
