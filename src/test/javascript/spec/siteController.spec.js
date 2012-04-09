@@ -48,51 +48,51 @@ describe("SiteController", function(){
     });
 
     describe('create',function(){
-      it("when datevisited is invalid", function(){
-         var inValidDate = "123";
-         initSiteAttributes('title', inValidDate);
+        it("when datevisited is invalid", function(){
+            var inValidDate = "123";
+            initSiteAttributes('title', inValidDate);
 
-         siteController.create();
+            siteController.create();
 
-         expect(alert).toHaveBeenCalledWith('The date visited: ' + inValidDate + ' is invalid.');
-         expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
+            expect(alert).toHaveBeenCalledWith('The date visited: ' + inValidDate + ' is invalid.');
+            expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
        })
 
-      it("when datevisited is valid", function(){
-         var validDate = "04/05/2012";
-         initSiteAttributes('title', validDate);
+        it("when datevisited is valid", function(){
+            var validDate = "04/05/2012";
+            initSiteAttributes('title', validDate);
 
-         siteController.create();
+            siteController.create();
 
-         expect(devtrac.fieldTrip.sites.push).toHaveBeenCalled();
+            expect(devtrac.fieldTrip.sites.push).toHaveBeenCalled();
        })
 
-       it('should be invalid when title is empty', function(){
-           initSiteAttributes('','03/02/2012');
+        it('should be invalid when title is empty', function(){
+            initSiteAttributes('','03/02/2012');
 
-           siteController.create();
+            siteController.create();
 
-           expect(alert).toHaveBeenCalledWith('The title can not be empty.');
-           expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
+            expect(alert).toHaveBeenCalledWith('The title can not be empty.');
+            expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
        })
 
-       it('should be invalid when title is black', function(){
-          initSiteAttributes('    ','03/02/2012');
+        it('should be invalid when title is blank', function(){
+            initSiteAttributes('    ','03/02/2012');
 
-          siteController.create();
+            siteController.create();
 
-          expect(alert).toHaveBeenCalledWith('The title can not be empty.');
-          expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
+            expect(alert).toHaveBeenCalledWith('The title can not be empty.');
+            expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
        })
 
-    it("position data should be saved to site", function(){
-        spyOn(navigator.store, "put").andCallThrough();
-        $("#latitude").text("Latitude: 45");
-        $("#longitude").text("Longitude: 108");
-        siteController.create();
-        var site = devtrac.fieldTrip.sites.pop();
-        expect(site.latitude).toEqual("45");
-        expect(site.longitude).toEqual("108");
+        it("position data should be saved to site", function(){
+            spyOn(navigator.store, "put").andCallThrough();
+            $("#latitude").text("Latitude: 45");
+            $("#longitude").text("Longitude: 108");
+            siteController.create();
+            var site = devtrac.fieldTrip.sites.pop();
+            expect(site.latitude).toEqual("45");
+            expect(site.longitude).toEqual("108");
     })
   })
 
