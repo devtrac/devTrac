@@ -18,14 +18,19 @@ siteController.list = function(){
 };
 
 siteController.create = function(){
-	navigator.log.debug("Creating a new site");
+    navigator.log.debug("Creating a new site");
+    var dateVisited = $("#dateVisited").val();
+    if(!new Validator().isValidDate(dateVisited)){
+      alert('The date visited: '+ dateVisited + ' is invalid.');
+      return;
+    }
     var site = new Site();
     site.id = Math.round(new Date().getTime() / 1000);
     site.uploaded = false;
     site.offline = true;
     site.name = $("#site_title").val();
     site.type = $("#sitetypes").val();
-    site.dateVisited = $("#dateVisited").val();
+    site.dateVisited = dateVisited;
     site.narrative = "Please provide a full report.";
 	devtrac.fieldTrip.sites.push(site);
 	navigator.store.put(function(){
