@@ -84,13 +84,6 @@ describe("SiteController", function(){
           expect(alert).toHaveBeenCalledWith('The title can not be empty.');
           expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
        })
-  })
-
-function initSiteAttributes(title, date){
-    $("#site_title").val(title);
-    $("#sitetypes").val("school");
-    $("#dateVisited").val(date);
-    }
 
     it("position data should be saved to site", function(){
         spyOn(navigator.store, "put").andCallThrough();
@@ -101,4 +94,11 @@ function initSiteAttributes(title, date){
         expect(site.latitude).toEqual("45");
         expect(site.longitude).toEqual("108");
     })
+  })
+
+function initSiteAttributes(title, date){
+    $("#site_title").val(title);
+    $("#sitetypes").val("school");
+    $("#dateVisited").val(date);
+    }
 })
