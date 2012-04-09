@@ -46,6 +46,7 @@ describe("SiteController", function(){
         spyOn(devtrac.fieldTrip.sites, "push").andCallFake(function(){});
 
     });
+
     describe('create',function(){
       it("when datevisited is invalid", function(){
          var inValidDate = "123";
@@ -91,4 +92,13 @@ function initSiteAttributes(title, date){
     $("#dateVisited").val(date);
     }
 
+    it("position data should be saved to site", function(){
+        spyOn(navigator.store, "put").andCallThrough();
+        $("#latitude").text("Latitude: 45");
+        $("#longitude").text("Longitude: 108");
+        siteController.create();
+        var site = devtrac.fieldTrip.sites.pop();
+        expect(site.latitude).toEqual("45");
+        expect(site.longitude).toEqual("108");
+    })
 })
