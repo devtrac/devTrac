@@ -99,6 +99,7 @@ function ActionItem(){
     this.title = "";
 	this.task = "";
     this.assignedTo = "";
+    this.uploaded = false;
 }
 
 ActionItem.packageData = function(item, siteID, placeID){

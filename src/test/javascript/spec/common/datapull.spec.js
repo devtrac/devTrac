@@ -754,13 +754,15 @@ describe("DataPull", function(){
                         "id": "590",
                         "title": "Improve Supervision and Support",
                         "task": "Follow up with in-charge to make sure OTP is better managed.  Follow up with DHT to ensure better supervision.",
-                        "assignedTo": "72"
+                        "assignedTo": "72",
+                        "uploaded": true
                      },
                      {
                         "id": "591",
                         "title": "Check the site for solar power possibilities",
                         "task": "Ask Seth to visit site and assess",
-                        "assignedTo": "8, 11"
+                        "assignedTo": "8, 11",
+                        "uploaded": true
                      }]
                 )
             })

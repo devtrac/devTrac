@@ -320,6 +320,7 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
                 actionItem.assignedTo = $.map(devtrac.dataPull.undNode(item, "field_actionitem_responsible", []), function(user){
                     return user.target_id;
                 }).join(", ");
+                actionItem.uploaded = true;
                 navigator.log.debug("Processed action item: " + actionItem.title);
                 return actionItem;
             });

@@ -37,6 +37,7 @@ ActionItemController.prototype.editSave = function(){
             devtrac.currentSite.actionItems[id].title = title;
             devtrac.currentSite.actionItems[id].task = task;
             devtrac.currentSite.actionItems[id].assignedTo = assignedTo;
+            devtrac.currentSite.actionItems[id].uploaded = false;
         }
     }
 
@@ -129,6 +130,7 @@ ActionItemController.prototype.save = function(){
     actionItem.title = title;
     actionItem.task = task;
     actionItem.assignedTo = assignedTo;
+    actionItem.uploaded = false;
     devtrac.currentSite.actionItems.push(actionItem);
 
     devtrac.currentSite.uploaded = false;
