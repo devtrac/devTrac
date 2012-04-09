@@ -258,6 +258,10 @@ fieldset {
     background: grey;
 }
 
-#location{
+#latitude{
+    padding-top: 10px;
+}
+
+#longitude{
     padding-top: 10px;
 }
