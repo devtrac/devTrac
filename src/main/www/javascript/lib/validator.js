@@ -1,7 +1,7 @@
 function Validator(){
 }
 
-Validator.prototype.isValidDate = function(date) {
+Validator.isValidDate = function(date) {
     var matches = /^(\d{2})[\/](\d{2})[\/](\d{4})$/.exec(date);
     if (matches == null) return false;
     var day = matches[1];

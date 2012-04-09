@@ -29,7 +29,7 @@ siteController.create = function(){
     }
 
     var dateVisited = $("#dateVisited").val();
-    if(!new Validator().isValidDate(dateVisited)){
+    if(!Validator.isValidDate(dateVisited)){
       alert('The date visited: '+ dateVisited + ' is invalid.');
       return;
     }
