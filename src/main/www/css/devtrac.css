@@ -261,3 +261,18 @@ fieldset {
 #latitude, #longitude{
     padding-top: 10px;
 }
+
+/**Edit GPS**/
+#re_capture_gps_button{
+    margin-top: 10px;
+}
+
+#re_capture_gps_button[disabled]{
+    margin-top: 10px;
+    border: 0px;
+    background: grey;
+}
+
+#latitude_edit, #longitude_edit{
+    padding-top: 10px;
+}
