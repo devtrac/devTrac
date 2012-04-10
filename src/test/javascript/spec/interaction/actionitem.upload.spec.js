@@ -55,7 +55,11 @@ describe("ActionItemUpload", function() {
 
             devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
 
-            expect(navigator.network.XHR.mostRecentCall.args[3]).toEqual('title=AI 2&type=actionitem&field_actionitem_ftreportitem[und][0][target_id]=6666&field_actionitem_resp_place[und][0][target_id]=1276&field_actionitem_due_date[und][0][value][date]=' + devtrac.common.getOneMonthLaterDate() + '&field_actionitem_responsible[und][0][target_id]=tester2 (32)&field_actionitem_followuptask[und][0][value]=test 2&language=und&');
+            var expectedPostData = 'title=AI 2&type=actionitem&field_actionitem_ftreportitem[und][0][target_id]=6666'
+                + '&field_actionitem_resp_place[und][0][target_id]=1276&field_actionitem_due_date[und][0][value][date]=' + devtrac.common.getOneMonthLaterDate()
+                + '&field_actionitem_responsible[und][0][target_id]=tester2 (32)&field_actionitem_followuptask[und][0][value]=test 2&language=und&';
+
+            expect(navigator.network.XHR.mostRecentCall.args[3]).toEqual(expectedPostData);
         })
 
         describe("update the 'uploaded' attribute", function(){
@@ -122,24 +126,24 @@ describe("ActionItemUpload", function() {
             })
 
             it("'successCallback' should be called when all action items uploaded successfully", function() {
-                actionItems.push(itemSuccessful);
-                actionItems.push(itemSuccessful);
+                actionItems.push(createActionItem('YES one', false));
+                actionItems.push(createActionItem('YES two', false));
                 devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
                 expect(successCallback).toHaveBeenCalledWith('Uploading finished. 0 failure in 2 items.');
             })
 
             it("'errorCallback' should be called when some of all action items uploaded successfully", function() {
-                actionItems.push(itemSuccessful);
-                actionItems.push(itemFailed);
-                actionItems.push(itemSuccessful);
+                actionItems.push(createActionItem('YES one', false));
+                actionItems.push(createActionItem('FAILED one', false));
+                actionItems.push(createActionItem('YES two', false));
                 devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
                 expect(errorCallback).toHaveBeenCalledWith('Uploading finished. 1 failure in 3 items.');
             })
 
-            it("'errorCallback' should be called when some of all action items uploaded successfully", function() {
-                actionItems.push(itemFailed);
-                actionItems.push(itemFailed);
-                actionItems.push(itemFailed);
+            it("'errorCallback' should be called when all action items uploaded failed", function() {
+                actionItems.push(createActionItem('FAILED one', false));
+                actionItems.push(createActionItem('FAILED two', false));
+                actionItems.push(createActionItem('FAILED three', false));
                 devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
                 expect(errorCallback).toHaveBeenCalledWith('Uploading finished. 3 failure in 3 items.');
             })
@@ -151,21 +155,8 @@ describe("ActionItemUpload", function() {
 
             beforeEach(function() {
                 actionItems = [];
-
-                itemUploaded = new ActionItem();
-                itemUploaded.id = 123;
-                itemUploaded.title = "Uploaded One";
-                itemUploaded.task = "task uploaded";
-                itemUploaded.assignedTo = "testerUploaed";
-                itemUploaded.uploaded = true;
-
-                itemNotUploaded = new ActionItem();
-                itemNotUploaded.id = 0;
-                itemNotUploaded.title = "Not Uploaded One";
-                itemNotUploaded.task = "task not uploaded";
-                itemNotUploaded.assignedTo = "testerNotUploaded";
-                itemNotUploaded.uploaded = false;
-
+                itemUploaded = createActionItem('Uploaded One', true);
+                itemNotUploaded = createActionItem('Not Uploaded One', false);
                 actionItems.push(itemUploaded);
                 actionItems.push(itemNotUploaded);
 
@@ -184,5 +175,18 @@ describe("ActionItemUpload", function() {
                 expect(devtrac.common.callServicePost.callCount).toEqual(1);
             })
         })
+
+        function createActionItem(title, uploaded){
+            var actionItem = new ActionItem();
+
+            actionItem.title = title;
+            actionItem.uploaded = uploaded;
+            actionItem.id = 0;
+            actionItem.task = 'Action Task';
+            actionItem.assignedTo = 'tester';
+
+            return actionItem;
+        }
     })
 })
+
