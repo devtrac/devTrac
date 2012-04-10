@@ -96,8 +96,7 @@ describe("SiteController", function(){
             $("#longitude").text("Longitude: 108");
             siteController.create();
             var site = devtrac.fieldTrip.sites.pop();
-            expect(site.latitude).toEqual("45");
-            expect(site.longitude).toEqual("108");
+            expect(site.placeGeo).toEqual("POINT (45 108)");
         })
     })
 

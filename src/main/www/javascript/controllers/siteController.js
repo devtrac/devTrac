@@ -40,8 +40,9 @@ siteController.create = function(){
     site.name = $("#site_title").val();
     site.type = $("#sitetypes").val();
     site.dateVisited = dateVisited;
-    site.latitude = $("#latitude").text().split(" ")[1];
-    site.longitude = $("#longitude").text().split(" ")[1];
+    var latitude = $("#latitude").text().split(" ")[1];
+    var longitude = $("#longitude").text().split(" ")[1];
+    site.placeGeo = "POINT (" + latitude + " " + longitude + ")";
     site.narrative = "Please provide a full report.";
 	devtrac.fieldTrip.sites.push(site);
 	navigator.store.put(function(){

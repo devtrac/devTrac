@@ -21,8 +21,6 @@ function Site(){
         phone: "",
         email: ""
     };
-    this.latitude = "";
-    this.longitude = "";
     this.submission = [];
     this.photos = {};
     this.actionItems = [];
@@ -57,8 +55,8 @@ Site.packageData = function(site, fieldTripId) {
         "language": "und"
     };
     if (site.offline) {
-        if (site.latitude != "" && site.longitude != "") {
-            data["field_ftritem_lat_long[und][0][wkt]"] = "POINT (" + site.latitude + " " + site.longitude + ")";
+        if (site.placeGeo != "") {
+            data["field_ftritem_lat_long[und][0][wkt]"] = site.placeGeo;
         }
         data["field_ftritem_field_trip[und][0][target_id]"] = fieldTripId;
     }
