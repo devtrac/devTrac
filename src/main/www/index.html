@@ -58,6 +58,8 @@
         </script>
         <script type="text/javascript" src="javascript/controllers/contactInfoController.js">
         </script>
+        <script type="text/javascript" src="javascript/controllers/gpsController.js">
+        </script>
         <script type="text/javascript" src="javascript/controllers/actionItemController.js">
         </script>
         <script type="text/javascript" src="javascript/controllers/settingsController.js">
@@ -286,6 +288,9 @@
                     <li>
                         <span id="site_detail_action_item" class="link">Action Item</span>
                     </li>
+                    <li>
+                        <span id="site_detail_gps" class="link">GPS Information</span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -449,6 +454,29 @@
                 <p class="submit">
                     <input type="submit" id="action_item_edit" class="button" value="Save"/>
                 </p>
+            </div>
+        </div>
+        <!-- GPS information Screen -->
+        <div id="gps_screen" style="display: none">
+            <div class="toolbar">
+                <h1>GPS Information</h1>
+                <span class="back site_details_sub_screen">Back</span>
+            </div>
+            <div class="content">
+                <p>
+                        <fieldset>
+                        <legend> Location Info </legend>
+                        <p>
+                            <label id="latitude_edit">
+                                Latitude:
+                            </label>
+                            <label id="longitude_edit">
+                                Longitude:
+                            </label>
+                            <input type="button" name="capture" id="re_capture_gps_button" class="button" value="Capture GPS"/>
+                        </p>
+                        </fieldset>
+                    </p>
             </div>
         </div>
     </body>

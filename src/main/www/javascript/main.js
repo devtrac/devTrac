@@ -10,6 +10,7 @@ var devtrac = {
     questionsController: new QuestionsController(),
     contactInfoController: new ContactInfoController(),
     actionItemController: new ActionItemController(),
+    gpsController: new GPSController(),
     settingsController: new SettingsController(),
     photoController: new PhotoController(),
     remoteView: new RemoteView(),
