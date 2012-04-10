@@ -174,8 +174,23 @@ describe("DataPull", function(){
                                 },
                                 "field_ftritem_images": [
                                 ],
-                                "field_ftritem_lat_long": [
-                                ],
+                                "field_ftritem_lat_long": {
+                                  "und": [
+                                    {
+                                      "wkt": "POINT (32.34780701 2.78787083)",
+                                      "geo_type": "geometrycollection",
+                                      "lat": "2.78787",
+                                      "lon": "32.3478",
+                                      "left": "32.3478",
+                                      "top": "2.78787",
+                                      "right": "32.3478",
+                                      "bottom": "2.78787",
+                                      "srid": "4326",
+                                      "accuracy": null,
+                                      "source": null
+                                    }
+                                  ]
+                                },
                                 "field_ftritem_narrative": {
                                   "und": [
                                     {
@@ -347,6 +362,7 @@ describe("DataPull", function(){
                 site.placeId = '581';
                 site.narrative = "Please provide a full report.";
                 site.dateVisited = "24/03/2011";
+                site.placeGeo = "POINT (32.34780701 2.78787083)";
                 expected_sites.push(site);
 
                 site = new Site();
@@ -403,23 +419,6 @@ describe("DataPull", function(){
                                    "und": [
                                      {
                                        "email": "terra@gmail.com"
-                                     }
-                                   ]
-                                 },
-                                 "field_place_lat_long": {
-                                   "und": [
-                                     {
-                                       "wkt": "GEOMETRYCOLLECTION (POINT (32.34780701 2.78787083))",
-                                       "geo_type": "geometrycollection",
-                                       "lat": "2.78787",
-                                       "lon": "32.3478",
-                                       "left": "32.3478",
-                                       "top": "2.78787",
-                                       "right": "32.3478",
-                                       "bottom": "2.78787",
-                                       "srid": "4326",
-                                       "accuracy": null,
-                                       "source": null
                                      }
                                    ]
                                  },
@@ -523,7 +522,6 @@ describe("DataPull", function(){
                 site.name = '';
                 site.placeId = '581';
                 site.placeName = "Gulu PTC Demo PS";
-                site.placeGeo = "GEOMETRYCOLLECTION (POINT (32.34780701 2.78787083))";
 
                 var taxonomy = new PlaceTaxonomy();
                 taxonomy.id = '195';
