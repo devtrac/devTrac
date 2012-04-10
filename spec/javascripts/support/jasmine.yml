@@ -39,6 +39,7 @@ src_files:
     - src/main/www/javascript/controllers/siteDetailController.js
     - src/main/www/javascript/controllers/contactInfoController.js
     - src/main/www/javascript/controllers/actionItemController.js
+    - src/main/www/javascript/controllers/gpsController.js
     - src/main/www/javascript/controllers/settingsController.js
     - src/main/www/javascript/controllers/photoController.js
     - src/main/www/javascript/helpers/site_list_helper.js
