@@ -191,7 +191,7 @@ DataPull.prototype.tripSiteDetails = function(callback){
                 var dateVisited = devtrac.dataPull.undNode(item, "field_ftritem_date_visited", []);
                 Site.setDateVisited(site, devtrac.dataPull.getFieldFromJsonArray(dateVisited, "value", site.dateVisited));
 
-                var lat_long = devtrac.dataPull.undNode(placeDetails, "field_ftritem_lat_long", []);
+                var lat_long = devtrac.dataPull.undNode(item, "field_ftritem_lat_long", []);
                 site.placeGeo = devtrac.dataPull.getFieldFromJsonArray(lat_long, "wkt", site.placeGeo);
 
                 navigator.log.debug("Processed site with id: " + site.id);
