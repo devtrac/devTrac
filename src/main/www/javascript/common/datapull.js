@@ -191,6 +191,9 @@ DataPull.prototype.tripSiteDetails = function(callback){
                 var dateVisited = devtrac.dataPull.undNode(item, "field_ftritem_date_visited", []);
                 Site.setDateVisited(site, devtrac.dataPull.getFieldFromJsonArray(dateVisited, "value", site.dateVisited));
 
+                var lat_long = devtrac.dataPull.undNode(placeDetails, "field_ftritem_lat_long", []);
+                site.placeGeo = devtrac.dataPull.getFieldFromJsonArray(lat_long, "wkt", site.placeGeo);
+
                 navigator.log.debug("Processed site with id: " + site.id);
                 devtrac.dataPull.sites.push(site);
                 return site;
@@ -237,8 +240,6 @@ DataPull.prototype.placeDetailsForSite = function(callback){
                 var placeDetails = placeResponse["#data"][0];
                 site.placeId = placeDetails.nid;
                 site.placeName = placeDetails.title;
-                var lat_long = devtrac.dataPull.undNode(placeDetails, "field_place_lat_long", []);
-                site.placeGeo = devtrac.dataPull.getFieldFromJsonArray(lat_long, "wkt", site.placeGeo);
 
                 var persons = devtrac.dataPull.undNode(placeDetails, "field_place_responsible_person", []);
                 site.contactInfo.name = devtrac.dataPull.getFieldFromJsonArray(persons, "value", site.contactInfo.name);
