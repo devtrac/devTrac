@@ -42,7 +42,6 @@ siteController.create = function(){
     site.dateVisited = dateVisited;
     site.latitude = $("#latitude").text().split(" ")[1];
     site.longitude = $("#longitude").text().split(" ")[1];
-    site.dateVisited = $("#dateVisited").val();
     site.narrative = "Please provide a full report.";
 	devtrac.fieldTrip.sites.push(site);
 	navigator.store.put(function(){
