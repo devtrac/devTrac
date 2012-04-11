@@ -2,7 +2,7 @@ function SiteMother(){
 
 }
 
-SiteMother.createActionItem = function(title, uploaded){
+SiteMother.createActionItem = function(title, uploaded, status){
     var actionItem = new ActionItem();
 
     actionItem.title = title;
@@ -10,6 +10,7 @@ SiteMother.createActionItem = function(title, uploaded){
     actionItem.id = 0;
     actionItem.task = 'Action Task';
     actionItem.assignedTo = 'tester';
+    actionItem.status = status? status : actionItem.status;
 
     return actionItem;
 }
