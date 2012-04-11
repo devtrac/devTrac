@@ -550,180 +550,181 @@ describe("DataPull", function(){
             var siteID = 0;
 
             beforeEach(function() {
-                actionItems = [{
-                                "vid": "590",
-                                "uid": "11",
-                                "title": "Improve Supervision and Support",
-                                "log": "",
-                                "status": "1",
-                                "comment": "2",
-                                "promote": "0",
-                                "sticky": "0",
-                                "nid": "590",
-                                "type": "actionitem",
-                                "language": "und",
-                                "created": "1300949564",
-                                "changed": "1300949564",
-                                "tnid": "0",
-                                "translate": "0",
-                                "revision_timestamp": "1300949564",
-                                "revision_uid": "11",
-                                "taxonomy_vocabulary_8": [
-                                ],
-                                "field_actionitem_due_date": {
-                                  "und": [
-                                    {
-                                      "value": "2011-03-24T00:00:00",
-                                      "timezone": "Africa\/Kampala",
-                                      "timezone_db": "Africa\/Kampala",
-                                      "date_type": "date"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_followuptask": {
-                                  "und": [
-                                    {
-                                      "value": "Follow up with in-charge to make sure OTP is better managed.  Follow up with DHT to ensure better supervision.",
-                                      "format": null
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_severity": {
-                                  "und": [
-                                    {
-                                      "value": "2"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_status": {
-                                  "und": [
-                                    {
-                                      "value": "1"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_ftreportitem": {
-                                  "und": [
-                                    {
-                                      "target_id": "587",
-                                      "target_type": "node"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_resp_place": {
-                                  "und": [
-                                    {
-                                      "target_id": "586",
-                                      "target_type": "node"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_responsible": {
-                                  "und": [
-                                    {
-                                      "target_id": "72",
-                                      "target_type": "user"
-                                    }
-                                  ]
-                                },
-                                "cid": "0",
-                                "last_comment_timestamp": "1300973910",
-                                "last_comment_name": "",
-                                "last_comment_uid": "72",
-                                "comment_count": "1",
-                                "name": "Sean Blaschke",
-                                "picture": "0",
-                                "data": "a:6:{s:13:\"form_build_id\";s:37:\"form-59e71a1b413fb05d207e8ed5c1db4c31\";s:7:\"contact\";i:1;s:14:\"picture_delete\";i:0;s:14:\"picture_upload\";s:0:\"\";s:5:\"piwik\";a:1:{s:16:\"piwik_token_auth\";s:9:\"anonymous\";}s:29:\"taxonomy_image_disable_images\";i:0;}"
-                              },
-                              {
-                                "vid": "591",
-                                "uid": "8",
-                                "title": "Check the site for solar power possibilities",
-                                "log": "",
-                                "status": "1",
-                                "comment": "2",
-                                "promote": "0",
-                                "sticky": "0",
-                                "nid": "591",
-                                "type": "actionitem",
-                                "language": "und",
-                                "created": "1300949669",
-                                "changed": "1307436711",
-                                "tnid": "0",
-                                "translate": "0",
-                                "revision_timestamp": "1307436711",
-                                "revision_uid": "8",
-                                "taxonomy_vocabulary_8": [],
-                                "field_actionitem_due_date": {
-                                  "und": [
-                                    {
-                                      "value": "2011-07-01T00:00:00",
-                                      "timezone": "Africa\/Kampala",
-                                      "timezone_db": "Africa\/Kampala",
-                                      "date_type": "date"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_followuptask": {
-                                  "und": [
-                                    {
-                                      "value": "Ask Seth to visit site and assess",
-                                      "format": "1",
-                                      "safe_value": "<p>Ask Seth to visit site and assess<\/p>\n"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_severity": {
-                                  "und": [
-                                    {
-                                      "value": "3"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_status": {
-                                  "und": [
-                                    {
-                                      "value": "3"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_ftreportitem": {
-                                  "und": [
-                                    {
-                                      "target_id": "582",
-                                      "target_type": "node"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_resp_place": {
-                                  "und": [
-                                    {
-                                      "target_id": "581",
-                                      "target_type": "node"
-                                    }
-                                  ]
-                                },
-                                "field_actionitem_responsible": {
-                                  "und": [
-                                    {
-                                      "target_id": "8",
-                                      "target_type": "user"
-                                    },
-                                    {
-                                      "target_id": "11",
-                                      "target_type": "user"
-                                    }
-                                  ]
-                                },
-                                "cid": "0",
-                                "last_comment_timestamp": "1300973359",
-                                "last_comment_name": "",
-                                "last_comment_uid": "58",
-                                "comment_count": "1",
-                                "name": "terraw",
-                                "picture": "0",
-                                "data": "a:5:{s:13:\"form_build_id\";s:37:\"form-1050f68a726df9c11f0702f838f43047\";s:14:\"picture_delete\";s:0:\"\";s:14:\"picture_upload\";s:0:\"\";s:29:\"taxonomy_image_disable_images\";i:0;s:7:\"contact\";i:1;}"
-                              }];
+                actionItems = [
+                               {
+                                   "changed": "1329128643",
+                                   "cid": "0",
+                                   "comment": "2",
+                                   "comment_count": "0",
+                                   "created": "1329128643",
+                                   "data": "a:6:{s:13:\"form_build_id\";s:37:\"form-294b8c011bb6a8a87f63672d7145c263\";s:14:\"picture_delete\";s:0:\"\";s:14:\"picture_upload\";s:0:\"\";s:29:\"taxonomy_image_disable_images\";i:0;s:7:\"contact\";i:1;s:5:\"piwik\";a:1:{s:16:\"piwik_token_auth\";s:9:\"anonymous\";}}",
+                                   "ds_switch": "",
+                                   "field_actionitem_due_date": {
+                                       "und": [
+                                           {
+                                               "date_type": "date",
+                                               "timezone": "Africa/Kampala",
+                                               "timezone_db": "Africa/Kampala",
+                                               "value": "2012-02-13T00:00:00"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_followuptask": {
+                                       "und": [
+                                           {
+                                               "format": null,
+                                               "value": "There is not much to do"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_ftreportitem": {
+                                       "und": [
+                                           {
+                                               "target_id": "1277"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_resp_place": {
+                                       "und": [
+                                           {
+                                               "target_id": "1276"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_responsible": {
+                                       "und": [
+                                           {
+                                               "target_id": "5"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_severity": {
+                                       "und": [
+                                           {
+                                               "value": "3"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_status": {
+                                       "und": [
+                                           {
+                                               "value": "3"
+                                           }
+                                       ]
+                                   },
+                                   "field_fieldtrip_button": [],
+                                   "language": "und",
+                                   "last_comment_name": null,
+                                   "last_comment_timestamp": "1329128643",
+                                   "last_comment_uid": "5",
+                                   "log": "",
+                                   "name": "reinier",
+                                   "nid": "5757",
+                                   "picture": "0",
+                                   "promote": "0",
+                                   "revision_timestamp": "1329128643",
+                                   "revision_uid": "5",
+                                   "status": "1",
+                                   "sticky": "0",
+                                   "taxonomy_vocabulary_8": {
+                                       "und": [
+                                           {
+                                               "tid": "221"
+                                           }
+                                       ]
+                                   },
+                                   "title": "This is an Action Item for the blackberry application",
+                                   "tnid": "0",
+                                   "translate": "0",
+                                   "type": "actionitem",
+                                   "uid": "5",
+                                   "vid": "5757"
+                               },
+                               {
+                                   "changed": "1333708548",
+                                   "cid": "0",
+                                   "comment": "2",
+                                   "comment_count": "0",
+                                   "created": "1333708548",
+                                   "data": "a:6:{s:7:\"contact\";i:1;s:14:\"picture_delete\";s:0:\"\";s:14:\"picture_upload\";s:0:\"\";s:13:\"form_build_id\";s:37:\"form-557ec27ac104213f5cec77b52f27a601\";s:21:\"force_password_change\";i:0;s:29:\"taxonomy_image_disable_images\";i:0;}",
+                                   "ds_switch": "",
+                                   "field_actionitem_due_date": {
+                                       "und": [
+                                           {
+                                               "date_type": "date",
+                                               "timezone": "Africa/Kampala",
+                                               "timezone_db": "Africa/Kampala",
+                                               "value": "2012-04-06T00:00:00"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_followuptask": {
+                                       "und": [
+                                           {
+                                               "format": "1",
+                                               "safe_value": "<p>123</p>\n",
+                                               "value": "123"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_ftreportitem": {
+                                       "und": [
+                                           {
+                                               "target_id": "6693"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_resp_place": {
+                                       "und": [
+                                           {
+                                               "target_id": "1276"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_responsible": {
+                                       "und": [
+                                           {
+                                               "target_id": "32"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_severity": {
+                                       "und": [
+                                           {
+                                               "value": "3"
+                                           }
+                                       ]
+                                   },
+                                   "field_actionitem_status": {
+                                       "und": [
+                                           {
+                                               "value": "1"
+                                           }
+                                       ]
+                                   },
+                                   "field_fieldtrip_button": [],
+                                   "language": "und",
+                                   "last_comment_name": null,
+                                   "last_comment_timestamp": "1333708548",
+                                   "last_comment_uid": "32",
+                                   "log": "",
+                                   "name": "tester2",
+                                   "nid": "6699",
+                                   "picture": "0",
+                                   "promote": "0",
+                                   "revision_timestamp": "1333708548",
+                                   "revision_uid": "32",
+                                   "status": "1",
+                                   "sticky": "0",
+                                   "taxonomy_vocabulary_8": [],
+                                   "title": "abc",
+                                   "tnid": "0",
+                                   "translate": "0",
+                                   "type": "actionitem",
+                                   "uid": "32",
+                                   "vid": "6716"
+                               }
+                           ];
 
                 siteID = 582;
                 devtrac.dataPull.sitesForActionItems = [{"id" : siteID}];
@@ -751,17 +752,17 @@ describe("DataPull", function(){
             it("parse action items for site correctly", function() {
                 expect(devtrac.dataPull.fieldTrip.sites[0].actionItems).toEqual(
                     [{
-                        "id": "590",
-                        "title": "Improve Supervision and Support",
-                        "task": "Follow up with in-charge to make sure OTP is better managed.  Follow up with DHT to ensure better supervision.",
-                        "assignedTo": "72",
+                        "id": "5757",
+                        "title": "This is an Action Item for the blackberry application",
+                        "task": "There is not much to do",
+                        "assignedTo": "5",
                         "uploaded": true
                      },
                      {
-                        "id": "591",
-                        "title": "Check the site for solar power possibilities",
-                        "task": "Ask Seth to visit site and assess",
-                        "assignedTo": "8, 11",
+                        "id": "6699",
+                        "title": "abc",
+                        "task": "123",
+                        "assignedTo": "32",
                         "uploaded": true
                      }]
                 )
