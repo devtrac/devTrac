@@ -64,7 +64,6 @@ ActionItemUpload.prototype._processResult = function(successCallback, errorCallb
         failedCounts += (this.items[index].uploaded ? 0 : 1);
     }
 
-    var msg = 'Uploading finished. ' + failedCounts + ' failure in ' + this.itemsCount + (this.itemsCount > 1 ? ' items' : ' item') + '.';
-
+    var msg = 'Action item Uploading finished. ' + failedCounts + ' failure in ' + this.itemsCount + (this.itemsCount > 1 ? ' items' : ' item') + '.';
     failedCounts > 0 ? errorCallback(msg) : successCallback(msg);
 }

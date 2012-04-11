@@ -129,7 +129,7 @@ describe("ActionItemUpload", function() {
                 actionItems.push(createActionItem('YES one', false));
                 actionItems.push(createActionItem('YES two', false));
                 devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
-                expect(successCallback).toHaveBeenCalledWith('Uploading finished. 0 failure in 2 items.');
+                expect(successCallback).toHaveBeenCalledWith('Action item Uploading finished. 0 failure in 2 items.');
             })
 
             it("'errorCallback' should be called when some of all action items uploaded successfully", function() {
@@ -137,7 +137,7 @@ describe("ActionItemUpload", function() {
                 actionItems.push(createActionItem('FAILED one', false));
                 actionItems.push(createActionItem('YES two', false));
                 devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
-                expect(errorCallback).toHaveBeenCalledWith('Uploading finished. 1 failure in 3 items.');
+                expect(errorCallback).toHaveBeenCalledWith('Action item Uploading finished. 1 failure in 3 items.');
             })
 
             it("'errorCallback' should be called when all action items uploaded failed", function() {
@@ -145,7 +145,7 @@ describe("ActionItemUpload", function() {
                 actionItems.push(createActionItem('FAILED two', false));
                 actionItems.push(createActionItem('FAILED three', false));
                 devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
-                expect(errorCallback).toHaveBeenCalledWith('Uploading finished. 3 failure in 3 items.');
+                expect(errorCallback).toHaveBeenCalledWith('Action item Uploading finished. 3 failure in 3 items.');
             })
         })
 
