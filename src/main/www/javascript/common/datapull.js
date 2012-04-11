@@ -315,6 +315,9 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
                 actionItem.title = item.title;
                 actionItem.id = item.nid;
 
+                var status = devtrac.dataPull.undNode(item, "field_actionitem_status", []);
+                actionItem.status = devtrac.dataPull.getFieldFromJsonArray(status, "value", actionItem.status);
+
                 var tasks = devtrac.dataPull.undNode(item, "field_actionitem_followuptask", []);
                 actionItem.task = devtrac.dataPull.getFieldFromJsonArray(tasks, "value", actionItem.task);
 

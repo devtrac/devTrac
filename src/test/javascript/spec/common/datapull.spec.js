@@ -756,6 +756,7 @@ describe("DataPull", function(){
                         "title": "This is an Action Item for the blackberry application",
                         "task": "There is not much to do",
                         "assignedTo": "5",
+                        "status": "3",
                         "uploaded": true
                      },
                      {
@@ -763,6 +764,7 @@ describe("DataPull", function(){
                         "title": "abc",
                         "task": "123",
                         "assignedTo": "32",
+                        "status": "1",
                         "uploaded": true
                      }]
                 )

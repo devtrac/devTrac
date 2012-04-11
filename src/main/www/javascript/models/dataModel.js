@@ -97,6 +97,7 @@ function ActionItem(){
     this.title = "";
 	this.task = "";
     this.assignedTo = "";
+    this.status = 1;
     this.uploaded = false;
 }
 
