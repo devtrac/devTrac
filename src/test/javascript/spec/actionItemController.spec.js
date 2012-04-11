@@ -208,9 +208,7 @@ describe("ActionItemController", function() {
         })
 
         it("Field value should be correct", function(){
-            var expectedItem = new ActionItem();
-            expectedItem.id = 0;
-            expectedItem.title = title;
+            var expectedItem = SiteMother.createActionItem(title, false);
             expectedItem.task = task;
             expectedItem.assignedTo = assignedTo;
             expect(devtrac.currentSite.actionItems[0]).toEqual(expectedItem);
