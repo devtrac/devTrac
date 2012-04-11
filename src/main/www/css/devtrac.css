@@ -267,7 +267,10 @@ fieldset {
     padding-top: 10px;
 }
 
-#gps_screen fieldset {
-    width: 240px;
-    height: 80px;
+#gps_screen label {
+    display: inline;
+}
+
+#latitude_value {
+    padding-left: 14px;
 }
