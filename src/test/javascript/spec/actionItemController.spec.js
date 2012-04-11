@@ -3,6 +3,7 @@ describe("ActionItemController", function() {
     describe("Rendering action item view", function(){
         var actionItemController = new ActionItemController();
         var userProfiles;
+        var actionItems;
 
         beforeEach(function(){
             var fixture = "<div id='list_action_item_screen' style='display: none'>" +
@@ -41,39 +42,29 @@ describe("ActionItemController", function() {
 
             setFixtures("<body>"+ fixture +"</body>");
 
-            devtrac.profiles = [{username:"Bob", name:"Bob"}, {username:"Charlie", name:"Charlie"}];
+            devtrac.profiles = [{username:"tester", name:"tester"}, {username:"Charlie", name:"Charlie"}];
+
+            actionItems = [];
+            actionItems.push(SiteMother.createActionItem("Opened Action Item", false, "1"));
+            actionItems.push(SiteMother.createActionItem("Closed Action Item", false, "3"));
+
+            devtrac.currentSite = [];
+            devtrac.currentSite.actionItems = actionItems;
+
+            actionItemController.show();
         });
 
 
-        it("display action items in current section", function(){
-            var actionItems = [{title:"test action", assignedTo:"Bob"},{title:"test action 2", assignedTo:"Dick"}];
-
-
-            actionItemController.displayActionItemsInCurrentSection(actionItems);
-
-
+        it("display opened action items in current section", function(){
+            expect($('#action_items_list .grid_row .col1').size()).toEqual(1);
             expect($('#action_items_list div.col1:first')).toHaveText( actionItems[0].title);
-            expect($('#action_items_list div.col1:eq(1)')).toHaveText( actionItems[1].title);
-
-
             expect($('#action_items_list div.col2:eq(0)')).toHaveText( actionItems[0].assignedTo);
-            expect($('#action_items_list div.col2:eq(1)')).toHaveText( "N/A");
         });
 
-
-        it("display fake action items in history section", function(){
-            var fakeActionItems = [{title:"test fake", assignedTo:"Bob"},{title:"test fake 2", assignedTo:"Dick"}];
-
-
-            actionItemController.displayActionItemsInHistorySection(fakeActionItems);
-
-
-            expect($('#previous_action_items_list div.col1:eq(0)')).toHaveText( fakeActionItems[0].title);
-            expect($('#previous_action_items_list div.col1:eq(1)')).toHaveText( fakeActionItems[1].title);
-
-
-            expect($('#previous_action_items_list div.col2:eq(0)')).toHaveText( fakeActionItems[0].assignedTo);
-            expect($('#previous_action_items_list div.col2:eq(1)')).toHaveText( "N/A");
+        it("display closed action items in history section", function(){
+            expect($('#previous_action_items_list .grid_row .col1').size()).toEqual(1);
+            expect($('#previous_action_items_list div.col1:first')).toHaveText( actionItems[1].title);
+            expect($('#previous_action_items_list div.col2:eq(0)')).toHaveText( actionItems[1].assignedTo);
         });
     })
 

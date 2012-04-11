@@ -64,18 +64,19 @@ ActionItemController.prototype.show = function(){
     $("#no_action_items").hide();
 
     devtrac.actionItemController.displayActionItemsInCurrentSection(devtrac.currentSite.actionItems);
-    devtrac.actionItemController.displayActionItemsInHistorySection([{title:"test action item",id:"1",assignedTo:"tester" }]);
+    devtrac.actionItemController.displayActionItemsInHistorySection(devtrac.currentSite.actionItems);
     actionItemGrid.show();
 
     navigator.log.debug("Displayed action items");
     screens.show("list_action_items");
-    attachClickEvents(".action_item", showActionItemEditScreen);
+    $(".action_item").click(showActionItemEditScreen);
 }
 
 ActionItemController.prototype.displayActionItemsInCurrentSection = function(actionItems){
     var container = $("#action_items_list");
     container.html("");
     $.each(actionItems, function(index, item){
+        if (item.status === "3") return;
         var name = devtrac.actionItemController._parseProfileName(item);
         var id = item.id;
         var html = "<div class='grid_row'><div id='" + id + "' class='col1 action_item link'>" + item.title + "</div><div class='col2'>" + name + "</div></div>";
@@ -87,6 +88,7 @@ ActionItemController.prototype.displayActionItemsInHistorySection = function(act
     var container = $("#previous_action_items_list");
     container.html("");
     $.each(actionItems, function(index, item){
+        if (item.status === "1") return;
         var name = devtrac.actionItemController._parseProfileName(item);
         var id = item.id;
         var html = "<div class='grid_row'><div id='" + id + "' class='col1'>" + item.title + "</div><div class='col2'>" + name + "</div></div>";
