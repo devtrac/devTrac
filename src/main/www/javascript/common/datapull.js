@@ -350,7 +350,9 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
 
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving action item details for '" + site.name + "'.");
-    devtrac.remoteView.get(DT_D7.ACTION_ITEMS.replace('<SITE_NID>', site.id), actionItemSuccess, actionItemFailed);
+    var url = DT_D7.ACTION_ITEMS.replace('<SITE_NID>', site.id);
+    url = url.replace('<FIELD_TRIP_NID>', devtrac.dataPull.fieldTrip.id);
+    devtrac.remoteView.get(url, actionItemSuccess, actionItemFailed);
 }
 
 DataPull.prototype.undNode = function(node, field, defaultValue) {

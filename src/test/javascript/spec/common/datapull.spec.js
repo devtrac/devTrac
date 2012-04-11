@@ -739,7 +739,9 @@ describe("DataPull", function(){
             });
 
             it("should call new method to get remote views with correct URL", function(){
-                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_D7.ACTION_ITEMS.replace('<SITE_NID>', siteID));
+                var url = DT_D7.ACTION_ITEMS.replace('<SITE_NID>', siteID);
+                url = url.replace('<FIELD_TRIP_NID>', devtrac.dataPull.fieldTrip.id);
+                expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(url);
             })
 
             it("response should be wrapped in '#data' to ensure forward compatibility", function() {
