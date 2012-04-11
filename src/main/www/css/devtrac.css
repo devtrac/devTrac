@@ -244,28 +244,24 @@ p.submit {
 
 /**GPS Info**/
 fieldset {
-    width: 240px;
-    height: 120px;
+    padding-top: 5px;
+    margin-left: 10px;
+    width: 204px;
+    height: 100px;
 }
 
 #capture_gps_button{
     margin-left: 10px;
-    margin-top: 7px;
 }
 
 #capture_gps_button[disabled]{
     margin-left: 10px;
-    margin-top: 7px;
     border: 0px;
     background: grey;
 }
 
 #add_trip fieldset label {
     display: inline;
-}
-
-#latitude, #longitude{
-    padding-top: 7px;
 }
 
 #latitude_value {
