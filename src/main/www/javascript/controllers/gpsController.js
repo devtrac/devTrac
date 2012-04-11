@@ -15,7 +15,7 @@ GPSController.prototype.show = function(){
         longitude = gpsInfo.split(" ")[1];
     }
 
-    $("#latitude_value").text(latitude);
-    $("#longitude_value").text(longitude);
+    $("#latitude_edit_value").text(latitude);
+    $("#longitude_edit_value").text(longitude);
     screens.show("gps_edit");
 }

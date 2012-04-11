@@ -66,8 +66,8 @@ siteController.getGPS = function (){
         $("#capture_gps_button").removeAttr('disabled');
         alert("Capturing GPS location successfully");
         navigator.geolocation.stop();
-        $("#latitude").text("Latitude: " + position.coords.latitude);
-        $("#longitude").text("Longitude: " + position.coords.longitude);
+        $("#latitude_value").text(position.coords.latitude);
+        $("#longitude_value").text(position.coords.longitude);
     }
 
     var errorCallback = function(error){
