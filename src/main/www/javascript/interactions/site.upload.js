@@ -7,6 +7,7 @@ SiteUpload.prototype.uploadMultiple = function(sitesToUpload, progressCallback, 
     siteCounts = sitesToUpload.length;
     sites = sitesToUpload;
     devtrac.siteUpload._uploadInternal(sitesToUpload.slice(), progressCallback, successCallback, errorCallback);
+    this.progressCallback = progressCallback;
 }
 
 SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
@@ -16,6 +17,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
         return;
     }
 
+    var that = this;
     var siteData = Site.packageData(site, devtrac.fieldTrip.id);
 
     var success = function(response) {
@@ -28,6 +30,14 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
         else {
             site.id = response['nid'];
             site.uploaded = true;
+            var actionUploadCallback = function (msg){
+                 for(var index in site.actionItems){
+                    site.uploaded &= site.actionItems[index].uploaded;
+                }
+            }
+
+            devtrac.actionItemUpload.uploadMultiple(site.actionItems, site.id, site.placeId, that.progressCallback, actionUploadCallback, actionUploadCallback);
+
             devtrac.currentSite = site;
             devtrac.dataStore.saveCurrentSite(function(){
                 navigator.log.log('Site "' + site.name + '" is marked as uploaded.');

@@ -21,3 +21,9 @@ SiteMother.createSite = function(name, uploaded, offline){
     site.offline = offline;
     return site;
 }
+
+SiteMother.createSiteWithActionItems = function(name, uploaded){
+    var site = this.createSite(name, uploaded, false);
+    site.actionItems.push(this.createActionItem('testActionItem', false));
+    return site;
+}

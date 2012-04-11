@@ -57,6 +57,39 @@ describe("SiteUpload", function(){
 
     });
 
+    describe('upload site with action items', function(){
+        var site;
+        beforeEach(function(){
+            successCallback = jasmine.createSpy('uploader.successCallback');
+            errorCallback = jasmine.createSpy('uploader.errorCallback');
+
+            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
+                callback('{#nid: 1}');
+            });
+
+            spyOn(devtrac.actionItemUpload, "uploadMultiple").andCallFake(function(items, siteId, placeId, progressCallback, successCallback, errorCallback){
+                for (index in items) {
+                    items[index].uploaded = false;
+                }
+                successCallback();
+            })
+
+            site = SiteMother.createSiteWithActionItems('1', false);
+        })
+
+        it('should upload action item when site uploaded successfully', function(){
+            uploader.upload(site, successCallback, errorCallback);
+
+            expect(devtrac.actionItemUpload.uploadMultiple).toHaveBeenCalled();
+        })
+
+        it('Site uploaded status should updated after upload action item', function(){
+            uploader.upload(site, successCallback, errorCallback);
+
+            expect(site.uploaded).toBeFalsy();
+        })
+    })
+
     describe("upload new sites", function(){
         beforeEach(function() {
             sites.push( SiteMother.createSite('YES', false, true));
