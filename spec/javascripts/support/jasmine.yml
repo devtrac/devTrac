@@ -44,6 +44,7 @@ src_files:
     - src/main/www/javascript/controllers/photoController.js
     - src/main/www/javascript/helpers/site_list_helper.js
     - src/main/www/javascript/main.js
+    - src/test/javascript/spec/fixture/siteMother.js
 
 # stylesheets
 #

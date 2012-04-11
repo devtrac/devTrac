@@ -126,24 +126,24 @@ describe("ActionItemUpload", function() {
             })
 
             it("'successCallback' should be called when all action items uploaded successfully", function() {
-                actionItems.push(createActionItem('YES one', false));
-                actionItems.push(createActionItem('YES two', false));
+                actionItems.push(SiteMother.createActionItem('YES one', false));
+                actionItems.push(SiteMother.createActionItem('YES two', false));
                 devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
                 expect(successCallback).toHaveBeenCalledWith('Action item Uploading finished. 0 failure in 2 items.');
             })
 
             it("'errorCallback' should be called when some of all action items uploaded successfully", function() {
-                actionItems.push(createActionItem('YES one', false));
-                actionItems.push(createActionItem('FAILED one', false));
-                actionItems.push(createActionItem('YES two', false));
+                actionItems.push(SiteMother.createActionItem('YES one', false));
+                actionItems.push(SiteMother.createActionItem('FAILED one', false));
+                actionItems.push(SiteMother.createActionItem('YES two', false));
                 devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
                 expect(errorCallback).toHaveBeenCalledWith('Action item Uploading finished. 1 failure in 3 items.');
             })
 
             it("'errorCallback' should be called when all action items uploaded failed", function() {
-                actionItems.push(createActionItem('FAILED one', false));
-                actionItems.push(createActionItem('FAILED two', false));
-                actionItems.push(createActionItem('FAILED three', false));
+                actionItems.push(SiteMother.createActionItem('FAILED one', false));
+                actionItems.push(SiteMother.createActionItem('FAILED two', false));
+                actionItems.push(SiteMother.createActionItem('FAILED three', false));
                 devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
                 expect(errorCallback).toHaveBeenCalledWith('Action item Uploading finished. 3 failure in 3 items.');
             })
@@ -155,8 +155,8 @@ describe("ActionItemUpload", function() {
 
             beforeEach(function() {
                 actionItems = [];
-                itemUploaded = createActionItem('Uploaded One', true);
-                itemNotUploaded = createActionItem('Not Uploaded One', false);
+                itemUploaded = SiteMother.createActionItem('Uploaded One', true);
+                itemNotUploaded = SiteMother.createActionItem('Not Uploaded One', false);
                 actionItems.push(itemUploaded);
                 actionItems.push(itemNotUploaded);
 
@@ -175,18 +175,6 @@ describe("ActionItemUpload", function() {
                 expect(devtrac.common.callServicePost.callCount).toEqual(1);
             })
         })
-
-        function createActionItem(title, uploaded){
-            var actionItem = new ActionItem();
-
-            actionItem.title = title;
-            actionItem.uploaded = uploaded;
-            actionItem.id = 0;
-            actionItem.task = 'Action Task';
-            actionItem.assignedTo = 'tester';
-
-            return actionItem;
-        }
     })
 })
 
