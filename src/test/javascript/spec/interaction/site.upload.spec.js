@@ -12,20 +12,19 @@ describe("SiteUpload", function(){
         uploader = new SiteUpload();
     })
 
+    function createSite(name, uploaded, offline){
+        var site = new Site();
+        site.name = name;
+        site.uploaded = uploaded;
+		site.offline = offline;
+        return site;
+    }
+
     describe("upload existing sites", function(){
         beforeEach(function(){
-            var site = new Site();
-            site.name = "YES";
-            site.uploaded = false;
-            sites.push(site);
-            site = new Site();
-            site.name = "NO";
-            site.uploaded = false;
-            sites.push(site);
-            site = new Site();
-            site.name = "YES";
-            site.uploaded = false;
-            sites.push(site);
+            sites.push(createSite('YES', false, false));
+            sites.push(createSite('NO', false, false));
+            sites.push(createSite('YES', false, false));
 
             progressCallback = jasmine.createSpy('uploader.progressCallback');
             successCallback = jasmine.createSpy('uploader.successCallback');
@@ -66,11 +65,7 @@ describe("SiteUpload", function(){
 
     describe("upload new sites", function(){
         beforeEach(function() {
-            var site = new Site();
-            site.name = "YES";
-            site.uploaded = false;
-            site.offline = true;
-            sites.push(site);
+            sites.push( createSite('YES', false, true));
         })
 
         it("should use HTTP POST method to create node", function(){
@@ -105,8 +100,9 @@ describe("SiteUpload", function(){
         })
 
         it("should only upload the site which uploaded is false", function(){
-            sites = [{'name':1,'uploaded':false},{'name':2,'uploaded':true},{'name':3,'uploaded':false} ];
-
+            sites.push(createSite('1',false, false));
+            sites.push(createSite('2',true, false));
+            sites.push(createSite('3',false, false));
             spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                 successCallback({'#data':'data_string'});
             })
@@ -117,7 +113,7 @@ describe("SiteUpload", function(){
         })
 
         it("should update the uploaded status to true if uploading is succeeded", function(){
-            var site ={'name':1,'uploaded':false};
+            var site = createSite('1',false,false);
 
             spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                 successCallback({'#data':'data_string'});
@@ -129,7 +125,7 @@ describe("SiteUpload", function(){
         })
 
         it("should update the uploaded status to false if uploading is failed", function(){
-            var site ={'name':1,'uploaded':false};
+            var site = createSite('1',false,false);
 
             spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
                 errorCallback({'#data':'data_string'});
@@ -160,7 +156,8 @@ describe("SiteUpload", function(){
 
         describe("when success", function(){
             beforeEach(function(){
-                sites = [{name: "YES", uploaded: false}, {name: "YES", uploaded: false}];
+                sites.push(createSite('YES',false,false));
+                sites.push(createSite('YES',false,false));
                 devtrac.siteUpload.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
             })
 
@@ -183,7 +180,9 @@ describe("SiteUpload", function(){
 
         describe("when error", function(){
             beforeEach(function(){
-                sites = [{name: "YES", uploaded: false}, {name: "NO", uploaded: false}, {name: "YES", uploaded: false}];
+                sites.push(createSite('YES',false, false));
+                sites.push(createSite('NO',false, false));
+                sites.push(createSite('YES',false, false));
                 devtrac.siteUpload.uploadMultiple(sites, progressCallback, successCallback, errorCallback);
             })
 
