@@ -32,7 +32,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
             site.uploaded = true;
             var actionUploadCallback = function (msg){
                  for(var index in site.actionItems){
-                    site.uploaded &= site.actionItems[index].uploaded;
+                    site.uploaded =  site.uploaded && site.actionItems[index].uploaded ;
                 }
             }
 
