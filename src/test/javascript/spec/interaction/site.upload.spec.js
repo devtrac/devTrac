@@ -59,31 +59,70 @@ describe("SiteUpload", function(){
 
     describe('upload site with action items', function(){
         var site;
+
         beforeEach(function(){
             successCallback = jasmine.createSpy('uploader.successCallback');
             errorCallback = jasmine.createSpy('uploader.errorCallback');
+            site = SiteMother.createSiteWithActionItems('1', false);
+        })
 
+        it('should upload action item after site uploaded successfully', function(){
             spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
                 callback('{#nid: 1}');
             });
 
             spyOn(devtrac.actionItemUpload, "uploadMultiple").andCallFake(function(items, siteId, placeId, progressCallback, successCallback, errorCallback){
-                for (index in items) {
-                    items[index].uploaded = false;
-                }
-                successCallback();
             })
 
-            site = SiteMother.createSiteWithActionItems('1', false);
-        })
-
-        it('should upload action item when site uploaded successfully', function(){
             uploader.upload(site, successCallback, errorCallback);
 
             expect(devtrac.actionItemUpload.uploadMultiple).toHaveBeenCalled();
         })
 
-        it('Site uploaded status should be updated after upload action item', function(){
+        it('should not upload action item when site uploaded failed', function(){
+            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
+                errorCallback({"#error": true});
+            });
+
+            spyOn(devtrac.actionItemUpload, "uploadMultiple").andCallFake(function(items, siteId, placeId, progressCallback, successCallback, errorCallback){
+            })
+
+            uploader.upload(site, successCallback, errorCallback);
+
+            expect(devtrac.actionItemUpload.uploadMultiple).not.toHaveBeenCalled();
+        })
+
+        it('Site uploaded status should be updated to true after all action item been uploaded successfully', function(){
+            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
+                callback('{#nid: 1}');
+            });
+
+            spyOn(devtrac.actionItemUpload, "uploadMultiple").andCallFake(function(items, siteId, placeId, progressCallback, successCallback, errorCallback){
+                for(index in items){
+                    items[index].uploaded = true;
+                }
+
+                successCallback();
+            })
+
+            uploader.upload(site, successCallback, errorCallback);
+
+            expect(site.uploaded).toBeTruthy();
+
+        })
+
+        it('Site uploaded status should be updated  to false after upload action item failed', function(){
+            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
+                callback('{#nid: 1}');
+            });
+
+            spyOn(devtrac.actionItemUpload, "uploadMultiple").andCallFake(function(items, siteId, placeId, progressCallback, successCallback, errorCallback){
+                if (items.length > 0) {
+                    items[0].uploaded = false;
+                }
+                errorCallback();
+            })
+
             uploader.upload(site, successCallback, errorCallback);
 
             expect(site.uploaded).toBeFalsy();
