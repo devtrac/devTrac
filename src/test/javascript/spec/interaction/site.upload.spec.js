@@ -66,7 +66,7 @@ describe("SiteUpload", function(){
             site = SiteMother.createSiteWithActionItems('1', false);
         })
 
-        it('should upload action item after site uploaded successfully', function(){
+        it('should upload action items after site uploaded successfully', function(){
             spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
                 callback('{#nid: 1}');
             });
@@ -79,7 +79,7 @@ describe("SiteUpload", function(){
             expect(devtrac.actionItemUpload.uploadMultiple).toHaveBeenCalled();
         })
 
-        it('should not upload action item when site uploaded failed', function(){
+        it('should not upload action items when site uploaded failed', function(){
             spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
                 errorCallback({"#error": true});
             });
@@ -92,40 +92,42 @@ describe("SiteUpload", function(){
             expect(devtrac.actionItemUpload.uploadMultiple).not.toHaveBeenCalled();
         })
 
-        it('Site uploaded status should be updated to true after all action item been uploaded successfully', function(){
-            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
-                callback('{#nid: 1}');
-            });
+        describe('site "uploaded" should be updated to', function(){
 
-            spyOn(devtrac.actionItemUpload, "uploadMultiple").andCallFake(function(items, siteId, placeId, progressCallback, successCallback, errorCallback){
-                for(index in items){
-                    items[index].uploaded = true;
-                }
+            beforeEach(function(){
+                spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
+                    callback('{#nid: 1}');
+                });
 
-                successCallback();
+               var site = SiteMother.createSiteWithActionItems('1', false);
             })
 
-            uploader.upload(site, successCallback, errorCallback);
+            it('"true" after all action items being uploaded successfully', function(){
+                spyOn(devtrac.actionItemUpload, "uploadMultiple").andCallFake(function(items, siteId, placeId, progressCallback, successCallback, errorCallback){
+                    for (index in items) {
+                        items[index].uploaded = true;
+                    }
 
-            expect(site.uploaded).toBeTruthy();
+                    successCallback();
+                })
 
-        })
+                uploader.upload(site, successCallback, errorCallback);
 
-        it('Site uploaded status should be updated  to false after upload action item failed', function(){
-            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
-                callback('{#nid: 1}');
-            });
-
-            spyOn(devtrac.actionItemUpload, "uploadMultiple").andCallFake(function(items, siteId, placeId, progressCallback, successCallback, errorCallback){
-                if (items.length > 0) {
-                    items[0].uploaded = false;
-                }
-                errorCallback();
+                expect(site.uploaded).toBeTruthy();
             })
 
-            uploader.upload(site, successCallback, errorCallback);
+            it('"false" after one of action item is uploaded failed', function(){
+                spyOn(devtrac.actionItemUpload, "uploadMultiple").andCallFake(function(items, siteId, placeId, progressCallback, successCallback, errorCallback){
+                    if (items.length > 0) {
+                        items[0].uploaded = false;
+                    }
+                    errorCallback();
+                })
 
-            expect(site.uploaded).toBeFalsy();
+                uploader.upload(site, successCallback, errorCallback);
+
+                expect(site.uploaded).toBeFalsy();
+            })
         })
     })
 
