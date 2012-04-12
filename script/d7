@@ -2,7 +2,7 @@
 
 set -e
 
-base_url='http://devtracd7.mountbatten.net/api'
+base_url='http://geo.devtrac.org/api'
 
 echo "# Authenticating..."
 auth_data="username=${1:?Username not found}&password=${2:?Password not found}"
@@ -31,7 +31,7 @@ post_data="uid=$user_id&filesize=$image_size&filename=$image_name"
 echo
 
 echo "# Uploading image..."
-upload_file_result=`curl -b "$cookie" -d "$post_data" --data-urlencode "file@${image_data_file}" "$base_url/file"`
+upload_file_result=`curl --trace-ascii 'curl.log' -b "$cookie" -d "$post_data" --data-urlencode "file@${image_data_file}" "$base_url/file"`
 fid=`echo $upload_file_result | cut -d ' ' -f3`
 echo "fid = $fid"
 
