@@ -63,8 +63,13 @@ ActionItemController.prototype.show = function(){
 
     $("#no_action_items").hide();
 
-    devtrac.actionItemController.displayActionItemsInCurrentSection(devtrac.currentSite.actionItems);
-    devtrac.actionItemController.displayActionItemsInHistorySection(devtrac.currentSite.actionItems);
+    $.each(devtrac.currentSite.actionItems, function(index, item){
+        var container = item.status=== "1" ? $("#action_items_list"):$("#previous_action_items_list");
+        container.html("");
+        var html = devtrac.actionItemController.getDisplayHtml(item);
+        container.append(html);
+    });
+
     actionItemGrid.show();
 
     navigator.log.debug("Displayed action items");
@@ -72,28 +77,11 @@ ActionItemController.prototype.show = function(){
     $(".action_item").click(showActionItemEditScreen);
 }
 
-ActionItemController.prototype.displayActionItemsInCurrentSection = function(actionItems){
-    var container = $("#action_items_list");
-    container.html("");
-    $.each(actionItems, function(index, item){
-        if (item.status === "3") return;
-        var name = devtrac.actionItemController._parseProfileName(item);
-        var id = item.id;
-        var html = "<div class='grid_row'><div id='" + id + "' class='col1 action_item link'>" + item.title + "</div><div class='col2'>" + name + "</div></div>";
-        container.append(html);
-    });
-}
-
-ActionItemController.prototype.displayActionItemsInHistorySection = function(actionItems){
-    var container = $("#previous_action_items_list");
-    container.html("");
-    $.each(actionItems, function(index, item){
-        if (item.status === "1") return;
-        var name = devtrac.actionItemController._parseProfileName(item);
-        var id = item.id;
-        var html = "<div class='grid_row'><div id='" + id + "' class='col1'>" + item.title + "</div><div class='col2'>" + name + "</div></div>";
-        container.append(html);
-    });
+ActionItemController.prototype.getDisplayHtml = function(item){
+    var name = devtrac.actionItemController._parseProfileName(item);
+    var htmlClass = item.status=== "1" ? "' class='col1 action_item link'>" : "' class='col1'>";
+    var html = "<div class='grid_row'><div id='" + item.id + htmlClass + item.title + "</div><div class='col2'>" + name + "</div></div>";
+    return html;
 }
 
 ActionItemController.prototype._parseProfileName = function(actionItem){
