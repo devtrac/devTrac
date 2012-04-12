@@ -83,7 +83,7 @@ describe("SiteUpload", function(){
             expect(devtrac.actionItemUpload.uploadMultiple).toHaveBeenCalled();
         })
 
-        it('Site uploaded status should updated after upload action item', function(){
+        it('Site uploaded status should be updated after upload action item', function(){
             uploader.upload(site, successCallback, errorCallback);
 
             expect(site.uploaded).toBeFalsy();
