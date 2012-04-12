@@ -64,10 +64,11 @@ ActionItemController.prototype.show = function(){
     $("#no_action_items").hide();
 
     $.each(devtrac.currentSite.actionItems, function(index, item){
-        var container = item.status=== "1" ? $("#action_items_list"):$("#previous_action_items_list");
-        container.html("");
-        var html = devtrac.actionItemController.getDisplayHtml(item);
-        container.append(html);
+         if(item.status === "1" || item.status === "3"){
+            var container = item.status == "1" ? $("#action_items_list"):$("#previous_action_items_list");
+            var html = devtrac.actionItemController.getDisplayHtml(item);
+            container.append(html);
+        }
     });
 
     actionItemGrid.show();
