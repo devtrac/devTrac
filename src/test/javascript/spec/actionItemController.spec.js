@@ -46,9 +46,17 @@ describe("ActionItemController", function() {
 
             actionItems = [];
             actionItems.push(SiteMother.createActionItem("Opened Action Item", false, "1"));
-            actionItems.push(SiteMother.createActionItem("Opened Action Item2", false, "1"));
+            actionItems.push(SiteMother.createActionItem("Opened Action Item2", true, "1"));
             actionItems.push(SiteMother.createActionItem("Closed Action Item", false, "3"));
-            actionItems.push(SiteMother.createActionItem("Closed Action Item2", false, "3"));
+
+            var item = new ActionItem();
+            item.title = "strange item";
+            item.uploaded = true;
+            item.id = 0;
+            item.task = 'Action Task';
+            item.assignedTo = 'yoyo';
+            item.status = "1";
+            actionItems.push(item);
 
             devtrac.currentSite = [];
             devtrac.currentSite.actionItems = actionItems;
@@ -58,15 +66,28 @@ describe("ActionItemController", function() {
 
 
         it("display opened action items in current section", function(){
-            expect($('#action_items_list .grid_row .col1').size()).toEqual(2);
-            expect($('#action_items_list div.col1:first')).toHaveText( actionItems[0].title);
+            expect($('#action_items_list .grid_row .col1').size()).toEqual(3);
+            expect($('#action_items_list div.col1:eq(0)')).toHaveText( actionItems[0].title);
             expect($('#action_items_list div.col2:eq(0)')).toHaveText( actionItems[0].assignedTo);
+            expect($('#action_items_list div.col1:eq(1)')).toHaveText( actionItems[1].title);
+            expect($('#action_items_list div.col2:eq(1)')).toHaveText( actionItems[1].assignedTo);
+            expect($('#action_items_list div.col1:eq(2)')).toHaveText( actionItems[3].title);
+            expect($('#action_items_list div.col2:eq(2)')).toHaveText( "N/A");
         });
 
         it("display closed action items in history section", function(){
-            expect($('#previous_action_items_list .grid_row .col1').size()).toEqual(2);
-            expect($('#previous_action_items_list div.col1:first')).toHaveText( actionItems[2].title);
+            expect($('#previous_action_items_list .grid_row .col1').size()).toEqual(1);
+            expect($('#previous_action_items_list div.col1:eq(0)')).toHaveText( actionItems[2].title);
             expect($('#previous_action_items_list div.col2:eq(0)')).toHaveText( actionItems[2].assignedTo);
+        });
+
+
+        it("actionItem is opened && assignedTo user should be editable",function(){
+            expect($(".editable_action_item").length).toBe(2);
+        });
+
+        it("actionItem either closed or not assignedTo user should not be editable",function(){
+            expect($(".uneditable_action_item").length).toBe(2);
         });
     })
 
