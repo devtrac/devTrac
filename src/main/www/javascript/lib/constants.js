@@ -51,6 +51,8 @@ DT_D7 = (function(){
 
 	return {
 	    TIME_OUT: 30000,
+	    OPENED_STATUS: "1",
+	    CLOSED_STATUS: "3",
         NODE_TYPE: {
             SITE: 'ftritem',
             ACTIONITEM: 'actionitem'
