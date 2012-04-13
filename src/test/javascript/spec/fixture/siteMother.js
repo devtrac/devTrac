@@ -29,3 +29,20 @@ SiteMother.createSiteWithActionItems = function(name, uploaded){
     site.actionItems.push(this.createActionItem('testActionItem', false));
     return site;
 }
+
+SiteMother.createContactInfo = function(name){
+    var contactInfo = {
+        name: name,
+        phone: "1234",
+        email: "test@gmail.com"
+    }
+
+    return contactInfo;
+}
+
+SiteMother.createSiteWithContacInfo = function(siteName, uploaded, offline, contactName){
+    var site =  this.createSite(name, uploaded, false);
+    site.contactInfo = this.createContactInfo(contactName);
+
+    return site;
+}
