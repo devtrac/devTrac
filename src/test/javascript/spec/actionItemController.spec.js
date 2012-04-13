@@ -166,9 +166,11 @@ describe("ActionItemController", function() {
         var UserProfile;
         var actionit;
         var user1 = "Terra Weikel";
+        var uid1 = "7";
 
         var title = "A new action itemz";
         var task = "Test creating task";
+
         var assignedTo = user1;
 
         beforeEach(function(){
@@ -212,8 +214,8 @@ describe("ActionItemController", function() {
             $("#action_item_assigned_to").append("<option value='" + assignedTo + "'>" + assignedTo + "</option>");
 
             devtrac.currentSite = {id: 1, name: "test site", actionItems: []};
-            devtrac.profiles = [{name:user1},{name:"Rebecca Kwagala"}];
-
+            devtrac.profiles = [{username:user1,uid:uid1},{name:"Rebecca Kwagala",uid:"3"}];
+            devtrac.user.name = user1;
             actionItemController.save();
         })
 
@@ -225,6 +227,7 @@ describe("ActionItemController", function() {
             var expectedItem = SiteMother.createActionItem(title, false);
             expectedItem.task = task;
             expectedItem.assignedTo = assignedTo;
+            expectedItem.uid = uid1;
             expect(devtrac.currentSite.actionItems[0]).toEqual(expectedItem);
         })
     })

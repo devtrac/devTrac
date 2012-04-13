@@ -137,6 +137,7 @@ ActionItemController.prototype.save = function(){
     actionItem.task = task;
     actionItem.assignedTo = assignedTo;
     actionItem.uploaded = false;
+    actionItem.uid = UserProfile.getUserIDbyUserName(devtrac.user.name);
     devtrac.currentSite.actionItems.push(actionItem);
 
     devtrac.currentSite.uploaded = false;
