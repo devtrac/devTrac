@@ -325,6 +325,7 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
                     return user.target_id;
                 }).join(", ");
                 actionItem.uploaded = true;
+                actionItem.uid = item.uid;
                 navigator.log.debug("Processed action item: " + actionItem.title);
                 return actionItem;
             });

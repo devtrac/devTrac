@@ -757,7 +757,8 @@ describe("DataPull", function(){
                         "task": "There is not much to do",
                         "assignedTo": "5",
                         "status": "3",
-                        "uploaded": true
+                        "uploaded": true,
+                        "uid": "5"
                      },
                      {
                         "id": "6699",
@@ -765,7 +766,8 @@ describe("DataPull", function(){
                         "task": "123",
                         "assignedTo": "32",
                         "status": "1",
-                        "uploaded": true
+                        "uploaded": true,
+                        "uid": "32"
                      }]
                 )
             })
