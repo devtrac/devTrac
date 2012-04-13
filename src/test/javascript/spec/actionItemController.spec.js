@@ -54,13 +54,15 @@ describe("ActionItemController", function() {
             item.uploaded = true;
             item.id = 0;
             item.task = 'Action Task';
-            item.assignedTo = 'yoyo';
+            item.assignedTo = "yoyo";
             item.status = "1";
+            item.uid = "5";
             actionItems.push(item);
 
             devtrac.currentSite = [];
             devtrac.currentSite.actionItems = actionItems;
-
+            devtrac.user.uid = "32";
+            devtrac.user.name = "tester";
             actionItemController.show();
         });
 

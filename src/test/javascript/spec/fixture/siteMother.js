@@ -10,6 +10,7 @@ SiteMother.createActionItem = function(title, uploaded, status){
     actionItem.id = 0;
     actionItem.task = 'Action Task';
     actionItem.assignedTo = 'tester';
+    actionItem.uid = "32";
     actionItem.status = status? status : actionItem.status;
 
     return actionItem;

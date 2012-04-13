@@ -86,16 +86,9 @@ ActionItemController.prototype.getDisplayHtml = function(item){
 
     var htmlClass = "' class='col1 uneditable_action_item link'>";
     if(item.status === DT_D7.OPENED_STATUS){
-        if(item.uploaded == false)
-            htmlClass = "' class='col1 editable_action_item link'>";
-    else{
-            if(name !== "N/A")
-                htmlClass = "' class='col1 editable_action_item link'>";
-            else
-                htmlClass = "' class='col1 uneditable_action_item link'>";
-        }
+        if(item.uid === devtrac.user.uid || name === devtrac.user.name)
+             htmlClass = "' class='col1 editable_action_item link'>";
     }
-
     var html = "<div class='grid_row'><div id='" + item.id + htmlClass + item.title + "</div><div class='col2'>" + name + "</div></div>";
     return html;
 }
