@@ -67,8 +67,8 @@ ActionItemController.prototype.show = function(){
     $("#previous_action_items_list").html("");
 
     $.each(devtrac.currentSite.actionItems, function(index, item){
-         if(item.status === "1" || item.status === "3"){
-            var container = item.status === "1" ? $("#action_items_list"):$("#previous_action_items_list");
+         if(item.status === DT_D7.OPENED_STATUS || DT_D7.CLOSED_STATUS ){
+            var container = item.status === DT_D7.OPENED_STATUS ? $("#action_items_list"):$("#previous_action_items_list");
             var html = devtrac.actionItemController.getDisplayHtml(item);
             container.append(html);
         }
@@ -85,7 +85,7 @@ ActionItemController.prototype.getDisplayHtml = function(item){
     var name = devtrac.actionItemController._parseProfileName(item);
 
     var htmlClass = "' class='col1 uneditable_action_item link'>";
-    if(item.status === "1"){
+    if(item.status === DT_D7.OPENED_STATUS){
         if(item.uploaded == false)
             htmlClass = "' class='col1 editable_action_item link'>";
     else{
