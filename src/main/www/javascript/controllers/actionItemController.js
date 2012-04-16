@@ -49,6 +49,17 @@ ActionItemController.prototype.editSave = function(){
     });
 }
 
+ActionItemController.prototype.info = function(actionItem){
+    navigator.log.debug("Showing action item info");
+    screens.show("loading");
+    $("#action_item_title_value").text(actionItem.title);
+    $("#action_item_task_value").text(actionItem.task);
+    $("#action_item_assign_value").text(actionItem.assignedTo);
+
+    screens.show("action_item_info");
+    navigator.log.debug("Displayed action item info screen");
+}
+
 ActionItemController.prototype.show = function(){
     navigator.log.debug("Showing action items");
     screens.show("loading");
@@ -79,6 +90,7 @@ ActionItemController.prototype.show = function(){
     navigator.log.debug("Displayed action items");
     screens.show("list_action_items");
     $(".editable_action_item").click(showActionItemEditScreen);
+    $(".uneditable_action_item").click(showActionItemInfoScreen);
 }
 
 ActionItemController.prototype.getDisplayHtml = function(item){

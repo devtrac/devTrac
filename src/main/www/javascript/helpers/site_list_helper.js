@@ -17,6 +17,15 @@ function showActionItemEditScreen(event){
 	}
 }
 
+function showActionItemInfoScreen(event){
+	for(var id in devtrac.currentSite.actionItems){
+		var actionItem = devtrac.currentSite.actionItems[id];
+		if(this.id == actionItem.id){
+			devtrac.actionItemController.info(devtrac.currentSite.actionItems[id]);
+		}
+	}
+}
+
 function attachClickEvents(selector, callback){
     $("'"+ selector +"'").click(callback);
 }
