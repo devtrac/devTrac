@@ -9,7 +9,7 @@ describe("ContactInfoUpload", function(){
             })
         })
 
-        it('successCallback should be callde when contact info update successfully', function(){
+        it('successCallback should be called when contact info update successfully', function(){
 
             spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
                 successCallback({
@@ -17,7 +17,7 @@ describe("ContactInfoUpload", function(){
                 });
             })
 
-            var site = SiteMother.createSiteWithContacInfo("site", false, false, "contact");
+            var site = SiteMother.createSiteWithContactInfo("site", false, false, "contact");
 
             devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
 
@@ -25,7 +25,7 @@ describe("ContactInfoUpload", function(){
             expect(errorCallback).not.toHaveBeenCalled();
         })
 
-        it('error callback should be callde when contact info update successfully', function(){
+        it('error callback should be called when contact info update failed', function(){
 
             spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
                 errorCallback({
@@ -33,7 +33,7 @@ describe("ContactInfoUpload", function(){
                 });
             })
 
-            var site = SiteMother.createSiteWithContacInfo("site", false, false, "contact");
+            var site = SiteMother.createSiteWithContactInfo("site", false, false, "contact");
 
             devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
 

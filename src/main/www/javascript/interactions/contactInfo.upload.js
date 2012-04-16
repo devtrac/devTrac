@@ -1,8 +1,8 @@
-function ContacInfoUpload(){
+function ContactInfoUpload(){
     this.uploaded = false;
 }
 
-ContacInfoUpload.prototype.upload = function(site, successCallback, errorCallback){
+ContactInfoUpload.prototype.upload = function(site, successCallback, errorCallback){
     var contactInfo = Site.packageContactInfoData(site);
     var url = 'http://api.tobe.indentify';
 
