@@ -24,5 +24,9 @@ ContactInfoUpload.prototype.upload = function(site, successCallback, errorCallba
         devtrac.contactInfoUpload.uploaded = false;
         errorCallback(srvErr);
     }
-    devtrac.common.callServicePut(url, contactInfo, success, error);
+    if(site.placeId === '0'){
+        devtrac.common.callServicePost(url, contactInfo, success, error);
+    }else{
+        devtrac.common.callServicePut(url, contactInfo, success, error);
+    }
 }

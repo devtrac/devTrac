@@ -1,12 +1,13 @@
 describe("ContactInfoUpload", function(){
+    var successCallback, errorCallback;
+    var contactInfoUpload;
+    beforeEach(function(){
+        contactInfoUpload = new ContactInfoUpload();
+        successCallback = jasmine.createSpy('successCallback');
+        errorCallback = jasmine.createSpy('errorCallback');
+    })
 
     describe("callback should be called successfully", function(){
-        var successCallback, errorCallback;
-        beforeEach(function(){
-            successCallback = jasmine.createSpy('successCallback');
-            errorCallback = jasmine.createSpy('errorCallback');
-        })
-
         it('successCallback should be called when contact info update successfully', function(){
 
             spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, successCallback, errorCallback){
@@ -15,7 +16,7 @@ describe("ContactInfoUpload", function(){
                 });
             })
 
-            var site = SiteMother.createSiteWithContactInfo("site", false, false, "contact");
+            var site = SiteMother.createSiteWithContactInfo("site", false, '1', "contact");
 
             devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
 
@@ -32,7 +33,7 @@ describe("ContactInfoUpload", function(){
                 });
             })
 
-            var site = SiteMother.createSiteWithContactInfo("site", false, false, "contact");
+            var site = SiteMother.createSiteWithContactInfo("site", false, '1', "contact");
 
             devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
 
@@ -40,6 +41,26 @@ describe("ContactInfoUpload", function(){
             expect(successCallback).not.toHaveBeenCalled();
             expect(errorCallback).toHaveBeenCalled();
         })
-
     })
+
+    describe('Correct Http method should be called', function(){
+        it('Http POST should be called when uploading newly created contact info', function(){
+            spyOn(devtrac.common, "callServicePost").andCallThrough();
+            var site = SiteMother.createSiteWithContactInfo("site", false, '0', "contact");
+
+            devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
+
+            expect(devtrac.common.callServicePost).toHaveBeenCalled();
+        })
+
+        it('Http PUT should be called when uploading an existing contact info', function(){
+            spyOn(devtrac.common, "callServicePut").andCallThrough();
+            var site = SiteMother.createSiteWithContactInfo("site", false, '1', "contact");
+
+            devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
+
+            expect(devtrac.common.callServicePut).toHaveBeenCalled();
+        })
+    })
+
 })

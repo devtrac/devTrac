@@ -40,8 +40,9 @@ SiteMother.createContactInfo = function(name){
     return contactInfo;
 }
 
-SiteMother.createSiteWithContactInfo = function(siteName, uploaded, offline, contactName){
+SiteMother.createSiteWithContactInfo = function(siteName, uploaded, placeId, contactName){
     var site =  this.createSite(name, uploaded, false);
+	site.placeId = placeId;
     site.contactInfo = this.createContactInfo(contactName);
 
     return site;
