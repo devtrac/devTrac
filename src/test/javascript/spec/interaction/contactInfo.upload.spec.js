@@ -1,19 +1,17 @@
 describe("ContactInfoUpload", function(){
 
     describe("callback should be called successfully", function(){
+        var successCallback, errorCallback;
         beforeEach(function(){
             successCallback = jasmine.createSpy('successCallback');
             errorCallback = jasmine.createSpy('errorCallback');
-
-            spyOn(devtrac.common, "callServicePost").andCallFake(function(url, postData, callback, errorCallback){
-            })
         })
 
         it('successCallback should be called when contact info update successfully', function(){
 
-            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
+            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, successCallback, errorCallback){
                 successCallback({
-                    "#error": false
+                    "error": false
                 });
             })
 
@@ -21,6 +19,7 @@ describe("ContactInfoUpload", function(){
 
             devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
 
+            expect(devtrac.contactInfoUpload.uploaded).toBeTruthy();
             expect(successCallback).toHaveBeenCalled();
             expect(errorCallback).not.toHaveBeenCalled();
         })
@@ -29,7 +28,7 @@ describe("ContactInfoUpload", function(){
 
             spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
                 errorCallback({
-                    "#error": true
+                    "error": true
                 });
             })
 
@@ -37,6 +36,7 @@ describe("ContactInfoUpload", function(){
 
             devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
 
+            expect(devtrac.contactInfoUpload.uploaded).toBeFalsy();
             expect(successCallback).not.toHaveBeenCalled();
             expect(errorCallback).toHaveBeenCalled();
         })
