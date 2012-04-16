@@ -78,7 +78,7 @@ ActionItemController.prototype.show = function(){
     $("#previous_action_items_list").html("");
 
     $.each(devtrac.currentSite.actionItems, function(index, item){
-         if(item.status === DT_D7.OPENED_STATUS || DT_D7.CLOSED_STATUS ){
+         if(item.status === DT_D7.OPENED_STATUS || item.status === DT_D7.CLOSED_STATUS ){
             var container = item.status === DT_D7.OPENED_STATUS ? $("#action_items_list"):$("#previous_action_items_list");
             var html = devtrac.actionItemController.getDisplayHtml(item);
             container.append(html);
@@ -142,7 +142,7 @@ ActionItemController.prototype.save = function(){
     actionItem.task = task;
     actionItem.assignedTo = assignedTo;
     actionItem.uploaded = false;
-    actionItem.uid = UserProfile.getUserIDbyUserName(devtrac.user.name);
+    actionItem.uid = devtrac.user.uid;
     devtrac.currentSite.actionItems.push(actionItem);
 
     devtrac.currentSite.uploaded = false;
