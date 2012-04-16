@@ -20,7 +20,7 @@ describe("ContactInfoUpload", function(){
 
             devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
 
-            expect(devtrac.contactInfoUpload.uploaded).toBeTruthy();
+            expect(site.uploaded).toBeTruthy();
             expect(successCallback).toHaveBeenCalled();
             expect(errorCallback).not.toHaveBeenCalled();
         })
@@ -37,7 +37,7 @@ describe("ContactInfoUpload", function(){
 
             devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
 
-            expect(devtrac.contactInfoUpload.uploaded).toBeFalsy();
+            expect(site.uploaded).toBeFalsy();
             expect(successCallback).not.toHaveBeenCalled();
             expect(errorCallback).toHaveBeenCalled();
         })

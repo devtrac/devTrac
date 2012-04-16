@@ -1,5 +1,4 @@
 function ContactInfoUpload(){
-    this.uploaded = false;
 }
 
 ContactInfoUpload.prototype.upload = function(site, successCallback, errorCallback){
@@ -9,11 +8,11 @@ ContactInfoUpload.prototype.upload = function(site, successCallback, errorCallba
         if (response['error']) {
             var errorMsg = 'Error occured in uploading contact info of site"' + site.name + '". Please try again.';
             navigator.log.log(errorMsg);
-            devtrac.contactInfoUpload.uploaded = false;
+            site.uploaded = false;
             errorCallback(errorMsg);
         }
         else {
-            devtrac.contactInfoUpload.uploaded = true;
+            site.uploaded = true;
             site.placeId = response['nid'];
             successCallback('ContactInfo of site "' + site.name + '" uploaded successfully.');
         }
@@ -21,7 +20,7 @@ ContactInfoUpload.prototype.upload = function(site, successCallback, errorCallba
      var error = function(srvErr) {
         navigator.log.log('Error in uploading contactInfo of site "' + site.name + '".');
         navigator.log.log(srvErr);
-        devtrac.contactInfoUpload.uploaded = false;
+        site.uploaded = false;
         errorCallback(srvErr);
     }
     if(site.placeId === '0'){
