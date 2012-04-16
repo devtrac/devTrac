@@ -82,14 +82,14 @@ ActionItemController.prototype.show = function(){
 }
 
 ActionItemController.prototype.getDisplayHtml = function(item){
-    var name = devtrac.actionItemController._parseProfileName(item);
+    var assignTo = devtrac.actionItemController._parseProfileName(item);
 
     var htmlClass = "' class='col1 uneditable_action_item link'>";
     if(item.status === DT_D7.OPENED_STATUS){
-        if(item.uid === devtrac.user.uid || name === devtrac.user.name)
+        if(item.uid === devtrac.user.uid || assignTo === devtrac.user.name)
              htmlClass = "' class='col1 editable_action_item link'>";
     }
-    var html = "<div class='grid_row'><div id='" + item.id + htmlClass + item.title + "</div><div class='col2'>" + name + "</div></div>";
+    var html = "<div class='grid_row'><div id='" + item.id + htmlClass + item.title + "</div><div class='col2'>" + assignTo + "</div></div>";
     return html;
 }
 
