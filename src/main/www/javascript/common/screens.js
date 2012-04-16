@@ -15,6 +15,7 @@ screens.list = {
     "list_action_items": "#list_action_item_screen",
     "add_action_item": "#add_action_item_screen",
     "action_item_edit": "#action_item_edit_screen",
+    "action_item_info": "#action_item_info_screen",
     "gps_edit": "#gps_screen",
     "settings": "#settings",
     "delete_confirm": "#delete_confirm",

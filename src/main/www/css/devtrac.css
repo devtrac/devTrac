@@ -242,6 +242,15 @@ p.submit {
 	margin-bottom: 40px;
 }
 
+/**Action item info**/
+#action_item_title, action_item_task,action_item_assign{
+    padding-top: 10px;
+}
+
+#action_item_info_screen label {
+    display: inline;
+}
+
 /**GPS Info**/
 fieldset {
     padding-top: 5px;
