@@ -2,6 +2,10 @@ function authenticate(userName, password, successCallback, failedCallback){
     var timeout = 30000;
 
     var connectCallback = function(data){
+        if (hasError(data)){
+            failedCallback(data);
+        }
+
         if (userLoggedIn(data)) {
             successCallback(data);
         }
@@ -26,3 +30,11 @@ function userLoggedIn(response){
     response[DT.USER_REF][DT.PASSWORD_REF];
 }
 
+function hasError(response){
+    if (response["error"]){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
