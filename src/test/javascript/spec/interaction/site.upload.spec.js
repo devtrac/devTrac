@@ -81,7 +81,7 @@ describe("SiteUpload", function(){
 
         it('should not upload action items when site uploaded failed', function(){
             spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
-                errorCallback({"#error": true});
+                errorCallback();
             });
 
             spyOn(devtrac.actionItemUpload, "uploadMultiple").andCallFake(function(items, siteId, placeId, progressCallback, successCallback, errorCallback){
@@ -214,9 +214,9 @@ describe("SiteUpload", function(){
 
             spyOn(devtrac.common, "callServicePut").andCallFake(function(url, data, successCallback, errorCallback){
                 if (/YES/.test(JSON.stringify(data))) {
-                    successCallback({"#error": false});
+                    successCallback({"error": false});
                 } else {
-                    errorCallback({"#error": true});
+                    errorCallback({"error": true});
                 }
             })
 
