@@ -30,20 +30,21 @@ SiteMother.createSiteWithActionItems = function(name, uploaded){
     return site;
 }
 
-SiteMother.createContactInfo = function(name){
+SiteMother.createContactInfo = function(name, uploaded){
     var contactInfo = {
         name: name,
         phone: "1234",
-        email: "test@gmail.com"
+        email: "test@gmail.com",
+        uploaded: uploaded
     }
 
     return contactInfo;
 }
 
-SiteMother.createSiteWithContactInfo = function(siteName, uploaded, placeId, contactName){
+SiteMother.createSiteWithContactInfo = function(siteName, uploaded, placeId, contactName, uploadedOfContactInfo){
     var site =  this.createSite(name, uploaded, false);
 	site.placeId = placeId;
-    site.contactInfo = this.createContactInfo(contactName);
+    site.contactInfo = this.createContactInfo(contactName, uploadedOfContactInfo);
 
     return site;
 }

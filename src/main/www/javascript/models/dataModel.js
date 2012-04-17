@@ -21,7 +21,8 @@ function Site(){
     this.contactInfo = {
         name: "",
         phone: "",
-        email: ""
+        email: "",
+        uploaded: false
     };
     this.submission = [];
     this.photos = {};

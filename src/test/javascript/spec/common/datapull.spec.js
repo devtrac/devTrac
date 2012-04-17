@@ -532,7 +532,8 @@ describe("DataPull", function(){
                 site.contactInfo = {
                     name: 'gt',
                     phone: '099999999',
-                    email: 'terra@gmail.com'
+                    email: 'terra@gmail.com',
+                    uploaded: false
                 };
 
                 expected_sites.push(site);

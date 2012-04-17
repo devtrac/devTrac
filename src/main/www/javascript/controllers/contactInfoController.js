@@ -19,6 +19,7 @@ ContactInfoController.prototype.save = function(){
         devtrac.currentSite.contactInfo.name = $("#contact_name_input").val();
         devtrac.currentSite.contactInfo.phone = $("#contact_phone_number_input").val();
         devtrac.currentSite.contactInfo.email = $("#contact_email_input").val();
+        devtrac.currentSite.contactInfo.uploaded = false;
 
         devtrac.currentSite.uploaded = false;
         devtrac.dataStore.saveCurrentSite(function(){
