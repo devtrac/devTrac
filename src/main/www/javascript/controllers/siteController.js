@@ -32,8 +32,13 @@ siteController.create = function(){
       alert('The date visited: '+ dateVisited + ' is invalid.');
       return;
     }
+
     if(Validator.isOutrangedDate(dateVisited)){
-        alert('The date visited should between: ' + devtrac.fieldTrip.startDate + ' and' + devtrac.fieldTrip.endDate);
+        var startDate = Validator.parseDate(devtrac.fieldTrip.startDate);
+        var endDate = Validator.parseDate(devtrac.fieldTrip.endDate);
+        var startDateString = startDate.getDate() + "/" + (startDate.getMonth()+1) + "/" + startDate.getFullYear();
+        var endDateString = endDate.getDate() + "/" + (endDate.getMonth()+1) + "/" + endDate.getFullYear();
+        alert('The date visited should between: ' + startDateString + ' and ' + endDateString);
         return;
     }
 

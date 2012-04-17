@@ -76,7 +76,7 @@ describe("SiteController", function(){
 
             siteController.create();
 
-            expect(alert).toHaveBeenCalledWith('The date visited should between: ' + devtrac.fieldTrip.startDate + ' and ' + devtrac.fieldTrip.endDate);
+            expect(alert).toHaveBeenCalledWith('The date visited should between: 13/2/2012 and 15/2/2012');
             expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
         })
 
