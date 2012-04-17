@@ -54,7 +54,8 @@ ActionItemController.prototype.info = function(actionItem){
     screens.show("loading");
     $("#action_item_title_value").text(actionItem.title);
     $("#action_item_task_value").text(actionItem.task);
-    $("#action_item_assign_value").text(actionItem.assignedTo);
+    var assignTo = devtrac.actionItemController._parseProfileName(actionItem);
+    $("#action_item_assign_value").text(assignTo);
 
     screens.show("action_item_info");
     navigator.log.debug("Displayed action item info screen");
