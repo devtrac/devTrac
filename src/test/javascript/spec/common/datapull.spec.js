@@ -533,7 +533,7 @@ describe("DataPull", function(){
                     name: 'gt',
                     phone: '099999999',
                     email: 'terra@gmail.com',
-                    uploaded: false
+                    uploaded: true
                 };
 
                 expected_sites.push(site);

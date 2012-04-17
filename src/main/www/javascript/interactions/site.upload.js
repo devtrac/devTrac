@@ -35,8 +35,12 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
                     site.uploaded =  site.uploaded && site.actionItems[index].uploaded ;
                 }
             }
-
             devtrac.actionItemUpload.uploadMultiple(site.actionItems, site.id, site.placeId, that.progressCallback, actionUploadCallback, actionUploadCallback);
+
+            var contactUploadedCallback = function(){
+                site.uploaded = site.uploaded && site.contactInfo.uploaded;
+            }
+            devtrac.contactInfoUpload.upload(site, contactUploadedCallback, contactUploadedCallback);
 
             devtrac.currentSite = site;
             devtrac.dataStore.saveCurrentSite(function(){

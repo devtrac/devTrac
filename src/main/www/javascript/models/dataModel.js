@@ -22,7 +22,7 @@ function Site(){
         name: "",
         phone: "",
         email: "",
-        uploaded: false
+        uploaded: true
     };
     this.submission = [];
     this.photos = {};

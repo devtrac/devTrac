@@ -21,6 +21,7 @@ SiteMother.createSite = function(name, uploaded, offline){
     site.name = name;
     site.uploaded = uploaded;
     site.offline = offline;
+    site.contactInfo.uploaded = true;
     return site;
 }
 

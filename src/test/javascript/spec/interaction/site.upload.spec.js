@@ -57,6 +57,40 @@ describe("SiteUpload", function(){
 
     });
 
+    describe('upload site with contact info', function(){
+        var site;
+
+        beforeEach(function(){
+            successCallback = jasmine.createSpy('uploader.successCallback');
+            errorCallback = jasmine.createSpy('uploader.errorCallback');
+            site = SiteMother.createSiteWithContactInfo("site", false, '1', "contact");
+        })
+
+        it('should upload contact info after site uploaded successfully', function(){
+            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
+                callback('{nid: 1}');
+            });
+
+            spyOn(devtrac.contactInfoUpload, "upload").andCallThrough();
+
+            uploader.upload(site, successCallback, errorCallback);
+
+            expect(devtrac.contactInfoUpload.upload).toHaveBeenCalled();
+        })
+
+        it('should not upload contact info when site uploaded failed', function(){
+            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
+                errorCallback();
+            });
+
+            spyOn(devtrac.contactInfoUpload, "upload").andCallThrough();
+
+            uploader.upload(site, successCallback, errorCallback);
+
+            expect(devtrac.contactInfoUpload.upload).not.toHaveBeenCalled();
+        })
+    })
+
     describe('upload site with action items', function(){
         var site;
 
