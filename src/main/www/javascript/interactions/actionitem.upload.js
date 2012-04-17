@@ -55,7 +55,11 @@ ActionItemUpload.prototype.upload = function(item, successCallback, errorCallbac
         errorCallback(srvErr);
     }
 
-    devtrac.common.callServicePost(DT_D7.NODE_CREATE, itemData, success, error);
+    if(item.id == 0){
+        devtrac.common.callServicePost(DT_D7.NODE_CREATE, itemData, success, error);
+    }else{
+        devtrac.common.callServicePut(DT_D7.NODE_SAVE.replace('<NODE_ID>', item.id), itemData, success, error);
+    }
 }
 
 ActionItemUpload.prototype._processResult = function(successCallback, errorCallback){

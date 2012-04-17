@@ -31,21 +31,26 @@ describe("ActionItemUpload", function() {
             actionItems.push(item);
 
             var item = new ActionItem();
-            item.id = 2;
+            item.id = 0;
             item.title = "AI 2";
             item.task = "test 2";
             item.assignedTo = "tester2";
             actionItems.push(item);
         })
 
-        it("should use POST method to upload", function() {
+        it("should use correct http method to upload", function() {
             spyOn(devtrac.common, "callServicePost").andCallFake(function(url, postData, callback, errorCallback) {
                 callback({"nid":"6675","uri":"http://geo.devtrac.org/api/node/6675"});
             });
 
+            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback) {
+                callback({'error':false});
+            });
+
             devtrac.actionItemUpload.uploadMultiple(actionItems, siteID, placeID, progressCallback, successCallback, errorCallback);
 
-            expect(devtrac.common.callServicePost.callCount).toEqual(actionItems.length);
+            expect(devtrac.common.callServicePost.callCount).toEqual(1);
+            expect(devtrac.common.callServicePut.callCount).toEqual(1);
         })
 
         it("should send correct data", function() {
@@ -76,7 +81,7 @@ describe("ActionItemUpload", function() {
                 actionItems.push(itemFailed);
             })
 
-            it("to 'ture' when uploaded successfully", function(){
+            it("to 'true' when uploaded successfully", function(){
                 spyOn(navigator.network, "XHR").andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback) {
                     successCallback({"nid":"6675","uri":"http://geo.devtrac.org/api/node/6675"});
                 });
