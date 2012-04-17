@@ -20,4 +20,10 @@ describe('validator', function(){
             })
         })
     })
+
+    describe('return string for a date', function(){
+        it("", function(){
+            expect(Validator.dateToString(new Date(2012, 1, 7))).toEqual("07/02/2012");
+        })
+    })
 })

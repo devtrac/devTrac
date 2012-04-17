@@ -36,8 +36,8 @@ siteController.create = function(){
     if(Validator.isOutrangedDate(dateVisited)){
         var startDate = Validator.parseDate(devtrac.fieldTrip.startDate);
         var endDate = Validator.parseDate(devtrac.fieldTrip.endDate);
-        var startDateString = startDate.getDate() + "/" + (startDate.getMonth()+1) + "/" + startDate.getFullYear();
-        var endDateString = endDate.getDate() + "/" + (endDate.getMonth()+1) + "/" + endDate.getFullYear();
+        var startDateString = Validator.dateToString(startDate);
+        var endDateString = Validator.dateToString(endDate);
         alert('The date visited should between: ' + startDateString + ' and ' + endDateString);
         return;
     }

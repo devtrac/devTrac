@@ -33,3 +33,16 @@ Validator.parseDate = function(dateString) {
 
     return new Date(year, month, day);
 }
+
+Validator.dateToString = function(date) {
+    var monthString = (date.getMonth()+1).toString();
+    if (monthString.length==1){
+        monthString = "0" + monthString;
+    }
+    var dateString = date.getDate().toString();
+    if (dateString.length==1){
+        dateString = "0" + dateString;
+    }
+    var string = dateString + "/" + monthString + "/" + date.getFullYear();
+    return string;
+}
