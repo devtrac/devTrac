@@ -2,6 +2,8 @@ function FieldTrip(){
 	this.id;
     this.title;
     this.sites = [];
+    this.startDate = "";
+    this.endDate = "";
 }
 
 function Site(){

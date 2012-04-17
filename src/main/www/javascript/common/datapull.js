@@ -147,6 +147,8 @@ DataPull.prototype.tripDetails = function(callback){
         if (tripResponse.length > 0) {
             devtrac.dataPull.fieldTrip.id = tripResponse[0]["nid"];
             devtrac.dataPull.fieldTrip.title = tripResponse[0]["title"];
+            devtrac.dataPull.fieldTrip.startDate = tripResponse[0]["field_fieldtrip_start_end_date"]["und"][0]["value"];
+            devtrac.dataPull.fieldTrip.endDate = tripResponse[0]["field_fieldtrip_start_end_date"]["und"][0]["value2"];
             devtrac.dataPull.tripSiteDetails(callback);
             navigator.log.debug("Processed trip with id: " + devtrac.dataPull.fieldTrip.id);
             return;
