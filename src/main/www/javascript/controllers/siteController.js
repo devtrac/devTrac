@@ -22,7 +22,6 @@ siteController.create = function(){
 
     var isAllWhiteSpace = true;
     var siteTitle = $("#site_title").val();
-
     if(siteTitle.replace(/\s/g,'').length ==0){
         alert('The title can not be empty.');
         return;
@@ -33,6 +32,11 @@ siteController.create = function(){
       alert('The date visited: '+ dateVisited + ' is invalid.');
       return;
     }
+    if(Validator.isOutrangedDate(dateVisited)){
+        alert('The date visited should between: ' + devtrac.fieldTrip.startDate + ' and' + devtrac.fieldTrip.endDate);
+        return;
+    }
+
     var site = new Site();
     site.id = Math.round(new Date().getTime() / 1000);
     site.uploaded = false;

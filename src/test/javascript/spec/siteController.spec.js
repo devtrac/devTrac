@@ -47,6 +47,8 @@ describe("SiteController", function(){
 
     describe('create',function(){
         beforeEach(function(){
+            devtrac.fieldTrip.startDate = "2012-02-13T00:00:00";
+            devtrac.fieldTrip.endDate = "2012-02-15T00:00:00";
             spyOn(devtrac.fieldTrip.sites, "push").andCallThrough();
         })
         it("when datevisited has invalid format", function(){
@@ -66,6 +68,16 @@ describe("SiteController", function(){
             siteController.create();
 
             expect(devtrac.fieldTrip.sites.push).toHaveBeenCalled();
+        })
+
+        it('when datevisited is outranged', function(){
+            var outRangerdDate = "18/02/2012";
+            initSiteAttributes('title', outRangerdDate);
+
+            siteController.create();
+
+            expect(alert).toHaveBeenCalledWith('The date visited should between: ' + devtrac.fieldTrip.startDate + ' and ' + devtrac.fieldTrip.endDate);
+            expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
         })
 
         it('should be invalid when title is empty', function(){
