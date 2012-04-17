@@ -89,6 +89,39 @@ describe("SiteUpload", function(){
 
             expect(devtrac.contactInfoUpload.upload).not.toHaveBeenCalled();
         })
+
+    describe('site "uploaded" should be updated to', function(){
+
+        beforeEach(function(){
+            spyOn(devtrac.common, "callServicePut").andCallFake(function(url, postData, callback, errorCallback){
+                callback('{nid: 1}');
+            });
+
+           var site = SiteMother.createSiteWithContactInfo("site", false, '1', "contact");
+        })
+
+        it('"true" after contact info being uploaded successfully', function(){
+            spyOn(devtrac.contactInfoUpload, "upload").andCallFake(function(site, successCallback, errorCallback){
+                site.contactInfo.uploaded = true;
+                successCallback();
+            })
+
+            uploader.upload(site, successCallback, errorCallback);
+
+            expect(site.contactInfo.uploaded).toBeTruthy();
+        })
+
+        it('"false" after the contact info is uploaded failed', function(){
+            spyOn(devtrac.contactInfoUpload, "upload").andCallFake(function(site, successCallback, errorCallback){
+                site.contactInfo.uploaded = false;
+                errorCallback();
+            })
+
+            uploader.upload(site, successCallback, errorCallback);
+
+            expect(site.contactInfo.uploaded).toBeFalsy();
+        })
+    })
     })
 
     describe('upload site with action items', function(){
