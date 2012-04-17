@@ -49,7 +49,7 @@ describe("SiteController", function(){
         beforeEach(function(){
             spyOn(devtrac.fieldTrip.sites, "push").andCallThrough();
         })
-        it("when datevisited is invalid", function(){
+        it("when datevisited has invalid format", function(){
             var inValidDate = "123";
             initSiteAttributes('title', inValidDate);
 
@@ -59,8 +59,8 @@ describe("SiteController", function(){
             expect(devtrac.fieldTrip.sites.push).not.toHaveBeenCalled();
         })
 
-        it("when datevisited is valid", function(){
-            var validDate = "04/05/2012";
+        it("when datevisited has valid format", function(){
+            var validDate = "14/02/2012";
             initSiteAttributes('title', validDate);
 
             siteController.create();
@@ -69,7 +69,7 @@ describe("SiteController", function(){
         })
 
         it('should be invalid when title is empty', function(){
-            initSiteAttributes('','03/02/2012');
+            initSiteAttributes('','14/02/2012');
 
             siteController.create();
 
@@ -78,7 +78,7 @@ describe("SiteController", function(){
         })
 
         it('should be invalid when title is blank', function(){
-            initSiteAttributes('    ','03/02/2012');
+            initSiteAttributes('    ','14/02/2012');
 
             siteController.create();
 
@@ -91,7 +91,7 @@ describe("SiteController", function(){
     describe("Create a new site", function(){
         it("position data should be saved to site", function(){
             spyOn(navigator.store, "put").andCallThrough();
-            initSiteAttributes('title', '04/05/2012');
+            initSiteAttributes('title', '14/02/2012');
             $("#latitude").text("Latitude: 45");
             $("#longitude").text("Longitude: 108");
             siteController.create();
