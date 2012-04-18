@@ -1,0 +1,21 @@
+#! /usr/bin/env bash
+
+set -e
+
+connect_timeout=${1:-60}
+
+function connect_to_host() {
+    url="${1:?# ERROR: Host URL not found!}"
+    echo
+    echo "# Checking $url ..."
+    curl --connect-time ${connect_timeout} "$url"
+    echo
+    echo "# Done with $url"
+}
+
+connect_to_host "http://www.devtrac.ug/"
+connect_to_host "http://test.devtrac.org/"
+
+connect_to_host "http://geo.devtrac.org/"
+connect_to_host "http://devtracd7.mountbatten.net/"
+
