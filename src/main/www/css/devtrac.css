@@ -252,19 +252,26 @@ p.submit {
     color:gray;
 }
 /**GPS Info**/
+.gps-info{
+    padding-left: 9px;
+}
+
 fieldset {
     padding-top: 5px;
-    margin-left: 10px;
     width: 204px;
     height: 100px;
 }
 
+fieldset div{
+    margin: 8px 0px 8px 8px;
+}
+
 #capture_gps_button{
-    margin-left: 10px;
+    margin-left: 8px;
 }
 
 #capture_gps_button[disabled]{
-    margin-left: 10px;
+    margin-left: 8px;
     border: 0px;
     background: grey;
 }

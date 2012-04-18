@@ -179,28 +179,28 @@
                        <label>
                         Visited Date(DD/MM/YYYY):
                        </label>
-                      <input id="dateVisited" type="text"/>
+                      <input id="dateVisited" type="text" class="input"/>
                     </p>
-                    <p>
+                    <div class="gps-info">
                         <label>GPS Infomation</label>
                         <fieldset>
-                        <p>
-                            <label id="latitude">
-                                Latitude:
-                            </label>
-                            <label id="latitude_value">
-                            </label>
-                        </p>
-                        <p>
-                            <label id="longitude">
-                                Longitude:
-                            </label>
-                            <label id="longitude_value">
-                            </label>
-                        </p>
-                        <input type="button" name="capture" id="capture_gps_button" class="button" value="Capture GPS"/>
+                            <div>
+                                <label id="latitude">
+                                    Latitude:
+                                </label>
+                                <label id="latitude_value">
+                                </label>
+                            </div>
+                            <div>
+                                <label id="longitude">
+                                    Longitude:
+                                </label>
+                                <label id="longitude_value">
+                                </label>
+                            </div>
+                            <input type="button" name="capture" id="capture_gps_button" class="button" value="Capture GPS"/>
                         </fieldset>
-                    </p>
+                    </div>
                     <p class="submit">
                         <input type="submit" name="type-submit" id="add_site_button" class="button" value="Add" tabindex="100"/>
                     </p>
