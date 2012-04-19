@@ -43,7 +43,7 @@ SiteMother.createContactInfo = function(name, uploaded){
 }
 
 SiteMother.createSiteWithContactInfo = function(siteName, uploaded, placeId, contactName, uploadedOfContactInfo){
-    var site =  this.createSite(name, uploaded, false);
+    var site =  this.createSite(siteName, uploaded, false);
 	site.placeId = placeId;
     site.contactInfo = this.createContactInfo(contactName, uploadedOfContactInfo);
 
