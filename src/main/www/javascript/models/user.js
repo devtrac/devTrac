@@ -14,7 +14,9 @@ User.prototype.authenticate = function(userName, password, successCallback, fail
     };
 
     var failed = function(response){
-        devtrac.common.logAndShowGenericError("Error in authenticating. Details: " + JSON.stringify(response));
+        if(response["httpcode"]==401){
+            devtrac.common.logAndShowGenericError("Wrong username or password.");
+        }
         failedCallback();
     };
     authenticate(userName, password, success, failed);
