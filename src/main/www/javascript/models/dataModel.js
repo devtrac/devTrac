@@ -70,11 +70,14 @@ Site.packageContactInfoData = function(site){
     var placeId = site.offline ? 0 : site.placeId;
     var contactInfo = site.contactInfo;
     var data = {
+        'title': site.name,
         'type': 'place',
         'nid': placeId,
         'field_place_responsible_person[und][0][value]': contactInfo.name,
         'field_place_phone[und][0][value]': contactInfo.phone,
-        'field_place_email[und][0][email]': contactInfo.email
+        'field_place_email[und][0][email]': contactInfo.email,
+        'taxonomy_vocabulary_1[und][0][tid]': 195,
+        'taxonomy_vocabulary_6[und][0][tid]': 92
     }
     return data;
 }
