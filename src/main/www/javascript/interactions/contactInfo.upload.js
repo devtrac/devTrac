@@ -10,7 +10,6 @@ ContactInfoUpload.prototype.upload = function(site, successCallback, errorCallba
     }
 
     var contactInfo = Site.packageContactInfoData(site);
-    var url = 'http://api.tobe.indentify';
     var success = function(response) {
         if (response['error']) {
             var errorMsg = 'Error occured in uploading contact info of site"' + site.name + '". Please try again.';
@@ -31,8 +30,8 @@ ContactInfoUpload.prototype.upload = function(site, successCallback, errorCallba
         errorCallback(srvErr);
     }
     if(site.placeId === '0'){
-        devtrac.common.callServicePost(url, contactInfo, success, error);
+        devtrac.common.callServicePost(DT_D7.NODE_CREATE, contactInfo, success, error);
     }else{
-        devtrac.common.callServicePut(url, contactInfo, success, error);
+        devtrac.common.callServicePut(DT_D7.NODE_SAVE.replace('<NODE_ID>', site.placeId), contactInfo, success, error);
     }
 }

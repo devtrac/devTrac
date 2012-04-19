@@ -50,7 +50,7 @@ describe("ContactInfoUpload", function(){
 
             devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
 
-            expect(devtrac.common.callServicePost).toHaveBeenCalled();
+            expect(devtrac.common.callServicePost.mostRecentCall.args[0]).toEqual(DT_D7.NODE_CREATE);
         })
 
         it('Http PUT should be called when uploading an existing contact info', function(){
@@ -59,7 +59,7 @@ describe("ContactInfoUpload", function(){
 
             devtrac.contactInfoUpload.upload(site, successCallback, errorCallback);
 
-            expect(devtrac.common.callServicePut).toHaveBeenCalled();
+            expect(devtrac.common.callServicePut.mostRecentCall.args[0]).toEqual(DT_D7.NODE_SAVE.replace('<NODE_ID>', site.placeId))
         })
 
         it('Should not invoke any http method when "uploaded" of contact info is true', function(){
