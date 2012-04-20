@@ -80,10 +80,10 @@ siteController.getGPS = function (){
     var successCallback = function(position){
         $("#capture_gps_button").val("Capture GPS");
         $("#capture_gps_button").removeAttr('disabled');
-        alert("Capturing GPS location successfully");
         navigator.geolocation.stop();
         $("#latitude_value").text(position.coords.latitude);
         $("#longitude_value").text(position.coords.longitude);
+        alert("Capturing GPS location successfully");
     }
 
     var errorCallback = function(error){
