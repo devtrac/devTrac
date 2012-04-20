@@ -8,6 +8,13 @@ siteController.add = function(){
     $(questions.locationTypes()).each(function(i, option){
         list.append("<option>" + option + "</option>");
     });
+
+    var startDate = Validator.parseDate(devtrac.fieldTrip.startDate);
+    var endDate = Validator.parseDate(devtrac.fieldTrip.endDate);
+    var startDateString = Validator.dateToString(startDate);
+    var endDateString = Validator.dateToString(endDate);
+    $("#datetip").html("Valid date range is " + startDateString + " ~ " + endDateString);
+
     screens.show("add_new_site");
 	navigator.log.debug("Displayed add new site screen.");
 };
