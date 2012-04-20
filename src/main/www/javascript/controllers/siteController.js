@@ -49,8 +49,8 @@ siteController.create = function(){
     site.name = $("#site_title").val();
     site.type = $("#sitetypes").val();
     site.dateVisited = dateVisited;
-    var latitude = $("#latitude").text().split(" ")[1];
-    var longitude = $("#longitude").text().split(" ")[1];
+    var latitude = $("#latitude_value").text();
+    var longitude = $("#longitude_value").text();
     site.placeGeo = "POINT (" + latitude + " " + longitude + ")";
     site.narrative = "Please provide a full report.";
 	devtrac.fieldTrip.sites.push(site);

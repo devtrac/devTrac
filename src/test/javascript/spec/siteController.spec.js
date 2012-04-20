@@ -1,45 +1,63 @@
 describe("SiteController", function(){
     beforeEach(function(){
-        var fixture = '<div id="add_trip">' +
-                    '<h2>Add New Site</h2>' +
-                    '<p>' +
-                        '<label>' +
-                            'Site Name' +
-                        '</label>' +
-                        '<input type="text" name="site_title" id="site_title" class="input" value="" size="20" tabindex="10"/><span class="tip">(example: Toro health center, Acwera water point)</span>' +
-                    '</p>' +
-                    '<p>' +
-                        '<label>' +
-                            'Site Type' +
-                        '</label>' +
-                        '<select id="sitetypes" class="select" name="sitetypes">' +
-                        '</select>' +
-                    '</p>' +
-
-                    '<p>' +
-                       '<label>' +
-                            'Visited Date(DD/MM/YYYY):' +
-                       '</label>' +
-                      '<input id="dateVisited" type="text"/>' +
-                    '</p>' +
-                    '<p>' +
-                        '<fieldset>' +
-                        '<legend> Location Info </legend>' +
+        var fixture =
+            '<!-- Add Site Screen -->' +
+            '<div id="add_new_site" style="display: none">' +
+                '<div class="toolbar">' +
+                    '<h1>New Site</h1>' +
+                    '<span class="back back_to_site_list">Back</span>' +
+                '</div>' +
+                '<div class="content">' +
+                    '<div class="right">' +
+                        '<span id="sites_to_visit_button" class="link">Sites To Visit</span>' +
+                    '</div>' +
+                    '<div id="add_trip">' +
+                        '<h2>Add New Site</h2>' +
                         '<p>' +
-                            '<input type="button" name="capture" id="capture_gps_button" class="button" value="Capture GPS"/>' +
-                            '<label id="latitude">' +
-                                'Latitude: 30' +
+                            '<label for="site_title">' +
+                                'Site Name' +
                             '</label>' +
-                            '<label id="longitude">' +
-                                'Longitude: 110' +
-                            '</label>' +
+                            '<input type="text" name="site_title" id="site_title" class="input" value="" size="20" tabindex="10"/><span class="tip">(example: Toro health center, Acwera water point)</span>' +
                         '</p>' +
-                        '</fieldset>' +
-                    '</p>' +
-                    '<p class="submit">' +
-                        '<input type="submit" name="type-submit" id="add_site_button" class="button" value="Add" tabindex="100"/>' +
-                    '</p>' +
-                '</div> ';
+                        '<p>' +
+                            '<label for="sitetypes">' +
+                                'Site Type' +
+                            '</label>' +
+                            '<select id="sitetypes" class="select" name="sitetypes">' +
+                            '</select>' +
+                        '</p>' +
+                        '<p>' +
+                           '<label for="dateVisited">' +
+                            'Visited Date(DD/MM/YYYY):' +
+                           '</label>' +
+                          '<input id="dateVisited" type="text" class="input"/>' +
+                        '</p>' +
+                        '<div class="gps-info">' +
+                            '<label>GPS Infomation</label>' +
+                            '<fieldset>' +
+                                '<div>' +
+                                    '<label id="latitude" for="latitude_value">' +
+                                        'Latitude:' +
+                                    '</label>' +
+                                    '<label id="latitude_value">' +
+                                    '</label>' +
+                                '</div>' +
+                                '<div>' +
+                                    '<label id="longitude" for="longitude_value">' +
+                                        'Longitude:' +
+                                    '</label>' +
+                                    '<label id="longitude_value">' +
+                                    '</label>' +
+                                '</div>' +
+                                '<input type="button" name="capture" id="capture_gps_button" class="button" value="Capture GPS"/>' +
+                            '</fieldset>' +
+                        '</div>' +
+                        '<p class="submit">' +
+                            '<input type="submit" name="type-submit" id="add_site_button" class="button" value="Add" tabindex="100"/>' +
+                        '</p>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
 
         setFixtures("<body>"+ fixture +"</body>");
         spyOn(window, "alert").andCallFake(function(){});
@@ -104,8 +122,8 @@ describe("SiteController", function(){
         it("position data should be saved to site", function(){
             spyOn(navigator.store, "put").andCallThrough();
             initSiteAttributes('title', '14/02/2012');
-            $("#latitude").text("Latitude: 45");
-            $("#longitude").text("Longitude: 108");
+            $("#latitude_value").text("45");
+            $("#longitude_value").text("108");
             siteController.create();
             var site = devtrac.fieldTrip.sites.pop();
             expect(site.placeGeo).toEqual("POINT (45 108)");
