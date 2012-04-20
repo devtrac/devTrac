@@ -42,22 +42,32 @@ describe("ActionItemController", function() {
 
             setFixtures("<body>"+ fixture +"</body>");
 
-            devtrac.profiles = [{username:"tester", name:"tester"}, {username:"Charlie", name:"Charlie"}];
+            devtrac.profiles = [{username:"tester", name:"Tester"}, {username:"Charlie", name:"Charlie"}];
 
             actionItems = [];
-            actionItems.push(SiteMother.createActionItem("Opened Action Item", false, "1"));
-            actionItems.push(SiteMother.createActionItem("Opened Action Item2", true, "1"));
-            actionItems.push(SiteMother.createActionItem("Closed Action Item", false, "3"));
-
             var item = new ActionItem();
+            actionItems.push(SiteMother.createActionItem("Opened Action Item2", true, "1"));
+
             item.title = "strange item";
             item.uploaded = true;
             item.id = 0;
             item.task = 'Action Task';
-            item.assignedTo = "yoyo";
+            item.assignedTo = "tester";
             item.status = "1";
             item.uid = "5";
             actionItems.push(item);
+
+            actionItems.push(SiteMother.createActionItem("Closed Action Item", false, "3"));
+
+            var item2 = new ActionItem();
+            item2.title = "strange item";
+            item2.uploaded = true;
+            item2.id = 0;
+            item2.task = 'Action Task';
+            item2.assignedTo = "yoyo";
+            item2.status = "1";
+            item2.uid = "5";
+            actionItems.push(item2);
 
             devtrac.currentSite = [];
             devtrac.currentSite.actionItems = actionItems;
@@ -70,9 +80,9 @@ describe("ActionItemController", function() {
         it("display opened action items in current section", function(){
             expect($('#action_items_list .grid_row .col1').size()).toEqual(3);
             expect($('#action_items_list div.col1:eq(0)')).toHaveText( actionItems[0].title);
-            expect($('#action_items_list div.col2:eq(0)')).toHaveText( actionItems[0].assignedTo);
+            expect($('#action_items_list div.col2:eq(0)')).toHaveText("Tester");
             expect($('#action_items_list div.col1:eq(1)')).toHaveText( actionItems[1].title);
-            expect($('#action_items_list div.col2:eq(1)')).toHaveText( actionItems[1].assignedTo);
+            expect($('#action_items_list div.col2:eq(1)')).toHaveText("Tester");
             expect($('#action_items_list div.col1:eq(2)')).toHaveText( actionItems[3].title);
             expect($('#action_items_list div.col2:eq(2)')).toHaveText( "N/A");
         });
@@ -80,7 +90,7 @@ describe("ActionItemController", function() {
         it("display closed action items in history section", function(){
             expect($('#previous_action_items_list .grid_row .col1').size()).toEqual(1);
             expect($('#previous_action_items_list div.col1:eq(0)')).toHaveText( actionItems[2].title);
-            expect($('#previous_action_items_list div.col2:eq(0)')).toHaveText( actionItems[2].assignedTo);
+            expect($('#previous_action_items_list div.col2:eq(0)')).toHaveText("Tester");
         });
 
 
