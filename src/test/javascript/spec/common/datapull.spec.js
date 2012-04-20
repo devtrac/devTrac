@@ -90,10 +90,10 @@ describe("DataPull", function(){
                                     "users_created": "1295869437"
                                 },
                                 {
-                                    "users_name": "",
-                                    "uid": "0",
+                                    "users_name": "tester2",
+                                    "uid": "32",
                                     "users_status": "0",
-                                    "realname_realname": "%1 %2",
+                                    "realname_realname": "Tester 2",
                                     "realname_uid": "0",
                                     "users_created": "0"
                                 }];
@@ -119,7 +119,7 @@ describe("DataPull", function(){
                 expect(navigator.store.put.mostRecentCall.args[3]).toEqual(
                     '[{"uid":"146","username":"thoughwks","name":"thoughwks"},' +
                     '{"uid":"29","username":"tester1","name":"tester1"},' +
-                    '{"uid":"0","username":"","name":"%1 %2"}]'
+                    '{"uid":"32","username":"tester2","name":"Tester 2"}]'
                 );
             });
         })
