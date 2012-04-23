@@ -55,6 +55,7 @@ Site.packageData = function(site, fieldTripId) {
         "field_ftritem_narrative[und][0][value]" : site.narrative,
         "field_ftritem_public_summary[und][0][value]" : site.narrative,
         "field_ftritem_date_visited[und][0][value][date]" : site.dateVisited,
+        "field_ftritem_place[und][0][target_id]": devtrac.common.findPlaceType(site),
         "language": "und"
     };
     if (site.offline) {
@@ -76,7 +77,7 @@ Site.packageContactInfoData = function(site){
         'field_place_responsible_person[und][0][value]': contactInfo.name,
         'field_place_phone[und][0][value]': contactInfo.phone,
         'field_place_email[und][0][email]': contactInfo.email,
-        'taxonomy_vocabulary_1[und][0]': 195,
+        'taxonomy_vocabulary_1[und][0]': devtrac.common.findPlaceType(site),
         'taxonomy_vocabulary_6[und][0]': 92
     }
     return data;

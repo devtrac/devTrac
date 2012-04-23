@@ -175,6 +175,7 @@ function Common(){
                 }
             }
         }
-        return site.placeTaxonomy && site.placeTaxonomy.length > 0 && site.placeTaxonomy[0] && site.placeTaxonomy[0].id;
+        var placeId = site.placeTaxonomy && site.placeTaxonomy.length > 0 && site.placeTaxonomy[0] && site.placeTaxonomy[0].id;
+        return placeId ? placeId : 195;
     }
 }

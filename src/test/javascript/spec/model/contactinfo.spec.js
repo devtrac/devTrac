@@ -6,8 +6,16 @@ describe("ContactInfo", function(){
             var site, data, contactInfo;
 
             beforeEach(function(){
+                var placeTypeName = "Office";
                 site = SiteMother.createSiteWithContactInfo("test", false, "1234", "tester", false);
+                site.type = placeTypeName;
+                site.offline = true;
                 contactInfo = site.contactInfo;
+
+                var place = new PlaceType();
+                place.id = 58;
+                place.name = placeTypeName;
+                devtrac.places.push(place);
 
                 data = devtrac.common.convertHash(Site.packageContactInfoData(site));
             })
@@ -33,7 +41,7 @@ describe("ContactInfo", function(){
             })
 
             it("should contain taxonomy_vocabulary_1[und][0][tid]", function(){
-                expect(data).toMatch(new RegExp("taxonomy_vocabulary_1\\[und]\\[0]=195"))
+                expect(data).toMatch(new RegExp("taxonomy_vocabulary_1\\[und]\\[0]=58"))
             })
 
             it("taxonomy_vocabulary_6[und][0][tid]", function(){
