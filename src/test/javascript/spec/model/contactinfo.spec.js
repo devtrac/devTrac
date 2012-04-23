@@ -21,23 +21,23 @@ describe("ContactInfo", function(){
             })
 
             it("should contain field_place_responsible_person[und][0][value]", function(){
-                expect(data).toMatch(new RegExp("field_place_responsible_person\\[und\]\\[0\]\\[value\\]=" + contactInfo.name));
+                expect(data).toMatch(new RegExp("field_place_responsible_person\\[und]\\[0]\\[value]=" + contactInfo.name));
             })
 
             it("should contain field_place_phone[und][0][value]", function(){
-                expect(data).toMatch(new RegExp("field_place_phone\\[und\\]\\[0\\]\\[value\\]=" + contactInfo.phone));
+                expect(data).toMatch(new RegExp("field_place_phone\\[und]\\[0]\\[value]=" + contactInfo.phone));
             })
 
             it("should contain field_place_email[und][0][email]", function(){
-                expect(data).toMatch(new RegExp("field_place_email\\[und\\]\\[0\\]\\[email\\]=" + contactInfo.email));
+                expect(data).toMatch(new RegExp("field_place_email\\[und]\\[0]\\[email]=" + contactInfo.email));
             })
 
             it("should contain taxonomy_vocabulary_1[und][0][tid]", function(){
-                expect(data).toMatch(new RegExp("taxonomy_vocabulary_1\\[und\\]\\[0]\\[tid\\]=195"))
+                expect(data).toMatch(new RegExp("taxonomy_vocabulary_1\\[und]\\[0]=195"))
             })
 
             it("taxonomy_vocabulary_6[und][0][tid]", function(){
-                expect(data).toMatch(new RegExp("taxonomy_vocabulary_6\\[und\\]\\[0]\\[tid\\]=92"))
+                expect(data).toMatch(new RegExp("taxonomy_vocabulary_6\\[und]\\[0]=92"))
             })
         })
     })
