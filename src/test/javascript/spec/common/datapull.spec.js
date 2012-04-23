@@ -125,6 +125,107 @@ describe("DataPull", function(){
         })
     })
 
+    describe("questions",function(){
+        beforeEach(function(){
+            callback = jasmine.createSpy("Callback");
+            var questionResponse = [
+            {
+                "language": "und",
+                "nid": "402",
+                "questionnaire_question_options": {
+                    "und": [
+                    {
+                        "format": null,
+                        "safe_value": "Yes",
+                        "value": "Yes"
+                    },
+                    {
+                        "format": null,
+                        "safe_value": "No",
+                        "value": "No"
+                    }]
+                 },
+                 "questionnaire_question_type": {
+	                 "und": [
+	                    {
+	                        "value": "radios"
+	                    }]
+	                 },
+                 "taxonomy_vocabulary_1": [],
+                 "title": "Do both the community and school have access to the water source at the health facility?",
+                 "type": "questionnaire_question"
+            },
+            {
+                "language": "und",
+                 "nid": "403",
+                 "questionnaire_question_options": {
+	                 "und": [
+	                    {
+	                        "format": null,
+	                        "safe_value": "Protected spring",
+	                        "value": "Protected spring"
+	                    },
+	                    {
+	                        "format": null,
+	                        "safe_value": "Piped water scheme",
+	                        "value": "Piped water scheme"
+	                    },
+	                    {
+	                        "format": null,
+	                        "safe_value": "Hand pump",
+	                        "value": "Hand pump"
+	                    }]
+                 },
+                 "questionnaire_question_type": {
+	                 "und": [
+	                    {
+	                        "value": "checkboxes"
+	                    }]
+                 },
+                 "taxonomy_vocabulary_1": [],
+                 "title": "Type of water point?",
+                 "type": "questionnaire_question"
+            },
+            {
+                "language": "und",
+                 "nid": "404",
+                 "questionnaire_question_options": [],
+                 "questionnaire_question_type": {
+	                 "und": [
+	                    {
+	                        "value": "number"
+	                    }]
+                 },
+                 "taxonomy_vocabulary_1": [],
+                 "title": "Type of water point?",
+                 "type": "questionnaire_question"
+            }];
+
+            spyOn(devtrac.remoteView, "get").andCallFake(function(url, successCallback, failedCallback) {
+                    successCallback(questionResponse);
+            });
+            spyOn(devtrac.common, "logAndShowGenericError");
+            spyOn(navigator.store, "put");
+            devtrac.dataPull.questions(callback);
+        })
+
+        it("should call new method to get questions with correct URL", function(){
+            expect(devtrac.remoteView.get.mostRecentCall.args[0]).toEqual(DT_D7.QUESTIONS);
+        })
+
+        it("response should be wrapped in '#data' to ensure forward compatibility", function() {
+            expect(devtrac.common.logAndShowGenericError).not.toHaveBeenCalled();
+        });
+
+        it("parse questions correctly", function() {
+            expect(navigator.store.put.mostRecentCall.args[3]).toEqual(
+                '[{"id":"402","title":"Do both the community and school have access to the water source at the health facility?","type":"radios","options":[{"format":null,"safe_value":"Yes","value":"Yes"},{"format":null,"safe_value":"No","value":"No"}],"taxonomy":[]},' +
+                '{"id":"403","title":"Type of water point?","type":"checkboxes","options":[{"format":null,"safe_value":"Protected spring","value":"Protected spring"},{"format":null,"safe_value":"Piped water scheme","value":"Piped water scheme"},{"format":null,"safe_value":"Hand pump","value":"Hand pump"}],"taxonomy":[]},' +
+                '{"id":"404","title":"Type of water point?","type":"number","taxonomy":[]}]'
+            );
+        });
+    })
+
     describe("tripSiteDetails", function(){
         var callback;
 

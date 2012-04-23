@@ -8,6 +8,7 @@ DataPull.prototype.questions = function(callback){
     $("#status").html("");
     navigator.log.debug("Requesting question download.");
     var questionSuccess = function(questionResponse){
+        var questionResponse = {"#data": questionResponse};
         if (devtrac.common.hasError(questionResponse)) {
             devtrac.common.logAndShowGenericError(devtrac.common.getErrorMessage(questionResponse));
             callback();
@@ -18,9 +19,9 @@ DataPull.prototype.questions = function(callback){
                 var question = new Question();
                 question.id = item.nid;
                 question.title = item.title;
-                question.type = item.questiontype;
-                question.options = item.questionoptions;
-                for (var id in item.taxonomy) {
+                question.type = item.questionnaire_question_type["und"][0]["value"];
+                question.options = item.questionnaire_question_options["und"];
+                for (var id in item.taxonomy_vocabulary_1) {
                     var questionTaxonomy = new QuestionTaxonomy();
                     questionTaxonomy.id = id;
                     questionTaxonomy.name = item.taxonomy[id].name;
@@ -50,7 +51,7 @@ DataPull.prototype.questions = function(callback){
 
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving questions from devtrac.");
-    devtrac.remoteView.call('api_questions', 'page_1', '', questionSuccess, questionFailed);
+    devtrac.remoteView.get(DT_D7.QUESTIONS, questionSuccess, questionFailed);
 }
 
 DataPull.prototype.placeTypes = function(callback){
