@@ -127,6 +127,7 @@ describe("DataPull", function(){
 
     describe("questions",function(){
         beforeEach(function(){
+            devtrac.places = [{id:1, name:"Office"},{id:203, name:"School"}];
             callback = jasmine.createSpy("Callback");
             var questionResponse = [
             {
@@ -150,8 +151,13 @@ describe("DataPull", function(){
 	                    {
 	                        "value": "radios"
 	                    }]
-	                 },
-                 "taxonomy_vocabulary_1": [],
+                 },
+                 "taxonomy_vocabulary_1": {
+                     "und": [
+	                    {
+	                       "tid": "203"
+	                    }]
+                 },
                  "title": "Do both the community and school have access to the water source at the health facility?",
                  "type": "questionnaire_question"
             },
@@ -219,7 +225,7 @@ describe("DataPull", function(){
 
         it("parse questions correctly", function() {
             expect(navigator.store.put.mostRecentCall.args[3]).toEqual(
-                '[{"id":"402","title":"Do both the community and school have access to the water source at the health facility?","type":"radios","options":[{"format":null,"safe_value":"Yes","value":"Yes"},{"format":null,"safe_value":"No","value":"No"}],"taxonomy":[]},' +
+                '[{"id":"402","title":"Do both the community and school have access to the water source at the health facility?","type":"radios","options":[{"format":null,"safe_value":"Yes","value":"Yes"},{"format":null,"safe_value":"No","value":"No"}],"taxonomy":[{"id":"203","name":"School"}]},' +
                 '{"id":"403","title":"Type of water point?","type":"checkboxes","options":[{"format":null,"safe_value":"Protected spring","value":"Protected spring"},{"format":null,"safe_value":"Piped water scheme","value":"Piped water scheme"},{"format":null,"safe_value":"Hand pump","value":"Hand pump"}],"taxonomy":[]},' +
                 '{"id":"404","title":"Type of water point?","type":"number","taxonomy":[]}]'
             );

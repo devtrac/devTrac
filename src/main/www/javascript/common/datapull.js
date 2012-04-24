@@ -21,10 +21,11 @@ DataPull.prototype.questions = function(callback){
                 question.title = item.title;
                 question.type = item.questionnaire_question_type["und"][0]["value"];
                 question.options = item.questionnaire_question_options["und"];
-                for (var id in item.taxonomy_vocabulary_1) {
+                for (var index in item.taxonomy_vocabulary_1["und"]) {
                     var questionTaxonomy = new QuestionTaxonomy();
-                    questionTaxonomy.id = id;
-                    questionTaxonomy.name = item.taxonomy[id].name;
+                    var placeTypeId = item.taxonomy_vocabulary_1["und"][index]['tid'];
+                    questionTaxonomy.id = placeTypeId;
+                    questionTaxonomy.name = devtrac.dataPull.getPlaceTypeNameBy(placeTypeId);
                     question.taxonomy.push(questionTaxonomy);
                 }
                 navigator.log.debug("Processed question with id: " + question.id);
@@ -388,6 +389,16 @@ DataPull.prototype.getPlaceTypeFor = function(id){
             return place;
         }
     }
+}
+
+DataPull.prototype.getPlaceTypeNameBy = function(id){
+    for (var index in devtrac.places) {
+        var place = devtrac.places[index];
+        if (id == place.id) {
+            return place && place.name;
+        }
+    }
+    return "undefined name";
 }
 
 DataPull.prototype.saveFieldtrip = function(callback){
