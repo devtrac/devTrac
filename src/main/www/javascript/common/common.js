@@ -178,4 +178,11 @@ function Common(){
         var placeId = site.placeTaxonomy && site.placeTaxonomy.length > 0 && site.placeTaxonomy[0] && site.placeTaxonomy[0].id;
         return placeId ? placeId : 195;
     }
+
+    this.initialTaxonomy = function(){
+        for (var index in devtrac.questions) {
+            var id = devtrac.questions[index].taxonomy[0].id;
+            devtrac.questions[index].taxonomy[0].name = devtrac.dataPull.getPlaceTypeNameBy(id);
+        }
+    };
 }

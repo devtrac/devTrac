@@ -214,4 +214,15 @@ describe("Common", function(){
             })
         })
     })
+
+    describe("initialTaxonomy", function(){
+        it("should initial taxonomy correctly", function(){
+            devtrac.questions =[{taxonomy:[{id:1}]}];
+            devtrac.places = [{id: 1, name: "School"}];
+
+            devtrac.common.initialTaxonomy();
+
+            expect(devtrac.questions[0].taxonomy[0].name).toEqual("School");
+        })
+    })
 });
