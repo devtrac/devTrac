@@ -418,7 +418,8 @@ var QuestionTypes = function(questions){
 
     this.locationTypes = function(){
         var types = $.map(that.questions, function(q){
-            return q.taxonomy[0].name;
+             if( q.taxonomy[0].name.indexOf("undefined name")==-1)
+                return q.taxonomy[0].name;
         });
         return $.unique(types);
     }
