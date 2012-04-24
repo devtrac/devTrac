@@ -18,16 +18,16 @@ QuestionsController.prototype.show = function(){
     $.each(devtrac.questionsController.questions, function(index, q){
         var questionHtml = "";
         switch (q.type) {
-            case "0":
+            case "select":
                 questionHtml = devtrac.questionsController.listQuestion(q);
                 break;
-            case "1":
+            case "checkboxes":
                 questionHtml = devtrac.questionsController.checkboxQuestion(q);
                 break;
-            case "2":
+            case "radios":
                 questionHtml = devtrac.questionsController.objectiveQuestion(q);
                 break;
-            case "3":
+            case "number":
                 questionHtml = devtrac.questionsController.numericQuestion(q);
                 break;
             default:
