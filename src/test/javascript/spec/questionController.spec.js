@@ -1,4 +1,4 @@
-describe("", function(){
+describe("questionController", function(){
        var questionSamples = [{
                     id:401,
                     title:"Do both the community and school have access to the water source at the health facility?",
@@ -36,10 +36,12 @@ describe("", function(){
                        '</div>';
 
         setFixtures("<body>"+ fixture +"</body>");
+
+        var container = $('.question-content');
+        container.html("");
     })
-	
-	it("only question type of current site should be attached", function(){
-		
+
+    it("only question type of current site should be attached", function(){
         spyOn(devtrac.questionsController,"checkboxQuestion").andCallFake(function(){});
         spyOn(devtrac.questionsController,"objectiveQuestion").andCallFake(function(){});
         devtrac.currentSite.type = "School";
@@ -48,21 +50,70 @@ describe("", function(){
         var question2 = questionSamples[1];
         devtrac.questions.push(question1);
         devtrac.questions.push(question2);
+
+        var container = $('.question-content');
+        container.html("");
         devtrac.questionsController.show();
 
         expect(devtrac.questionsController.objectiveQuestion).toHaveBeenCalled();
         expect(devtrac.questionsController.checkboxQuestion).not.toHaveBeenCalled();
-	})
-	
+    })
+
     it("questionnaire of number type should be attaached correctly", function(){
         devtrac.currentSite.type = "School";
         devtrac.questions = [];
         var question = questionSamples[3];
         devtrac.questions.push(question);
 
+        var container = $('.question-content');
+        container.html("");
+
         devtrac.questionsController.show();
-		alert($('input[type=text]').html());
-        expect($('.question')).toHaveText(question.title);
-        //expect($(":input").attr("class")).toEqual("" + question.id + " input numeric");
+
+        var qid = question.id;
+        expect($("#"+qid)).toHaveText(question.title);
+        expect($("input[type=text]").attr("class")).toEqual("" + question.id + " input numeric");
+    })
+
+    it("questionnaire of radios type should be attaached correctly", function(){
+        devtrac.currentSite.type = "School";
+        devtrac.questions = [];
+        var question = questionSamples[0];
+        devtrac.questions.push(question);
+
+        var container = $('.question-content');
+        container.html("");
+
+        devtrac.questionsController.show();
+
+        var qid = question.id;
+        expect($("#"+qid)).toHaveText(question.title);
+        //expect($("input[type=text]").val()).toEqual("");
+    })
+
+    it("questionnaire of checkboxs type should be attaached correctly", function(){
+        devtrac.currentSite.type = "Office";
+        devtrac.questions = [];
+        var question = questionSamples[1];
+        devtrac.questions.push(question);
+
+        devtrac.questionsController.show();
+
+        var qid = question.id;
+        expect($("#"+qid)).toHaveText(question.title);
+        //expect($(":input").html()).toEqual("");
+    })
+
+    it("questionnaire of select type should be attaached correctly", function(){
+        devtrac.currentSite.type = "School";
+        devtrac.questions = [];
+        var question = questionSamples[2];
+        devtrac.questions.push(question);
+
+        devtrac.questionsController.show();
+
+        var qid = question.id;
+        expect($("#"+qid)).toHaveText(question.title);
+        //expect($(":input").html()).toEqual("");
     })
 })

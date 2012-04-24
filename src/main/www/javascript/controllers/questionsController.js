@@ -43,20 +43,21 @@ QuestionsController.prototype.show = function(){
 
 QuestionsController.prototype.listQuestion = function(q){
     var html = "<div class='question'><label id='" + q.id + "'>" + q.title + "</label><select name='" + q.id + "' class='" + q.id + " select'>";
-    var options = q.options.split("\r\n");
+    var options = q.options;
     $.each(options, function(index){
         var item = options[index];
-        html += "<option value='" + item + "'>" + item + "</option>";
+        html += "<option value='" + item.safe_value + "'>" + item.value + "</option>";
     });
     html += "</select></div>";
     return html;
 }
 
 QuestionsController.prototype.checkboxQuestion = function(q){
-    var html = "<div class='question'><label>" + q.title + "</label>";
-    var options = q.options.split("\r\n");
+
+    var html = "<div class='question'><label id='" + q.id + "'>" + q.title + "</label>";
+    var options = q.options;
     $.each(options, function(index, item){
-        html += "<input type='checkbox' id=" + q.id + "_" + index + " name=" + q.id + " value='" + escape(item) + "'/><label>" + item + "</label>";
+        html += "<input type='checkbox' id=" + q.id + "_" + index + " name=" + q.id + " value='" + escape(item.safe_value) + "'/><label>" + item.value + "</label>";
     });
     html += "</div>";
     return html;
@@ -64,10 +65,10 @@ QuestionsController.prototype.checkboxQuestion = function(q){
 
 QuestionsController.prototype.objectiveQuestion = function(q){
     var html = "<div class='question'><label id='" + q.id + "'>" + q.title + "</label>";
-    var options = q.options.split("\r\n");
+    var options = q.options;
     $.each(options, function(index){
         var item = options[index];
-        html += "<input type='radio' name='" + q.id + "' value='" + item + "'>" + item + "</input>";
+        html += "<input type='radio' name='" + q.id + "' value='" + item.safe_value + "'>" + item.value + "</input>";
     });
     html += "</div>";
     return html;
