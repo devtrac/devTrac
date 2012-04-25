@@ -93,7 +93,7 @@ DataPull.prototype.placeTypes = function(callback){
     };
 
     screens.show("pull_status");
-    devtrac.dataPull.updateStatus("Retrieving location types.");
+    devtrac.dataPull.updateStatus("Retrieving place types.");
     devtrac.remoteView.get(DT_D7.PLACE_TYPES, placesSuccess, placesFailed);
 }
 
