@@ -57,7 +57,7 @@ QuestionsController.prototype.checkboxQuestion = function(q){
     var html = "<div class='question'><label id='" + q.id + "'>" + q.title + "</label>";
     var options = q.options;
     $.each(options, function(index, item){
-        html += "<input type='checkbox' id=" + q.id + "_" + index + " name=" + q.id + " value='" + escape(item.safe_value) + "'/><label>" + item.value + "</label>";
+        html += "<input type='checkbox' id=" + q.id + "_" + index + " name=" + q.id + " value='" + item.safe_value + "'>" + item.value + "</input> <br />";
     });
     html += "</div>";
     return html;
