@@ -232,6 +232,18 @@ describe("DataPull", function(){
         });
     })
 
+    describe("QuestionTypes", function(){
+       it("type of undefined name should be ignored", function(){
+          var originalQuestions = [{taxonomy:[{name:"School"}]},{taxonomy:[{name:"Office"}]},{taxonomy:[{name:"undefined name"}]}];
+          var questions = new QuestionTypes(originalQuestions);
+          var types = questions.locationTypes();
+
+          expect(types.length).toEqual(2);
+          expect(types[0]).toEqual("Office");
+          expect(types[1]).toEqual("School");
+       })
+    })
+	
     describe("tripSiteDetails", function(){
         var callback;
 
