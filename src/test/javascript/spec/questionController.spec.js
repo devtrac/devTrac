@@ -174,7 +174,6 @@ describe("questionController", function(){
         })
 
         it("submission to checkbox question should be saved correctly", function(){
-            alert(JSON.stringify(devtrac.currentSite.submission));
             expect(devtrac.currentSite.submission[1]).toEqual({id: "402",response: "Chicken~Rice"});
         })
     })
