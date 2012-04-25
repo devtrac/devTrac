@@ -129,17 +129,17 @@ describe("questionController", function(){
                                  '<div class="question"><label id="404">Number of schools?</label>' +
                                     '<input type="text" name="404" value="" class="404 input numeric"></input></div>'+
                                  '<div class="question"><label id="401">Do both school have access to the water sourcet?</label>' +
-                                    '<input type="radio" name="401" value="Yes">Yes</input>' + 
-                                    '<input type="radio" name="401" value="No">No</input></div>' + 
+                                    '<input type="radio" name="401" value="Yes">Yes</input>' +
+                                    '<input type="radio" name="401" value="No">No</input></div>' +
                                  '<div class="question"><label id="402">What food I like?</label>' +
-                                    '<input type="checkbox" name="402" value="Noodle">Noodle</input><br />' + 
-                                    '<input type="checkbox" name="402" value="Chicken">Chicken</input><br />' + 
-                                    '<input type="checkbox" name="402" value="Rice">Rice</input><br /></div>' + 
+                                    '<input type="checkbox" name="402" value="Noodle">Noodle</input><br />' +
+                                    '<input type="checkbox" name="402" value="Chicken">Chicken</input><br />' +
+                                    '<input type="checkbox" name="402" value="Rice">Rice</input><br /></div>' +
                                  '<div class="question"><label id="403">When was last repair carried out?</label>' +
                                     '<select name="403" class="403 select">' +
-                                    '<option value="Less than 1 month ago">Less than 1 month ago</option>' + 
-                                    '<option value="1-6 months ago">1-6 months ago</option>' + 
-                                    '<option value="More than 6 months ago">More than 6 months ago</option></select></div>' + 
+                                    '<option value="Less than 1 month ago">Less than 1 month ago</option>' +
+                                    '<option value="1-6 months ago">1-6 months ago</option>' +
+                                    '<option value="More than 6 months ago">More than 6 months ago</option></select></div>' +
                                '</div>' +
                            '</form>' +
                        '</div>';
@@ -150,8 +150,8 @@ describe("questionController", function(){
 
             $("input[type=text]").val("3");
             $("input[type=radio]").eq(0).attr("checked", "checked");
+            $("input[name=402]").eq(1).attr("checked", "checked");
             $("input[name=402]").eq(2).attr("checked", "checked");
-            $("input[name=402]").eq(3).attr("checked", "checked");
             $("select").selectedIndex = 1;
             devtrac.questionsController.save();
 
@@ -173,9 +173,9 @@ describe("questionController", function(){
             expect(devtrac.currentSite.submission[0]).toEqual({id: "403",response: "Less than 1 month ago"});
         })
 
-//        it("submission to checkbox question should be saved correctly", function(){
-//            alert(JSON.stringify(devtrac.currentSite.submission));
-//            expect(devtrac.currentSite.submission[1]).toEqual({id: "402",response: "Chicken~Rice"});
-//        })
+        it("submission to checkbox question should be saved correctly", function(){
+            alert(JSON.stringify(devtrac.currentSite.submission));
+            expect(devtrac.currentSite.submission[1]).toEqual({id: "402",response: "Chicken~Rice"});
+        })
     })
 })
