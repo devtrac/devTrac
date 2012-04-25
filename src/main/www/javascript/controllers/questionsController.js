@@ -57,7 +57,7 @@ QuestionsController.prototype.checkboxQuestion = function(q){
     var html = "<div class='question'><label id='" + q.id + "'>" + q.title + "</label>";
     var options = q.options;
     $.each(options, function(index, item){
-        html += "<input type='checkbox' id=" + q.id + "_" + index + " name=" + q.id + " value='" + item.safe_value + "'>" + item.value + "</input> <br />";
+        html += "<input type='checkbox' id=" + q.id + "_" + index + " name=" + q.id + " value='" + escape(item.safe_value) + "'>" + item.value + "</input> <br />";
     });
     html += "</div>";
     return html;
@@ -137,10 +137,10 @@ QuestionsController.prototype.collectCheckboxAnswers = function(){
 
 QuestionsController.prototype.collectRadioAnswers = function(){
     $("form :radio").each(function(){
-        var answer = new SubmissionItem();
-        answer.id = $(this).attr("name");
-        answer.response = $(this).val();
-        if ($(this).attr("checked")) {
+        if($(this).attr("checked")){
+            var answer = new SubmissionItem();
+            answer.id = $(this).attr("name");
+            answer.response = $(this).val();
             devtrac.questionsController.answers.push(answer);
         }
     });

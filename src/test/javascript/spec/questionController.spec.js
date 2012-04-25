@@ -26,94 +26,156 @@ describe("questionController", function(){
                     type:"number",
                     taxonomy:[{"id": "1","name": "School"}]
                   }];
-				  
-     beforeEach(function(){
-        var fixture = '<div class="content">' +
+    describe("question display",function(){
+
+        beforeEach(function(){
+            var fixture = '<div class="content">' +
                            '<form>' +
                                '<div class="question-content">' +
                                '</div>' +
                            '</form>' +
                        '</div>';
 
-        setFixtures("<body>"+ fixture +"</body>");
+            setFixtures("<body>"+ fixture +"</body>");
 
-        var container = $('.question-content');
-        container.html("");
-    })
+            var container = $('.question-content');
+            container.html("");
+        })
 
-    it("only question type of current site should be attached", function(){
-        spyOn(devtrac.questionsController,"checkboxQuestion").andCallFake(function(){});
-        spyOn(devtrac.questionsController,"objectiveQuestion").andCallFake(function(){});
-        devtrac.currentSite.type = "School";
-        devtrac.questions = [];
-        var question1 = questionSamples[0];
-        var question2 = questionSamples[1];
-        devtrac.questions.push(question1);
-        devtrac.questions.push(question2);
+        it("only question type of current site should be attached", function(){
+            spyOn(devtrac.questionsController,"checkboxQuestion").andCallFake(function(){});
+            spyOn(devtrac.questionsController,"objectiveQuestion").andCallFake(function(){});
+            devtrac.currentSite.type = "School";
+            devtrac.questions = [];
+            var question1 = questionSamples[0];
+            var question2 = questionSamples[1];
+            devtrac.questions.push(question1);
+            devtrac.questions.push(question2);
 
-        var container = $('.question-content');
-        container.html("");
-        devtrac.questionsController.show();
+            var container = $('.question-content');
+            container.html("");
+            devtrac.questionsController.show();
 
-        expect(devtrac.questionsController.objectiveQuestion).toHaveBeenCalled();
-        expect(devtrac.questionsController.checkboxQuestion).not.toHaveBeenCalled();
-    })
+            expect(devtrac.questionsController.objectiveQuestion).toHaveBeenCalled();
+            expect(devtrac.questionsController.checkboxQuestion).not.toHaveBeenCalled();
+        })
 
-    it("questionnaire of number type should be attaached correctly", function(){
-        devtrac.currentSite.type = "School";
-        devtrac.questions = [];
-        var question = questionSamples[3];
-        devtrac.questions.push(question);
 
-        devtrac.questionsController.show();
+        it("questionnaire of number type should be attaached correctly", function(){
+            devtrac.currentSite.type = "School";
+            devtrac.questions = [];
+            var question = questionSamples[3];
+            devtrac.questions.push(question);
 
-        var qid = question.id;
-        expect($("#"+qid)).toHaveText(question.title);
-        expect($("input[type=text]").attr("class")).toEqual("" + question.id + " input numeric");
-    })
+            devtrac.questionsController.show();
 
-    it("questionnaire of radios type should be attaached correctly", function(){
-        devtrac.currentSite.type = "School";
-        devtrac.questions = [];
-        var question = questionSamples[0];
-        devtrac.questions.push(question);
+            var qid = question.id;
+            expect($("#"+qid)).toHaveText(question.title);
+            expect($("input[type=text]").attr("class")).toEqual("" + question.id + " input numeric");
+        })
 
-        devtrac.questionsController.show();
+        it("questionnaire of radios type should be attaached correctly", function(){
+            devtrac.currentSite.type = "School";
+            devtrac.questions = [];
+            var question = questionSamples[0];
+            devtrac.questions.push(question);
 
-        var qid = question.id;
-        expect($("#"+qid)).toHaveText(question.title);
+            devtrac.questionsController.show();
 
-        expect($("input[type=radio]").eq(0)).toHaveAttr("value", 'Yes');
-        expect($("input[type=radio]").eq(1)).toHaveAttr("value", 'No');
-    })
+            var qid = question.id;
+            expect($("#"+qid)).toHaveText(question.title);
 
-    it("questionnaire of checkboxs type should be attaached correctly", function(){
-        devtrac.currentSite.type = "Office";
-        devtrac.questions = [];
-        var question = questionSamples[1];
-        devtrac.questions.push(question);
+            expect($("input[type=radio]").eq(0)).toHaveAttr("value", 'Yes');
+            expect($("input[type=radio]").eq(1)).toHaveAttr("value", 'No');
+        })
 
-        devtrac.questionsController.show();
+        it("questionnaire of checkboxs type should be attaached correctly", function(){
+            devtrac.currentSite.type = "Office";
+            devtrac.questions = [];
+            var question = questionSamples[1];
+            devtrac.questions.push(question);
 
-        var qid = question.id;
-        expect($("#"+qid)).toHaveText(question.title);
-        expect($("input[name=402]").eq(0)).toHaveAttr("value", 'Protected spring');
-        expect($("input[name=402]").eq(1)).toHaveAttr("value", 'Piped water scheme');
-        expect($("input[name=402]").eq(2)).toHaveAttr("value", 'Hand pump');
-    })
+            devtrac.questionsController.show();
 
-    it("questionnaire of select type should be attaached correctly", function(){
-        devtrac.currentSite.type = "School";
-        devtrac.questions = [];
-        var question = questionSamples[2];
-        devtrac.questions.push(question);
+            var qid = question.id;
+            expect($("#"+qid)).toHaveText(question.title);
+            expect($("input[name=402]").eq(0)).toHaveAttr("value", 'Protected%20spring');
+            expect($("input[name=402]").eq(1)).toHaveAttr("value", 'Piped%20water%20scheme');
+            expect($("input[name=402]").eq(2)).toHaveAttr("value", 'Hand%20pump');
+        })
 
-        devtrac.questionsController.show();
+        it("questionnaire of select type should be attaached correctly", function(){
+            devtrac.currentSite.type = "School";
+            devtrac.questions = [];
+            var question = questionSamples[2];
+            devtrac.questions.push(question);
 
-        var qid = question.id;
-        expect($("#"+qid)).toHaveText(question.title);
-        expect($("option").eq(0)).toHaveAttr("value", 'Less than 1 month ago');
-        expect($("option").eq(1)).toHaveAttr("value", '1-6 months ago');
-        expect($("option").eq(2)).toHaveAttr("value", 'More than 6 months ago');
+            devtrac.questionsController.show();
+
+            var qid = question.id;
+            expect($("#"+qid)).toHaveText(question.title);
+            expect($("option").eq(0)).toHaveAttr("value", 'Less than 1 month ago');
+            expect($("option").eq(1)).toHaveAttr("value", '1-6 months ago');
+            expect($("option").eq(2)).toHaveAttr("value", 'More than 6 months ago');
+        })
+	})
+
+    describe("submission saving", function(){
+
+        beforeEach(function(){
+            var fixture = '<div class="content">' +
+                           '<form>' +
+                               '<div class="question-content">' +
+                                 '<div class="question"><label id="404">Number of schools?</label>' +
+                                    '<input type="text" name="404" value="" class="404 input numeric"></input></div>'+
+                                 '<div class="question"><label id="401">Do both school have access to the water sourcet?</label>' +
+                                    '<input type="radio" name="401" value="Yes">Yes</input>' + 
+                                    '<input type="radio" name="401" value="No">No</input></div>' + 
+                                 '<div class="question"><label id="402">What food I like?</label>' +
+                                    '<input type="checkbox" name="402" value="Noodle">Noodle</input><br />' + 
+                                    '<input type="checkbox" name="402" value="Chicken">Chicken</input><br />' + 
+                                    '<input type="checkbox" name="402" value="Rice">Rice</input><br /></div>' + 
+                                 '<div class="question"><label id="403">When was last repair carried out?</label>' +
+                                    '<select name="403" class="403 select">' +
+                                    '<option value="Less than 1 month ago">Less than 1 month ago</option>' + 
+                                    '<option value="1-6 months ago">1-6 months ago</option>' + 
+                                    '<option value="More than 6 months ago">More than 6 months ago</option></select></div>' + 
+                               '</div>' +
+                           '</form>' +
+                       '</div>';
+
+            setFixtures("<body>"+ fixture +"</body>");
+
+            devtrac.currentSite.submission = [];
+
+            $("input[type=text]").val("3");
+            $("input[type=radio]").eq(0).attr("checked", "checked");
+            $("input[name=402]").eq(2).attr("checked", "checked");
+            $("input[name=402]").eq(3).attr("checked", "checked");
+            $("select").selectedIndex = 1;
+            devtrac.questionsController.save();
+
+        })
+
+        it("number of submissions should be correct",function(){
+            expect(devtrac.currentSite.submission.length).toEqual(4);
+        })
+
+        it("submission to number question should be saved correctly", function(){
+            expect(devtrac.currentSite.submission[3]).toEqual({id: "404",response: "3"});
+        })
+
+        it("submission to radio question should be saved correctly", function(){
+            expect(devtrac.currentSite.submission[2]).toEqual({id: "401",response: "Yes"});
+        })
+
+        it("submission to select question should be saved correctly", function(){
+            expect(devtrac.currentSite.submission[0]).toEqual({id: "403",response: "Less than 1 month ago"});
+        })
+
+//        it("submission to checkbox question should be saved correctly", function(){
+//            alert(JSON.stringify(devtrac.currentSite.submission));
+//            expect(devtrac.currentSite.submission[1]).toEqual({id: "402",response: "Chicken~Rice"});
+//        })
     })
 })
