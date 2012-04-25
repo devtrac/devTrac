@@ -17,7 +17,7 @@ describe("questionController", function(){
                     id:"403",
                     title:"When was the last repair carried out?",
                     type:"select",
-                    options:[{"value":"Less than 1 month ago","format":null,"safe_value":"Less than 1 month ago"},{"value":"1-6 months ago","format":null,"safe_value":"1-6 months ago"},{"value":"More than 6 months ago","format":null,"safe_value":"More than 6 months ago"}],                           
+                    options:[{"value":"Less than 1 month ago","format":null,"safe_value":"Less than 1 month ago"},{"value":"1-6 months ago","format":null,"safe_value":"1-6 months ago"},{"value":"More than 6 months ago","format":null,"safe_value":"More than 6 months ago"}],
                     taxonomy:[{"id": "203","name": "School"}]
                   },
                   {
@@ -65,9 +65,6 @@ describe("questionController", function(){
         var question = questionSamples[3];
         devtrac.questions.push(question);
 
-        var container = $('.question-content');
-        container.html("");
-
         devtrac.questionsController.show();
 
         var qid = question.id;
@@ -81,14 +78,13 @@ describe("questionController", function(){
         var question = questionSamples[0];
         devtrac.questions.push(question);
 
-        var container = $('.question-content');
-        container.html("");
-
         devtrac.questionsController.show();
 
         var qid = question.id;
         expect($("#"+qid)).toHaveText(question.title);
-        //expect($("input[type=text]").val()).toEqual("");
+
+        expect($("input[type=radio]").eq(0)).toHaveAttr("value", 'Yes');
+        expect($("input[type=radio]").eq(1)).toHaveAttr("value", 'No');
     })
 
     it("questionnaire of checkboxs type should be attaached correctly", function(){
@@ -101,7 +97,9 @@ describe("questionController", function(){
 
         var qid = question.id;
         expect($("#"+qid)).toHaveText(question.title);
-        //expect($(":input").html()).toEqual("");
+        expect($("input[name=402]").eq(0)).toHaveAttr("value", 'Protected spring');
+        expect($("input[name=402]").eq(1)).toHaveAttr("value", 'Piped water scheme');
+        expect($("input[name=402]").eq(2)).toHaveAttr("value", 'Hand pump');
     })
 
     it("questionnaire of select type should be attaached correctly", function(){
@@ -114,6 +112,8 @@ describe("questionController", function(){
 
         var qid = question.id;
         expect($("#"+qid)).toHaveText(question.title);
-        //expect($(":input").html()).toEqual("");
+        expect($("option").eq(0)).toHaveAttr("value", 'Less than 1 month ago');
+        expect($("option").eq(1)).toHaveAttr("value", '1-6 months ago');
+        expect($("option").eq(2)).toHaveAttr("value", 'More than 6 months ago');
     })
 })
