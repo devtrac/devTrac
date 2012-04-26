@@ -109,4 +109,72 @@ describe("Site", function() {
             })
         })
     })
+
+    describe("packageSubimissions", function(){
+        var site;
+        var submissionItems;
+
+        beforeEach(function(){
+            site = [];
+            site.id = "123";
+            site.placeId ="58";
+
+            submissionItems = [];
+            var item = new SubmissionItem();
+            item.id = "489";
+            item.response = "66";
+            submissionItems.push(item);
+        })
+
+        it("should package numeric type submissions correctly", function(){
+            devtrac.questions =[{id:"489",type:"number"}];
+
+            var submissionsJsonData = Site.packageSubmissions(site.id, site.placeId, submissionItems);
+
+            var submissionsData = devtrac.common.convertHash(submissionsJsonData);
+            expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
+            expect(submissionsData).toMatch(new RegExp("contextnid="+ site.placeId));
+            expect(submissionsData).toMatch(new RegExp("answers={489:66}"));
+        })
+
+        it("should package radio type submissions correctly", function(){
+            devtrac.questions =[{id:"489",type:"radios"}];
+
+            var submissionsJsonData = Site.packageSubmissions(site.id, site.placeId, submissionItems);
+
+            var submissionsData = devtrac.common.convertHash(submissionsJsonData);
+            expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
+            expect(submissionsData).toMatch(new RegExp("contextnid="+ site.placeId));
+            expect(submissionsData).toMatch(new RegExp('answers={489:"66"}'));
+        })
+
+        it("should package select type submissions correctly", function(){
+            devtrac.questions =[{id:"489",type:"radios"}];
+
+            var submissionsJsonData = Site.packageSubmissions(site.id, site.placeId, submissionItems);
+
+            var submissionsData = devtrac.common.convertHash(submissionsJsonData);
+            expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
+            expect(submissionsData).toMatch(new RegExp("contextnid="+ site.placeId));
+            expect(submissionsData).toMatch(new RegExp('answers={489:"66"}'));
+        })
+
+        it("should package checkbox type submissions correctly", function(){
+            devtrac.questions =[{id:"489",type:"checkboxes"}];
+
+            submissionItems = [];
+            var item = new SubmissionItem();
+            item.id = "489";
+            item.response = "left~right~middle";
+            submissionItems.push(item);
+
+            var submissionsJsonData = Site.packageSubmissions(site.id, site.placeId, submissionItems);
+
+            var submissionsData = devtrac.common.convertHash(submissionsJsonData);
+            expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
+            expect(submissionsData).toMatch(new RegExp("contextnid="+ site.placeId));
+            expect(submissionsData).toMatch(new RegExp('answers={489:{"left":"left","right":"right","middle":"middle"}}'));
+        })
+
+    })
 })

@@ -83,6 +83,44 @@ Site.packageContactInfoData = function(site){
     return data;
 }
 
+
+Site.packageSubmissions = function(siteId, placeId, submissionItems){
+
+    var generateAnswerItems = function(submissionItems){
+        var answerData ="{"
+        $.each(submissionItems, function(index, item){
+            var type = devtrac.common.getQuestionTypeById(item.id);
+            if (type == "number") {
+                answerData += item.id + ":" + item.response + ",";
+            }
+            else
+                if (type == "radios" || type == "select") {
+                    answerData += item.id + ":" + '"' + item.response + '",';
+                }
+                else
+                    if (type == "checkboxes") {
+                        var response = item.response.split("~");
+                        answerData += item.id + ":{";
+                        for (var i in response) {
+                            answerData += '"' + response[i] + '":"' + response[i] + '",'
+                        }
+                        answerData = answerData.substring(0, answerData.length - 1);
+                        answerData += "},";
+                    }
+        })
+        var answersData = answerData.substring(0,answerData.length-1)
+        answersData += "}";
+        return answersData;
+    }
+
+    var data = {
+        qnid: siteId,
+        contextnid: placeId,
+        answers: generateAnswerItems(submissionItems)
+    }
+    return data;
+}
+
 function PlaceTaxonomy(){
 	this.id = "";
 	this.name = "";
