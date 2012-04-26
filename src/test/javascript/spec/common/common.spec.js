@@ -225,4 +225,14 @@ describe("Common", function(){
             expect(devtrac.questions[0].taxonomy[0].name).toEqual("School");
         })
     })
+
+    describe("getQuestionTypeById", function(){
+        it("should return question type by question id", function(){
+            devtrac.questions =[{id:"489", type:"number"}];
+
+            var questionType = devtrac.common.getQuestionTypeById("489");
+
+            expect(questionType).toEqual("number");
+        })
+    })
 });

@@ -179,6 +179,15 @@ function Common(){
         return placeId ? placeId : 195;
     }
 
+    this.getQuestionTypeById = function(id){
+        for(var i in devtrac.questions){
+            var question = devtrac.questions[i];
+            if(question.id == id)
+               return question.type;
+        }
+        return "undefined";
+    }
+
     this.initialTaxonomy = function(){
         for (var index in devtrac.questions) {
             var id = devtrac.questions[index].taxonomy[0].id;
