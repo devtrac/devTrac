@@ -87,28 +87,28 @@ Site.packageContactInfoData = function(site){
 Site.packageSubmissions = function(siteId, placeId, submissionItems){
 
     var generateAnswerItems = function(submissionItems){
-        var answerData ="{"
-        $.each(submissionItems, function(index, item){
+        var answersData ="{"
+        for (var index in submissionItems) {
+            var answerData = "";
+            var item = submissionItems[index];
             var type = devtrac.common.getQuestionTypeById(item.id);
-            if (type == "number") {
-                answerData += item.id + ":" + item.response + ",";
-            }
-            else
-                if (type == "radios" || type == "select") {
-                    answerData += item.id + ":" + '"' + item.response + '",';
+            if(type =="undefined")return;
+            if (type == "checkboxes") {
+                var response = item.response.split("~");
+                answerData += item.id + ":{";
+                for (var i in response) {
+                    answerData += '"' + response[i] + '":"' + response[i] + '",'
                 }
-                else
-                    if (type == "checkboxes") {
-                        var response = item.response.split("~");
-                        answerData += item.id + ":{";
-                        for (var i in response) {
-                            answerData += '"' + response[i] + '":"' + response[i] + '",'
-                        }
-                        answerData = answerData.substring(0, answerData.length - 1);
-                        answerData += "},";
-                    }
-        })
-        var answersData = answerData.substring(0,answerData.length-1)
+                answerData = answerData.substring(0, answerData.length - 1);
+                answerData += "},";
+            }
+            else {
+                var answerKey = type == "number" ? item.response : '"' + item.response + '"';
+                answerData += item.id + ":" + answerKey + ',';
+            }
+        answersData+=answerData;
+        }
+        answersData = answersData.substring(0, answersData.length-1)
         answersData += "}";
         return answersData;
     }
