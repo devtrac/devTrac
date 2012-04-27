@@ -25,7 +25,7 @@ SubmissionUpload.prototype.upload = function(site, successCallback, errorCallbac
      var error = function(srvErr) {
         navigator.log.log('Error in uploading contactInfo of site "' + site.name + '".');
         navigator.log.log(srvErr);
-        site.contactInfo.uploaded = false;
+        site.submission.uploaded = false;
         errorCallback(srvErr);
     }
 

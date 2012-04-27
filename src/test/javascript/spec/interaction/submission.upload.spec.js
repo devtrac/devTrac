@@ -3,6 +3,7 @@ describe("SubmissionUpload", function(){
         var submissionUpload,successCallback, errorCallback,site;
         beforeEach(function(){
             site = SiteMother.createSite("site1", false, false);
+			site.submission.uploaded = false;
             submissionUpload = new SubmissionUpload();
             successCallback = jasmine.createSpy('successCallback');
             errorCallback = jasmine.createSpy('errorCallback');
@@ -33,7 +34,7 @@ describe("SubmissionUpload", function(){
 
             submissionUpload.upload(site, successCallback, errorCallback);
 
-            expect(site.contactInfo.uploaded).toBeFalsy();
+            expect(site.submission.uploaded).toBeFalsy();
             expect(successCallback).not.toHaveBeenCalled();
             expect(errorCallback).toHaveBeenCalled();
         })

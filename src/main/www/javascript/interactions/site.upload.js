@@ -42,6 +42,11 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
             }
             devtrac.contactInfoUpload.upload(site, contactUploadedCallback, contactUploadedCallback);
 
+            var submissionUploadedCallback = function(){
+                site.uploaded = site.uploaded && site.submission.uploaded;
+            }
+            devtrac.submissionUpload.upload(site, submissionUploadedCallback, submissionUploadedCallback);
+
             devtrac.currentSite = site;
             devtrac.dataStore.saveCurrentSite(function(){
                 navigator.log.log('Site "' + site.name + '" is marked as uploaded.');

@@ -49,3 +49,4 @@ SiteMother.createSiteWithContactInfo = function(siteName, uploaded, placeId, con
 
     return site;
 }
+

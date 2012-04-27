@@ -57,6 +57,79 @@ describe("SiteUpload", function(){
 
     });
 
+    describe('upload site with submission', function(){
+        var site;
+
+        describe("submission upload should",function(){
+            beforeEach(function(){
+                successCallback = jasmine.createSpy('uploader.successCallback');
+                errorCallback = jasmine.createSpy('uploader.errorCallback');
+                site = SiteMother.createSite("site", false, true);
+                site.submission.uploaded = false;
+            })
+
+            it('be invoked after site uploaded successfully', function(){
+                spyOn(devtrac.common, "callServicePost").andCallFake(function(url, postData, callback, error){
+                    callback('{nid: 1}');
+                });
+
+                spyOn(devtrac.submissionUpload, "upload").andCallThrough();
+
+                uploader.upload(site, successCallback, errorCallback);
+
+                expect(devtrac.submissionUpload.upload).toHaveBeenCalled();
+            })
+
+            it('not be invoked when site uploaded failed', function(){
+                spyOn(devtrac.common, "callServicePost").andCallFake(function(url, postData, callback, errorCallback){
+                    errorCallback();
+                });
+
+                spyOn(devtrac.submissionUpload, "upload").andCallThrough();
+
+                uploader.upload(site, successCallback, errorCallback);
+
+                expect(devtrac.submissionUpload.upload).not.toHaveBeenCalled();
+            })
+        })
+
+        describe('site "uploaded" should be updated to', function(){
+            var site;
+            beforeEach(function(){
+                successCallback = jasmine.createSpy('uploader.successCallback');
+                errorCallback = jasmine.createSpy('uploader.errorCallback');
+                spyOn(devtrac.common, "callServicePost").andCallFake(function(url, postData, callback, errorCallback){
+                     callback('{nid: 1}');
+                });
+
+               site = SiteMother.createSite("site", false, true);
+               site.submission.uploaded = false;
+            })
+
+            it('"true" after submission being uploaded successfully', function(){
+                spyOn(devtrac.submissionUpload, "upload").andCallFake(function(site, successCallback, errorCallback){
+                    site.submission.uploaded = true;
+                    successCallback();
+                })
+
+                uploader.upload(site, successCallback, errorCallback);
+
+                expect(site.uploaded).toBeTruthy();
+            })
+
+            it('"false" after the submission is uploaded failed', function(){
+                spyOn(devtrac.submissionUpload, "upload").andCallFake(function(site, successCallback, errorCallback){
+                    site.submission.uploaded = false;
+                    errorCallback();
+                })
+
+                uploader.upload(site, successCallback, errorCallback);
+
+                expect(site.uploaded).toBeFalsy();
+            })
+        })
+    })
+
     describe('upload site with contact info', function(){
         var site;
 

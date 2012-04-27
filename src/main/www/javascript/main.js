@@ -17,6 +17,7 @@ var devtrac = {
     photoUpload: new PhotoUpload(),
     siteUpload: new SiteUpload(),
     contactInfoUpload: new ContactInfoUpload(),
+	submissionUpload: new SubmissionUpload(),
     actionItemUpload: new ActionItemUpload(),
     currentSite: new Site(),
     places: "",

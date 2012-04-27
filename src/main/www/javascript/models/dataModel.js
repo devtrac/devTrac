@@ -26,7 +26,7 @@ function Site(){
     };
     this.submission = {
         submissionItems:[],
-        uploaded:false
+        uploaded: true
     };
     this.photos = {};
     this.actionItems = [];
