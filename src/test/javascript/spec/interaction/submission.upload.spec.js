@@ -1,8 +1,8 @@
 describe("SubmissionUpload", function(){
 	 describe("callback should be called successfully", function(){
-        var submissionUpload,successCallback, errorCallback;
+        var submissionUpload,successCallback, errorCallback,site;
         beforeEach(function(){
-			
+            site = SiteMother.createSite("site1", false, false);
             submissionUpload = new SubmissionUpload();
             successCallback = jasmine.createSpy('successCallback');
             errorCallback = jasmine.createSpy('errorCallback');
@@ -15,22 +15,11 @@ describe("SubmissionUpload", function(){
                     "error": false
                 });
             })
-            var submissionItems = [];
-            var item = new SubmissionItem();
-            item.id = "489";
-            item.response = "66";
-            submissionItems.push(item);
-
-            var site = new Site();
-            site.id = "1";
-            site.placeId = "58";
-            site.submission.submissionItems = submissionItems;
-            site.submission.uploaded = false;
 
             submissionUpload.upload(site, successCallback, errorCallback);
 
             expect(site.submission.uploaded).toBeTruthy();
-            expect(successCallback).toHaveBeenCalled();
+            expect(successCallback).toHaveBeenCalledWith('Submission of site "site1" uploaded successfully.');
             expect(errorCallback).not.toHaveBeenCalled();
         })
 
@@ -42,8 +31,6 @@ describe("SubmissionUpload", function(){
                 });
             })
 
-            var site = SiteMother.createSite("site", false, false);
-
             submissionUpload.upload(site, successCallback, errorCallback);
 
             expect(site.contactInfo.uploaded).toBeFalsy();
@@ -51,6 +38,5 @@ describe("SubmissionUpload", function(){
             expect(errorCallback).toHaveBeenCalled();
         })
     })
-	
-	
+
 })
