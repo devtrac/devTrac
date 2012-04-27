@@ -18,7 +18,7 @@ var devtrac = {
     siteUpload: new SiteUpload(),
     contactInfoUpload: new ContactInfoUpload(),
     actionItemUpload: new ActionItemUpload(),
-    currentSite: "",
+    currentSite: new Site(),
     places: "",
     questions: "",
     profiles: ""

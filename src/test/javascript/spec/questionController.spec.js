@@ -37,7 +37,7 @@ describe("questionController", function(){
                        '</div>';
 
             setFixtures("<body>"+ fixture +"</body>");
-
+            devtrac.currentSite = SiteMother.createSite("siteForQuestion", false, false);
             var container = $('.question-content');
             container.html("");
         })
@@ -146,35 +146,34 @@ describe("questionController", function(){
 
             setFixtures("<body>"+ fixture +"</body>");
 
-            devtrac.currentSite.submission = [];
-
             $("input[type=text]").val("3");
             $("input[type=radio]").eq(0).attr("checked", "checked");
             $("input[name=402]").eq(1).attr("checked", "checked");
             $("input[name=402]").eq(2).attr("checked", "checked");
             $("select").selectedIndex = 1;
+            devtrac.currentSite = SiteMother.createSite("siteForQuestion", false, false);
             devtrac.questionsController.save();
 
         })
 
         it("number of submissions should be correct",function(){
-            expect(devtrac.currentSite.submission.length).toEqual(4);
+            expect(devtrac.currentSite.submission.submissionItems.length).toEqual(4);
         })
 
         it("submission to number question should be saved correctly", function(){
-            expect(devtrac.currentSite.submission[3]).toEqual({id: "404",response: "3"});
+            expect(devtrac.currentSite.submission.submissionItems[3]).toEqual({id: "404",response: "3"});
         })
 
         it("submission to radio question should be saved correctly", function(){
-            expect(devtrac.currentSite.submission[2]).toEqual({id: "401",response: "Yes"});
+            expect(devtrac.currentSite.submission.submissionItems[2]).toEqual({id: "401",response: "Yes"});
         })
 
         it("submission to select question should be saved correctly", function(){
-            expect(devtrac.currentSite.submission[0]).toEqual({id: "403",response: "Less than 1 month ago"});
+            expect(devtrac.currentSite.submission.submissionItems[0]).toEqual({id: "403",response: "Less than 1 month ago"});
         })
 
         it("submission to checkbox question should be saved correctly", function(){
-            expect(devtrac.currentSite.submission[1]).toEqual({id: "402",response: "Chicken~Rice"});
+            expect(devtrac.currentSite.submission.submissionItems[1]).toEqual({id: "402",response: "Chicken~Rice"});
         })
     })
 })

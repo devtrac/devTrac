@@ -86,7 +86,7 @@ QuestionsController.prototype.save = function(){
     devtrac.questionsController.collectCheckboxAnswers();
     devtrac.questionsController.collectRadioAnswers();
     devtrac.questionsController.collectTextAnswers();
-    devtrac.currentSite.submission = devtrac.questionsController.answers;
+    devtrac.currentSite.submission.submissionItems = devtrac.questionsController.answers;
     devtrac.questionsController.markProgress();
 
     devtrac.currentSite.uploaded = false;
@@ -158,8 +158,8 @@ QuestionsController.prototype.collectTextAnswers = function(){
 }
 
 QuestionsController.prototype.responseFor = function(id){
-    for (var index in devtrac.currentSite.submission) {
-        var answer = devtrac.currentSite.submission[index];
+    for (var index in devtrac.currentSite.submission.submissionItems) {
+        var answer = devtrac.currentSite.submission.submissionItems[index];
         if (answer.id == id) {
             return answer.response;
         }
@@ -168,8 +168,8 @@ QuestionsController.prototype.responseFor = function(id){
 }
 
 QuestionsController.prototype.populateResponse = function(){
-    for (var index in devtrac.currentSite.submission) {
-        var answer = devtrac.currentSite.submission[index];
+    for (var index in devtrac.currentSite.submission.submissionItems) {
+        var answer = devtrac.currentSite.submissionItems[index];
         var textboxes = $(":text[name='" + answer.id + "']");
         if (textboxes.length > 0) {
             textboxes.val(answer.response);

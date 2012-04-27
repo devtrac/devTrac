@@ -24,7 +24,10 @@ function Site(){
         email: "",
         uploaded: true
     };
-    this.submission = [];
+    this.submission = {
+        submissionItems:[],
+        uploaded:false
+    };
     this.photos = {};
     this.actionItems = [];
     this.historyAssignedToMeActionItems = [];

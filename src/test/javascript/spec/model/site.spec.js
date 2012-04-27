@@ -115,7 +115,7 @@ describe("Site", function() {
         var submissionItems;
 
         beforeEach(function(){
-            site = [];
+            site = new Site();
             site.id = "123";
             site.placeId ="58";
 
