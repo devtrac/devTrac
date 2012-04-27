@@ -31,6 +31,7 @@ src_files:
     - src/main/www/javascript/interactions/site.upload.js
     - src/main/www/javascript/interactions/actionitem.upload.js
     - src/main/www/javascript/interactions/contactInfo.upload.js
+    - src/main/www/javascript/interactions/submission.upload.js
     - src/main/www/javascript/models/user.js
     - src/main/www/javascript/models/dataModel.js
     - src/main/www/javascript/controllers/loginController.js
