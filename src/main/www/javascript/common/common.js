@@ -53,6 +53,10 @@ function Common(){
         this.callServiceWithTimeoutAndUrl("POST", url, postData, DT_D7.TIME_OUT, callback, errorCallback, errorCallback);
     }
 
+    this.callServicePostWithJsonString= function(url, postData, callback, errorCallback){
+        navigator.network.XHR(devtrac.user.cookie, "POST", url, postData, callback, errorCallback);
+    }
+
     this.callServicePut= function(url, postData, callback, errorCallback){
         this.callServiceWithTimeoutAndUrl("PUT", url, postData, DT_D7.TIME_OUT, callback, errorCallback, errorCallback);
     }

@@ -35,7 +35,7 @@ QuestionsController.prototype.show = function(){
         }
         container.append(questionHtml);
     });
-    devtrac.questionsController.attachValidations();
+//    devtrac.questionsController.attachValidations();
     devtrac.questionsController.populateResponse();
     screens.show("questions_form");
 	navigator.log.debug("Displayed questions.");
@@ -90,6 +90,7 @@ QuestionsController.prototype.save = function(){
     devtrac.questionsController.markProgress();
 
     devtrac.currentSite.uploaded = false;
+    devtrac.currentSite.submission.uploaded = false;
     devtrac.dataStore.saveCurrentSite(function(){
         alert("Your response is saved.");
         devtrac.siteDetailController.show();
@@ -168,8 +169,9 @@ QuestionsController.prototype.responseFor = function(id){
 }
 
 QuestionsController.prototype.populateResponse = function(){
-    for (var index in devtrac.currentSite.submission.submissionItems) {
-        var answer = devtrac.currentSite.submissionItems[index];
+    var submissionItems = devtrac.currentSite.submission.submissionItems;
+    for (var index in submissionItems) {
+        var answer = submissionItems[index];
         var textboxes = $(":text[name='" + answer.id + "']");
         if (textboxes.length > 0) {
             textboxes.val(answer.response);

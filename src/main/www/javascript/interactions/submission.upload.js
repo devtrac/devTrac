@@ -23,11 +23,11 @@ SubmissionUpload.prototype.upload = function(site, successCallback, errorCallbac
         }
     };
      var error = function(srvErr) {
-        navigator.log.log('Error in uploading contactInfo of site "' + site.name + '".');
+        navigator.log.log('Error in uploading submission of site "' + site.name + '".');
         navigator.log.log(srvErr);
         site.submission.uploaded = false;
         errorCallback(srvErr);
     }
 
-    devtrac.common.callServicePost(DT_D7.SUBMISSION, submission, success, error);
+    devtrac.common.callServicePostWithJsonString(DT_D7.SUBMISSION, submission, success, error);
 }

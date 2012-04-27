@@ -11,7 +11,7 @@ describe("SubmissionUpload", function(){
 
         it('successCallback should be called when submission update successfully', function(){
 
-            spyOn(devtrac.common, "callServicePost").andCallFake(function(url, postData, successCallback, errorCallback){
+            spyOn(devtrac.common, "callServicePostWithJsonString").andCallFake(function(url, postData, successCallback, errorCallback){
                 successCallback({
                     "error": false
                 });
@@ -26,7 +26,7 @@ describe("SubmissionUpload", function(){
 
         it('errorCallback should be called when submission update failed', function(){
 
-            spyOn(devtrac.common, "callServicePost").andCallFake(function(url, postData, callback, errorCallback){
+            spyOn(devtrac.common, "callServicePostWithJsonString").andCallFake(function(url, postData, callback, errorCallback){
                 errorCallback({
                     "error": true
                 });
