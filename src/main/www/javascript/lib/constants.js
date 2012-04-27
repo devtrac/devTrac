@@ -70,6 +70,7 @@ DT_D7 = (function(){
 	    NODE_SAVE: get_full_url('/api/node/<NODE_ID>.json'),
 	    NODE_CREATE: get_full_url('/api/node.json'),
         QUESTIONS: get_full_url('/api/views/api_questions.json'),
+        SUBMISSION: get_full_url('/api/questionnaire/submit'),
 	    FILE_SAVE: get_full_url('/api/file')
 	};
 })();
