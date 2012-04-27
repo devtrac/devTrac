@@ -156,7 +156,7 @@ describe("questionController", function(){
 
         })
 
-        it("number of submissions should be correct",function(){
+        it("number of submission should be correct",function(){
             expect(devtrac.currentSite.submission.submissionItems.length).toEqual(4);
         })
 

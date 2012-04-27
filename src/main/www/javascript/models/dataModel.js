@@ -87,7 +87,7 @@ Site.packageContactInfoData = function(site){
 }
 
 
-Site.packageSubmissions = function(siteId, placeId, submissionItems){
+Site.packageSubmission = function(siteId, placeId, submissionItems){
 
     var generateAnswerItems = function(submissionItems){
         var answersData ="{"

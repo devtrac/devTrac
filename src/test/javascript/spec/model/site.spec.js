@@ -126,10 +126,10 @@ describe("Site", function() {
             submissionItems.push(item);
         })
 
-        it("should package numeric type submissions correctly", function(){
+        it("should package numeric type submission correctly", function(){
             devtrac.questions =[{id:"489",type:"number"}];
 
-            var submissionsJsonData = Site.packageSubmissions(site.id, site.placeId, submissionItems);
+            var submissionsJsonData = Site.packageSubmission(site.id, site.placeId, submissionItems);
 
             var submissionsData = devtrac.common.convertHash(submissionsJsonData);
             expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
@@ -140,7 +140,7 @@ describe("Site", function() {
         it("should package radio type submissions correctly", function(){
             devtrac.questions =[{id:"489",type:"radios"}];
 
-            var submissionsJsonData = Site.packageSubmissions(site.id, site.placeId, submissionItems);
+            var submissionsJsonData = Site.packageSubmission(site.id, site.placeId, submissionItems);
 
             var submissionsData = devtrac.common.convertHash(submissionsJsonData);
             expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
@@ -148,10 +148,10 @@ describe("Site", function() {
             expect(submissionsData).toMatch(new RegExp('answers={489:"66"}'));
         })
 
-        it("should package select type submissions correctly", function(){
+        it("should package select type submission correctly", function(){
             devtrac.questions =[{id:"489",type:"radios"}];
 
-            var submissionsJsonData = Site.packageSubmissions(site.id, site.placeId, submissionItems);
+            var submissionsJsonData = Site.packageSubmission(site.id, site.placeId, submissionItems);
 
             var submissionsData = devtrac.common.convertHash(submissionsJsonData);
             expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
@@ -168,7 +168,7 @@ describe("Site", function() {
             item.response = "left~right~middle";
             submissionItems.push(item);
 
-            var submissionsJsonData = Site.packageSubmissions(site.id, site.placeId, submissionItems);
+            var submissionsJsonData = Site.packageSubmission(site.id, site.placeId, submissionItems);
 
             var submissionsData = devtrac.common.convertHash(submissionsJsonData);
             expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
