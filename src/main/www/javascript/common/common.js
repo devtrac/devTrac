@@ -54,7 +54,7 @@ function Common(){
     }
 
     this.callServicePostWithJsonString= function(url, postData, callback, errorCallback){
-        navigator.network.XHR(devtrac.user.cookie, "POST", url, postData, 'default', callback, errorCallback);
+        navigator.network.XHR(devtrac.user.cookie, "POST", url, postData, 'json', callback, errorCallback);
     }
 
     this.callServicePut= function(url, postData, callback, errorCallback){
