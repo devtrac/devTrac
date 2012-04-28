@@ -12,13 +12,6 @@ public class HttpRequest {
     public HttpRequest() {
     }
 
-    public HttpRequest(String cookie, String method, String url, String data) {
-        this.cookie = cookie;
-        this.method = method;
-        this.url = url;
-        this.data = data;
-    }
-
     public void parseFrom(String reqURL) {
         String [] requests = this.splitRequestUrl(reqURL);
 

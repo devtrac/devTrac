@@ -21,11 +21,13 @@ public class ConnectionThread extends Thread {
     private String _POSTdata;
     private String _method;
     private String _cookie = null;
+    private String _contentType;
 
     private volatile boolean _fetchStarted = false;
     public volatile boolean _stop = false;
 
     private PhoneGap berryGap;
+
 
     public ConnectionThread(PhoneGap gap) {
         berryGap = gap;
@@ -48,6 +50,7 @@ public class ConnectionThread extends Thread {
             this._theUrl = httpRequest.getUrlWithSuffix();
             this._POSTdata = httpRequest.getData();
             this._method = httpRequest.getMethod();
+            this._contentType= httpRequest.getContentType();
         }
     }
 
@@ -130,8 +133,7 @@ public class ConnectionThread extends Thread {
                                     + DeviceInfo.getDeviceName() + "/"
                                     + DeviceInfo.getSoftwareVersion()
                                     + ".rdf");
-                    httpConn.setRequestProperty("Content-Type",
-                            "application/x-www-form-urlencoded");
+                    httpConn.setRequestProperty("Content-Type", _contentType);
 
                     if (_cookie != null) {
                         httpConn.setRequestProperty("Cookie", getCookie());
