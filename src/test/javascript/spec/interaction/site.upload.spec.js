@@ -23,7 +23,7 @@ describe("SiteUpload", function(){
             errorCallback = jasmine.createSpy('uploader.errorCallback');
 
             spyOn(devtrac.common, "callServicePut").andCallThrough();
-            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
+            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback){
                 successCallback({'#data':'data_string'});
             })
 
@@ -311,7 +311,7 @@ describe("SiteUpload", function(){
             sites.push(SiteMother.createSite('1',false, false));
             sites.push(SiteMother.createSite('2',true, false));
             sites.push(SiteMother.createSite('3',false, false));
-            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
+            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback){
                 successCallback({'#data':'data_string'});
             })
 
@@ -323,7 +323,7 @@ describe("SiteUpload", function(){
         it("should update the uploaded status to true if uploading is succeeded", function(){
             var site = SiteMother.createSite('1',false,false);
 
-            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
+            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback){
                 successCallback({'#data':'data_string'});
             })
 
@@ -335,7 +335,7 @@ describe("SiteUpload", function(){
         it("should update the uploaded status to false if uploading is failed", function(){
             var site = SiteMother.createSite('1',false,false);
 
-            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
+            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback){
                 errorCallback({'#data':'data_string'});
             })
 

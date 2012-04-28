@@ -54,7 +54,7 @@ describe("ActionItemUpload", function() {
         })
 
         it("should send correct data", function() {
-            spyOn(navigator.network, "XHR").andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback) {
+            spyOn(navigator.network, "XHR").andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback) {
                 successCallback({"nid":"6675","uri":"http://geo.devtrac.org/api/node/6675"});
             });
 
@@ -82,7 +82,7 @@ describe("ActionItemUpload", function() {
             })
 
             it("to 'true' when uploaded successfully", function(){
-                spyOn(navigator.network, "XHR").andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback) {
+                spyOn(navigator.network, "XHR").andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback) {
                     successCallback({"nid":"6675","uri":"http://geo.devtrac.org/api/node/6675"});
                 });
 
@@ -92,7 +92,7 @@ describe("ActionItemUpload", function() {
             })
 
             it("to 'false' when uploaded failed", function(){
-                spyOn(navigator.network, "XHR").andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback) {
+                spyOn(navigator.network, "XHR").andCallFake(function(cookie, method, URL, POSTdata, contentType,successCallback, errorCallback) {
                     errorCallback({error:true,message:'Bad server response.',httpcode:406});
                 });
 

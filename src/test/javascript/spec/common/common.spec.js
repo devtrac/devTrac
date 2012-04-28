@@ -18,7 +18,7 @@ describe("Common", function(){
                 successCallback = jasmine.createSpy("'successCallback'");
                 errorCallback = jasmine.createSpy("'errorCallback'");
 
-                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback){
                     successCallback(successData);
                 })
 
@@ -42,7 +42,7 @@ describe("Common", function(){
                 errorCallback = jasmine.createSpy("'errorCallback'");
                 errorMessage = "Network error occurred.";
 
-                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback){
                     errorCallback(errorMessage);
                 })
 
@@ -72,7 +72,7 @@ describe("Common", function(){
         describe("when success", function(){
 
             beforeEach(function(){
-                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback){
                     successCallback(successData);
                 })
 
@@ -105,7 +105,7 @@ describe("Common", function(){
         describe("when some network error occurred", function(){
 
             beforeEach(function(){
-                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback){
                     errorCallback(errorData);
                 })
 
@@ -138,7 +138,7 @@ describe("Common", function(){
         describe("when request timeout", function(){
 
             beforeEach(function(){
-                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, contentType, successCallback, errorCallback){
                     var invokeSuccessCallback = function(){
                         successCallback(successData);
                     };
@@ -187,7 +187,7 @@ describe("Common", function(){
             method = "GET";
             POSTdata = null;
 
-            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, success, error){
+            spyOn(navigator.network, 'XHR').andCallFake(function(cookie, method, URL, POSTdata, contentType, contentType, success, error){
             })
 
             devtrac.common.callServiceGet(URL, successCallback, errorCallback);

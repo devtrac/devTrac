@@ -31,7 +31,7 @@ function Common(){
             timeoutCallback("Request timeout");
         }, timeout);
 
-        navigator.network.XHR(devtrac.user.cookie, method, url, devtrac.common.convertHash(data), success, error);
+        navigator.network.XHR(devtrac.user.cookie, method, url, devtrac.common.convertHash(data),'default' ,success, error);
     }
 
     this.callService = function(data, callback, errorCallback){
@@ -42,7 +42,7 @@ function Common(){
         var method = data ? "POST" : "GET";
 
         navigator.log.log("Network call with data: " + JSON.stringify(data));
-        navigator.network.XHR(devtrac.user.cookie, method, url, devtrac.common.convertHash(data), callback, errorCallback);
+        navigator.network.XHR(devtrac.user.cookie, method, url, devtrac.common.convertHash(data),'default', callback, errorCallback);
     }
 
     this.callServiceGet = function(url, callback, errorCallback){
@@ -54,7 +54,7 @@ function Common(){
     }
 
     this.callServicePostWithJsonString= function(url, postData, callback, errorCallback){
-        navigator.network.XHR(devtrac.user.cookie, "POST", url, postData, callback, errorCallback);
+        navigator.network.XHR(devtrac.user.cookie, "POST", url, postData, 'default', callback, errorCallback);
     }
 
     this.callServicePut= function(url, postData, callback, errorCallback){
