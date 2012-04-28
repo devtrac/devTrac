@@ -6,7 +6,8 @@ public class HttpRequest {
     private String url;
     private String data;
     private String cookie;
-    private static final int REQUEST_FIELD_NUM = 4;
+    private String contentType;
+    private static final int REQUEST_FIELD_NUM = 5;
 
     public HttpRequest() {
     }
@@ -25,6 +26,7 @@ public class HttpRequest {
         this.method = requests[1];
         this.url = requests[2];
         this.data = (requests[3].equals("null")) ? null : requests[3];
+        this.contentType = requests[4].equals("json")? "application/json" : "application/x-www-form-urlencoded";
     }
 
     public void addNetworkSuffix() {
@@ -67,6 +69,10 @@ public class HttpRequest {
 
     public String getUrlWithSuffix() {
         return this.url + new NetworkSuffixGenerator().generateNetworkSuffix();
+    }
+
+    public String getContentType() {
+        return this.contentType;
     }
 
 }
