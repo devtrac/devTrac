@@ -110,7 +110,7 @@ describe("Site", function() {
         })
     })
 
-    describe("packageSubimissions", function(){
+    describe("packageSubimission", function(){
         var site;
         var submissionItems;
 
@@ -129,37 +129,34 @@ describe("Site", function() {
         it("should package numeric type submission correctly", function(){
             devtrac.questions =[{id:"489",type:"number"}];
 
-            var submissionsJsonData = Site.packageSubmission(site.id, site.placeId, submissionItems);
+            var submissionData = Site.packageSubmission(site.id, site.placeId, submissionItems);
 
-            var submissionsData = devtrac.common.convertHash(submissionsJsonData);
-            expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
-            expect(submissionsData).toMatch(new RegExp("contextnid="+ site.placeId));
-            expect(submissionsData).toMatch(new RegExp("answers={489:66}"));
+            expect(submissionData).toMatch(new RegExp('"qnid":'+ site.id));
+            expect(submissionData).toMatch(new RegExp('"contextnid":'+ site.placeId));
+            expect(submissionData).toMatch(new RegExp('"answers":{"489":66}'));
         })
 
-        it("should package radio type submissions correctly", function(){
+        it("should package radio type submission correctly", function(){
             devtrac.questions =[{id:"489",type:"radios"}];
 
-            var submissionsJsonData = Site.packageSubmission(site.id, site.placeId, submissionItems);
+            var submissionData = Site.packageSubmission(site.id, site.placeId, submissionItems);
 
-            var submissionsData = devtrac.common.convertHash(submissionsJsonData);
-            expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
-            expect(submissionsData).toMatch(new RegExp("contextnid="+ site.placeId));
-            expect(submissionsData).toMatch(new RegExp('answers={489:"66"}'));
+            expect(submissionData).toMatch(new RegExp('"qnid":'+ site.id));
+            expect(submissionData).toMatch(new RegExp('"contextnid":'+ site.placeId));
+            expect(submissionData).toMatch(new RegExp('"answers":{"489":"66"}'));
         })
 
         it("should package select type submission correctly", function(){
             devtrac.questions =[{id:"489",type:"radios"}];
 
-            var submissionsJsonData = Site.packageSubmission(site.id, site.placeId, submissionItems);
+            var submissionData = Site.packageSubmission(site.id, site.placeId, submissionItems);
 
-            var submissionsData = devtrac.common.convertHash(submissionsJsonData);
-            expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
-            expect(submissionsData).toMatch(new RegExp("contextnid="+ site.placeId));
-            expect(submissionsData).toMatch(new RegExp('answers={489:"66"}'));
+            expect(submissionData).toMatch(new RegExp('"qnid":'+ site.id));
+            expect(submissionData).toMatch(new RegExp('"contextnid":'+ site.placeId));
+            expect(submissionData).toMatch(new RegExp('"answers":{"489":"66"}'));
         })
 
-        it("should package checkbox type submissions correctly", function(){
+        it("should package checkbox type submission correctly", function(){
             devtrac.questions =[{id:"489",type:"checkboxes"}];
 
             submissionItems = [];
@@ -168,12 +165,11 @@ describe("Site", function() {
             item.response = "left~right~middle";
             submissionItems.push(item);
 
-            var submissionsJsonData = Site.packageSubmission(site.id, site.placeId, submissionItems);
+            var submissionData = Site.packageSubmission(site.id, site.placeId, submissionItems);
 
-            var submissionsData = devtrac.common.convertHash(submissionsJsonData);
-            expect(submissionsData).toMatch(new RegExp("qnid="+ site.id));
-            expect(submissionsData).toMatch(new RegExp("contextnid="+ site.placeId));
-            expect(submissionsData).toMatch(new RegExp('answers={489:{"left":"left","right":"right","middle":"middle"}}'));
+            expect(submissionData).toMatch(new RegExp('"qnid":'+ site.id));
+            expect(submissionData).toMatch(new RegExp('"contextnid":'+ site.placeId));
+            expect(submissionData).toMatch(new RegExp('"answers":{489:{"left":"left","right":"right","middle":"middle"}}'));
         })
 
     })

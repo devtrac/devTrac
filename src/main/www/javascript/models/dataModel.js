@@ -107,7 +107,7 @@ Site.packageSubmission = function(siteId, placeId, submissionItems){
             }
             else {
                 var answerKey = type == "number" ? item.response : '"' + item.response + '"';
-                answerData += item.id + ":" + answerKey + ',';
+                answerData += '"' + item.id + '"'+ ":" + answerKey + ',';
             }
         answersData+=answerData;
         }
@@ -116,12 +116,12 @@ Site.packageSubmission = function(siteId, placeId, submissionItems){
         return answersData;
     }
 
-    var data = {
-        qnid: siteId,
-        contextnid: placeId,
-        answers: generateAnswerItems(submissionItems)
-    }
-    return data;
+    var dataString = '{'
+                     + '"qnid":' + siteId + ','
+                     + '"contextnid":' + placeId + ','
+                     + '"answers":' + generateAnswerItems(submissionItems)
+                     + '}'
+    return dataString;
 }
 
 function PlaceTaxonomy(){
