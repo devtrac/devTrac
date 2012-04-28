@@ -162,14 +162,14 @@ describe("Site", function() {
             submissionItems = [];
             var item = new SubmissionItem();
             item.id = "489";
-            item.response = "left~right~middle";
+            item.response = "left~right~test%20escape";
             submissionItems.push(item);
 
             var submissionData = Site.packageSubmission(site.id, site.placeId, submissionItems);
 
             expect(submissionData).toMatch(new RegExp('"qnid":'+ site.id));
             expect(submissionData).toMatch(new RegExp('"contextnid":'+ site.placeId));
-            expect(submissionData).toMatch(new RegExp('"answers":{489:{"left":"left","right":"right","middle":"middle"}}'));
+            expect(submissionData).toMatch(new RegExp('"answers":{"489":{"left":"left","right":"right","test escape":"test escape"}}'));
         })
 
     })

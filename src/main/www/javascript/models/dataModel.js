@@ -98,9 +98,9 @@ Site.packageSubmission = function(siteId, placeId, submissionItems){
             if(type =="undefined")return;
             if (type == "checkboxes") {
                 var response = item.response.split("~");
-                answerData += item.id + ":{";
+                answerData += '"' + item.id + '":{';
                 for (var i in response) {
-                    answerData += '"' + response[i] + '":"' + response[i] + '",'
+                    answerData += '"' + unescape(response[i]) + '":"' + unescape(response[i]) + '",'
                 }
                 answerData = answerData.substring(0, answerData.length - 1);
                 answerData += "},";
