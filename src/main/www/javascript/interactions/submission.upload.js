@@ -9,7 +9,8 @@ SubmissionUpload.prototype.upload = function(site, successCallback, errorCallbac
         return;
     }
 
-    var submission = Site.packageSubmission(site.id, site.placeId, site.submission);
+    var submission = Site.packageSubmission(site.id, site.placeId, site.submission.submissionItems);
+//    var submission = '{"qnid":6919,"contextnid":195,"answers":{"402":"No","472":"Yes"}}';
     var success = function(response) {
         if (response['error']) {
             var errorMsg = 'Error occured in uploading submssion of site"' + site.name + '". Please try again.';
