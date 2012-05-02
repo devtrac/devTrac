@@ -1,9 +1,15 @@
 function GPSController(){
-
 }
 
 GPSController.prototype.show = function(){
-    var gpsInfo = devtrac.currentSite.placeGeo.substring(devtrac.currentSite.placeGeo.lastIndexOf("(")+1, devtrac.currentSite.placeGeo.lastIndexOf(")"));
+    var extractGpsInfo = function(placeGeo){
+        if(placeGeo){
+          return placeGeo.substring(placeGeo.lastIndexOf("(")+1, placeGeo.lastIndexOf(")"))
+        }
+        return "";
+    }
+
+    var gpsInfo = extractGpsInfo(devtrac.currentSite.placeGeo);
     var latitude;
     var longitude;
     if (gpsInfo == ""){
