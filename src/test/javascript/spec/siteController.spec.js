@@ -30,7 +30,7 @@ describe("SiteController", function(){
                            '<label for="dateVisited">' +
                             'Visited Date(DD/MM/YYYY):' +
                            '</label>' +
-                          '<input id="dateVisited" type="text" class="input"/>' +
+                          '<input id="dateVisited" type="text" class="input"/><span class="tip" id="datetip">"date"</span>' +
                         '</p>' +
                         '<div class="gps-info">' +
                             '<label>GPS Infomation</label>' +
@@ -130,6 +130,22 @@ describe("SiteController", function(){
         })
     })
 
+    describe("add", function(){
+      it("should render the date tip with the date range of field trip", function(){
+        devtrac.fieldTrip.startDate = "2012-02-13T00:00:00";
+        devtrac.fieldTrip.endDate = "2012-02-15T00:00:00";
+        siteController.add();
+        expect($('#datetip')).toHaveText('Valid date range is 13/02/2012 ~ 15/02/2012');
+      })
+
+      it("should render the date tip with the date range of field trip", function(){
+        devtrac.fieldTrip.startDate = null;
+        devtrac.fieldTrip.endDate = null;
+        siteController.add();
+        expect($('#datetip')).not.toHaveText('Valid fate range is');
+        expect($('#datetip')).toHaveText('');
+      })
+    })
     function initSiteAttributes(title, date){
         $("#site_title").val(title);
         $("#sitetypes").val("school");

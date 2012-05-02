@@ -9,14 +9,19 @@ siteController.add = function(){
         list.append("<option>" + option + "</option>");
     });
 
-    var startDate = Validator.parseDate(devtrac.fieldTrip.startDate);
-    var endDate = Validator.parseDate(devtrac.fieldTrip.endDate);
-    var startDateString = Validator.dateToString(startDate);
-    var endDateString = Validator.dateToString(endDate);
-    $("#datetip").html("Valid date range is " + startDateString + " ~ " + endDateString);
+    var generateDateTip = function(startDate, endDate){
+          var msg ="";
+          if(startDate && endDate){
+            var startDateString = Validator.parseToDateString(startDate);
+            var endDateString = Validator.parseToDateString(endDate);
+            msg = "Valid date range is " + startDateString + " ~ " + endDateString;
+        }
+        return msg;
+    }
 
+    $("#datetip").html(generateDateTip(devtrac.fieldTrip.startDate, devtrac.fieldTrip.endDate));
     screens.show("add_new_site");
-	navigator.log.debug("Displayed add new site screen.");
+    navigator.log.debug("Displayed add new site screen.");
 };
 
 siteController.list = function(){
@@ -41,10 +46,8 @@ siteController.create = function(){
     }
 
     if(Validator.isOutrangedDate(dateVisited)){
-        var startDate = Validator.parseDate(devtrac.fieldTrip.startDate);
-        var endDate = Validator.parseDate(devtrac.fieldTrip.endDate);
-        var startDateString = Validator.dateToString(startDate);
-        var endDateString = Validator.dateToString(endDate);
+        var startDateString = Validator.parseToDateString(devtrac.fieldTrip.startDate);
+        var endDateString = Validator.parseToDateString(devtrac.fieldTrip.endDate);
         alert('The date visited should between: ' + startDateString + ' and ' + endDateString);
         return;
     }

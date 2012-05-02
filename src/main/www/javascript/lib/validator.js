@@ -46,3 +46,8 @@ Validator.dateToString = function(date) {
     var string = dateString + "/" + monthString + "/" + date.getFullYear();
     return string;
 }
+
+Validator.parseToDateString = function(date){
+    var dateObj = this.parseDate(date);
+    return this.dateToString(dateObj);
+}
