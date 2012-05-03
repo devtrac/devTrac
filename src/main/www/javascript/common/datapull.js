@@ -152,6 +152,7 @@ DataPull.prototype.tripDetails = function(callback){
             devtrac.dataPull.fieldTrip.title = tripResponse[0]["title"];
             devtrac.dataPull.fieldTrip.startDate = tripResponse[0]["field_fieldtrip_start_end_date"]["und"][0]["value"];
             devtrac.dataPull.fieldTrip.endDate = tripResponse[0]["field_fieldtrip_start_end_date"]["und"][0]["value2"];
+            devtrac.dataPull.saveFieldtrip(null, "");
             devtrac.dataPull.tripSiteDetails(callback);
             navigator.log.debug("Processed trip with id: " + devtrac.dataPull.fieldTrip.id);
             return;
@@ -205,9 +206,9 @@ DataPull.prototype.tripSiteDetails = function(callback){
             });
             devtrac.dataPull.fieldTrip.sites = sites;
             if (sites.length == 0) {
-                devtrac.dataPull.saveFieldtrip(callback);
                 return;
             }
+            devtrac.dataPull.saveFieldtrip(null, "with sites");
             navigator.log.debug("Requesting details of place for sites.");
             devtrac.dataPull.placeDetailsForSite(callback);
         }
@@ -344,7 +345,7 @@ DataPull.prototype.actionItemDetailsForSite = function(callback){
                     }
                     else {
                         navigator.log.debug("Finished downloading action items. Saving fieldtrip.");
-                        devtrac.dataPull.saveFieldtrip(callback);
+                        devtrac.dataPull.saveFieldtrip(callback, "with actionItems");
                     }
                 }
             });
@@ -381,6 +382,7 @@ DataPull.prototype.updateStatus = function(message){
     var status = $("#status");
     status.append(message);
     status.append("<br/>");
+    navigator.log.log(message);
 }
 
 DataPull.prototype.getPlaceTypeFor = function(id){
@@ -402,13 +404,17 @@ DataPull.prototype.getPlaceTypeNameBy = function(id){
     return "undefined name";
 }
 
-DataPull.prototype.saveFieldtrip = function(callback){
+DataPull.prototype.saveFieldtrip = function(callback, submsg){
     navigator.store.put(function(){
-        devtrac.dataPull.updateStatus("Saved '" + devtrac.dataPull.fieldTrip.title + "' with action items successfully.");
-        callback();
+        devtrac.dataPull.updateStatus("Saved field trip '" + devtrac.dataPull.fieldTrip.title + "' " + submsg + " successfully.");
+        if(callback) {
+            callback();
+        }
     }, function(){
         devtrac.dataPull.updateStatus("Error in saving field trip.");
-        callback();
+        if(callback){
+          callback();
+        }
     }, devtrac.user.name, JSON.stringify(devtrac.dataPull.fieldTrip));
 }
 
