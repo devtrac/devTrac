@@ -126,13 +126,15 @@ SiteUpload.prototype._createBBSyncNode = function(siteData){
 }
 
 SiteUpload.prototype._processResult = function(successCallback, errorCallback){
-    var failedCounts = 0;
+    var failedSites = [];
     for(index in sites){
-        failedCounts += (sites[index].uploaded ? 0 : 1);
+        if (!sites[index].uploaded) {
+            failedSites.push(sites[index].name);
+        }
     }
 
-    var msg = 'Uploading finished. ' + failedCounts + ' failure in ' + siteCounts + (siteCounts > 1 ? ' sites' : ' site') + '.';
+    var msg = 'Uploading finished. ' + failedSites.length + ' failure in ' + siteCounts + 'site(s)' + '.'+ '\n' + '"'+failedSites.join('",\n"')+'"';
 
-    failedCounts > 0 ? errorCallback(msg) : successCallback(msg);
+    failedSites.length  > 0 ? errorCallback(msg) : successCallback(msg);
 }
 
