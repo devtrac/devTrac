@@ -39,7 +39,8 @@ ActionItemUpload.prototype.upload = function(item, successCallback, errorCallbac
 
     var success = function(response) {
         if (response['error']) {
-            var errorMsg = 'Error occured in uploading actionItem "' + item.title + '". Please try again.';
+            var errorMsg = 'Error occured in uploading actionItem "' + item.title + '". Please try again.\n' +
+                           'Error detail:'+ JSON.stringify(response);
             navigator.log.log(errorMsg);
             errorCallback(errorMsg);
         }

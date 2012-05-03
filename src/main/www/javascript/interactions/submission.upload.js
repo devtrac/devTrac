@@ -12,7 +12,8 @@ SubmissionUpload.prototype.upload = function(site, successCallback, errorCallbac
     var submission = Site.packageSubmission(site.id, site.placeId, site.submission.submissionItems);
     var success = function(response) {
         if (response['error']) {
-            var errorMsg = 'Error occured in uploading submssion of site"' + site.name + '". Please try again.';
+            var errorMsg = 'Error occured in uploading submssion of site"' + site.name + '". Please try again.\n'+
+                           'Error detail:'+ JSON.stringify(response);
             navigator.log.log(errorMsg);
             site.submission.uploaded = false;
             errorCallback(errorMsg);

@@ -12,7 +12,8 @@ ContactInfoUpload.prototype.upload = function(site, successCallback, errorCallba
     var contactInfo = Site.packageContactInfoData(site);
     var success = function(response) {
         if (response['error']) {
-            var errorMsg = 'Error occured in uploading contact info of site"' + site.name + '". Please try again.';
+            var errorMsg = 'Error occured in uploading contact info of site"' + site.name + '". Please try again.\n'+
+                                    'Error detail:'+ JSON.stringify(response);
             navigator.log.log(errorMsg);
             site.contactInfo.uploaded = false;
             errorCallback(errorMsg);
