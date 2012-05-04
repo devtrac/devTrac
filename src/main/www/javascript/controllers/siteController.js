@@ -69,26 +69,28 @@ siteController.create = function(){
             var error = 'Error occured in uploading place of site "' + site.name + '". Please try again.\n' +
             'Error detail:' + JSON.stringify(response);
             navigator.log.log(error);
-            errorCallback(error);
+            alert("Error occured in creating place of site '" + site.name + "', creating new site failed.");
         }
         else {
             site.placeNid = response['nid'];
+            devtrac.fieldTrip.sites.push(site);
+            navigator.store.put(function(){
+            alert(site.name + " added successfully.");
+            $("#site_title").val("");
+            $("#dateVisited").val("")
+            navigator.log.debug("Saved newly created site.");
+            fieldTripController.showTripReports();
+            }, function(){
+                devtrac.common.logAndShowGenericError("Error in creating trip.");
+                screens.show("sites_to_visit");
+            }, devtrac.user.name, JSON.stringify(devtrac.fieldTrip));
         }
-    devtrac.fieldTrip.sites.push(site);
-    navigator.store.put(function(){
-        alert(site.name + " added successfuly.");
-        $("#site_title").val("");
-        $("#dateVisited").val("")
-        navigator.log.debug("Saved newly created site.");
-        fieldTripController.showTripReports();
-    }, function(){
-        devtrac.common.logAndShowGenericError("Error in creating trip.");
-        screens.show("sites_to_visit");
-    }, devtrac.user.name, JSON.stringify(devtrac.fieldTrip));
     }
 
     var placeError = function(){
-        navigator.log.log('Error in uploading place of site "' + site.name + '".');
+        var error = "Error occured in creating place of site '" + site.name + "', creating new site failed.";
+        navigator.log.log(error);
+        alert(error);
     }
 
     var placeData = {
