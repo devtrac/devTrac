@@ -78,6 +78,11 @@ DataPull.prototype.placeTypes = function(callback){
                 devtrac.dataPull.updateStatusAndLog("Saved " + places.length + " place types successfully.", navigator.log.debug);
                 devtrac.places = places;
                 devtrac.common.initialTaxonomy();
+                navigator.store.put(function(){
+                     navigator.log.log("Saved questionnaire types successfully.");
+                },function(){
+                     navigator.log.log("Error occured in saving questionnaire types.");
+                },"questions", JSON.stringify(devtrac.questions));
                 devtrac.dataPull.userProfiles(callback);
             }, function(){
                 devtrac.dataPull.updateStatusAndLog("Error in saving place types", navigator.log.log);
