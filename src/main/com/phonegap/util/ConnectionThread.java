@@ -50,6 +50,7 @@ public class ConnectionThread extends Thread {
             this._theUrl = httpRequest.getUrlWithSuffix();
             this._POSTdata = httpRequest.getData();
             this._method = httpRequest.getMethod();
+            this._cookie= httpRequest.getCookie();
             this._contentType= httpRequest.getContentType();
         }
     }
