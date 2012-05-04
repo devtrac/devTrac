@@ -119,18 +119,20 @@ siteController.getGPS = function (){
     $("#capture_gps_button").attr('disabled','disabled');
 
     var successCallback = function(position){
-        $("#capture_gps_button").val("Capture GPS");
-        $("#capture_gps_button").removeAttr('disabled');
         navigator.geolocation.stop();
         $("#latitude_value").text(position.coords.latitude);
         $("#longitude_value").text(position.coords.longitude);
+
+        $("#capture_gps_button").val("Capture GPS");
+        $("#capture_gps_button").removeAttr('disabled');
+
         alert("Capturing GPS location successfully");
     }
 
-    var errorCallback = function(error){
+    var errorCallback = function(){
+        alert("Error occurred when capturing GPS location. Make sure your GPS coverage is sufficient.");
         $("#capture_gps_button").val("Capture GPS");
         $("#capture_gps_button").removeAttr('disabled');
-        alert("Error occurred when capturing GPS location. Error message: " + error.message);
     }
 
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
