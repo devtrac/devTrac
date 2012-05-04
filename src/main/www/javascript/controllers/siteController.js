@@ -15,8 +15,11 @@ siteController.add = function(){
             var startDateString = Validator.parseToDateString(startDate);
             var endDateString = Validator.parseToDateString(endDate);
             msg = "Valid date range is " + startDateString + " ~ " + endDateString;
-        }
-        return msg;
+          }
+          else{
+              navigator.log.log("Date range of fieldtrip incorrect error in rendering date range tip");
+          }
+          return msg;
     }
 
     $("#datetip").html(generateDateTip(devtrac.fieldTrip.startDate, devtrac.fieldTrip.endDate));
@@ -48,7 +51,15 @@ siteController.create = function(){
     if(Validator.isOutrangedDate(dateVisited)){
         var startDateString = Validator.parseToDateString(devtrac.fieldTrip.startDate);
         var endDateString = Validator.parseToDateString(devtrac.fieldTrip.endDate);
-        alert('The date visited should between: ' + startDateString + ' and ' + endDateString);
+        if (startDateString != "undefined" && endDateString != "undefined") {
+            navigator.log.log("Date outrange error in creating site.");
+            alert('The date visited should between: ' + startDateString + ' and ' + endDateString);
+        }
+        else {
+            navigator.log.log("Date range of fieldtrip incorrect error in creating site: " + siteTitle);
+            navigator.log.log("Date range of current fieldtrip is: [" + devtrac.fieldTrip.startDate + "] to [" + devtrac.fieldTrip.endDate + "].");
+            alert('The field trip has incorrect date range, site creating cancelled.');
+        }
         return;
     }
 

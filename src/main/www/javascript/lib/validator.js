@@ -20,17 +20,18 @@ Validator.isOutrangedDate = function(date){
     var year = matches[3];
 
     var composedDate = new Date(year, month, day);
-
-    var startDate = this.parseDate(devtrac.fieldTrip.startDate);
-    var endDate = this.parseDate(devtrac.fieldTrip.endDate);
-    return startDate > composedDate || endDate < composedDate;
+    if(devtrac.fieldTrip.startDate && devtrac.fieldTrip.endDate){
+        var startDate = this.parseDate(devtrac.fieldTrip.startDate);
+        var endDate = this.parseDate(devtrac.fieldTrip.endDate);
+        return startDate > composedDate || endDate < composedDate;
+    }
+    return true;
 }
 
 Validator.parseDate = function(dateString) {
     var year = dateString.substring(0,4);
     var month = dateString.substring(5,7) - 1;
     var day = dateString.substring(8,10);
-
     return new Date(year, month, day);
 }
 
@@ -48,6 +49,11 @@ Validator.dateToString = function(date) {
 }
 
 Validator.parseToDateString = function(date){
-    var dateObj = this.parseDate(date);
-    return this.dateToString(dateObj);
+	if(date){
+	   var dateObj = this.parseDate(date);
+       return this.dateToString(dateObj);
+	}
+	else
+	   return "undefined";
+
 }
