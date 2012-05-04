@@ -68,7 +68,11 @@ describe("SiteController", function(){
             devtrac.fieldTrip.startDate = "2012-02-13T00:00:00";
             devtrac.fieldTrip.endDate = "2012-02-15T00:00:00";
             spyOn(devtrac.fieldTrip.sites, "push").andCallThrough();
+            spyOn(devtrac.common, "callServicePost").andCallFake(function(url, data, success, error){
+                success({"nid":"195"});
+          })
         })
+
         it("when datevisited has invalid format", function(){
             var inValidDate = "123";
             initSiteAttributes('title', inValidDate);
@@ -120,6 +124,10 @@ describe("SiteController", function(){
 
     describe("Create a new site", function(){
         it("position data should be saved to site", function(){
+            spyOn(devtrac.fieldTrip.sites, "push").andCallThrough();
+            spyOn(devtrac.common, "callServicePost").andCallFake(function(url, data, success, error){
+                success({"nid":"195"});
+            })
             spyOn(navigator.store, "put").andCallThrough();
             initSiteAttributes('title', '14/02/2012');
             $("#latitude_value").text("45");

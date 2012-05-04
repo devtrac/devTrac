@@ -63,17 +63,42 @@ siteController.create = function(){
     var longitude = $("#longitude_value").text();
     site.placeGeo = "POINT (" + latitude + " " + longitude + ")";
     site.narrative = "Please provide a full report.";
-	devtrac.fieldTrip.sites.push(site);
-	navigator.store.put(function(){
+
+    var placeSuccess = function(response){
+        if (response['error']) {
+            var error = 'Error occured in uploading place of site "' + site.name + '". Please try again.\n' +
+            'Error detail:' + JSON.stringify(response);
+            navigator.log.log(error);
+            errorCallback(error);
+        }
+        else {
+            site.placeNid = response['nid'];
+        }
+    devtrac.fieldTrip.sites.push(site);
+    navigator.store.put(function(){
         alert(site.name + " added successfuly.");
-		$("#site_title").val("");
-		$("#dateVisited").val("")
-		navigator.log.debug("Saved newly created site.");
+        $("#site_title").val("");
+        $("#dateVisited").val("")
+        navigator.log.debug("Saved newly created site.");
         fieldTripController.showTripReports();
     }, function(){
         devtrac.common.logAndShowGenericError("Error in creating trip.");
         screens.show("sites_to_visit");
     }, devtrac.user.name, JSON.stringify(devtrac.fieldTrip));
+    }
+
+    var placeError = function(){
+        navigator.log.log('Error in uploading place of site "' + site.name + '".');
+    }
+
+    var placeData = {
+        'title': site.type,
+        'type': 'place',
+        'taxonomy_vocabulary_1[und][0]': devtrac.common.findPlaceType(site),
+        'taxonomy_vocabulary_6[und][0]': 92
+        }
+
+    devtrac.common.callServicePost(DT_D7.NODE_CREATE, placeData, placeSuccess, placeError);
 }
 
 siteController.getGPS = function (){

@@ -22,6 +22,7 @@ SiteMother.createSite = function(name, uploaded, offline){
     site.uploaded = uploaded;
     site.offline = offline;
     site.contactInfo.uploaded = true;
+	site.placeNid = "195";
     return site;
 }
 

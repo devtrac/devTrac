@@ -14,6 +14,7 @@ function Site(){
 	this.placeGeo = "";
 	this.placeTaxonomy = [];
     this.type = "";
+    this.placeNid = "";
     this.offline = false;
     this.complete = false;
 	this.narrative = "";
@@ -58,7 +59,7 @@ Site.packageData = function(site, fieldTripId) {
         "field_ftritem_narrative[und][0][value]" : site.narrative,
         "field_ftritem_public_summary[und][0][value]" : site.narrative,
         "field_ftritem_date_visited[und][0][value][date]" : site.dateVisited,
-        "field_ftritem_place[und][0][target_id]": devtrac.common.findPlaceType(site),
+        "field_ftritem_place[und][0][target_id]": site.placeNid,
         "language": "und"
     };
     if (site.offline) {
