@@ -88,7 +88,9 @@ siteController.create = function(){
             navigator.store.put(function(){
             alert(site.name + " added successfully.");
             $("#site_title").val("");
-            $("#dateVisited").val("")
+            $("#dateVisited").val("");
+            $("#latitude_value").text("");
+            $("#longitude_value").text("");
             navigator.log.debug("Saved newly created site.");
             fieldTripController.showTripReports();
             }, function(){
