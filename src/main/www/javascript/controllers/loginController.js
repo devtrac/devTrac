@@ -43,7 +43,7 @@ LoginController.prototype.login = function(){
                                     // No fieldtrip exist for user. Download the details.
                                     devtrac.dataPull.tripDetails(fieldTripController.showTripReports);
                                 });
-                            });
+                            }, false);
                         }
                     })
                 });

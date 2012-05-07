@@ -4,7 +4,7 @@ function DataPull(){
     this.sitesForActionItems = [];
 }
 
-DataPull.prototype.questions = function(callback){
+DataPull.prototype.questions = function(callback, byFilter){
     $("#status").html("");
     navigator.log.debug("Requesting question download.");
     var questionSuccess = function(questionResponse){
@@ -32,19 +32,31 @@ DataPull.prototype.questions = function(callback){
                 return question;
             });
 
+            var allQuestions = [];
+            if(byFilter){
+                devtrac.dataStore.getQuestions(function(){
+                    navigator.log.debug("Retrieved the existing questions from offine storage.");
+                    allQuestions = devtrac.questions.concat(questions);
+                });
+            }else{
+                allQuestions = questions;
+            }
+
             navigator.store.put(function(){
-                devtrac.dataPull.updateStatus("Saved " + questions.length + " questions successfully.");
-                navigator.log.log("Saved " + questions.length + " questions successfully.");
-                devtrac.questions = questions;
+                devtrac.dataPull.updateStatus("Saved " + allQuestions.length + " questions successfully.");
+                navigator.log.log("Saved " + allQuestions.length + " questions successfully.");
+                devtrac.questions = allQuestions;
                 var now = new Date();
                 devtrac.lastSyncTime = Validator.dateToStringWithFormat(now, "yyyy-mm-dd");
                 devtrac.dataStore.saveLastSyncTime();
-                devtrac.dataPull.placeTypes(callback);
+                if(!byFilter){
+                    devtrac.dataPull.placeTypes(callback);
+                }
             }, function(){
                 devtrac.dataPull.updateStatus("Error in saving questions");
                 navigator.log.log("Error in saving questions");
                 callback();
-            }, "questions", JSON.stringify(questions));
+            }, "questions", JSON.stringify(allQuestions));
         }
     };
 
@@ -55,7 +67,8 @@ DataPull.prototype.questions = function(callback){
 
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving questions from devtrac.");
-    devtrac.remoteView.get(DT_D7.QUESTIONS, questionSuccess, questionFailed);
+	var questionUrl = byFilter ? DT_D7.QUESTIONS_FILTER : DT_D7.QUESTIONS;
+    devtrac.remoteView.get(questionUrl, questionSuccess, questionFailed);
 }
 
 DataPull.prototype.placeTypes = function(callback){
