@@ -128,7 +128,7 @@ siteController.getGPS = function (){
         $("#capture_gps_button").val("Capture GPS");
         $("#capture_gps_button").removeAttr('disabled');
 
-        alert("Capturing GPS location successfully");
+        alert("GPS infomation captured successfully");
     }
 
     var errorCallback = function(){
