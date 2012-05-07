@@ -79,13 +79,13 @@ DataStore.prototype.saveFieldTrip = function(callback){
     }, devtrac.user.name, JSON.stringify(devtrac.fieldTrip));
 }
 
-DataStore.prototype.saveLastSyncTime = function(){
-    navigator.log.debug("Storing questions last sync time: " + devtrac.lastSyncTime);
+DataStore.prototype.saveLastSyncTime = function(lastSyncTime){
+    navigator.log.debug("Storing questions last sync time: " + lastSyncTime);
     navigator.store.put(function(){
-        navigator.log.debug("Questions last sync time: " + devtrac.lastSyncTime + 'is stored successfully.');
+        navigator.log.debug("Questions last sync time: " + lastSyncTime + 'is stored successfully.');
     }, function(error){
         navigator.log.debug("Could not save last sync time. Error: " + error);
-    }, "syncTime", devtrac.lastSyncTime);
+    }, "syncTime", lastSyncTime);
 }
 
 DataStore.prototype.updateTripImageFid = function(imagePath, fid, callback){
@@ -180,7 +180,7 @@ DataStore.prototype.getProfiles = function(callback){
 }
 
 DataStore.prototype.getLastSyncTime = function(callback){
-    navigator.store.get(function(response){
+       navigator.store.get(function(response){
         if (response) {
             devtrac.lastSyncTime = response;
             if (callback) {
@@ -191,7 +191,7 @@ DataStore.prototype.getLastSyncTime = function(callback){
             callback();
         }
     }, function(error){
-        devtrac.common.logAndShowGenericError("Getting sync time error: " + error);
+        devtrac.common.logAndShowGenericError("Offline storage error: " + error);
         if (callback) {
             callback();
         }
