@@ -36,6 +36,9 @@ DataPull.prototype.questions = function(callback){
                 devtrac.dataPull.updateStatus("Saved " + questions.length + " questions successfully.");
                 navigator.log.log("Saved " + questions.length + " questions successfully.");
                 devtrac.questions = questions;
+                var now = new Date();
+                devtrac.lastSyncTime = Validator.dateToStringWithFormat(now, "yyyy-mm-dd");
+                devtrac.dataStore.saveLastSyncTime();
                 devtrac.dataPull.placeTypes(callback);
             }, function(){
                 devtrac.dataPull.updateStatus("Error in saving questions");

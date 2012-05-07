@@ -243,7 +243,61 @@ describe("DataPull", function(){
           expect(types[1]).toEqual("School");
        })
     })
-	
+
+    describe("Question last sync time", function(){
+        it("Last sync time should be saved", function(){
+			 var questionResponse = [
+            {
+                "language": "und",
+                "nid": "402",
+                "questionnaire_question_options": {
+                    "und": [
+                    {
+                        "format": null,
+                        "safe_value": "Yes",
+                        "value": "Yes"
+                    },
+                    {
+                        "format": null,
+                        "safe_value": "No",
+                        "value": "No"
+                    }]
+                 },
+                 "questionnaire_question_type": {
+                     "und": [
+                        {
+                            "value": "radios"
+                        }]
+                 },
+                 "taxonomy_vocabulary_1": {
+                     "und": [
+                        {
+                           "tid": "203"
+                        }]
+                 },
+                 "title": "Do both the community and school have access to the water source at the health facility?",
+                 "type": "questionnaire_question"
+            }];
+          spyOn(devtrac.remoteView, "get").andCallFake(function(url, success, failedCallback) {
+            success(questionResponse);
+          });
+
+          var successCallback = function(){
+            devtrac.lastSyncTime = "2011-02-01";
+            devtrac.dataStore.saveLastSyncTime();
+          }
+
+          spyOn(navigator.store, "put").andCallFake(function(successCallback, failedCallback, qustionsKey, qustionsValue) {
+            successCallback();
+          });
+          spyOn(devtrac.dataStore, "saveLastSyncTime");
+
+          devtrac.dataPull.questions(callback);
+
+          expect(devtrac.dataStore.saveLastSyncTime).toHaveBeenCalled();
+        })
+    })
+
     describe("tripSiteDetails", function(){
         var callback;
 
