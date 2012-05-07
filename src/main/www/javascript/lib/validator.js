@@ -36,16 +36,26 @@ Validator.parseDate = function(dateString) {
 }
 
 Validator.dateToString = function(date) {
+    return this.dateToStringWithFormat(date, 'dd/mm/yyyy');
+}
+
+Validator.dateToStringWithFormat = function(date, format) {
     var monthString = (date.getMonth()+1).toString();
     if (monthString.length==1){
         monthString = "0" + monthString;
     }
-    var dateString = date.getDate().toString();
-    if (dateString.length==1){
-        dateString = "0" + dateString;
+    var dayString = date.getDate().toString();
+    if (dayString.length==1){
+        dayString = "0" + dayString;
     }
-    var string = dateString + "/" + monthString + "/" + date.getFullYear();
-    return string;
+
+    var dateString = "";
+    if(format =='dd/mm/yyyy'){
+        dateString = dayString + "/" + monthString + "/" + date.getFullYear();
+    }else{
+        dateString = date.getFullYear() + '-' + monthString + '-' +dayString;
+    }
+    return dateString;
 }
 
 Validator.parseToDateString = function(date){
