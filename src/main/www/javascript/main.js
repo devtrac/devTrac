@@ -22,6 +22,7 @@ var devtrac = {
     currentSite: new Site(),
     places: "",
     questions: "",
+	lastSyncTime: "",
     profiles: ""
 }
 

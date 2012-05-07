@@ -79,6 +79,15 @@ DataStore.prototype.saveFieldTrip = function(callback){
     }, devtrac.user.name, JSON.stringify(devtrac.fieldTrip));
 }
 
+DataStore.prototype.saveLastSyncTime = function(){
+    navigator.log.debug("Storing questions last sync time: " + devtrac.lastSyncTime);
+    navigator.store.put(function(){
+        navigator.log.debug("Questions last sync time: " + devtrac.lastSyncTime + 'is stored successfully.');
+    }, function(error){
+        navigator.log.debug("Could not save last sync time. Error: " + error);
+    }, "syncTime", devtrac.lastSyncTime);
+}
+
 DataStore.prototype.updateTripImageFid = function(imagePath, fid, callback){
     var imageFound = false;
     $.each(devtrac.fieldTrip.sites, function(index, site){
@@ -170,5 +179,22 @@ DataStore.prototype.getProfiles = function(callback){
     }, "profiles");
 }
 
-
+DataStore.prototype.getLastSyncTime = function(callback){
+    navigator.store.get(function(response){
+        if (response) {
+            devtrac.lastSyncTime = response;
+            if (callback) {
+                callback();
+            }
+        }
+        else {
+            callback();
+        }
+    }, function(error){
+        devtrac.common.logAndShowGenericError("Getting sync time error: " + error);
+        if (callback) {
+            callback();
+        }
+    }, "syncTime");
+}
 
