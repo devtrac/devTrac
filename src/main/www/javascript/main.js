@@ -42,6 +42,6 @@ function init(){
 	navigator.log.debug("Initializing app.");
     initializeApplicationEvents();
 	navigator.log.debug("Initialized application events.");
-    devtrac.dataStore.init(fieldTripController.showTripReports);
+    devtrac.dataStore.init(fieldTripController.showTripReportsIfLoggedIn);
 	navigator.log.debug("Datastore initialized.");
 }

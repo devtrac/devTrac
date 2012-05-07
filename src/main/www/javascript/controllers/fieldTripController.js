@@ -1,6 +1,6 @@
 var fieldTripController = new Object();
 
-fieldTripController.showTripReports = function(){
+fieldTripController.showTripReportsIfLoggedIn = function(){
 	navigator.log.debug("Showing trip reports.");
     screens.show("loading");
     if (devtrac.user.loggedIn) {
@@ -13,6 +13,13 @@ fieldTripController.showTripReports = function(){
 		navigator.log.debug("User not logged in. Will display login screen.");
         devtrac.loginController.show();
     }
+};
+
+fieldTripController.showTripReports = function(){
+    navigator.store.get(fieldTripController.display, function(error){
+        navigator.log.debug("Used logged in but can't retrieve trip reports. Will display login screen.");
+        devtrac.loginController.show();
+    }, devtrac.user.name);
 };
 
 fieldTripController.display = function(response){
