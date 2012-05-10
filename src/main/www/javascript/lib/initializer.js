@@ -7,6 +7,7 @@ function initializeApplicationEvents(){
     attachQuestionsButtons();
     attachPhotoButtons();
     attachActionItemButtons();
+	attachCommentButtons();
     attachGPSButtons();
     attachSettingsButton();
     attachGlobalErrorHandler();
@@ -38,6 +39,12 @@ function initializeApplicationEvents(){
         $("#add_action_item_button").click(devtrac.actionItemController.add);
         $("#action_item_edit").click(devtrac.actionItemController.editSave);
         $("#save_action_item").click(devtrac.actionItemController.save);
+        $("#add_comment").click(devtrac.actionItemController.addComment);
+    }
+
+    function attachCommentButtons(){
+        $(".back_to_action_item_edit").click(devtrac.actionItemController.show);
+        $("#comment_save").click(devtrac.actionItemController.saveComment);
     }
 
     function attachGPSButtons(){

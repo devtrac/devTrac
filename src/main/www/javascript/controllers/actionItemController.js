@@ -49,6 +49,32 @@ ActionItemController.prototype.editSave = function(){
     });
 }
 
+ActionItemController.prototype.addComment = function(){
+    navigator.log.debug("Showing add comment");
+    screens.show("loading");
+    currentActionItem.comments = [];
+    screens.show("add_comment");
+    navigator.log.debug("Displayed comment adding screen");
+}
+
+ActionItemController.prototype.saveComment = function(){
+    var comment = new Comment();
+    comment.subject = $("#comment_edit").val();
+
+    for (var id in devtrac.currentSite.actionItems) {
+        var actionItem = devtrac.currentSite.actionItems[id];
+        if (currentActionItem.id == actionItem.id) {
+            devtrac.currentSite.actionItems[id].comments.push(comment);
+            devtrac.currentSite.actionItems[id].uploaded = false;
+        }
+    }
+
+    var container = $(".comment-content");
+    var html = '<div>' + comment.subject + '</div><br />';
+    container.append(html);
+    alert("Comment saved successfully");
+}
+
 ActionItemController.prototype.info = function(actionItem){
     navigator.log.debug("Showing action item info");
     screens.show("loading");

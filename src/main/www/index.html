@@ -443,6 +443,9 @@
                 <span class="back back_to_action_item_list">Back</span>
             </div>
             <div class="content">
+                <div class="right">
+                    <span id="add_comment" class="link">Add comment</span>
+                </div>
                 <p>
                     <label id="action_title">
                         Title
@@ -494,6 +497,27 @@
                     </label>
                     <label id="action_item_assign_value">
                     </label>
+                </p>
+            </div>
+        </div>
+        <!-- Comment adding Screen -->
+        <div id="comment_add_screen" style="display: none">
+            <div class="toolbar">
+                <h1>Comment</h1>
+                <span class="back back_to_action_item_edit">Back</span>
+            </div>
+            <div class="content">
+                <div>
+                    <form>
+                          <div class="comment-content"></div>
+                    </form>
+                    <label id="comment">
+                        Comment
+                    </label>
+                    <textarea type="text" id="comment_edit" class="input" value="" ></textarea>
+                </div>
+                <p class="submit">
+                    <input type="submit" id="comment_save" class="button" value="Save"/>
                 </p>
             </div>
         </div>

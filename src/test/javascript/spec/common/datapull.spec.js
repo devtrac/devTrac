@@ -932,7 +932,8 @@ describe("DataPull", function(){
                         "assignedTo": "5",
                         "status": "3",
                         "uploaded": true,
-                        "uid": "5"
+                        "uid": "5",
+						"comments" : []
                      },
                      {
                         "id": "6699",
@@ -941,7 +942,8 @@ describe("DataPull", function(){
                         "assignedTo": "32",
                         "status": "1",
                         "uploaded": true,
-                        "uid": "32"
+                        "uid": "32",
+						"comments" : []
                      }]
                 )
             })

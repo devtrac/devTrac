@@ -163,6 +163,11 @@ function ActionItem(){
     this.status = "1";
     this.uploaded = false;
     this.uid = "";
+	this.comments = [];
+}
+
+function Comment(){
+	this.subject = "";
 }
 
 ActionItem.packageData = function(item, siteID, placeID){
