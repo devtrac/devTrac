@@ -176,4 +176,17 @@ describe("questionController", function(){
             expect(devtrac.currentSite.submission.submissionItems[1]).toEqual({id: "402",response: "Chicken~Rice"});
         })
     })
+
+    describe("questionFilter", function(){
+        beforeEach(function(){
+            offlineQuestions = [{id:101, status: "1"}, {id:102, status: "1"}];
+            downloadedQuestions = [{id:102, status: "0"}, {id:103, status: "1"}];
+        })
+
+        it("questions should be filtered correctly",function(){
+            var allQuestions = [];
+            allQuestions = devtrac.questionsController.questionFilter(offlineQuestions, downloadedQuestions);
+            expect(allQuestions).toEqual([ { id : 101, status : '1' }, { id : 103, status : '1' } ] );
+        })
+    })
 })

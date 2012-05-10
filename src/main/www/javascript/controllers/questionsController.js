@@ -208,3 +208,20 @@ QuestionsController.prototype.attachValidations = function(){
         element.val("");
     });
 }
+
+QuestionsController.prototype.questionFilter = function(offlineQuestions, downloadedQuestions){
+    var allQuestions = [];
+    for(var i in downloadedQuestions){
+        for( var j in offlineQuestions){
+            if(downloadedQuestions[i].id == offlineQuestions[j].id){
+                offlineQuestions.splice(j,1);
+            }
+        }
+    }
+    allQuestions = offlineQuestions.concat(downloadedQuestions);
+    allQuestions = $.map(allQuestions,function(item){
+        if(item.status == "1")
+           return item;
+    })
+    return allQuestions;
+}
