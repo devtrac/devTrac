@@ -268,12 +268,24 @@ fieldset div{
 
 #capture_gps_button{
     margin-left: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 #capture_gps_button[disabled]{
     margin-left: 8px;
+    margin-right: 6px;
+    padding-left: 4px;
+    padding-right: 4px;
     border: 0px;
     background: grey;
+}
+
+#clear_gps_button{
+    margin-left: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
+	
 }
 
 #add_trip fieldset label {

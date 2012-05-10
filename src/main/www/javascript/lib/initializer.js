@@ -66,6 +66,7 @@ function initializeApplicationEvents(){
         $("#add_site_button").click(siteController.create);
         $("#site_details_back_button").click(fieldTripController.showTripReports);
         $("#capture_gps_button").click(siteController.getGPS);
+        $("#clear_gps_button").click(siteController.clearGPS);
     }
 
     function attachLoginButtons(){

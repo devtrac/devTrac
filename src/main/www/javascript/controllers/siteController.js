@@ -139,3 +139,14 @@ siteController.getGPS = function (){
 
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 }
+
+siteController.clearGPS = function (){
+    $("#latitude_value").text("");
+    $("#longitude_value").text("");
+
+    $("#capture_gps_button").attr('disabled','disabled');
+    $("#capture_gps_button").removeAttr('disabled');
+
+    alert("GPS infomation has been cleared.");
+    return;
+}
