@@ -35,7 +35,7 @@ DataPull.prototype.questions = function(callback, byFilter){
 
             var allQuestions = [];
             if(byFilter){
-                    allQuestions = devtrac.questions.concat(questions);
+                    allQuestions = devtrac.questionsController.questionFilter(devtrac.questions, questions);
             }else{
                 allQuestions = questions;
             }
