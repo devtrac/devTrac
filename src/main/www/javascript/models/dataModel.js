@@ -147,6 +147,7 @@ function Question(){
     this.type = "";
     this.options = "";
 	this.taxonomy = [];
+	this.status = "";
 }
 
 function QuestionTaxonomy(){

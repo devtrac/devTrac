@@ -19,6 +19,7 @@ DataPull.prototype.questions = function(callback, byFilter){
                 var question = new Question();
                 question.id = item.nid;
                 question.title = item.title;
+                question.status = item.status;
                 question.type = item.questionnaire_question_type["und"][0]["value"];
                 question.options = item.questionnaire_question_options["und"];
                 for (var index in item.taxonomy_vocabulary_1["und"]) {
