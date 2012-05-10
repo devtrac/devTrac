@@ -89,8 +89,8 @@ siteController.create = function(){
             alert(site.name + " added successfully.");
             $("#site_title").val("");
             $("#dateVisited").val("");
-            $("#latitude_value").text("");
-            $("#longitude_value").text("");
+            $("#latitude_value").text("0");
+            $("#longitude_value").text("0");
             navigator.log.debug("Saved newly created site.");
             fieldTripController.showTripReports();
             }, function(){
@@ -141,9 +141,10 @@ siteController.getGPS = function (){
 }
 
 siteController.clearGPS = function (){
-    $("#latitude_value").text("");
-    $("#longitude_value").text("");
+    $("#latitude_value").text("0");
+    $("#longitude_value").text("0");
 
+    //for showing the clearing result in screen.
     $("#capture_gps_button").attr('disabled','disabled');
     $("#capture_gps_button").removeAttr('disabled');
 
