@@ -34,23 +34,23 @@ DataPull.prototype.questions = function(callback, byFilter){
 
             var allQuestions = [];
             if(byFilter){
-                devtrac.dataStore.getQuestions(function(){
-                    navigator.log.debug("Retrieved the existing questions from offine storage.");
                     allQuestions = devtrac.questions.concat(questions);
-                });
             }else{
                 allQuestions = questions;
             }
 
             navigator.store.put(function(){
-                devtrac.dataPull.updateStatus("Saved " + allQuestions.length + " questions successfully.");
-                navigator.log.log("Saved " + allQuestions.length + " questions successfully.");
+                devtrac.dataPull.updateStatus("Downloaded " + questions.length + " questions from server.");
+                devtrac.dataPull.updateStatus("Retrieved " + devtrac.questions.length + " questions locally.");
+                devtrac.dataPull.updateStatus("Totally saved " + allQuestions.length + " questions successfully.");
                 devtrac.questions = allQuestions;
                 var now = new Date();
-                devtrac.lastSyncTime = Validator.dateToStringWithFormat(now, "yyyy-mm-dd");
-                devtrac.dataStore.saveLastSyncTime();
+                var lastSyncTime = Validator.dateToStringWithFormat(now, "yyyy-mm-dd");
+                devtrac.dataStore.saveLastSyncTime(lastSyncTime);
                 if(!byFilter){
                     devtrac.dataPull.placeTypes(callback);
+                }else{
+                    callback();
                 }
             }, function(){
                 devtrac.dataPull.updateStatus("Error in saving questions");
@@ -67,8 +67,14 @@ DataPull.prototype.questions = function(callback, byFilter){
 
     screens.show("pull_status");
     devtrac.dataPull.updateStatus("Retrieving questions from devtrac.");
-	var questionUrl = byFilter ? DT_D7.QUESTIONS_FILTER : DT_D7.QUESTIONS;
-    devtrac.remoteView.get(questionUrl, questionSuccess, questionFailed);
+    if(byFilter){
+        var syncTimeCallBack = function(){
+            devtrac.remoteView.get(DT_D7.QUESTIONS_FILTER.replace('<SYNC_TIME>', devtrac.lastSyncTime), questionSuccess, questionFailed);
+        }
+        devtrac.dataStore.getLastSyncTime(syncTimeCallBack);
+    }else{
+        devtrac.remoteView.get(DT_D7.QUESTIONS, questionSuccess, questionFailed);
+    }
 }
 
 DataPull.prototype.placeTypes = function(callback){
