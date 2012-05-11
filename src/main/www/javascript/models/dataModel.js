@@ -170,6 +170,19 @@ function Comment(){
 	this.subject = "";
 }
 
+Comment.packageData = function(actiontItem, comment){
+    var data = {
+         "node_type" : "comment_node_actionitem",
+         "nid" : actiontItem.id,
+         "language" : "und",
+         "comment_body[und][0][format]" : "1",
+         "comment_body[und][0][value]"  : comment.subject,
+         "taxonomy_vocabulary_8[und][0]" : "214",
+         "field_actionitem_status[und][0]" : actiontItem.status
+    }
+    return data;
+}
+
 ActionItem.packageData = function(item, siteID, placeID){
 	var data = {
 		"title": item.title,
