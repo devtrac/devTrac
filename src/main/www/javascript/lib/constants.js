@@ -72,6 +72,7 @@ DT_D7 = (function(){
         QUESTIONS: get_full_url('/api/views/api_questions.json?filters[active]=1'),
 		QUESTIONS_FILTER: get_full_url('/api/views/api_questions.json?offset=0&limit=0&filters[changed]=<SYNC_TIME>'),
         SUBMISSION: get_full_url('/api/questionnaire/submit'),
+        COMMENT: get_full_url('/api/comment.json'),
 	    FILE_SAVE: get_full_url('/api/file')
 	};
 })();
