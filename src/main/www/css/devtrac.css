@@ -251,6 +251,14 @@ p.submit {
 .uneditable_action_item {
     color:gray;
 }
+
+/**Comment item**/
+.comment_item{
+	padding:5px 3px;
+    border-bottom: 1px solid #D6D6D6;
+    overflow: hidden;
+}
+
 /**GPS Info**/
 .gps-info{
     padding-left: 9px;

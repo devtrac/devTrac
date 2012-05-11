@@ -70,8 +70,9 @@ ActionItemController.prototype.saveComment = function(){
     }
 
     var container = $(".comment-content");
-    var html = '<div>' + comment.subject + '</div><br />';
+    var html = '<li class="comment_item">' + comment.subject + '</li>';
     container.append(html);
+	$("#comment_edit").val("");
     alert("Comment saved successfully");
 }
 
