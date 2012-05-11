@@ -193,7 +193,8 @@ ActionItem.packageData = function(item, siteID, placeID){
 		"field_actionitem_due_date[und][0][value][date]": devtrac.common.getOneMonthLaterDate(),
 		"field_actionitem_responsible[und][0][target_id]": item.assignedTo + " (" + UserProfile.getUserIDbyUserName(item.assignedTo) + ")",
 		"field_actionitem_followuptask[und][0][value]": item.task,
-		"language": "und"
+		"language": "und",
+		"taxonomy_vocabulary_8[und][0]": 221
 	}
 	return data;
 }

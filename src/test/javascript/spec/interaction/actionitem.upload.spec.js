@@ -62,7 +62,7 @@ describe("ActionItemUpload", function() {
 
             var expectedPostData = 'title=AI 2&type=actionitem&field_actionitem_ftreportitem[und][0][target_id]=6666'
                 + '&field_actionitem_resp_place[und][0][target_id]=1276&field_actionitem_due_date[und][0][value][date]=' + devtrac.common.getOneMonthLaterDate()
-                + '&field_actionitem_responsible[und][0][target_id]=tester2 (32)&field_actionitem_followuptask[und][0][value]=test 2&language=und&';
+                + '&field_actionitem_responsible[und][0][target_id]=tester2 (32)&field_actionitem_followuptask[und][0][value]=test 2&language=und&taxonomy_vocabulary_8[und][0]=221&';
 
             expect(navigator.network.XHR.mostRecentCall.args[3]).toEqual(expectedPostData);
         })

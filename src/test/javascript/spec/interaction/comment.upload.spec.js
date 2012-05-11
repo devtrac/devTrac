@@ -33,7 +33,7 @@ describe("CommentUpload",function(){
 
             var expectedPostData = 'node_type=comment_node_actionitem&nid=101'
                 + '&language=und&comment_body[und][0][format]=1'
-                + '&comment_body[und][0][value]=subject2&taxonomy_vocabulary_8[und][0]=214'
+                + '&comment_body[und][0][value]=subject2&taxonomy_vocabulary_8[und][0]=221'
                 + '&field_actionitem_status[und][0]=1&';
 
             expect(navigator.network.XHR.mostRecentCall.args[3]).toEqual(expectedPostData);
