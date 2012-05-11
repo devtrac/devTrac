@@ -19,6 +19,7 @@ var devtrac = {
     contactInfoUpload: new ContactInfoUpload(),
 	submissionUpload: new SubmissionUpload(),
     actionItemUpload: new ActionItemUpload(),
+	commentUpload: new CommentUpload(),
     currentSite: new Site(),
     places: "",
     questions: "",

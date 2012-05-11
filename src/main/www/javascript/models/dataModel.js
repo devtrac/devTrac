@@ -168,6 +168,7 @@ function ActionItem(){
 
 function Comment(){
 	this.subject = "";
+	this.uploaded = false;
 }
 
 Comment.packageData = function(actiontItem, comment){
