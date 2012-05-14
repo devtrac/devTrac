@@ -35,25 +35,24 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
                  for(var index in site.actionItems){
                     site.uploaded =  site.uploaded && site.actionItems[index].uploaded ;
                 }
+
+                var contactUploadedCallback = function(){
+                    site.uploaded = site.uploaded && site.contactInfo.uploaded;
+                    var submissionUploadedCallback = function(){
+                        site.uploaded = site.uploaded && site.submission.uploaded;
+
+                        devtrac.currentSite = site;
+                        devtrac.dataStore.saveCurrentSite(function(){
+                            navigator.log.log('Site "' + site.name + '" is marked as uploaded.');
+                        });
+                        navigator.log.log('Site "' + site.name + '" uploaded successfully.');
+                        successCallback('Site "' + site.name + '" uploaded successfully.');
+                    }
+                    devtrac.submissionUpload.upload(site, submissionUploadedCallback, submissionUploadedCallback);
+                }
+                devtrac.contactInfoUpload.upload(site, contactUploadedCallback, contactUploadedCallback);
             }
             devtrac.actionItemUpload.uploadMultiple(site.actionItems, site.id, site.placeId, that.progressCallback, actionUploadCallback, actionUploadCallback);
-
-            var contactUploadedCallback = function(){
-                site.uploaded = site.uploaded && site.contactInfo.uploaded;
-            }
-            devtrac.contactInfoUpload.upload(site, contactUploadedCallback, contactUploadedCallback);
-
-            var submissionUploadedCallback = function(){
-                site.uploaded = site.uploaded && site.submission.uploaded;
-            }
-            devtrac.submissionUpload.upload(site, submissionUploadedCallback, submissionUploadedCallback);
-
-            devtrac.currentSite = site;
-            devtrac.dataStore.saveCurrentSite(function(){
-                navigator.log.log('Site "' + site.name + '" is marked as uploaded.');
-            });
-            navigator.log.log('Site "' + site.name + '" uploaded successfully.');
-            successCallback('Site "' + site.name + '" uploaded successfully.');
         }
     }
 
