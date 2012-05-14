@@ -138,6 +138,7 @@ function PlaceType(){
 	this.id = "";
 	this.name = "";
 	this.parentId = "";
+	this.parentName = "";
 }
 
 function Question(){

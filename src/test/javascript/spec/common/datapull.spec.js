@@ -57,9 +57,9 @@ describe("DataPull", function(){
 
             it("parse place types correctly", function() {
                 expect(navigator.store.put.mostRecentCall.args[3]).toEqual(
-                    '[{"id":"204","name":"Borehole","parentId":"23"},' +
-                    '{"id":"3","name":"Government Office","parentId":"49"},' +
-                    '{"id":"197","name":"Health Centre","parentId":"2"}]'
+                    '[{"id":"204","name":"Borehole","parentId":"23","parentName":"Water Points"},' +
+                    '{"id":"3","name":"Government Office","parentId":"49","parentName":"Other Locations"},' +
+                    '{"id":"197","name":"Health Centre","parentId":"2","parentName":"Health Facilities"}]'
                 );
             });
         });
@@ -234,7 +234,7 @@ describe("DataPull", function(){
 
     describe("QuestionTypes", function(){
        it("type of undefined name should be ignored", function(){
-          var originalQuestions = [{taxonomy:[{name:"School"}]},{taxonomy:[{name:"Office"}]},{taxonomy:[{name:"undefined name"}]}];
+          var originalQuestions = [{taxonomy:[{name:"School"}]},{taxonomy:[{name:"Office"}]},{taxonomy:[{name:"undefined name"}]},{taxonomy:[{name:"School"}]},{taxonomy:[{name:"School"}]},{taxonomy:[{name:"Office"}]},{taxonomy:[{name:"Office"}]}];
           var questions = new QuestionTypes(originalQuestions);
           var types = questions.locationTypes();
 

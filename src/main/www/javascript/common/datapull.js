@@ -93,6 +93,7 @@ DataPull.prototype.placeTypes = function(callback){
                 placeType.id = item.tid;
                 placeType.name = item.taxonomy_term_data_name;
                 placeType.parentId = item.taxonomy_term_data_taxonomy_term_hierarchy_tid ? item.taxonomy_term_data_taxonomy_term_hierarchy_tid : item.tid;
+                placeType.parentName = item.taxonomy_term_data_taxonomy_term_hierarchy_name ? item.taxonomy_term_data_taxonomy_term_hierarchy_name : item.taxonomy_term_data_name;
                 navigator.log.debug("Processed place with id: " + placeType.id);
                 return placeType;
             });
@@ -428,6 +429,9 @@ DataPull.prototype.getPlaceTypeNameBy = function(id){
         if (id == place.id) {
             return place && place.name;
         }
+        else if(id == place.parentId){
+            return place && place.parentName;
+        }
     }
     return "undefined name";
 }
@@ -455,6 +459,7 @@ var QuestionTypes = function(questions){
              if( q.taxonomy[0].name.indexOf("undefined name")==-1)
                 return q.taxonomy[0].name;
         });
-        return $.unique(types);
+        var uniqueTypes = $.unique(types);
+        return $.unique($.unique(types));
     }
 }
