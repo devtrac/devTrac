@@ -120,23 +120,19 @@ describe("ActionItemController", function() {
                             "<label id='action_title'>"+
                                 "Title"+
                             "</label>"+
-                            '<input type="text" id="action_item_title_edit" class="input" value=""/>'+
+                            '<label id="action_item_title_edit" class="input" value=""/>'+
                         "</p>"+
                         "<p>"+
                             "<label id='action_task'>"+
                                 "Task"+
                             "</label>"+
-                            "<input type='text' id='action_item_task_edit' class='input' value=''/>"+
+                            "<label id='action_item_task_edit' class='input' value=''/>"+
                         "</p>"+
                         "<p>"+
                             "<label id='action_assign'>"+
                                 "Assign To"+
                             "</label>"+
-                            "<select id='action_item_assigned_to_edit' class='select' name='users'>"+
-                            "</select>"+
-                        "</p>"+
-                        "<p class='submit'>"+
-                            "<input type='submit' id='action_item_edit' class='button' value='Save'/>"+
+                            '<label id="action_item_assigned_to_edit"  value=""/>'+
                         "</p>"+
                     '</div>'+
                 '</div></body>';
@@ -149,27 +145,8 @@ describe("ActionItemController", function() {
         it("show correct info when edit an exist action item", function(){
             actionItemController.edit(actionItem);
 
-            expect($('#action_item_title_edit')).toHaveValue("test action");
-            expect($('#action_item_task_edit')).toHaveValue("test 1");
-        })
-
-        it("change action item after saved", function(){
-            devtrac.currentSite = {id:1, name: "test site" ,actionItems: [actionItem]};
-            actionItemController.edit(actionItem);
-            var newTitle = "test changed";
-            var newTask = "task changed";
-
-
-
-            $("#action_item_title_edit").val(newTitle);
-            $("#action_item_task_edit").val(newTask);
-
-            actionItemController.editSave();
-
-            expect(devtrac.currentSite.actionItems[0].uploaded).toBeFalsy();
-            actionItemController.edit(devtrac.currentSite.actionItems[0]);
-            expect($('#action_item_title_edit')).toHaveValue(newTitle);
-            expect($('#action_item_task_edit')).toHaveValue(newTask);
+            expect($('#action_item_title_edit')).toHaveText("test action");
+            expect($('#action_item_task_edit')).toHaveText("test 1");
         })
     })
 

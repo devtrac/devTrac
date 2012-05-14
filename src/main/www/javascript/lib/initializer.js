@@ -37,7 +37,6 @@ function initializeApplicationEvents(){
         $("#site_detail_action_item").click(devtrac.actionItemController.show);
         $(".back_to_action_item_list").click(devtrac.actionItemController.show);
         $("#add_action_item_button").click(devtrac.actionItemController.add);
-        $("#action_item_edit").click(devtrac.actionItemController.editSave);
         $("#save_action_item").click(devtrac.actionItemController.save);
         $("#add_comment").click(devtrac.actionItemController.addComment);
     }

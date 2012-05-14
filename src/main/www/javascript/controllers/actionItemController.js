@@ -6,46 +6,14 @@ ActionItemController.prototype.edit = function(actionItem){
     currentActionItem = actionItem;
     navigator.log.debug("Editing action item");
     screens.show("loading");
-    $("#action_item_title_edit").val(actionItem.title);
-    $("#action_item_task_edit").val(actionItem.task);
-    var users = $("#action_item_assigned_to_edit");
-    users.html("");
-    $(devtrac.profiles).each(function(index, profile){
-        users.append("<option value='" + profile.uid + "'>" + profile.name + "</option>");
-    });
-    var name = devtrac.actionItemController._parseProfileName(actionItem);
-    $("#action_item_assigned_to_edit option[text=" + name + "]").attr("selected", "selected");
+	
+    $("#action_item_title_edit").text(actionItem.title);
+    $("#action_item_task_edit").text(actionItem.task);
+    var assignedTo= devtrac.actionItemController._parseProfileName(actionItem);
+    $("#action_item_assigned_to_edit").text(assignedTo);
 
     screens.show("action_item_edit");
     navigator.log.debug("Displayed action item screen");
-}
-
-ActionItemController.prototype.editSave = function(){
-    navigator.log.debug("Saving action item");
-    var title = $("#action_item_title_edit").val();
-    var task = $("#action_item_task_edit").val();
-    var assignedTo = $("#action_item_assigned_to_edit").val();
-
-    if (!title || !task || !assignedTo) {
-        alert("Please enter title, task and assigned to values.");
-        return;
-    }
-
-    for (var id in devtrac.currentSite.actionItems) {
-        var actionItem = devtrac.currentSite.actionItems[id];
-        if (currentActionItem.id == actionItem.id) {
-            devtrac.currentSite.actionItems[id].title = title;
-            devtrac.currentSite.actionItems[id].task = task;
-            devtrac.currentSite.actionItems[id].assignedTo = assignedTo;
-            devtrac.currentSite.actionItems[id].uploaded = false;
-        }
-    }
-
-    devtrac.currentSite.uploaded = false;
-    devtrac.dataStore.saveCurrentSite(function(){
-        navigator.log.debug("Edited action item. Will display list.");
-        devtrac.actionItemController.show();
-    });
 }
 
 ActionItemController.prototype.addComment = function(){
