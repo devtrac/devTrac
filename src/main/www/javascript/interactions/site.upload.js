@@ -18,7 +18,6 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
     }
 
     var that = this;
-    var siteData = Site.packageData(site, devtrac.fieldTrip.id);
 
     var success = function(response) {
         navigator.log.debug('Received response from service: ' + JSON.stringify(response));
@@ -62,10 +61,47 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
         errorCallback(srvErr);
     }
 
-    if (site.offline) {
-        devtrac.common.callServicePost(Site.createURL(), siteData, success, error);
-    } else {
-        devtrac.common.callServicePut(Site.updateURL(site), siteData, success, error);
+    var uploadSite = function(){
+        var siteData = Site.packageData(site, devtrac.fieldTrip.id);
+        if (site.offline) {
+            devtrac.common.callServicePost(Site.createURL(), siteData, success, error);
+        } else {
+            devtrac.common.callServicePut(Site.updateURL(site), siteData, success, error);
+        }
+    }
+
+    if(site.placeId == ""){
+        var placeSuccess = function(response){
+            if (response['error']) {
+                var error = 'Error occured in uploading place of site "' + site.name + '". Please try again.\n' +
+                'Error detail:' + JSON.stringify(response);
+                navigator.log.log(error);
+                alert("Error occured in creating place of site '" + site.name + "', creating new site failed.");
+                errorCallback();
+            }
+            else {
+                site.placeId = response['nid'];
+                uploadSite();
+            }
+        }
+
+        var placeError = function(){
+            var error = "Error occured in creating place of site '" + site.name + "', creating new site failed.";
+            navigator.log.log(error);
+            errorCallback();
+        }
+
+        var placeData = {
+            'title': site.type,
+            'type': 'place',
+            'taxonomy_vocabulary_1[und][0]': devtrac.common.findPlaceType(site),
+            'taxonomy_vocabulary_6[und][0]': 92
+            }
+
+        devtrac.common.callServicePost(DT_D7.NODE_CREATE, placeData, placeSuccess, placeError);
+    }
+    else{
+        uploadSite();
     }
 }
 

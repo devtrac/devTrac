@@ -75,45 +75,19 @@ siteController.create = function(){
     site.placeGeo = "POINT (" + latitude + " " + longitude + ")";
     site.narrative = "Please provide a full report.";
 
-    var placeSuccess = function(response){
-        if (response['error']) {
-            var error = 'Error occured in uploading place of site "' + site.name + '". Please try again.\n' +
-            'Error detail:' + JSON.stringify(response);
-            navigator.log.log(error);
-            alert("Error occured in creating place of site '" + site.name + "', creating new site failed.");
-        }
-        else {
-            site.placeNid = response['nid'];
-            devtrac.fieldTrip.sites.push(site);
-            navigator.store.put(function(){
-            alert(site.name + " added successfully.");
-            $("#site_title").val("");
-            $("#dateVisited").val("");
-            $("#latitude_value").text("0");
-            $("#longitude_value").text("0");
-            navigator.log.debug("Saved newly created site.");
-            fieldTripController.showTripReports();
-            }, function(){
-                devtrac.common.logAndShowGenericError("Error in creating trip.");
-                screens.show("sites_to_visit");
-            }, devtrac.user.name, JSON.stringify(devtrac.fieldTrip));
-        }
-    }
-
-    var placeError = function(){
-        var error = "Error occured in creating place of site '" + site.name + "', creating new site failed.";
-        navigator.log.log(error);
-        alert(error);
-    }
-
-    var placeData = {
-        'title': site.type,
-        'type': 'place',
-        'taxonomy_vocabulary_1[und][0]': devtrac.common.findPlaceType(site),
-        'taxonomy_vocabulary_6[und][0]': 92
-        }
-
-    devtrac.common.callServicePost(DT_D7.NODE_CREATE, placeData, placeSuccess, placeError);
+    devtrac.fieldTrip.sites.push(site);
+    navigator.store.put(function(){
+        alert(site.name + " added successfully.");
+        $("#site_title").val("");
+        $("#dateVisited").val("");
+        $("#latitude_value").text("0");
+        $("#longitude_value").text("0");
+        navigator.log.debug("Saved newly created site.");
+        fieldTripController.showTripReports();
+    }, function(){
+        devtrac.common.logAndShowGenericError("Error in creating trip.");
+        screens.show("sites_to_visit");
+    }, devtrac.user.name, JSON.stringify(devtrac.fieldTrip));
 }
 
 siteController.getGPS = function (){
