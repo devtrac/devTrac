@@ -68,12 +68,17 @@ ActionItemController.prototype.saveComment = function(){
             devtrac.currentSite.actionItems[id].uploaded = false;
         }
     }
+    devtrac.currentSite.uploaded = false;
 
     var container = $(".comment-content");
     var html = '<li class="comment_item">' + comment.subject + '</li>';
     container.append(html);
-	$("#comment_edit").val("");
+    $("#comment_edit").val("");
     alert("Comment saved successfully");
+
+    devtrac.dataStore.saveCurrentSite(function(){
+        navigator.log.debug("Edited action item. Will display list.");
+    });
 }
 
 ActionItemController.prototype.info = function(actionItem){
