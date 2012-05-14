@@ -14,7 +14,6 @@ function Site(){
 	this.placeGeo = "";
 	this.placeTaxonomy = [];
     this.type = "";
-    this.placeNid = "";
     this.offline = false;
     this.complete = false;
 	this.narrative = "";
