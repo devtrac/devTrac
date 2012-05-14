@@ -127,14 +127,15 @@ ActionItemController.prototype.show = function(){
 }
 
 ActionItemController.prototype.getDisplayHtml = function(item){
-    var htmlClass = "' class='col1 uneditable_action_item link'>";
+    var htmlClass = " class='col1 uneditable_action_item link'>";
     if(item.status === DT_D7.OPENED_STATUS){
         if(item.uid === devtrac.user.uid || item.assignedTo === devtrac.user.name)
              htmlClass = "' class='col1 editable_action_item link'>";
     }
 
     var displayName = devtrac.actionItemController._parseProfileName(item);
-    var html = "<div class='grid_row'><div id='" + item.id + htmlClass + item.title + "</div><div class='col2'>" + displayName + "</div></div>";
+	var actionItemId = item.id ==0? item.title : item.id;
+    var html = "<div class='grid_row'><div id='" + actionItemId + "'" + htmlClass + item.title + "</div><div class='col2'>" + displayName + "</div></div>";
     return html;
 }
 
