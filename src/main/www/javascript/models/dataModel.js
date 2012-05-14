@@ -172,14 +172,15 @@ function Comment(){
 }
 
 Comment.packageData = function(actiontItem, comment){
+	var status = actiontItem.status == "1" ? 1 : 3;
     var data = {
          "node_type" : "comment_node_actionitem",
          "nid" : actiontItem.id,
          "language" : "und",
-         "comment_body[und][0][format]" : "1",
+         "comment_body[und][0][format]" : 1,
          "comment_body[und][0][value]"  : comment.subject,
-         "taxonomy_vocabulary_8[und][0]" : "214",
-         "field_actionitem_status[und][0]" : actiontItem.status
+         "taxonomy_vocabulary_8[und][0]" : 221,
+         "field_actionitem_status[und][0]" : status
     }
     return data;
 }
