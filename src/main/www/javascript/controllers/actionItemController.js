@@ -43,7 +43,6 @@ ActionItemController.prototype.editSave = function(){
 
     devtrac.currentSite.uploaded = false;
     devtrac.dataStore.saveCurrentSite(function(){
-        alert("Edited action item.");
         navigator.log.debug("Edited action item. Will display list.");
         devtrac.actionItemController.show();
     });
@@ -52,7 +51,14 @@ ActionItemController.prototype.editSave = function(){
 ActionItemController.prototype.addComment = function(){
     navigator.log.debug("Showing add comment");
     screens.show("loading");
-    currentActionItem.comments = [];
+
+    $(".comment-content").html("");
+    if(currentActionItem.comments){
+        for(var i in currentActionItem.comments){
+           var html = '<li class="comment_item">' + currentActionItem.comments[i].subject + '</li>';
+           $(".comment-content").append(html);
+        }
+    }
     screens.show("add_comment");
     navigator.log.debug("Displayed comment adding screen");
 }
@@ -63,7 +69,8 @@ ActionItemController.prototype.saveComment = function(){
 
     for (var id in devtrac.currentSite.actionItems) {
         var actionItem = devtrac.currentSite.actionItems[id];
-        if (currentActionItem.id == actionItem.id) {
+		var isSameActionItem = (currentActionItem.id ==0 && actionItem.id ==0)? currentActionItem.title ==actionItem.title : currentActionItem.id == actionItem.id;
+        if (isSameActionItem) {
             devtrac.currentSite.actionItems[id].comments.push(comment);
             devtrac.currentSite.actionItems[id].uploaded = false;
         }
