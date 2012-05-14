@@ -10,6 +10,7 @@ ActionItemUpload.prototype.uploadMultiple = function(itemsToUpload, siteID, plac
     this.itemsCount = itemsToUpload.length;
     this.siteID = siteID;
     this.placeID = placeID;
+	this.progressCallback = progressCallback;
     this._uploadInternal(itemsToUpload.slice(), progressCallback, successCallback, errorCallback);
 }
 
@@ -34,8 +35,19 @@ ActionItemUpload.prototype.upload = function(item, successCallback, errorCallbac
         successCallback('ActionItem "' + item.title + '" is skipped as it is unchanged.');
         return;
     }
-
+    var that = this;
     var itemData = ActionItem.packageData(item, this.siteID, this.placeID);
+    var commentCallback = function(){
+         for(var index in item.comments){
+            item.uploaded =  item.uploaded && item.comments[index].uploaded ;
+        }
+        var msg;
+        if(item.uploaded)
+           msg = 'ActionItem "' + item.title + '" uploaded successfully.';
+        else
+           msg = 'ActionItem "' + item.title + '" uploaded failed.'
+        successCallback(msg);
+    }
 
     var success = function(response) {
         if (response['error']) {
@@ -47,7 +59,7 @@ ActionItemUpload.prototype.upload = function(item, successCallback, errorCallbac
         else {
             item.id = response['nid'];
             item.uploaded = true;
-            successCallback('ActionItem "' + item.title + '" uploaded successfully.');
+            devtrac.commentUpload.uploadMultiple(item.comments, item, that.progressCallback, commentCallback, commentCallback);
         }
     }
 
