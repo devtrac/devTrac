@@ -76,7 +76,6 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
                 var error = 'Error occured in uploading place of site "' + site.name + '". Please try again.\n' +
                 'Error detail:' + JSON.stringify(response);
                 navigator.log.log(error);
-                alert("Error occured in creating place of site '" + site.name + "', creating new site failed.");
                 errorCallback();
             }
             else {
