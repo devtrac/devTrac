@@ -177,6 +177,9 @@ function Common(){
                 if (site.type == place.name) {
                     return place.id;
                 }
+                else if(site.type == place.parentName){
+                    return place.parentId;
+                }
             }
         }
         var placeId = site.placeTaxonomy && site.placeTaxonomy.length > 0 && site.placeTaxonomy[0] && site.placeTaxonomy[0].id;
