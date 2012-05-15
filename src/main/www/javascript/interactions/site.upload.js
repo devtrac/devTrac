@@ -96,7 +96,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
             'taxonomy_vocabulary_1[und][0]': devtrac.common.findPlaceType(site),
             'taxonomy_vocabulary_6[und][0]': 92
             }
-
+        navigator.log.debug("post data of place type node uploading: " +JSON.stringify(placeData));
         devtrac.common.callServicePost(DT_D7.NODE_CREATE, placeData, placeSuccess, placeError);
     }
     else{
