@@ -459,7 +459,14 @@ var QuestionTypes = function(questions){
              if( q.taxonomy[0].name.indexOf("undefined name")==-1)
                 return q.taxonomy[0].name;
         });
-        var uniqueTypes = $.unique(types);
-        return $.unique($.unique(types));
+
+        types = types.sort();
+        for ( var i = 1; i < types.length; i++ ) {
+        if ( types[i] === types[ i - 1 ] ) {
+                types.splice( i--, 1 );
+             }
+         }
+
+        return types;
     }
 }
