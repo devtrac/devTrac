@@ -289,12 +289,12 @@ DataPull.prototype.placeDetailsForSite = function(callback){
                 var taxonomies = devtrac.dataPull.undNode(placeDetails, "taxonomy_vocabulary_1", []);
                 for (var index in taxonomies) {
                     var item = taxonomies[index];
-                    var placeType = devtrac.dataPull.getPlaceTypeFor(item.tid);
-                    if (placeType) {
+                    var placeType = devtrac.dataPull.getPlaceTypeNameBy(item.tid);
+                    if (placeType.indexOf("undefined name")==-1) {
                         var placeTaxonomy = new PlaceTaxonomy();
                         placeTaxonomy.id = item.tid;
                         placeTaxonomy.name = item.name;
-                        site.type = placeType.name;
+                        site.type = placeType;
                         site.placeTaxonomy.push(placeTaxonomy);
                         break;
                     }
@@ -412,15 +412,6 @@ DataPull.prototype.updateStatus = function(message){
     status.append(message);
     status.append("<br/>");
     navigator.log.log(message);
-}
-
-DataPull.prototype.getPlaceTypeFor = function(id){
-    for (var index in devtrac.places) {
-        var place = devtrac.places[index];
-        if (id == place.id) {
-            return place;
-        }
-    }
 }
 
 DataPull.prototype.getPlaceTypeNameBy = function(id){
