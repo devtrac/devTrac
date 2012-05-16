@@ -70,7 +70,7 @@ SiteUpload.prototype.upload = function(site, successCallback, errorCallback){
         }
     }
 
-    if(site.placeId == ""){
+    if(site.offline){
         var placeSuccess = function(response){
             if (response['error']) {
                 var error = 'Error occured in uploading place of site "' + site.name + '". Please try again.\n' +
