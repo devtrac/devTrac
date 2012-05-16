@@ -19,10 +19,13 @@ fieldTripController.showTripReportsIfLoggedIn = function(){
 };
 
 fieldTripController.showTripReports = function(){
+	if(devtrac.user.loggedIn)
     navigator.store.get(fieldTripController.display, function(error){
         navigator.log.debug("Used logged in but can't retrieve trip reports. Will display login screen.");
         devtrac.loginController.show();
     }, devtrac.user.name);
+	else
+	   devtrac.loginController.show();
 };
 
 fieldTripController.display = function(response){
