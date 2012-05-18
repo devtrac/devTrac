@@ -53,13 +53,13 @@ Site.setDateVisited = function(site, dateString){
 
 Site.packageData = function(site, fieldTripId) {
     var data = {
-        "title": site.name,
-        "type": DT_D7.NODE_TYPE.SITE,
-        "field_ftritem_narrative[und][0][value]" : site.narrative,
-        "field_ftritem_public_summary[und][0][value]" : site.narrative,
-        "field_ftritem_date_visited[und][0][value][date]" : site.dateVisited,
-        "field_ftritem_place[und][0][target_id]": site.placeId,
-        "language": "und"
+        'title': site.name,
+        'type': DT_D7.NODE_TYPE.SITE,
+        'field_ftritem_narrative[und][0][value]' : site.narrative,
+        'field_ftritem_public_summary[und][0][value]' : site.narrative,
+        'field_ftritem_date_visited[und][0][value][date]' : site.dateVisited,
+        'field_ftritem_place[und][0][target_id]': site.placeId,
+        'language': "und"
     };
     if (site.offline) {
         if (site.placeGeo != "") {

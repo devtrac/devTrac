@@ -25,17 +25,18 @@ CommentUpload.prototype._uploadInternal = function(itemsToUpload, progressCallba
 }
 
 CommentUpload.prototype.upload = function(item, successCallback, errorCallback){
+    var that = this;
     var itemData = Comment.packageData(this.actionItem, item);
     var success = function(response) {
         if (response['error']) {
-            var errorMsg = 'Error occured in uploading comment "' + "" + '". Please try again.\n' +
+            var errorMsg = 'Error occured in uploading comment of action item "' + that.actionItem.title + '". Please try again.\n' +
                            'Error detail:'+ JSON.stringify(response);
             navigator.log.log(errorMsg);
             errorCallback(errorMsg);
         }
         else {
             item.uploaded = true;
-            successCallback('Comment "' + "" + '" uploaded successfully.');
+            successCallback('Comment of action item "' + that.actionItem.title + '" uploaded successfully.');
         }
     }
 

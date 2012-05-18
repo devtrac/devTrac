@@ -116,7 +116,7 @@ public class ConnectionThread extends Thread {
                         s = (StreamConnection) Connector.open(getUrl());
                     }
                     httpConn = (HttpConnection) s;
-                    LogCommand.LOG("HttpConnection with the method " + _method);
+                    LogCommand.LOG("HttpConnection with the method " + _method + " and post data:["+ postData +"]");
                     httpConn.setRequestMethod(this._method);
 
                     // === SET HTTP REQUEST HEADERS HERE ===
