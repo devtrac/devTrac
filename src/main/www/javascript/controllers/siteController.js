@@ -2,12 +2,53 @@ var siteController = new Object();
 
 siteController.add = function(){
     navigator.log.debug("Adding site.");
-	var questions = new QuestionTypes(devtrac.questions);
-	var list = $('#sitetypes');
-	list.html("");
-    $(questions.locationTypes()).each(function(i, option){
-        list.append("<option>" + option + "</option>");
-    });
+    var questions = new QuestionTypes(devtrac.questions);
+    var list = $('#sitetypes');
+    list.html("");
+
+    var placeTypeHtml = function(places){
+       var searchParentName = function(parentName, optGroup){
+           if(optGroup.lenght == 0)
+               return -1;
+           var index = -1;
+
+           for(var i in optGroup){
+               if(optGroup[i].parentName == parentName)
+                   index = i;
+           }
+           return index;
+       }
+
+       var optGroup = [];
+
+       for(var i in places){
+           var optIndex = searchParentName(places[i].parentName, optGroup);
+           if(optIndex !== -1){
+               optGroup[optIndex].types.push(places[i].name);
+            }
+            else{
+                 var opt = {
+                       parentName:"",
+                       types:[]
+                       };
+                 opt.parentName = places[i].parentName;
+                 opt.types.push(places[i].name);
+                 optGroup.push(opt);
+            }
+       }
+
+       var html = "";
+       for(var i in optGroup){
+           html += '<optgroup label=' + optGroup[i].parentName + '>';
+           for(var j in optGroup[i].types){
+              html += '<option value="' + optGroup[i].types[j] + '">' + optGroup[i].types[j] +'</option>'
+           }
+           html += '</optgroup>';
+       }
+       return html;
+    }
+
+    list.html(placeTypeHtml(devtrac.places));
 
     var generateDateTip = function(startDate, endDate){
           var msg ="";
