@@ -41,7 +41,7 @@ DT = {
 };
 
 DT_SERVER_ENDPOINT = {
-	HOST: 'http://geo.devtrac.ug'
+	HOST: 'http://test1.devtrac.org'
 };
 
 DT_D7 = (function(){
