@@ -92,10 +92,10 @@ public class NetworkCommand implements Command {
         case XHR_UPLOAD_COMMAND:
             int tildaIndex = instruction.lastIndexOf('~');
             reqURL = instruction.substring(CODE.length() + 11, tildaIndex);
+            LogCommand.LOG("Starting uploading image with reqURL:" + reqURL);
 
             HttpRequest httpRequest = new HttpRequest();
             httpRequest.parseFrom(reqURL);
-
             try {
                 JSONObject fileDetails = new JSONObject(
                         instruction.substring(tildaIndex + 1));
@@ -104,10 +104,11 @@ public class NetworkCommand implements Command {
                 LogCommand.DEBUG("Reading " + filePath + " for uploading");
                 String loggedinUser = fileDetails.getString("user");
                 fileData = readFileData(filePath);
-                String fileTargetPath = fileDetails.getString("targetPath")
-                        + "/" + fileData.getString("filename");
+//                String fileTargetPath = fileDetails.getString("targetPath")
+//                        + "/" + fileData.getString("filename");
                 fileData.put("uid", loggedinUser);
-                fileData.put("filepath", fileTargetPath);
+//                fileData.put("filepath", fileTargetPath);
+                
 
                 String POSTdata = null;
                 if (fileData != null) {

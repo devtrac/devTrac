@@ -1214,15 +1214,15 @@ Network.prototype.XHR = function(cookie, method, URL, POSTdata, contentType, suc
 };
 
 
-Network.prototype.XHRUpload = function(cookie, method, URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback) {
-	var req = cookie + '|' + method + '|' + URL + '|' + data;
+Network.prototype.XHRUpload = function(cookie, method, URL, data, filepath, loggedinUser, successCallback, errorCallback) {
+	var req = cookie + '|' + method + '|' + URL + '|' + data + '|' + 'file';
 
 	if (filepath !== null) {
-		req += "~" + JSON.stringify({
-			'filePath': filepath,
-			'user': loggedinUser,
-			'targetPath': targetPath
-		});
+		var jsonString = JSON.stringify({
+            'filePath': filepath,
+            'user': loggedinUser
+        });
+		req += "~" + jsonString;
 	}
 	this.XHR_success = successCallback;
 	if(errorCallback){

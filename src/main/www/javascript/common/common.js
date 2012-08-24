@@ -61,8 +61,8 @@ function Common(){
         this.callServiceWithTimeoutAndUrl("PUT", url, postData, DT_D7.TIME_OUT, callback, errorCallback, errorCallback);
     }
 
-    this.callServiceUpload = function(url, filePath, userId, fileUploadPath, successCallback, errorCallback){
-        navigator.network.XHRUpload(devtrac.user.cookie, "POST", url, null, filePath, userId, fileUploadPath, function(response){
+    this.callServiceUpload = function(url, filePath, userId, successCallback, errorCallback){
+        navigator.network.XHRUpload(devtrac.user.cookie, "POST", url, null, filePath, userId, function(response){
             successCallback(response["fid"]);
       }, errorCallback);
     }

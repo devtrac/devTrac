@@ -60,6 +60,7 @@ Site.packageData = function(site, fieldTripId) {
         'field_ftritem_date_visited[und][0][value][date]' : site.dateVisited,
         'field_ftritem_place[und][0][target_id]': site.placeId,
         'taxonomy_vocabulary_7[und][0]': "210",
+		'language':"und"
     };
     if (site.offline) {
         if (site.placeGeo != "") {

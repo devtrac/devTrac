@@ -2,7 +2,7 @@
 
 set -e
 
-base_url='http://geo.devtrac.org/api'
+base_url='http://test1.devtrac.org/api'
 
 echo "# Authenticating..."
 auth_data="username=${1:?Username not found}&password=${2:?Password not found}"
