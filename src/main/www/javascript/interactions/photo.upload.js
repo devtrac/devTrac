@@ -3,9 +3,7 @@ function PhotoUpload(){
 
 PhotoUpload.prototype.upload = function(filePath, successCallback, errorCallback){
     var userId = devtrac.user.uid;
-//    var fileUploadPath = DT.FILE_UPLOAD_PATH.replace('<UID>', userId)
-
-    devtrac.common.callServiceUpload(DT_D7.FILE_SAVE, filePath, userId, successCallback, errorCallback);
+        devtrac.common.callServiceUpload(DT_D7.FILE_SAVE, filePath, userId, successCallback, errorCallback);
 }
 
 PhotoUpload.prototype.uploadMultiple = function(filePaths, successCallback, progressCallback, errorCallback){

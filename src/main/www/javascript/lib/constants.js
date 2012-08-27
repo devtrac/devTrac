@@ -63,7 +63,7 @@ DT_D7 = (function(){
 	    USER_LOGOUT: get_full_url('/api/user/logout.json'),
 	    CURRENT_TRIP: get_full_url('/api/views/api_fieldtrips.json?display_id=current_trip'),
 	    PLACE_TYPES: get_full_url('/api/views/api_vocabularies.json?display_id=placetypes'),
-	    USER_PROFILES: get_full_url('/api/views/api_user.json?display_id=users'),
+	    USER_PROFILES: get_full_url('/api/views/api_user.json?display_id=users&offset=0&limit=0&filters[active]=1'),
 	    ACTION_ITEMS: get_full_url('/api/views/api_fieldtrips.json?display_id=actionitems&args[nid]=<FIELD_TRIP_NID>&filters[field_actionitem_status_value]=1&filters[field_actionitem_status_value]=3&args[field_actionitem_ftreportitem_target_id]=<SITE_NID>'),
 	    SITE_PLACES: get_full_url('/api/views/api_fieldtrips.json?display_id=place&filters[nid]=<SITE_NID>'),
 	    SITE_DETAILS: get_full_url('/api/views/api_fieldtrips.json?display_id=sitevisits&filters[field_ftritem_field_trip_target_id]=<FIELD_TRIP_NID>&offset=0&limit=20'),
