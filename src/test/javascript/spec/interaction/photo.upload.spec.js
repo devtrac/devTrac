@@ -10,7 +10,7 @@ describe("PhotoUpload", function(){
             it("should return fid", function(){
                 devtrac.user.uid = 23;
                 var filePath = "twer/image/image.jpg";
-                spyOn(navigator.network, 'XHRUpload').andCallFake(function(cookie, method, URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHRUpload').andCallFake(function(cookie, method, URL, data, filepath, loggedinUser, successCallback, errorCallback){
                     successCallback({'fid':'15'});
                 })
 
@@ -24,7 +24,7 @@ describe("PhotoUpload", function(){
             it("error callBack should be called", function(){
                 devtrac.user.uid = 23;
                 var filePath = "twer/image/image.jpg";
-                spyOn(navigator.network, 'XHRUpload').andCallFake(function(cookie, method, URL, data, filepath, loggedinUser, targetPath, successCallback, errorCallback){
+                spyOn(navigator.network, 'XHRUpload').andCallFake(function(cookie, method, URL, data, filepath, loggedinUser, successCallback, errorCallback){
                     errorCallback({'error':'true'});
                 })
                 devtrac.photoUpload.upload(filePath, successCallback, errorCallback);

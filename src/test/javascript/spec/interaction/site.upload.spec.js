@@ -51,7 +51,7 @@ describe("SiteUpload", function(){
         })
 
         it("should send data in format of parameter string", function() {
-            var expected = 'title=YES&type=ftritem&field_ftritem_narrative[und][0][value]=&field_ftritem_public_summary[und][0][value]=&field_ftritem_date_visited[und][0][value][date]=&field_ftritem_place[und][0][target_id]=195&language=und&';
+            var expected = 'title=YES&type=ftritem&field_ftritem_narrative[und][0][value]=&field_ftritem_public_summary[und][0][value]=&field_ftritem_date_visited[und][0][value][date]=&taxonomy_vocabulary_7[und][0]=210&language=und&field_ftritem_place[und][0]=195&';
             expect(navigator.network.XHR.mostRecentCall.args[3]).toEqual(expected);
         })
 
