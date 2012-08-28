@@ -58,15 +58,18 @@ Site.packageData = function(site, fieldTripId) {
         'field_ftritem_narrative[und][0][value]' : site.narrative,
         'field_ftritem_public_summary[und][0][value]' : site.narrative,
         'field_ftritem_date_visited[und][0][value][date]' : site.dateVisited,
-        'field_ftritem_place[und][0][target_id]': site.placeId,
         'taxonomy_vocabulary_7[und][0]': "210",
-		'language':"und"
+        'language':"und"
     };
     if (site.offline) {
         if (site.placeGeo != "") {
             data["field_ftritem_lat_long[und][0][wkt]"] = site.placeGeo;
         }
         data["field_ftritem_field_trip[und][0][target_id]"] = fieldTripId;
+        data['field_ftritem_place[und][0][target_id]'] = site.placeId;
+    }
+    else{
+        data['field_ftritem_place[und][0]'] = site.placeId;
     }
     return data;
 }
