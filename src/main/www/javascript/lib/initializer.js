@@ -59,6 +59,7 @@ function initializeApplicationEvents(){
         $("#delete_proceed").click(devtrac.settingsController.performWipeout);
         $("#delete_cancel").click(devtrac.settingsController.show);
         $("#log_debug_mode").click(devtrac.settingsController.setDebugMode);
+		$("#set_endpoint").click(devtrac.settingsController.setEndPoint);
     }
 
     function attachNarrativeButtons(){

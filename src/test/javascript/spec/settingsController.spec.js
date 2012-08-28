@@ -17,12 +17,14 @@ describe("SettingsController", function(){
                     '<p>' +
                         '<input type="checkbox" value="on" id="log_debug_mode" /><span>Debug Mode</span>' +
                     '</p>' +
+					'<input type="text" name="end_point" id="end_point" class="input" value="" size="20" tabindex="10"/>' +
+					'<input type="submit" name="type-submit" id="set_endpoint" class="button" value="Set" tabindex="100"/>' +
                 '</body>'
             );
         })
 
         describe("When user logged in", function(){
-
+ +
             beforeEach(function(){
                 devtrac.user.loggedIn = true;
                 devtrac.settingsController.show();
@@ -84,6 +86,15 @@ describe("SettingsController", function(){
 
             it("'DELETE Data' should be shown AGAIN", function(){
                 expect($('#wipe_out_data')).toBeVisible();
+            })
+        })
+
+        describe("when user want to change endpoint", function(){
+
+            it("set end point", function(){
+                $("#end_point").val("test1.com");
+                devtrac.settingsController.setEndPoint();
+                expect(DT_SERVER_ENDPOINT.HOST).toEqual("test1.com");
             })
         })
     })
