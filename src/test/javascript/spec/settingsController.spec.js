@@ -17,8 +17,10 @@ describe("SettingsController", function(){
                     '<p>' +
                         '<input type="checkbox" value="on" id="log_debug_mode" /><span>Debug Mode</span>' +
                     '</p>' +
-					'<input type="text" name="end_point" id="end_point" class="input" value="" size="20" tabindex="10"/>' +
-					'<input type="submit" name="type-submit" id="set_endpoint" class="button" value="Set" tabindex="100"/>' +
+                    '<p id="config_endpoint">' +
+                        '<input type="text" name="end_point" id="end_point" class="input" value="" size="20" tabindex="10"/>' +
+                        '<input type="submit" name="type-submit" id="set_endpoint" class="button" value="Set" tabindex="100"/>' +
+                    '</p>'+
                 '</body>'
             );
         })
@@ -45,6 +47,10 @@ describe("SettingsController", function(){
             it("'Debug Mode' should be shown", function(){
                 expect($('#log_debug_mode')).toBeVisible();
             })
+
+            it("'Config end point' should be hidden", function(){
+                expect($('#config_endpoint')).toBeHidden();
+            })
         })
 
         describe("When user NOT logged in", function(){
@@ -68,6 +74,10 @@ describe("SettingsController", function(){
 
             it("'Debug Mode' should be shown", function(){
                 expect($('#log_debug_mode')).toBeVisible();
+            })
+
+            it("'Config end point' should be shown", function(){
+                expect($('#config_endpoint')).toBeVisible();
             })
         })
 
