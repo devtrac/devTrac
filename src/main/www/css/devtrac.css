@@ -316,3 +316,12 @@ fieldset div{
 #latitude_edit_value {
     padding-left: 14px;
 }
+
+input#end_point{
+	vertical-align: top;
+}
+
+#config_endpoint input {
+	margin: 0;
+	
+}
