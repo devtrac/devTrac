@@ -235,6 +235,7 @@ DataPull.prototype.tripSiteDetails = function(callback){
             });
             devtrac.dataPull.fieldTrip.sites = sites;
             if (sites.length == 0) {
+                callback();
                 return;
             }
             devtrac.dataPull.saveFieldtrip(null, "with sites");
